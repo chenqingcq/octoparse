@@ -1,0 +1,53 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+	@{
+		var category=Request.QueryString["category"];
+		var baseUrl="/tutorial";
+	}
+	<div class="basc-left" style="background:#f4f4f4;">
+						<div class="nav-list-box">
+            				<div class="nav-list-top">
+            					<i class="tc-icon"></i>
+            					<span>Tutorial Categories</span>
+            				</div>
+            				<ul class="list-group nav-list">
+            					<li class="list-group-item @(string.IsNullOrWhiteSpace(category)?"list-group-active":"")"><a target="_blank" href="@baseUrl">All</a></li>
+            					@{
+									var df=ApplicationContext.Current.Services.DataTypeService.GetDataTypeDefinitionByName("TutorialCategories");
+										XPathNodeIterator iterator = umbraco.library.GetPreValues(df.Id);
+										iterator.MoveNext();
+										XPathNodeIterator preValues = iterator.Current.SelectChildren("preValue", "");
+									string preValue="";
+										while (preValues.MoveNext())
+										{
+											preValue = preValues.Current.Value;
+											<li class="list-group-item @(category==preValue?"list-group-active":"")"><a target="_blank" href="@(baseUrl+"?category="+preValue)">@preValue</a></li>
+                    
+										}
+
+                                                      }
+            </ul>
+      </div>
+       <hr style="width:198px;margin-left:40px;border-top-color:#e5e5e5;margin-bottom:40px;margin-top:100px;">
+       <div class="nav-list-box">
+            <div class="nav-list-top"> <i class="e_icon"></i>
+                  <p>
+                        We are glad to help and make our product even better for you. If you find any missing features, please feel free to contact us.
+                        <a target="_blank" href="mailto:@Umbraco.Field("#Email")">@Umbraco.Field("#Email")</a>
+                  </p>
+            </div>
+       </div>
+        <hr style="width:198px;margin-left:40px;border-top-color:#e5e5e5;margin-bottom:30px;margin-top:0px;">
+      <div class="down-info">
+            <span class="down-info-s">Software version:@Umbraco.Field("#SoftVersion")</span>
+            <div class="down-info-s">
+                  System Requirements:
+                  <span>Win7/Win8/Win10/WinXP</span>
+            </div>
+            <span class="down-info-s">Released:@Umbraco.Field("#ReleasedDate")</span>
+            <div class="down-info-btn">
+                  <a target="_blank" class="btn" href="/download">Download</a>
+            </div>
+      </div>
+</div>

@@ -1,0 +1,26 @@
+2018-12-09 00:18:55,075 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-09 00:18:55,075 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-09 00:18:55,075 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-09 00:18:55,075 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-09 03:56:16,231 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-09 03:56:16,247 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-09 03:56:16,247 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-09 03:56:16,247 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-09 08:24:28,372 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-09 08:24:28,387 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-09 08:24:28,387 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-09 08:24:28,387 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-09 19:01:06,637 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-09 19:01:06,653 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-09 19:01:06,653 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-09 19:01:06,653 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-09 19:01:08,840 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/9 11:00:10] | Kind: subscription_charged_successfully
+2018-12-09 19:01:30,012 [12] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:259c2379-8770-4e29-9675-3f65c09d24e7
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

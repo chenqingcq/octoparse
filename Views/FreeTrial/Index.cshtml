@@ -1,0 +1,85 @@
+﻿@model Octoparse.Web.Models.FreeTrialModel
+@using Octoparse.Web;
+@{
+  ViewBag.Title = "Application Trial For "+ViewBag.ApplicationEdition;
+  Layout = "~/Views/octAccountLayout.cshtml";
+}
+@section styles{
+  <link rel="stylesheet" href="/css/flex.css">
+  <style type="text/css">
+    .page-title {text-align:center;font-weight:bold;}
+    .page-title + p {text-align:center;font-size:24px;}
+    .panel-form {border:solid 1px #aaa;border-radius:10px;flex-wrap:wrap;padding:30px 80px;margin-top:60px;margin-bottom:60px;}
+    .row-group {justify-content:space-around;margin-bottom:30px;}
+    .row-group > div {width:400px;flex-wrap:wrap;}
+    .row-group .text-field-label {font-size:18px;margin-bottom:10px;}
+    .row-group input:not([type=radio]) {border:solid 2px #aaa;border-radius:6px;padding:8px 10px;outline:none;width:100%;}
+    .row-group p {width:100%;font-size:16px;}
+    .row-group .optional-label {width:100px;}
+    .panel-form .submit {margin-top:20px;font-size:20px;padding:6px 100px;}
+  </style>
+}
+
+<div class="container">
+  <h1 class="page-title">Request 5-Day Octoparse Pro Trial</h1>
+  <p>Octoparse Team will contact you within three business days after receipt of your trial request.</p>
+  <form method="post" action="/Octopus/FreeTrial/CreateFreeTrial" enctype="multipart/form-data" class="panel-form flex flex-column">
+    <input type="hidden" name="EditionType" value="3">
+    <div class="row-group flex flex-one">
+      <div class="flex flex-column">
+        <label class="text-field-label">First Name</label>
+        <input name="FirstName" type="text" required>
+      </div>
+      <div class="flex flex-column">
+        <label class="text-field-label">Last Name</label>
+        <input name="LastName" type="text" required>
+      </div>
+    </div>
+    <div class="row-group flex flex-one">
+      <div class="flex flex-column">
+        <label class="text-field-label">Country</label>
+        <input name="Country" type="text" required>
+      </div>
+      <div class="flex flex-column">
+        <label class="text-field-label">Company Email</label>
+        <input name="Email" type="text" required>
+      </div>
+    </div>
+    <div class="row-group flex flex-one">
+      <div class="flex flex-column">
+        <label class="text-field-label">Company Name</label>
+        <input name="CompanyName" type="text" required>
+      </div>
+      <div class="flex flex-column">
+        <label class="text-field-label">Job Title</label>
+        <input name="JobTitle" type="text" required>
+      </div>
+    </div>
+    <div class="row-group flex flex-one">
+      <div class="flex">
+        <p>1. Have you completed configuring an extraction rule?</p>
+        <label class="optional-label"><input type="radio" name="ConfiguredRule" value="true" required>&nbsp;Yes</label>
+        <label class="optional-label"><input type="radio" name="ConfiguredRule" value="false"  required>&nbsp;No</label>
+      </div>
+      <div class="flex">
+        <p>2. Have you run a task?</p>
+        <label class="optional-label"><input type="radio" name="RunTask" value="true" required>&nbsp;Yes</label>
+        <label class="optional-label"><input type="radio" name="RunTask" value="false" required>&nbsp;No</label>
+      </div>
+    </div>
+    <div class="row-group flex flex-one">
+      <div class="flex">
+        <p>3. Have you ever exported data using Octoparse?</p>
+        <label class="optional-label"><input type="radio" name="ExportedData" value="true" required>&nbsp;Yes</label>
+        <label class="optional-label"><input type="radio" name="ExportedData" value="false" required>&nbsp;No</label>
+      </div>
+      <div class="flex flex-column">
+        <label class="text-field-label">4. What websites did you scrape with Octoparse?</label>
+        <input name="ScrapeWebSites" type="text" required id="ScrapeWebSites" >
+      </div>
+    </div>
+    <div class="flex flex-middle">
+      <button class="btn-regular submit">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,52 @@
+﻿@using Octoparse.Web.Models;
+@{
+	Layout = "octLayout.cshtml";
+	if(User.Identity.IsAuthenticated){
+		Response.Redirect("/Profile");
+	}
+}
+@section styles{
+	<link href="/css/validation.css" rel="stylesheet">
+	<style>
+    .container > h1 {text-align: center;margin-bottom: 40px;}
+    .container a {font-size: 18px;}
+    .container > a {margin: 20px auto;display: block;width: 600px;text-align: center;}
+    #form-sign-up {border: solid 1px #aaa;border-radius: 10px;flex-wrap: wrap;width: 800px;padding: 20px 110px;margin:0 auto;}
+    #form-sign-up .group {margin: 10px 0;}
+    #form-sign-up label {font-size: 20px;font-weight: normal;}
+    #form-sign-up input:not([type=submit]),
+    #form-sign-up select {border: solid 2px #aaa;border-radius: 6px;font-size: 16px;padding: 8px 10px;line-height: 16px;outline: none;}
+    #form-sign-up [type=submit] {font-size: 20px;height: 40px;width: 130px;}
+	</style>
+}
+
+<div class="container">
+  <h1>Sign Up</h1>
+  @{
+    Html.RenderPartial("~/Views/Account/Register.cshtml", new RegisterModel());
+  }
+  <a href="/login" class="zc">Already have an account? Log in now</a>
+</div>
+
+@section scripts {
+<script src="@Url.Content("~/js/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/js/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("#form-register").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        email: {
+          required: "Please enter your email",
+          email: "please enter a valid email address!"
+        }
+      }
+    });
+  });
+</script>
+}

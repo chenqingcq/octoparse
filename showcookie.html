@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        Cookie: <span id="myId">
+            </span>
+            <script>
+                document.getElementById('myId').innerHTML = listCookies()
+                function listCookies() {
+                    var theCookies = document.cookie.split(';');
+                    var aString = '';
+                    for (var i = 1; i <= theCookies.length; i++) {
+                        aString += i + ' ' + theCookies[i - 1] + "\n";
+                    }
+                    return aString;
+                }
+				
+				var exp = new Date();
+                exp.setTime(exp.getTime() + 1000 * 60 * 60 * 24);//过期时间1天
+                document.cookie = "testCookieKey=testCookieValue;expires="+exp.toGMTString();// 写入Cookie
+            </script>
+    </div>
+	<br/>
+	<div>
+	        UserAgent: <span id="userAgent">
+            </span>
+			 <script>
+                document.getElementById('userAgent').innerHTML = navigator.userAgent;
+            </script>
+	</div>
+</body>
+</html>

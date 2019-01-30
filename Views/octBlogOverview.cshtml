@@ -1,0 +1,554 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+
+// If the editor has not explicitly provided the "Page title" property page
+// then just show the name of the page otherwise show the provided title
+var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+? CurrentPage.Name
+: CurrentPage.Title;
+
+// Model.Content is the current page that we're on
+// AncestorsOrSelf is all of the ancestors this page has in the tree
+// (1) means: go up to level 1 and stop looking for more ancestors when you get there
+// First() gets the first ancestor found (the home page, on level 1)
+var homePage = CurrentPage.AncestorsOrSelf(1).First();
+
+// Find all pages with document type alias umbNewsOverview
+// We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+// Then take the first one, as we know there will only be on news overview page
+var newsOverview = homePage.octBlogOverviews.First();
+
+int pageIndex = 0, pageSize = 8, total = 0;
+int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+string blogCategory = Request.QueryString["blogCategory"];
+if (pageIndex == 0)
+{
+pageIndex = 1;
+}
+total = newsOverview.octBlogItems.Count();
+var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+{
+Total = total,
+PageSize = pageSize,
+PageIndex = pageIndex,
+BaseUrl = "/blog"
+};
+
+//Get BlogCategory
+string url = "/blog?pageindex=" + pageIndex.ToString() + "&blogcategory=";
+
+// Similar to above: find all pages with document type umbNewsItem under the news overview page
+// Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+// and then by createDate, which is set by Umbraco automatically when a page gets created.
+var posts = newsOverview.octBlogItems;
+if (string.IsNullOrWhiteSpace(blogCategory) || "All" == blogCategory)
+{
+posts = posts.OrderBy("publishDate desc, createDate desc").Skip((pageIndex - 1) * pageSize).Take(pageSize);
+}
+else
+{
+posts = posts.Where("blogCategory == @0", blogCategory).OrderBy("publishDate desc, createDate desc").Skip((pageIndex - 1) * pageSize).Take(pageSize);
+pageInfo.Total = posts.Count();
+}
+}
+
+@section styles{
+@*<link rel="stylesheet" href="/css/flex.css">*@
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: #f7f8fa;
+    }
+
+    .tut-header {
+        background: #2095f2;
+        width: 100%;
+        height: 240px;
+        padding-top: 37px;
+        box-sizing: border-box;
+    }
+
+    .tut-header h1 {
+        font-size: 32px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 40px;
+        margin:0;
+        font-family: Futura-LT-W01-Light
+    }
+
+    .tut-header h2 {
+        letter-spacing: -0.4px;
+        font-size: 16px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 32px;
+        width: 600px;
+        margin: 7px auto 14px;
+        font-family: Futura-LT-W01-Light
+    }
+
+    .tut-header a {
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #ffffff;
+        border-radius: 3px;
+        width: 220px;
+        height: 46px;
+        line-height: 46px;
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-family: Futura-LT-W01-Light
+    }
+
+    .tut-content {
+        width: 1200px;
+        margin: 40px auto 44px;
+    }
+
+    .tut-content:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .tut-content .left {
+        width: 340px;
+        float: right;
+        margin-left: 60px;
+        padding: 20px 14px 20px 20px;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
+
+    .tut-content .left .social {
+        width: 100%;
+        height: 110px;
+        margin-bottom: 69px;
+    }
+
+    .tut-content .left .social p {
+        font-size: 20px;
+        color: #333333;
+        line-height: 32px;
+        text-align: left;
+        margin-bottom: 23px;
+        letter-spacing: -.8px;
+        font-weight: bold;
+    }
+
+    .tut-content .left .social ul {
+        list-style: none;
+        width: 100%;
+    }
+
+    .tut-content .left .social ul li {
+        float: left;
+        margin-right: 24px;
+    }
+
+    .tut-content .left .social ul li:last-child {
+        margin-right: 0;
+    }
+
+    .tut-content .left .pop {
+        width: 100%;
+        margin-bottom: 66px;
+    }
+    .tut-content .left .pop h2{
+        height: 40px;
+        font-size: 20px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+    }
+    .tut-content .left .pop p {
+        height: 40px;
+        font-size: 20px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tut-content .left .pop ul {
+        list-style: none;
+    }
+
+    .tut-content .left .pop ul li {
+        height: 65px;
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        letter-spacing: -.4px;
+        line-height: 24px;
+    }
+    .tut-content .left .pop ul li a{
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        letter-spacing: -.4px;
+        line-height: 24px;
+    }
+
+
+    .tut-content .left .articleName {
+        height: 280px;
+    }
+
+    .tut-content .left .articleName p {
+        height: 40px;
+        font-size: 20px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tut-content .left .articleName ul {
+        list-style: none;
+    }
+
+    .tut-content .left .articleName ul li {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 10px;
+    }
+    .tut-content .left .articleName ul li a{
+        color: black;
+        font-size: 15px;
+    }
+
+    .tut-content .left .articleName ul li:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 14px;
+        left: 0;
+        top: 12px;
+    }
+
+    .tut-content .right {
+        width: 800px;
+        float: left;
+    }
+
+    .tut-content .right .lesson {
+        list-style: none;
+    }
+
+    .tut-content .right .lesson li {
+        position: relative;
+        background: #ffffff;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 4px 0 #b7c0d4;
+        width: 800px;
+        height: 196px;
+        padding: 10px 20px 0 40px;
+        box-sizing: border-box;
+        letter-spacing: -.4px;
+        cursor:pointer;
+    }
+
+    .tut-content .right .lesson li:before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 120px;
+        top: 16px;
+        left: 12px;
+    }
+
+    .color1:before {
+        background: #1e81fa;
+    }
+
+    .color2:before {
+        background: #17d2bc;
+    }
+
+    .color3:before {
+        background: #591efa;
+    }
+
+    .color4:before {
+        background: #fcba52;
+    }
+
+    .color5:before {
+        background: #d82222;
+    }
+
+    .color6:before {
+        background: #115278;
+    }
+
+    .tut-content .right .lesson li h2 {
+        font-size: 24px;
+        color: #333333;
+        text-align: left;
+        margin-bottom: 15px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-weight:bold;
+        height:32px;
+        margin-top:10px;
+    }
+
+    .tut-content .right .lesson li > div {
+        height: 20px;
+        margin-bottom: 12px;
+    }
+
+    .tut-content .right .lesson li > div span.time {
+        font-size: 14px;
+        color: #333333;
+        text-align: left;
+        margin-right: 40px;
+    }
+
+    .tut-content .right .lesson li > div span.kind {
+        background: #ffc636;
+        width: 70px;
+        height: 20px;
+        font-size: 14px;
+        color: #333333;
+        text-align: center;
+        line-height: 20px;
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .tut-content .right .lesson li > p {
+        font-size: 16px;
+        color: #333333;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    .tut-content .right .lesson li > a {
+        font-size: 16px;
+        color: #2095f2;
+        float: right;
+        margin-top: 6px;
+    }
+
+    .page {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .page .pre {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 118px;
+        height: 38px;
+        float: left;
+        line-height: 38px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .next {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 118px;
+        height: 38px;
+        float: right;
+        line-height: 38px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .pages {
+        float: left;
+        width: 558px;
+        height: 40px;
+    }
+
+    .page .pages ul {
+        list-style: none;
+        text-align: center;
+    }
+
+    .page .pages li {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 38px;
+        height: 38px;
+        display: inline-block;
+        line-height: 38px;
+        text-align: center;
+        margin-right: 20px;
+        cursor: pointer;
+        color: #333333;
+    }
+
+    .page .pages a {
+        line-height: 38px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #333333;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .page .pages li.disabled {
+        color: #2095f2;
+        cursor: default;
+    }
+
+    .page .pages li.dot {
+        cursor: default;
+    }
+
+    .download {
+        background: url("@Url.Content("~/images/morequestions.jpg")");
+        background-position: center top;
+        width: 100%;
+        height: 160px;
+        padding-top: 18px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .download p {
+        font-size: 20px;
+        color: #2e2e2f;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a {
+        border: 2px solid #ffffff;
+        border-radius: 3px;
+        line-height: 36px;
+        margin-top: 22px;
+        text-decoration: none;
+        background: #ffffff;
+        width: 136px;
+        height: 40px;
+        display: inline-block;
+        font-size: 20px;
+        color: #fbad29;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a:last-child {
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        background: #fcba52;
+        margin-left: 40px;
+    }
+    .tut-content .right .lesson li>div a.kind{
+        background:#ffc636;
+        width:70px;
+        height:20px;
+        font-size:14px;
+        color:#333333;
+        text-align:center;
+        line-height: 20px;
+        padding-left:9px;
+        padding-right:9px;
+        cursor:pointer;
+        text-decoration:none;
+    }
+</style>
+}
+<div class="tut-header">
+    <h1>Octoparse web scraping blog</h1>
+    <h2>
+        Articles about web scraping, data extraction,web scraping tools,data analysis,<br />  big data other related knowledge.
+    </h2>
+    <a target="_blank" href="/download">Download Octoparse</a>
+</div>
+
+<div class="tut-content">
+    <div class="right">
+        <ul class="lesson" id="blogList">
+            @foreach (var post in posts)
+            {
+            var title = string.IsNullOrWhiteSpace(post.Title) ? post.Name : post.Title;
+            var dateTime = post.PublishDate == default(DateTime) ? post.CreateDate : post.PublishDate;
+
+
+            <li class='color1 colorSel'>
+                <h2>@post.Title</h2>
+                <div>
+                    <span class="time">@dateTime.GetDateTimeFormats('D')[0].ToString()</span>
+                    @if (!string.IsNullOrWhiteSpace(post.blogCategory))
+                    {
+                    <a target="_blank" href="/blog?blogcategory=@(post.blogCategory)" class="badge-category kind">@(post.blogCategory)</a>
+                    }
+                </div>
+                @if (!string.IsNullOrWhiteSpace(post.Summary))
+                {
+                <p class="article-content">@(post.Summary)</p>
+                }
+                else
+                {
+                <p class="article-content" title="@post.Description">@(post.Description.Length > 150 ? post.Description.Substring(0, 150) + "..." : post.Description)</p>
+                }
+
+                <a target="_blank" href="@post.Url" class='full'>Read full article >></a>
+            </li>
+            }
+        </ul>
+        @{ Html.RenderPartial("_PagePartial", pageInfo);}
+    </div>
+    <div class="left">
+        @{ Html.RenderPartial("octShare");}
+        @{ Html.RenderPartial("octLatestBlogWidget"); }
+        @{ Html.RenderPartial("octBlogCategory"); }
+    </div>
+</div>
+<div class="download">
+    <p>Download Octoparse to start web scraping or contact us for any<br> question about web scraping!</p>
+    <div>
+        <a target="_blank" href="/contact">Contact us</a>
+        <a target="_blank" href="/download">Download</a>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        document.querySelectorAll('.colorSel').forEach((e) => {
+            e.onclick = function () {
+                let href = e.querySelector('.full').getAttribute('href');
+                window.open(href)
+            }
+        })
+        document.querySelectorAll('.colorSel').forEach(function(e){
+            var name = 'color1'
+            switch ( e.querySelector('.badge-category')&&e.querySelector('.badge-category').innerText){
+                case 'Octoparse': name = 'color1';break;
+                case 'Big Data' : name = 'color2';break;
+                case 'Knowledge' : name = 'color3';break;
+                case 'Data Collection' : name = 'color4';break;
+                case 'Customer Reviews' : name = 'color5';break;
+                case 'Web Scraping' : name = 'color6';break;
+            }
+            e.setAttribute('class','colorSel '+ name)
+        })
+
+
+    }
+
+</script>

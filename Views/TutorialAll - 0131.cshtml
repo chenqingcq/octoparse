@@ -1,0 +1,171 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    //var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+    //    ? CurrentPage.Name
+    //    : CurrentPage.Title;
+    if(!string.IsNullOrWhiteSpace(Request.QueryString["category"]))
+    {
+        ViewBag.PageTitle=Request.QueryString["category"];
+    }
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octTutorialOverviews.First();
+
+    int pageIndex = 0,pageSize=6,total=0;
+    int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+    var baseUrl = "/learn";
+    var category=Request.QueryString["category"];
+    var newsItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Basic").Where("allShow=@0",true);
+	var featuresItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Features").Where("allShow=@0",true);
+	var casesItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Cases").Where("allShow=@0",true);
+
+ 
+    total=newsItems!=null?newsItems.Count():0;
+    if(total>0){
+        newsItems=newsItems.OrderBy("publishDate desc, createDate desc");
+    }
+
+}
+
+@section styles{
+	<link rel="stylesheet" href="/css/tutorial-search-bar.css">
+  <style>
+    .main-container {align-items:center;padding-bottom:100px;}
+    .tutorial-class-title {font-size:36px;font-weight:bold;text-align:center;width:800px;border-bottom:solid 1px #ccc;margin-top:50px;margin-bottom:30px;padding-bottom:20px;}
+    .list-wrap {width:800px;justify-content:space-between;margin-bottom:30px;}
+    .list-card {width:330px;}
+    .list-card h3 {font-size:26px;margin:0;}
+    .list-card ul {font-size:20px;margin:10px 0 0 0;}
+  </style>
+}
+<div class="wrap-body">
+  @Html.Partial("ocTutorialTop")
+  <div class="container flex flex-column main-container">
+    <h2 class="tutorial-class-title"><a href="/basic-tutorial">Basics & Concepts</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Basic</h3>
+        <ul>
+          <li><a target="_Blank" href="/blog/what-is-configuration-rule-in-octoparse/">What is a task?</a></li>
+          <li><a target="_Blank" href="/doc-wf/build-your-first-task/">Start My First Scraping Task</a></li>
+          <li><a target="_Blank" href="https://www.youtube.com/watch?v=Gqp3l5FKa20&t=16s&list=PLk27EuZqv5kYrVAxdGmgTdaZFu EKo_Oty&index=4">Video：Get Started with<br>Octoparse in 2 mins</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>Ways to Get Data</h3>
+        <ul>
+          <li><a target="_Blank" href="/basic-tutorial?category=LOCALEXTRACTION">Extract with local machine</a></li>
+          <li><a target="_Blank" href="/basic-tutorial?category=CLOUDEXTRACTION">Run extraction in the cloud</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>3 Scraping Modes</h3>
+        <ul>
+          <li><a target="_Blank" href="/basic-tutorial?category=ADVANCEDMODE">Advanced Mode - Most Popular</a></li>
+          <li><a target="_Blank" href="/basic-tutorial?category=WIZARDMODE">Wizard Mode</a></li>
+          <li><a target="_Blank" href="/tutorial/smartmode/?category=SMARTMODE">Smart Mode</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>Octoparse Tips for Newbies</h3>
+        <ul>
+          <li><a href="/faq?&faqCategory=Can%20I%20scrape%E2%80%A6?">Can I scrape…?</a></li>
+          <li><a href="/faq?pageIndex=1&faqCategory=How%20to%20…?">How to…?</a></li>
+          <li><a href="/faq?pageIndex=1&faqCategory=What%20is...?">What is…?</a></li>
+          <li><a href="/basic-tutorial?category=TIPS-FOR-NEWBIES">More tips</a></li>
+        </ul>
+      </div>
+    </div>
+    <h2 class="tutorial-class-title"><a href="/features-tutorial">Features Tutorials</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Interact with Websites</h3>
+        <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=PAGINATION">Pagination</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DROP-DOWN-MENUS">Drop down menus</a></li>
+          <li><a target="_Blank" href="/features-tutorial??category=SCRAPEDATABEHINDLOGIN">Authenticate behind the login</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=LOADMOREBUTTON">Load more button</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=SEARCHKEYWORDS">Keyword based scraping</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=INFINITESCROLLING">​Infinite scrolling</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=AJAX">AJAX</a></li>
+          <li><a target="_Blank" href="/tutorial/web-scraping-tutorial-branch-judgement/ ">​Branch Judgement</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>Advanced Features</h3>
+        <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=XPATH">XPath</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=AUTOMATIC-IP-ROTATION">Automatic IP rotation</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Regular Expression</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=SCHEDULE-EXTRACTION">Schedule Extraction</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=PROXIES">Proxies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Export Extracted Data</h3>
+        <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=CSV-EXCEL">CSV/Excel</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DATABASE">Database</a></li>
+          <li><a target="_Blank" href="/tutorial/api">API</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3><a href="/features-tutorial?category=OTHERS">Other</a></h3>
+      </div>
+    </div>
+    <h2 class="tutorial-class-title"><a href="/cases-tutorial">Case Tutorials</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/cases-tutorial?category=PRODUCT-DETAILS">Scrape Product Details</a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=JOBSITES">Scrape Job Postings</a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=PORTAL-SITES">Scrape Portal Sites</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/cases-tutorial?category=SNS">Scrape Networking Sites</a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=REAL-ESTATE">Scrape Real Estate Data </a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=DIRECTORIES-AND-REVIEWS">Scrape Directories and Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+    <h2 class="tutorial-class-title"><a href="/faq">More Resources</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/faq?&faqCategory=Troubleshootings">Troubleshooting</a></li>
+          <li><a target="_Blank" href="/tutorial/api">API Documentation</a></li>
+          <li><a target="_Blank" href="/basic-tutorial?category=TIPS-FOR-NEWBIES">Web scraping tips</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=Billing%20and%20Payments">Billing and payments</a></li>
+          <li><a target="_Blank" href="/doc-wf/preface">User Guide Documentation</a></li>
+          <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=System%20Requirements">Installation</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

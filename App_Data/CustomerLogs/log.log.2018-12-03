@@ -1,0 +1,28 @@
+2018-12-03 16:44:04,606 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-03 16:44:04,622 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-03 16:44:04,622 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-03 16:44:04,622 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-03 18:23:20,641 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-03 18:23:20,641 [12] INFO  SkieerWeb - RefundJob checking.
+2018-12-03 18:23:20,641 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-03 18:23:20,641 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-03 18:23:22,861 [10] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/3 10:22:13] | Kind: subscription_charged_successfully
+2018-12-03 18:23:44,114 [7] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:df2d7be0-4466-4147-8e5c-ee968a8fbdf0
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-03 18:25:18,589 [14] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/3 10:24:14] | Kind: subscription_charged_successfully
+2018-12-03 18:25:39,730 [14] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:030b8151-8fdb-49f0-b00b-34a69c3b69c3
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

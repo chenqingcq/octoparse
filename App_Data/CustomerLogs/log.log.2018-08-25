@@ -1,0 +1,29 @@
+2018-08-25 00:04:07,997 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-25 00:04:07,997 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-25 00:04:07,997 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-25 01:26:49,180 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-25 01:26:49,195 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-25 01:26:49,195 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-25 01:26:49,195 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-25 05:25:51,814 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-25 05:25:51,860 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-25 05:25:51,860 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-25 05:25:51,860 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-25 12:03:46,673 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-25 12:03:46,673 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-25 12:03:46,673 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-25 12:03:46,673 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-25 18:39:58,556 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-25 18:39:58,556 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-25 18:39:58,556 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-25 18:39:58,556 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-25 18:40:00,662 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/25 10:39:52] | Kind: subscription_charged_successfully
+2018-08-25 18:40:21,941 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:f3bac690-2129-4321-828c-4cdcdd8cac72
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

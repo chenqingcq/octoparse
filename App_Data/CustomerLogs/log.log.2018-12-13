@@ -1,0 +1,67 @@
+2018-12-13 01:32:39,919 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-13 01:32:39,935 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-13 01:32:39,935 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-13 01:32:39,935 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-13 15:07:51,982 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-13 15:07:51,997 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-13 15:07:51,997 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-13 15:07:51,997 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-13 18:37:26,419 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-13 18:37:26,435 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-13 18:37:26,435 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-13 18:37:26,435 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-13 18:37:28,825 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 10:37:21] | Kind: subscription_charged_successfully
+2018-12-13 18:37:50,044 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:41b6b66f-9898-4d0f-9d9f-c988bcf683f5
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-13 18:50:08,513 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 10:50:02] | Kind: subscription_charged_successfully
+2018-12-13 18:50:28,919 [17] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 10:50:25] | Kind: subscription_charged_successfully
+2018-12-13 18:50:29,544 [12] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3d7f930-1a5f-4f4f-a00e-8ea3b1bba894
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-13 18:50:49,982 [17] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:d7e055e4-bba2-457c-9213-d21c58c7c3ca
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-13 18:54:30,060 [17] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 10:54:26] | Kind: subscription_charged_successfully
+2018-12-13 18:54:51,107 [17] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:1d067df4-d920-4d89-a864-6e16d0c3dfd1
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-13 18:59:15,669 [18] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 10:59:10] | Kind: subscription_charged_successfully
+2018-12-13 18:59:36,763 [18] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:0a205ada-682b-4a4d-8d7a-8d127e03acc9
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-13 19:07:26,435 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-13 19:07:26,435 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-13 19:07:26,435 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-13 19:11:31,060 [30] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/13 11:11:21] | Kind: subscription_charged_successfully
+2018-12-13 19:11:31,075 [30] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:441807b0-c29d-4b94-8e3d-598636f769a8,Kind:subscription_charged_successfully

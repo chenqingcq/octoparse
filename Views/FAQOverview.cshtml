@@ -1,0 +1,105 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octFaqOverviews.First();
+
+    int pageIndex = 0,pageSize=12,total=0;
+    int.TryParse(Request.QueryString["pageindex"], out pageIndex);
+    string blogCategory=Request.QueryString["blogcategory"];
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+    total=newsOverview.octFaqItems.Count();
+    var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+            {
+                Total = total,
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                BaseUrl = "/faq"
+            };
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    var newsItems=newsOverview.octFaqItems;
+    if(string.IsNullOrWhiteSpace(blogCategory)||"All"==blogCategory){
+        newsItems = newsItems.OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+    }else{
+        pageInfo.Total=faqItems.Where("faqCategory==@0",faqCategory).Count();
+        newsItems = newsItems.Where("faqCategory == @0",blogCategory).OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+    }
+    //Get BlogCategory
+    string url="/faq?pageindex="+pageIndex.ToString()+"&faqcategory=";
+    
+}
+
+@section styles{
+	<style>
+		body{background: #f8f8f8;}
+		
+		.docs-body{border: 1px solid #E5E5E5;padding: 10px 27px;padding-bottom: 200px;overflow: hidden;background: #fff;min-height: 700px;margin-bottom: 100px;}
+		.docsItem{height: 76px;line-height: 76px;border-bottom: 1px solid #e5e5e5;}
+		.docsItem>a{font-size: 15px;color: #333;text-decoration: none;display: block;padding-left: 20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+		.docsItem:hover>a{color: #006F94;text-decoration: none;}
+		.tutorial-nav>li.f>a{color: #333;}
+	</style>
+	
+}
+<div class="wrap-body">
+   @Html.Partial("ocTutorialTop")
+   <div class="tutorialBody">
+		<div class="container tutos-body">
+			<div class="row tutos">
+				<div class="col-md-3">
+					<div class="leftbar">
+						<div class="leftitem">
+							<div class="title">All</div>
+							<ul class="leftnav">
+								<li><a href="/faq?faqcategory=All">All</a></li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="docs-body">
+						 @foreach (var item in newsItems)
+                        {
+                    
+						<div class="docsItem">
+							<a href="@item.Url">@item.faqTitle</a>
+						</div>
+                        }
+						
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+</div>
+@section scripts{
+	<script>
+	    $(function(){
+	    	
+	    })
+	</script>
+}

@@ -1,0 +1,2538 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+@section styles{
+	<style>
+		p,h1,h2,h4,h5,div {padding:0;margin:0;}
+		.body-wrap {background-color:#f8f8f8;}
+		.oct-title {margin:0;padding-top:80px;padding-bottom:10px;text-align:center;font-size:22px;font-weight:bold;}
+		.oct-subTitle {padding-bottom:40px;font-size:12px;color:#999;text-align:center;}
+		.table-top1-item {height:130px;padding:0;background-color:#2095f2;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;}
+		.table-top1-title {font-size:15px;padding-top:30px;padding-bottom:20px;font-weight:bold;color:#fff;text-align:center;margin:0;}
+		.table-btn {width:170px;height:36px;border-radius:18px;background-color:#ffc500;margin:0 auto;}
+		.table-btn a {display:block;width:100%;height:100%;line-height:36px;text-align:center;text-decoration:none;font-size:15px;font-weight:bold;color:#333;}
+		.table-top2-item {height:60px;padding:0;background-color:#fff;}
+		.table-top2-p {width:100%;height:100%;line-height:60px;padding-left:20px;border-right:1px solid #e5e5e5;color:#333;border-bottom:1px solid #e5e5e5;}
+		.bg-img {background:url(/images/most-popular-tag.png) no-repeat 0 0 #2095f2;}
+		.item-table-title {text-align:center;padding:20px 0;}
+		.table-top3-item {min-height:110px;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;background-color:#fff;display:table;padding-left:20px;height:100%;}
+		.table-top3-title {font-size:15px;font-weight:bold;padding-top:23px;padding-bottom:13px;}
+		.table-top3-p {height:100%;}
+		.table-top3-p p {padding-bottom:16px;font-size:13px;}
+		.first-color {color:#999;}
+		.last {border-right:none;}
+		.border-none {border-bottom:none;}
+		.padding-none {padding:0;}
+		.p-bold {font-weight:bold;}
+		.color-green {color:#2cb159}
+		.color-red {color:red;}
+	</style>
+}
+
+<div class="body-wrap">
+	<h1 class="oct-title">Octoparse Features Comparison</h1>
+	<p class="oct-subTitle">Explore the key features and functionality of Octoparse plans. <br>
+		Find out which Octoparse plan will best suit your needs!</p>
+
+	<table class="container table-top1">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top1-item">
+				<h3 class="table-top1-title">Key Features</h3>	
+			</td>
+			<td class="col-md-3 col-sm-6 table-top1-item">
+				<h3 class="table-top1-title">Free</h3>
+				
+			</td>
+			<td class="col-md-3 col-sm-6  table-top1-item bg-img">
+				<h3 class="table-top1-title">Standard</h3>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top1-item last">
+				<h3 class="table-top1-title">Professional</h3>
+				<div class="table-btn"><a href="javascript:void(0);" data-editiontype="3">Try now</a></div>
+			</td>
+		</tr>
+	</table>
+
+	<table class="container table-top2">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p first-color border-none"><p>Systems supported</p></div>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p border-none"><p>Win7/Win8/Win10/Win XP</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6  table-top2-item">
+				<div class="table-top2-p border-none"><p>Win7/Win8/Win10/Win XP</p></div>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item last">
+				<div class="table-top2-p border-none"><p>Win7/Win8/Win10/Win XP</p></div>
+			</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">Pricing</h4>
+
+	<table class="container table-top2">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p first-color"><p>Monthly pricing</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p p-bold"><p>Free</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6  table-top2-item">
+				<div class="table-top2-p p-bold"><p>$89</p></div>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item last">
+				<div class="table-top2-p p-bold"><p>$249</p></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p first-color"><p>Quarterly pricing</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p p-bold"><p>Free</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6  table-top2-item">
+				<div class="table-top2-p p-bold"><p>$239</p></div>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item last">
+				<div class="table-top2-p p-bold"><p>$659</p></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p first-color p-bold border-none"><p>Yearly pricing</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item">
+				<div class="table-top2-p p-bold border-none"><p>Free</p></div>	
+			</td>
+			<td class="col-md-3 col-sm-6  table-top2-item">
+				<div class="table-top2-p p-bold border-none"><p>$900(Save 16%)</p></div>
+			</td>
+			<td class="col-md-3 col-sm-6 table-top2-item last">
+				<div class="table-top2-p p-bold border-none"><p>$2499(Save 16%)</p></div>
+			</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">NEW</h4>
+
+	<table class="container table-top3">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Smart Mode</h5>
+					<p>All you need to do is to paste in a URL and our program will do the rest for you.</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Ad blocking</h5>
+					<p>	
+						Using the Ad Blocking technique to extract data from Ad-heavy pages will optimize the loading time of the page and reduce the number of HTTP requests.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+	</table>	
+
+	<h4 class="item-table-title">Extraction Mode</h4>
+
+	<table class="container table-top3">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Wizard Mode</h5>
+					<p>Wizard Mode is more suitable for beginners. You can grab data from simple web pages by just following the instructions step by step to configure your own task. </p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Advanced Mode</h5>
+					<p>	
+						Advanced Mode allows you to configure extraction task for extracting almost any complex web page.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Training sessions</h5>
+					<p>	
+						Before you explore Octoparse, you can follow the prompts of training sessions to help you get started.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">Extraction Task Management</h4>
+
+	<table class="container table-top3">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Concurrent tasks on local machine</h5>
+					<p>
+You can choose Local Extraction option to run the extraction task on your computer.</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p">
+					2 tasks
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p">
+					No limit
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p">
+					No limit
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Maximum number of tasks allowed</h5>
+					<p>	
+						Maximum number of tasks you can set up to extraction data.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p">
+					10 tasks
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p">
+					100 tasks
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p">
+					250 tasks
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Editing existing task</h5>
+					<p>	
+						You can edit the existing tasks, instead of creating a new one.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Copy task</h5>
+					<p>	
+						You can copy an existing task. 
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Delete task</h5>
+					<p>	
+						You can delete an extraction task and create a new one.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Export task</h5>
+					<p>	
+						You can export the extraction task as an .otd file and share it out.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Import task</h5>
+					<p>	
+						You can import the .otd file of extraction task into Octoparse.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">View data</h5>
+					<p>	
+						You can view your data after you back up your data or when you run the task in the cloud.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Create category</h5>
+					<p>	
+						Create a category for you tasks and make it clear to see.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Export category</h5>
+					<p>	
+						Export a category of your tasks and share them out.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Delete category</h5>
+					<p>	
+						You can delete your tasks by category.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+	</table>	
+
+	<h4 class="item-table-title">Handle Website</h4>
+
+	<table class="container table-top3">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Maximum number of pages</h5>
+					<p>
+						Maximum number of pages Octoparse crawls for all of your tasks.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p">
+					No limit
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p">
+					No limit
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p">
+					No limit
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract Link</h5>
+					<p></p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract Text</h5>
+					<p></p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract image URL</h5>
+					<p></p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract video</h5>
+					<p></p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-red">
+					<i class="fa fa-close" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-red">
+					<i class="fa fa-close" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-red">
+					<i class="fa fa-close" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data behind log in</h5>
+					<p>	
+						Extract data from websites that require log in first.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data from list/table pages</h5>
+					<p>	
+						Extract data from list/table pages with more than one row of data like a search results page, category pages, etc. 
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data from search result</h5>
+					<p>	
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract website with pagination</h5>
+					<p>	
+						Extract website with any kind of pagination.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract website with infinite scrolling</h5>
+					<p>	
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data from dropdown menus</h5>
+					<p>	
+						
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data loaded with AJAX</h5>
+					<p>	
+						You don't need to know much about Ajax to extract data. All you need is just to figure out whether the site you want to scrape uses Ajax or not. Many websites use a lot of Ajax such as Google, Amazon and eBay. Usually the URL of the page will not have any change when updating part of the content. With Octoparse, you can easily extract data from web pages where data is loaded with Ajax.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data loaded with JavaScript</h5>
+					<p>	
+						
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">Design Workflow</h4>
+
+	<table class="container table-top3">
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">
+						Open a web page
+					</h5>
+					<p>Directly enter the URL in the address bar of the built-in browser and click "Go", then the "Open a webpage" action will be automatically created.</p>	
+					<p>
+						Or you can drag an "Open a webpage" action, drop it into Workflow Designer, enter the URL in the "Page URL" textbox and click "Save" to open the target website/webpage.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Click an item/Click to paginate</h5>
+					<p>Click any web element on the web page in the built-in browser.</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract data</h5>
+					<p>
+						Drag an "Extract Data" action and drop it into Workflow Designer to extract data on the webpage. (Note: When you extract data on the webpage, "Extract Data" action will be created.)
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Switch dropdown</h5>
+					<p></p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Loop Item</h5>
+					<p>
+						Drag a "Loop Item" action and drop it into Workflow Designer to execute a set of actions repeatedly. (e.g. If you drop a "Click Item" into "Loop Item" action, it will keep executing the "Click Item" action.) (Note: When you "create a list of item" to loop open webpages, "Loop Item" action will be automatically created.)
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Enter Text</h5>
+					<p>	
+						Drag an "Enter Text" action and drop it into Workflow Designer to enter text in the textbox on the webpage. (Note: When you input words in the textbox (Search bar/Login textbox) on the webpage by choosing the textbox and selecting "Enter text value”, "Enter Text" action will be created automatically.)
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Switch Combo box</h5>
+					<p>	
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Branch judgment (If-else)</h5>
+					<p>	
+						Drag an "Branch judgment" action and drop it into Workflow Designer to execute different actions based on different conditions. (Note: it will execute the action if a condition is true and execute another action if that condition is false.)
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Cursor Over</h5>
+					<p>	
+						Drag a "Cursor Over" action and drop it into Workflow Designer to hover the cursor over a specific element.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">End Loop</h5>
+					<p>	
+						Drag an "End Loop" action and drop it into Workflow Designer to stop the "Loop Item" running.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">End Workflow</h5>
+					<p>	
+						Drag an "End Workflow" action and drop it into Workflow Designer to stop the rule running.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Create a list of items</h5>
+					<p>	
+						
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract inner HTML</h5>
+					<p>	
+						Extract inner HTML, including the source code, text with format, image URL.
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p first-color">
+					<h5 class="table-top3-title">Extract outer HTML</h5>
+					<p>	
+					
+					</p>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>	
+			</td>
+
+			<td class="col-md-3 col-sm-6  table-top3-item">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+
+			<td class="col-md-3 col-sm-6 table-top3-item last">
+				<div class="table-top3-p color-green">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">Workflow Advance Options</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Time out settings</h5>
+						<p>	
+							Set up the maximum time to load the page.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Scroll down settings</h5>
+						<p>	
+							Scroll down to the bottom of the page when finished loading. You can choose the scroll-down interval time and to scroll to the end of the page/ scroll down one screen. (Usually used for websites with infinite scrolling.)
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Cache settings</h5>
+						<p>	
+							Choose this option to clear cache before opening the web page.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Customize cookie</h5>
+						<p>	
+							Choose this option to use specified cookie.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Retry</h5>
+						<p>	
+							You can retry to load the website.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">AJAX setting</h5>
+						<p>	
+							Choose this option when the website/webpage is loaded with AJAX and set up AJAX timeout.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Page acceleration</h5>
+						<p>	
+							Choose this option to optimize non-AJAX page.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Define data fields</h5>
+						<p>	
+							You can rename the field and select options from the drop down list if the item is not found on the web page.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+	</table>
+
+	<h4 class="item-table-title">Built-in tools</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">XPath setting</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">XPath tool</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Regular Expression tool</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Built-in browser</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+	</table>
+
+	<h4 class="item-table-title">Export/Store data</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Store data to Cloud Platform</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Store data to database (My SQL, SQL Server, Oracle)</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">API access</h5>
+						<p>	
+							You can create your own API that will return data formatted as XML strings.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Download as CVS</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Download as HTML</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Download as TXT</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+	</table>	
+
+	<h4 class="item-table-title">Cloud Service</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Cloud Servers</h5>
+						<p>	
+							Our cloud service will speed up data extraction speed - 4/10 times extraction speed than Local Extraction. Once you use Cloud Extraction, 4/10 cloud servers will be assigned to your extraction tasks.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p">
+						6
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p">
+						20
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">API access</h5>
+						<p>	
+							You can create your own API that will return data formatted as XML strings.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Cloud Extraction</h5>
+						<p>	
+							Run the tasks you set up in the cloud servers we provide.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">IP proxy</h5>
+						<p>	
+							Octoparse enables you to scrape these websites by rotating anonymous HTTP proxy servers.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">IP rotation</h5>
+						<p>	
+							Scraping the web on a large scale simultaneously, based on distributed computing. After you upload your configuration project to the cloud, you can choose to perform the extraction concurrently by using cloud servers. 
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Schedule extraction</h5>
+						<p>	
+							Schedule to extract data as frequently as you like.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Concurrent tasks on local machine</h5>
+						<p>	
+							You can choose Local Extraction option to run the extraction task on your computer.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Incremental Extraction</h5>
+						<p>	
+							After you've set up an extraction rule for a website, you may need the updated data again from that website beside the data extracted before. This brand new feature Incremental Extraction allows you to extract the updated data without having to configure another rule to do this.
+
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Split the task in Cloud Extraction</h5>
+						<p>	
+							Our cloud service will speed up data extraction speed - 4/10 times extraction speed than Local Extraction. Once you use Cloud Extraction, 4/10 cloud servers will be assigned to your extraction tasks.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+	</table>
+
+
+	<h4 class="item-table-title">Extraction options</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Split the task in Cloud Extraction</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Disable images loading</h5>
+						<p>	
+							You can choose not to load images to speed up the extraction process.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Incremental Extraction</h5>
+						<p>	
+							After you've set up an extraction rule for a website, you may need the updated data again from that website beside the data extracted before. This brand new feature Incremental Extraction allows you to extract the updated data without having to configure another rule to do this.
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Display error messages during the extraction process</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+	</table>
+
+	<h4 class="item-table-title">Help</h4>
+	<table class="container table-top3">
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Support</h5>
+						<p>	
+							Customer Support is prioritized for Standard and Professional Plan
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p">
+						Limited
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p">
+						Premium
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p">
+						Premium
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Email</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Skype</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-red">
+						<i class="fa fa-close" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Forum</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>	
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">FB messenger</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>	
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Tutorials</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>	
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">Documentation</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>	
+
+		<tr>
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p first-color">
+						<h5 class="table-top3-title">FAQ</h5>
+						<p>	
+							
+						</p>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>	
+				</td>
+
+				<td class="col-md-3 col-sm-6  table-top3-item">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+
+				<td class="col-md-3 col-sm-6 table-top3-item last">
+					<div class="table-top3-p color-green">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+				</td>
+		</tr>			
+
+	</table>
+
+	<h4 class="item-table-title"></h4>
+
+@section scripts{
+	<script>
+	    $(function(){
+	    	
+	    })
+	</script>
+}

@@ -1,0 +1,238 @@
+﻿@*
+    This snippet displays a list of links of the pages immediately under the top-most page in the content tree.
+    This is the home page for a standard website.
+    It also highlights the current active page/section in the navigation with the css class "current".
+*@
+@{ 
+    string contentName = Convert.ToString(ViewBag.ContentName);
+}
+<!--<a href="/octoparse-2nd-anniversary-event/">
+	<div style="width: 100%;height: 120px;background: url(/media/5230/op2-banner-5.jpg) center no-repeat;position:fixed;top:0;left:0;z-index:999"></div>
+</a>-->
+<!-- <div class="top-banner" style="fon-size:2rem">
+  <a href="/black-friday-2018?EB-03" ><img src="/images/black-friday/english-3.png" /></a>
+</div> -->
+<style type="text/css">
+    .firstPageContainer{
+    }
+    header{
+      width: 100%;
+      height: 8rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    header span{
+      display: inline-block;
+    }
+    .signUp,.login{
+      width:12rem;
+      height: 6rem;
+      font-size:2.6rem;
+      font-family:ArialMT;
+      line-height:1.7rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #2095f2;
+      border-radius: .7rem;
+      color: white;
+      justify-self: flex-end;
+      position: absolute;
+      right: 8rem;
+    }
+    .login{
+      right: 22rem;
+    }
+    .logo{
+      display: inline-block;
+      width: 5rem;
+      height: 5rem;
+      margin: 0 3rem;
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+    }
+    .watchmore{
+      display: flex;
+      width: 5rem;
+      height: 4rem;
+      position: absolute;
+      right: 1rem;
+    }
+    .watchmore span:first-of-type{
+      width: 1rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .watchmore span em{
+      display: inline-block;
+      width: .6rem;
+      height: .6rem;
+      background: #2095f2;
+      border-radius: 50%;
+    }
+    .watchmore span.rgt-dots span{
+      display: inline-block;
+      width: 100%;
+      height: .4rem;
+      background: #2095f2;
+    }
+    .watchmore span.rgt-dots{
+      flex: 1;
+      padding: .2rem 0 ;
+      margin-left: .5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .nav-list{
+      width: 100vw;
+      font-size:3rem;
+      background: #2095f2;
+      color: #fff; 
+      position: absolute;
+      z-index: 999;
+    }
+    ul{
+      list-style: none;
+    }
+    .nav-list >ul >li {
+      padding:  0 2rem ;
+      margin: 3rem 0rem;
+      height: 3rem;
+    }
+    .sub-items{
+      background: #fff;
+      color: black;
+    }
+    .resource{
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+    }
+    .resource span{
+      height: 100%;
+      display: inline-block;
+      margin: 0;
+      float: right;
+    }
+    .sub-items {
+      padding: 1rem 0;
+    }
+    .sub-items li{;
+      height: 3rem;
+      margin: 2rem  2rem;
+    }
+    .arrow-default{
+      font-size: 3rem;
+      font-weight: 900;
+      float: right;
+      margin-right: 2rem;
+      display:flex !important;
+      width: 5rem;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(-90deg) scaleY(1.5);
+    }
+    .arrow-active{
+      transform: rotate(90deg) scaleY(1.5);
+    }
+    .show{
+      display: block;
+    }
+    .hidden{
+      display: none;
+    }
+    .resource-item{
+      padding: 3rem 0px;
+      margin: 3rem 0px;
+    }
+    .resource{
+      height: 3rem;
+    }
+</style>
+<div class="firstPageContainer">
+  <header style="font-size:2rem">
+      <a href="/" class="logo" >
+        <img src='/images/logo.png'/>
+      </a>
+      <span style="width:2px;background:#2095f2;height:3rem;" class="splitdot"></span>
+      <a href="/">
+        <span  style="color:#2095f2;font-size:3rem;margin-left:2rem;">Octoparse</span>
+      </a>
+      <span class="login theme-color">Log in</span>
+      <span class="signUp theme-color">Sign up</span>
+      <span class="watchmore"> 
+        <span class="left-dots">
+          <em></em>
+          <em></em>
+          <em></em>
+        </span>
+        <span class="rgt-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </span>   
+  </header>
+  <div class="nav-list hidden" >
+      <ul>
+        <li onclick="navigate('/product')">Product</li>
+        <li onclick="navigate('/pricing')">Pricing</li>
+        <div class="resource-item" style="padding:0">
+          <p class="resource" style="position:relative">
+            <span>Resource</span>
+            <span class="arrow-default arrow-not-active" style="position:absolute;right:2rem;"><</span>
+          </p>
+          <ul class="sub-items hidden">
+            <li onclick="navigate('/tutorial-7')">Tutorials 7.X</li>
+            <li onclick="navigate('https://helpecenter.octoparse.com')">Help Center</li>
+            <li onclick="navigate('https://www.youtube.com/channel/UCweDWm1QY2G67SDAKX7nreg/playlists')">Videos</li>
+            <li onclick="navigate('https://helpcenter.octoparse.com/hc/en-us/requests/new')">Contact Support</li>
+          </ul>
+        </div>
+        <li style="margin-top:2rem 0 ;">Download</li>
+        <li>Blog</li>
+      </ul>
+  </div>
+</div>
+
+<script >
+     var watchmore = document.querySelector('.watchmore');
+     var navItem = document.querySelector('.nav-list');
+     var arrow = document.querySelector('.arrow-default');
+     var resource = document.querySelector('.resource');
+     var subItems = document.querySelector('.sub-items');
+     watchmore.onclick = function(){
+       if(navItem.classList.contains('hidden')){
+         navItem.classList.remove('hidden');
+         navItem.classList.add('show')
+       }else{
+          navItem.classList.add('hidden');
+          navItem.classList.remove('show')
+       }
+     };
+     resource.onclick = function(){
+       console.log(arrow.classList)
+       if(arrow.classList.contains('arrow-not-active')){
+          arrow.classList.remove('arrow-not-active');
+          arrow.classList.add('arrow-active');
+          subItems.classList.remove('hidden');
+          subItems.classList.add('show');
+       }else{
+          arrow.classList.add('arrow-not-active');
+          arrow.classList.remove('arrow-active');
+          subItems.classList.add('hidden');
+          subItems.classList.remove('show');
+       }
+     }
+    function navigate(to){
+      window.open(to);
+    }
+ </script>

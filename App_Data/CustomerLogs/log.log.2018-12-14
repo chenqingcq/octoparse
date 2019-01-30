@@ -1,0 +1,21 @@
+2018-12-14 18:02:38,919 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-14 18:02:38,935 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-14 18:02:38,935 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-14 18:02:38,935 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-14 18:14:42,794 [47] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/14 10:14:41] | Kind: subscription_charged_successfully
+2018-12-14 18:15:03,966 [47] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:f79c525c-bab5-45f7-82f1-887ffa6f60aa
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-14 18:32:38,935 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-14 18:32:38,935 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-14 18:32:38,935 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-14 18:32:51,450 [67] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/14 10:32:45] | Kind: subscription_charged_successfully
+2018-12-14 18:32:51,466 [67] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:b6c11363-364d-48c6-9b42-92f1e1861642,Kind:subscription_charged_successfully
+2018-12-14 18:39:30,060 [59] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/14 10:39:12] | Kind: subscription_charged_successfully
+2018-12-14 18:39:30,075 [59] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:f761e093-2dde-46dc-b2ed-b87dea87732d,Kind:subscription_charged_successfully

@@ -1,0 +1,402 @@
+﻿@using Octoparse.Web.Models;
+@model BillingSettingsModel
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+    ViewBag.Title = "Billing address settings";
+    Html.EnableClientValidation();
+}
+
+@section styles{
+	<link href="/css/validation.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/flex.css">
+  <link rel="stylesheet" href="/css/account/index.css">
+  <style>
+    @@media (min-width:992px) {.home-bodying .col-md-2 {width:12.666667%;}}
+    .page-title {font-size:30px;margin:40px 0 20px 0;padding-bottom: 14px;border-bottom: solid 1px #ddd;}
+    .title-tip {font-size:24px;color:#999;font-weight:bold;margin-top:20px;margin-bottom:29px;}
+    .show-total {height:55px;line-height:55px;color:#333;font-size:15px;border-bottom:1px solid #e5e5e5;margin-bottom:10px;}
+    .tatol-placing p {line-height:24px;margin-top:26px;}
+    .bold-f15-cf50 {font-size:15px;font-weight:bold;color:#ff5050;}
+    .p-tit {font-size:20px;color:#999;height:40px;line-height:40px;border-bottom:1px solid #bdbdbd;margin-top:0;margin-bottom:30px;}
+    .cardform {width:480px;}
+    .cardform > label {font-size:15px;margin-bottom:5px;font-weight:normal;color:#333;display:block;width:480px;}
+    .cardform > .form-control {box-shadow:none;border-radius:0;height:50px;background:#F8F8F8;width:480px;border-color:#e5e5e5;}
+    .select-yhk {list-style:none;padding-left:0;margin-bottom:20px;}
+    .select-yhk li {width:55px;height:34px;border:1px solid #E5E5E5;float:left;margin-right:10px;overflow:hidden;border-radius:3px;cursor:pointer;}
+    .select-yhk li > img {display:block;margin-left:-1px;margin-top:-1px;opacity:0.6;}
+    .select-yhk li.active {border-color:#08A9E3;}
+    .select-yhk li img {-webkit-filter:grayscale(1);/* Webkit */ filter:gray;/* IE6-9 */ filter:grayscale(1);/* W3C */}
+    .select-yhk li.active img {opacity:1;-webkit-filter:initial;/* Webkit */ filter:initial;/* IE6-9 */                         filter:initial;/* W3C */}
+    .cardform > select {color:#999;}
+    .dates {margin-bottom:20px;}
+    .dates > label > span {float:right;width:120px;}
+    .dates > .form-control {width:130px;float:left;}
+    .dates > span {float:left;height:50px;line-height:50px;margin:0 10px;}
+    .btn-submit {width:210px;height:36px;line-height:32px;background:#08A9E3;color:#fff;font-size:15px;font-weight:bold;border-radius:36px;text-align:center;display:block;border:1px solid #08A9E3;margin-top:48px;margin-bottom:200px;outline:none;float:left;margin-right:10px;}
+    .btn-cancel {width:110px;height:36px;line-height:32px;background:none;color:#08A9E3;font-size:15px;border-radius:36px;text-align:center;display:block;border:1px solid #08A9E3;margin-top:48px;margin-bottom:200px;outline:none;float:left;margin-right:10px;}
+    .rig-img {border-left:1px solid #e5e5e5;height:320px;padding-top:150px;padding-left:100px;}
+    .rig-img > img {display:block;}
+    .modal-dialog {margin:250px auto;text-align:center;width:500px;}
+    .popover {max-width:300px;}
+    #changePaymentMethod {width:100px;height:50px;line-height:50px;display:inline-block;text-align:center;color:#575757;text-decoration:none;background-color:#f4f4f4;border:1px solid #c1c1c1;margin-left:8px;}
+    @@media (min-width:992px) {.col-md-4 {width:245px;}
+      .col-md-7 {width:78%;}
+    }
+    .modal-dialog {margin:250px auto;text-align:center;width:500px;}
+    .form-special {width:100%;}
+    .form-partOne {float:left;width:48%;height:65px;}
+    .form-partTwo {float:right;width:48%;margin-left:4%;height:65px;}
+    .form-group-special {height:65px;}
+    .form-address {height:55px;}
+    .form-partThree {float:left;width:48%;height:65px;}
+    .form-partFour {float:left;width:48%;height:65px;margin-left:4%;}
+    #countryList {display:block;height:34px;padding:6px 12px;font-size:14px;color:#555;border:1px solid #ccc;width:100%;}
+    .control-label:after {content:"*";color:#e35256;font-size:12px;width:5px;height:5px;margin-left:2px;}
+    .sub {outline: none;width:250px;height:50px;display: block;margin: 20px auto 0 auto;background:#08A9E3;border-radius:50px;text-align:center;font-size:16px;font-weight:600;color:#fff;border:0;}
+    .sub:hover {opacity:0.8;}
+  </style>
+}
+
+<div class="wrapper flex">
+  <div class="flex flex-one">
+    @Html.Partial("octUserMenu", "BillingSettings")
+    <div class="content">
+      <h1 class="page-title">Billing Address Settings</h1>
+      @if (ViewBag.IsUpdated != null && ViewBag.IsUpdated)
+      {
+        <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-success">Congratulations! You’ve completed the Billing Address Settings!</div>
+            </div>
+        </div>
+      }
+      else
+      {
+        if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+        {
+          <div class="alert alert-danger fade in" role="alert" id="serverError">Server error, please try again later.</div>
+        }
+        @Html.ValidationSummary(true)
+      }
+      <div class="row">
+        <div class="col-xs-12">
+          <form action="/subscribe/billingSettings" method="post" role="form">
+            <div class="form-group clearfix">
+              <div class="form-partOne">
+                @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                @Html.TextBoxFor(m=>m.FirstName, new { @class = "form-control form-special", @placeholder = "First name" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+              </div>
+              <div class="form-partTwo">
+                @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-special", @placeholder = "Last name" })
+                @Html.ValidationMessageFor(m => m.LastName)
+              </div>
+            </div>
+            <div class="form-group form-group-special">
+              @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+              @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "E-mail" })
+              @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group form-group-special">
+              @Html.LabelFor(m => m.Phone, new { @class = "control-label" })
+              @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Phone" })
+            </div>
+            <div class="form-group">
+              <label class= "control-label">Address</label>
+              <div class="form-address">
+                @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control", @placeholder = "Address line 1" })
+                @Html.ValidationMessageFor(m => m.AddressLine1)
+              </div>
+              @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control", @placeholder = "Address line 2" })
+            </div>
+            <div class="form-group form-group-special">
+              @Html.LabelFor(m => m.City, new { @class = "control-label" })
+              @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+              @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class="form-group" style="overflow: hidden;height:80px;margin-bottom:0px;">
+              <div class="form-partThree">
+                @Html.Label("countryList","Country",new { @class = "control-label" })
+                <select id="countryList" class="form-control">
+                  <option value="">Please select your country</option>
+                  <option value="AFG">Afghanistan</option>
+                  <option value="ALB">Albania</option>
+                  <option value="DZA">Algeria</option>
+                  <option value="ASM">American Samoa</option>
+                  <option value="AND">Andorra</option>
+                  <option value="AGO">Angola</option>
+                  <option value="AIA">Anguilla</option>
+                  <option value="ATA">Antarctica</option>
+                  <option value="ATG">Antigua And Barbuda</option>
+                  <option value="ARG">Argentina</option>
+                  <option value="ARM">Armenia</option>
+                  <option value="ABW">Aruba</option>
+                  <option value="AUS">Australia</option>
+                  <option value="AUT">Austria</option>
+                  <option value="AZE">Azerbaijan</option>
+                  <option value="BHS">Bahamas</option>
+                  <option value="BHR">Bahrain</option>
+                  <option value="BGD">Bangladesh</option>
+                  <option value="BRB">Barbados</option>
+                  <option value="BLR">Belarus</option>
+                  <option value="BEL">Belgium</option>
+                  <option value="BLZ">Belize</option>
+                  <option value="BEN">Benin</option>
+                  <option value="BMU">Bermuda</option>
+                  <option value="BTN">Bhutan</option>
+                  <option value="BOL">Bolivia</option>
+                  <option value="BIH">Bosnia and Herzegovina</option>
+                  <option value="BWA">Botswana</option>
+                  <option value="BVT">Bouvet Island</option>
+                  <option value="BRA">Brazil</option>
+                  <option value="IOT">British Indian Ocean Territory</option>
+                  <option value="VGB">British Virgin Islands</option>
+                  <option value="BRN">Brunei Darussalam</option>
+                  <option value="BGR">Bulgaria</option>
+                  <option value="BFA">Burkina Faso</option>
+                  <option value="BDI">Burundi</option>
+                  <option value="KHM">Cambodia</option>
+                  <option value="CMR">Cameroon</option>
+                  <option value="CAN">Canada</option>
+                  <option value="CPV">Cape Verde</option>
+                  <option value="BES">Caribbean Netherlands</option>
+                  <option value="CYM">Cayman Islands</option>
+                  <option value="CAF">Central African Republic</option>
+                  <option value="TCD">Chad</option>
+                  <option value="CHL">Chile</option>
+                  <option value="CHN">China</option>
+                  <option value="CXR">Christmas Island</option>
+                  <option value="CCK">Cocos (Keeling) Islands</option>
+                  <option value="COL">Colombia</option>
+                  <option value="COM">Comoros</option>
+                  <option value="COK">Cook Islands</option>
+                  <option value="CRI">Costa Rica</option>
+                  <option value="CIV">Côte d'Ivoire</option>
+                  <option value="HRV">Croatia</option>
+                  <option value="CUW">Curaçao</option>
+                  <option value="CYP">Cyprus</option>
+                  <option value="CZE">Czech Republic</option>
+                  <option value="COD">Democratic Republic of the Congo</option>
+                  <option value="DNK">Denmark</option>
+                  <option value="DJI">Djibouti</option>
+                  <option value="DMA">Dominica</option>
+                  <option value="DOM">Dominican Republic</option>
+                  <option value="ECU">Ecuador</option>
+                  <option value="EGY">Egypt</option>
+                  <option value="SLV">El Salvador</option>
+                  <option value="GNQ">Equatorial Guinea</option>
+                  <option value="ERI">Eritrea</option>
+                  <option value="EST">Estonia</option>
+                  <option value="ETH">Ethiopia</option>
+                  <option value="FLK">Falkland Islands</option>
+                  <option value="FRO">Faroe Islands</option>
+                  <option value="FJI">Fiji</option>
+                  <option value="FIN">Finland</option>
+                  <option value="FRA">France</option>
+                  <option value="GUF">French Guiana</option>
+                  <option value="PYF">French Polynesia</option>
+                  <option value="ATF">French Southern Territories</option>
+                  <option value="GAB">Gabon</option>
+                  <option value="GMB">Gambia</option>
+                  <option value="GEO">Georgia</option>
+                  <option value="DEU">Germany</option>
+                  <option value="GHA">Ghana</option>
+                  <option value="GIB">Gibraltar</option>
+                  <option value="GRC">Greece</option>
+                  <option value="GRL">Greenland</option>
+                  <option value="GRD">Grenada</option>
+                  <option value="GLP">Guadeloupe</option>
+                  <option value="GUM">Guam</option>
+                  <option value="GTM">Guatemala</option>
+                  <option value="GIN">Guinea</option>
+                  <option value="GNB">Guinea-Bissau</option>
+                  <option value="GUY">Guyana</option>
+                  <option value="HTI">Haiti</option>
+                  <option value="HMD">Heard And Mc Donald Islands</option>
+                  <option value="HND">Honduras</option>
+                  <option value="HKG">Hong Kong</option>
+                  <option value="HUN">Hungary</option>
+                  <option value="ISL">Iceland</option>
+                  <option value="IND">India</option>
+                  <option value="IDN">Indonesia</option>
+                  <option value="IRQ">Iraq</option>
+                  <option value="IRL">Ireland</option>
+                  <option value="ISR">Israel</option>
+                  <option value="ITA">Italy</option>
+                  <option value="JAM">Jamaica</option>
+                  <option value="JPN">Japan</option>
+                  <option value="JOR">Jordan</option>
+                  <option value="KAZ">Kazakhstan</option>
+                  <option value="KEN">Kenya</option>
+                  <option value="KIR">Kiribati</option>
+                  <option value="KWT">Kuwait</option>
+                  <option value="KGZ">Kyrgyzstan</option>
+                  <option value="LAO">Laos</option>
+                  <option value="LVA">Latvia</option>
+                  <option value="LBN">Lebanon</option>
+                  <option value="LSO">Lesotho</option>
+                  <option value="LBR">Liberia</option>
+                  <option value="LIE">Liechtenstein</option>
+                  <option value="LTU">Lithuania</option>
+                  <option value="LUX">Luxembourg</option>
+                  <option value="MAC">Macau</option>
+                  <option value="MKD">Macedonia</option>
+                  <option value="MDG">Madagascar</option>
+                  <option value="MWI">Malawi</option>
+                  <option value="MYS">Malaysia</option>
+                  <option value="MDV">Maldives</option>
+                  <option value="MLI">Mali</option>
+                  <option value="MLT">Malta</option>
+                  <option value="MHL">Marshall Islands</option>
+                  <option value="MTQ">Martinique</option>
+                  <option value="MRT">Mauritania</option>
+                  <option value="MUS">Mauritius</option>
+                  <option value="MYT">Mayotte</option>
+                  <option value="MEX">Mexico</option>
+                  <option value="FSM">Micronesia</option>
+                  <option value="MDA">Moldova</option>
+                  <option value="MCO">Monaco</option>
+                  <option value="MNG">Mongolia</option>
+                  <option value="MSR">Montserrat</option>
+                  <option value="MAR">Morocco</option>
+                  <option value="MOZ">Mozambique</option>
+                  <option value="MMR">Myanmar</option>
+                  <option value="NAM">Namibia</option>
+                  <option value="NRU">Nauru</option>
+                  <option value="NPL">Nepal</option>
+                  <option value="NLD">Netherlands</option>
+                  <option value="ANT">Netherlands Antilles</option>
+                  <option value="NCL">New Caledonia</option>
+                  <option value="NZL">New Zealand</option>
+                  <option value="NIC">Nicaragua</option>
+                  <option value="NER">Niger</option>
+                  <option value="NGA">Nigeria</option>
+                  <option value="NIU">Niue</option>
+                  <option value="NFK">Norfolk Island</option>
+                  <option value="MNP">Northern Mariana Islands</option>
+                  <option value="NOR">Norway</option>
+                  <option value="OMN">Oman</option>
+                  <option value="PAK">Pakistan</option>
+                  <option value="PLW">Palau</option>
+                  <option value="PSE">Palestinian Territories</option>
+                  <option value="PAN">Panama</option>
+                  <option value="PNG">Papua New Guinea</option>
+                  <option value="PRY">Paraguay</option>
+                  <option value="PER">Peru</option>
+                  <option value="PHL">Philippines</option>
+                  <option value="PCN">Pitcairn</option>
+                  <option value="POL">Poland</option>
+                  <option value="PRT">Portugal</option>
+                  <option value="PRI">Puerto Rico</option>
+                  <option value="QAT">Qatar</option>
+                  <option value="COG">Republic of the Congo</option>
+                  <option value="REU">Réunion</option>
+                  <option value="ROU">Romania</option>
+                  <option value="RUS">Russia</option>
+                  <option value="RWA">Rwanda</option>
+                  <option value="SHN">Saint Helena</option>
+                  <option value="KNA">Saint Kitts And Nevis</option>
+                  <option value="LCA">Saint Lucia</option>
+                  <option value="VCT">Saint Vincent and the Grenadines</option>
+                  <option value="SMR">San Marino</option>
+                  <option value="STP">Sao Tome And Principe</option>
+                  <option value="SAU">Saudi Arabia</option>
+                  <option value="SEN">Senegal</option>
+                  <option value="SRB">Serbia</option>
+                  <option value="SYC">Seychelles</option>
+                  <option value="SLE">Sierra Leone</option>
+                  <option value="SGP">Singapore</option>
+                  <option value="SXM">Sint Maarten</option>
+                  <option value="SVK">Slovakia</option>
+                  <option value="SVN">Slovenia</option>
+                  <option value="SLB">Solomon Islands</option>
+                  <option value="SOM">Somalia</option>
+                  <option value="ZAF">South Africa</option>
+                  <option value="SGS">South Georgia and South Sandwich Islands</option>
+                  <option value="KOR">South Korea</option>
+                  <option value="ESP">Spain</option>
+                  <option value="LKA">Sri Lanka</option>
+                  <option value="SPM">St. Pierre And Miquelon</option>
+                  <option value="SUR">Suriname</option>
+                  <option value="SJM">Svalbard And Jan Mayen Islands</option>
+                  <option value="SWZ">Swaziland</option>
+                  <option value="SWE">Sweden</option>
+                  <option value="CHE">Switzerland</option>
+                  <option value="TWN">Taiwan</option>
+                  <option value="TJK">Tajikistan</option>
+                  <option value="TZA">Tanzania</option>
+                  <option value="THA">Thailand</option>
+                  <option value="TMP">Timor-Leste</option>
+                  <option value="TGO">Togo</option>
+                  <option value="TKL">Tokelau</option>
+                  <option value="TON">Tonga</option>
+                  <option value="TTO">Trinidad and Tobago</option>
+                  <option value="TUN">Tunisia</option>
+                  <option value="TUR">Turkey</option>
+                  <option value="TKM">Turkmenistan</option>
+                  <option value="TCA">Turks and Caicos Islands</option>
+                  <option value="TUV">Tuvalu</option>
+                  <option value="UGA">Uganda</option>
+                  <option value="UKR">Ukraine</option>
+                  <option value="ARE">United Arab Emirates</option>
+                  <option value="GBR">United Kingdom</option>
+                  <option value="USA">United States</option>
+                  <option value="UMI">United States Minor Outlying</option>
+                  <option value="URY">Uruguay</option>
+                  <option value="UZB">Uzbekistan</option>
+                  <option value="VUT">Vanuatu</option>
+                  <option value="VAT">Vatican</option>
+                  <option value="VEN">Venezuela</option>
+                  <option value="VNM">Vietnam</option>
+                  <option value="VIR">Virgin Islands (U.S.)</option>
+                  <option value="WLF">Wallis And Futuna Islands</option>
+                  <option value="ESH">Western Sahara</option>
+                  <option value="YEM">Yemen</option>
+                  <option value="ZMB">Zambia</option>
+                  <option value="ZWE">Zimbabwe</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.Country)
+                @Html.TextBoxFor(m => m.Country, new { @id = "country" ,@style="width:1px;height:1px;background:transparent;border-width:0px" })
+              </div>
+              <div class="form-partFour">
+                @Html.LabelFor(m => m.StateOrRegion, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.StateOrRegion, new { @class = "form-control", @placeholder = "State/province" })
+                @Html.ValidationMessageFor(m => m.StateOrRegion)
+              </div>
+            </div>
+            <div class="form-group form-group-special">
+              @Html.LabelFor(m => m.PostalCode, new { @class = "control-label" })
+              @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @placeholder = "Zip/postal code" })
+              @Html.ValidationMessageFor(m => m.PostalCode)
+            </div>
+            <input type="submit" class="sub" value="Submit" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  @Html.Partial("octProfileFooter")
+</div>
+
+@section scripts {
+  <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
+  <script src="/js/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+  <script>
+    $(function() {
+      var initCountry = function() {
+        //把隐藏域的值赋给select
+        var country = $("#country").val();
+        $("#countryList").val(country);
+      }
+
+      $("#countryList").on("change", function() {
+        //选择的时候给隐藏域赋值
+        var country = $("#countryList").val();
+        $("#country").val(country);
+      });
+
+      initCountry();
+    })
+  </script>
+}

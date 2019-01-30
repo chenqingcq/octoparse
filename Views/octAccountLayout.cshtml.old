@@ -1,0 +1,107 @@
+﻿@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Language" content="en-US" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="yandex-verification" content="b0f022c421600386" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewBag.Title | Octoparse.com</title>
+        <link rel="shortcut icon" href="/logo_blue.png">
+        <link rel="apple-touch-icon" href= "/logo_blue.png">
+        <meta name="keywords" content=''>
+        <meta name="description" content="">
+        <!-- Bootstrap -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/css/app.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/flex.css">
+        <!--[if lt IE 9]>
+            <script src="/scripts/html5shiv.min.js"></script>
+            <script src="/scripts/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Start of octoparse Zendesk Widget script -->
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=b1cbeaf5-69a2-4e59-8f79-57a36817dd56"> </script>
+        <!-- End of octoparse Zendesk Widget script -->
+
+        @RenderSection("styles", required: false)
+        <style type="text/css">.chat a{opacity:0.7;} .chat a:hover{opacity:1;}</style>
+    </head>
+	<body>
+        <div class="top-banner">
+            <a href="/black-friday-2018" ><img src="/images/black-friday/english-1.jpg" /></a>
+        </div>
+        <div class='common-header'>
+            <nav class=''>
+                <div class=" navLogo" >
+                <a target='_black' href="/"><img src="/images/logo_header.png" alt="logo.png" width="148" height="30"></a>
+                </div>
+                <ul class=" list">
+                    <li class=" flex-middle">
+                        <a target='_black' href="/Product" nav-name="Product">Product</a>
+                    </li>
+                    <li class=" flex-middle">
+                        <a target='_black' href="/Pricing" nav-name="Pricing">Pricing</a>
+                    </li>
+                    <li class=" flex-middle help-center" >
+                        <a target='_black' href="/help" nav-name="help">Help Center</a>
+                        <ul>
+                            <li class=" flex-column">
+                                <p style="color:black;font-size: 22px;margin:0">
+                                    <a target="_blank" href="/tutorial-7">Tutorials 7.X </a>|
+                                    <a target="_blank" href="/tutorial"> 6.X</a>
+                                </p>
+                                <p>Articles and guides to get you started on your own scraping projects</p>
+                            </li>
+                            <li class="flex flex-column">
+                                <a target="_blank" href="https://www.youtube.com/channel/UCweDWm1QY2G67SDAKX7nreg/playlists" target="_Blank">Videos</a>
+                                <p>Learn web scraping by watching our step-by-step video tutorials on Youtube</p>
+                            </li>
+                            <li class="flex flex-column">
+                                <a target="_blank" href="https://www.facebook.com/groups/1700643603550408/" target="_Blank">Community</a>
+                                <p>Join Octoparse Community to ask for help or share anything you know about web scraping!</p>
+                            </li>
+                            <li class="flex flex-column">
+                                <a target="_blank" href="/contact">Contact Support</a>
+                                <p>Contact Octoparse Support Team for any question you may have</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class=" flex-middle">
+                        <a target='_black' href="/Download" nav-name="Download">Download</a>
+                    </li>
+                    <li class=" flex-middle">
+                        <a target='_black' href="/Blog" nav-name="Blog">Blog</a>
+                    </li>
+                </ul>
+                <div class="changeLang">
+                    <img src="/images/icon-worldwide.png" alt="">
+                    <span>English</span>
+                    <div class="jan">
+                        <a target="_blank" href="http://jp.octoparse.com/">日本語</a>
+                    </div>
+                </div>
+                @{Html.RenderPartial("octLoginStatus");}
+            </nav>
+        </div>
+        <div class="content" style="margin-top:80px">
+            @RenderBody()
+        </div>
+        @{Html.RenderPartial("octFooter"); }
+        <script src="/scripts/jquery.min.js"></script>
+        <script src="/scripts/bootstrap.min.js"></script>
+        <script src="/scripts/app.js"></script>
+        @RenderSection("scripts", required: false)
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-69472089-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

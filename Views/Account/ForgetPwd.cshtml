@@ -1,0 +1,44 @@
+﻿@using Umbraco.Web;
+@model Octoparse.Web.Models.ForgetPasswordModel
+@{
+    Layout = null;
+}
+@if (ViewBag.IsSendMail == null ||  ViewBag.IsSendMail == false)
+{
+
+    Html.EnableClientValidation();
+    using (Html.BeginUmbracoForm("ForgetPwd", "Account", null, new { @id = "forgetForm" }))
+    {
+        <div class="container" style="padding-top: 84px;width: 500px;">
+            <div class="login-container">
+                <div class="login-title">
+                    <h1 class="login-title-left">Forget password</h1>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group" style="margin-bottom: 18px; margin-top: 18px;">
+                    @Html.ValidationSummary(true)
+                </div>
+                <div class="form-group">
+                    <div class="submit-btn-box">
+                        <input type="submit" value="Submit" class="btn-regular" style="font-size:20px;width:140px;height:40px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="container flex flex-column flex-middle forgot-password-email-send-success">
+        <img src="/images/rage2.png" alt="rage2.png" width="319" height="210">
+        <p>We've sent you an email with password reset instructions.<br>If the email doesn't show up soon, check your spam folder. </p>
+        <a href="/login" class="btn-regular">Return To Login</a>
+    </div>
+}

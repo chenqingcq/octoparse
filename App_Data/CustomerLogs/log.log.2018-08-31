@@ -1,0 +1,198 @@
+2018-08-31 00:51:18,890 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 00:51:18,937 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 00:51:18,937 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 00:51:18,937 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 02:01:45,156 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 02:01:45,218 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 02:01:45,218 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 02:01:45,218 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 02:37:42,796 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 02:37:42,890 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 02:37:42,890 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 02:37:42,890 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 04:07:41,015 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 04:07:41,125 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 04:07:41,125 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 04:07:41,125 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 05:22:17,156 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 05:22:17,390 [8] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 05:22:17,406 [8] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 05:22:17,406 [8] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 06:16:05,000 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 06:16:05,031 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 06:16:05,031 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 06:16:05,031 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 10:23:14,921 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 10:23:14,953 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 10:23:14,953 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 10:23:14,953 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 10:23:28,796 [5] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/31 10:23:07] | Kind: subscription_charged_successfully
+2018-08-31 10:23:30,687 [5] ERROR SkieerWeb - GetSubscriptionById Error.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8017
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetSubscriptionById(String subscriptionId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()
+2018-08-31 10:23:30,750 [5] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519,Kind:subscription_charged_successfully
+2018-08-31 11:23:48,718 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 11:23:48,781 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 11:23:48,781 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 11:23:48,781 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 11:24:03,984 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/31 10:23:07] | Kind: subscription_charged_successfully
+2018-08-31 11:24:05,406 [11] ERROR SkieerWeb - GetSubscriptionById Error.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8017
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetSubscriptionById(String subscriptionId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()
+2018-08-31 11:24:05,406 [11] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519,Kind:subscription_charged_successfully
+2018-08-31 12:24:16,125 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 12:24:16,187 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 12:24:16,187 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 12:24:16,187 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 12:24:29,937 [10] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/31 10:23:07] | Kind: subscription_charged_successfully
+2018-08-31 12:24:31,421 [10] ERROR SkieerWeb - GetSubscriptionById Error.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8017
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetSubscriptionById(String subscriptionId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()
+2018-08-31 12:24:31,453 [10] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519,Kind:subscription_charged_successfully
+2018-08-31 13:24:46,031 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 13:24:46,062 [11] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 13:24:46,062 [11] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 13:24:46,062 [11] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 13:24:59,765 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/31 10:23:07] | Kind: subscription_charged_successfully
+2018-08-31 13:25:01,218 [7] ERROR SkieerWeb - GetSubscriptionById Error.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8017
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetSubscriptionById(String subscriptionId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()
+2018-08-31 13:25:01,218 [12] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519,Kind:subscription_charged_successfully
+2018-08-31 13:53:05,234 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 13:53:05,281 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 13:53:05,281 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 13:53:05,281 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 14:24:36,125 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 14:24:36,187 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 14:24:36,187 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 14:24:36,187 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 14:24:53,640 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/8/31 10:23:07] | Kind: subscription_charged_successfully
+2018-08-31 14:24:55,015 [12] ERROR SkieerWeb - GetSubscriptionById Error.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8017
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetSubscriptionById(String subscriptionId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()
+2018-08-31 14:24:55,015 [12] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9d109d7e-7c07-4c81-bd94-960d6b2be519,Kind:subscription_charged_successfully
+2018-08-31 15:42:02,421 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 15:42:02,515 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 15:42:02,531 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 15:42:02,531 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 16:17:29,609 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 16:17:29,640 [12] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 16:17:29,656 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 16:17:29,656 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 21:18:14,687 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 21:18:14,750 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 21:18:14,750 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 21:18:14,750 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 21:48:16,859 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 21:48:16,906 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 21:48:16,921 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 21:48:16,921 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-08-31 23:22:50,156 [1] INFO  SkieerWeb - RefundJob starting.
+2018-08-31 23:22:50,250 [5] INFO  SkieerWeb - RefundJob checking.
+2018-08-31 23:22:50,265 [5] INFO  SkieerWeb - IsEnabledRefund = False
+2018-08-31 23:22:50,265 [5] INFO  SkieerWeb - RefundJob waiting 30 minutes.

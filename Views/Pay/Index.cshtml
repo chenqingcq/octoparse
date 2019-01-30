@@ -1,0 +1,595 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@using Octoparse.Web.Models;
+@model Octoparse.Web.Models.OrderMode
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+    PaymentMethodModel paymentMethod = ViewBag.PaymentMethod!=null?ViewBag.PaymentMethod:null;
+}
+@section styles{
+    <style>
+     .cardform {
+            width: 480px;
+        }
+
+            .cardform > label {
+                font-size: 15px;
+                margin-bottom: 5px;
+                font-weight: normal;
+                color: #333;
+                display: block;
+                width: 480px;
+                height: 25px;
+                line-height: 25px;
+            }
+
+            .cardform > .form-control {
+                box-shadow: none;
+                border-radius: 0;
+                height: 50px;
+                background: #F8F8F8;
+                width: 480px;
+                border-color: #e5e5e5;
+            }
+
+             .cardform >div> label {
+                font-size: 15px;
+                margin-bottom: 5px;
+                font-weight:bold;
+                color: #333;
+                display: block;
+            }
+            .cardform >div> .form-control {
+                box-shadow: none;
+                border-radius: 0;
+                height: 50px;
+                background: #F8F8F8;
+                border-color: #e5e5e5;
+            }
+
+        .select-yhk {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+            .select-yhk li {
+                width: 55px;
+                height: 34px;
+                border: 1px solid #E5E5E5;
+                float: left;
+                margin-right: 10px;
+                overflow: hidden;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .select-yhk li > img {
+                    display: block;
+                    margin-left: -1px;
+                    margin-top: -1px;
+                    opacity: 0.6;
+                }
+
+                .select-yhk li.active {
+                    border-color: #08A9E3;
+                }
+
+                .select-yhk li img {
+                    -webkit-filter: grayscale(1); /* Webkit */
+                    filter: gray; /* IE6-9 */
+                    filter: grayscale(1); /* W3C */
+                }
+
+                .select-yhk li.active img {
+                    opacity: 1;
+                    -webkit-filter: initial; /* Webkit */
+                    filter: initial; /* IE6-9 */
+                    filter: initial; /* W3C */
+                }
+
+        .cardform > select {
+            color: #999;
+        }
+
+        .dates {
+            margin-bottom: 20px;
+        }
+
+            .dates > label > span {
+                float: right;
+                width: 120px;
+            }
+
+            .dates > .form-control {
+                width: 130px;
+                float: left;
+            }
+
+            .dates > span {
+                float: left;
+                height: 50px;
+                line-height: 50px;
+                margin: 0 10px;
+            }
+
+        .btn-submit {
+            width: 210px;
+            height: 36px;
+            line-height: 32px;
+            background: #08A9E3;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 36px;
+            text-align: center;
+            display: inline-block!important;
+            border: 1px solid #08A9E3;
+            margin-top: 48px;
+            margin-bottom: 200px;
+            outline: none;
+        }
+
+        .rig-img {
+            border-left: 1px solid #e5e5e5;
+            height: 320px;
+            padding-top: 150px;
+            padding-left: 100px;
+        }
+
+        .rig-img > img {
+            display: block;
+        }
+
+        #changePaymentMethod{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            display: inline-block;
+            text-align: center;
+            color: #575757;
+            text-decoration: none;
+            background-color: #f4f4f4;
+            border: 1px solid #c1c1c1;
+            margin-left: 8px;
+        }
+
+        @@media (min-width: 992px){
+            .col-md-4 {
+                width: 272px;
+            }
+
+            .col-md-7 {
+                width: 78%;
+            }
+        }
+
+        .modal-dialog{
+            margin: 250px auto;
+            text-align: center;
+            width: 500px;
+        }
+
+         @@media (min-width: 940px){
+            .stand-tab{
+                width: 600px;
+            }
+        }
+
+        .popover{
+             max-width: 300px;
+        }
+
+        .rig-img .customer-tips{
+            display: block;
+            width: 230px;
+            text-align: center;
+            padding-top: 7px;
+            text-decoration: none!important;
+        }
+        .tips{
+            text-decoration: none!important;
+            padding-left: 10px;
+        }
+
+        </style>
+
+}
+<div class="container" style="padding-top: 84px;">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="ro-title">Pay</h3>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-xs-4" style="padding-right: 0;">
+                <div class="st-jdt st-jdt-active st-jdt-bg3">
+                    <span>Review Order</span>
+                </div>
+            </div>
+            <div class="col-xs-4" style="padding: 0;">
+                <div class="st-jdt st-jdt-active st-jdt-bg1">
+                    <span>Pay</span>
+                </div>
+            </div>
+            <div class="col-xs-4" style="padding-left: 0;">
+                <div class="st-jdt ">
+                    <span>Payment Confirmation</span>
+                </div>
+            </div>
+        </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-xs-12">
+            <div class="co-item">
+                <div class="coi-title">
+                    <span>Purchase:</span>
+                </div>
+                <div class="coi-content">
+                    <span>@Model.Detail</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-xs-12" style="text-align: center;">
+            <span style="display: inline-block;">Total Amount:<em id="totalAmount" style="color: #036C94; font-size: 26px; margin: 0 6px; font-style: normal;">$@(Model.Amount)</em></span>
+        </div>
+    </div>
+
+    <div id="error-message" class="alert alert-danger fade in" role="alert" style="display:none">
+    </div>
+    <h3 class="p-tit">Pay with</h3>
+    @if (paymentMethod != null)
+    {
+    <div class="row">
+        <div class="col-md-12">
+            <div style="padding-bottom: 7px;font-weight: bold;font-size: 15px;">Payment Info: </div>
+
+            <div style="border:1px solid #e7e7e7;display: inline-block;width: 410px;height: 50px;line-height: 50px;"><img style="padding-left: 20px;" src="../images/right-1.png" alt=""><img src="@paymentMethod.ImgUrl" title="@paymentMethod.PaymentMethodType" style="max-height:30px;padding-left: 10px;padding-right: 20px;" /> @paymentMethod.Addtional</div>
+            <a href="javascript:;" id="changePaymentMethod">Change</a>
+        </div>
+    </div>
+    }
+    <div class="row" id="paymentMethod" style="display:@(paymentMethod != null ? "none" : "")">
+        <div class="col-md-8">
+
+
+            <div class="form-group cardform">
+                <label for="cardnumber" style="font-weight: bold; margin-top: 20px;">Credit Card Number:</label>
+                <div class="form-control" id="card-number"></div>
+            </div>
+            <ul class="select-yhk clearfix">
+                <li data-val="visa"><img src="/images/profile/visa.png" alt="Visa" title="Visa"></li>
+                <li data-val="master-card"><img src="/images/profile/Mastercard.png" alt="Master Card" title="Master Card"></li>
+                <li data-val="american-express"><img src="/images/profile/AmericanExpress.png" alt="American Express" title="American Express"></li>
+                <li data-val="discover"><img src="/images/profile/Discover-Card.png" alt="Discover Card" title="Discover Card"></li>
+                <li data-val="jcb"><img src="/images/profile/JCB.png" alt="JCB" title="JCB"></li>
+                <li data-val="diners-club"><img src="/images/profile/Diner's-Club.png" alt="Diner's Club" title="Diner's Club"></li>
+            </ul>
+            <div class="form-group cardform dates clearfix">
+                <div class="float-left" style="width: 50%;float: left;padding-right: 10px;margin-bottom: 20px;">
+                    <label for="cvv" id="cvvLabel">CVV (?)</label>
+                    <div class="form-control" id="cvv"></div>
+                </div>
+
+                <div class="float-right" style="width: 50%;float: left;padding-right: 10px;margin-bottom:20px;">
+                    <label for="expiration-date">Expiration Date(MM/YYYY)</label>
+                    <div class="form-control pull-right" id="expiration-date">
+                    </div>
+                </div>
+
+                <input type="button" id="creditCardSubmit" class="btn-submit" value="Pay now" disabled />
+                <a href="/custom-octoparse-web-crawler/" target="_blank" class="tips">*Must Know Before Buying</a>
+            </div>
+
+        </div>
+        <div class="col-md-4" id="paypalBox" style="position:relative;display:none">
+            <div class="rig-top" style="position:absolute;width:100%;top:30px;left:110px;margin-top: 20px;">By clicking the button below, you will be transferred to PayPal where you can set PayPal to be used as your method of payment.</div>
+            <div class="rig-img">
+                <script src="https://www.paypalobjects.com/api/button.js?"
+                        data-merchant="braintree"
+                        data-id="paypal-button"
+                        data-button="checkout"
+                        data-color="blue"
+                        data-size="medium"
+                        data-shape="pill"
+                        data-button_type="submit"
+                        data-button_disabled="false"></script>
+                <a href="/custom-octoparse-web-crawler/" target="_blank" class="customer-tips">*Must Know Before Buying</a>
+            </div>
+            <form id="checkoutForm" action="/pay" method="post" role="form" style="display:none">
+                <input type="hidden" name="paymentMethodType" id="paymentMethodType">
+                <input type="hidden" name="paymentMethodNonce" id="paymentMethodNonce">
+                <input type="hidden" name="id" id="id" value="@Model.Id">
+            </form>
+
+        </div>
+    </div>
+    @if (paymentMethod != null)
+    {
+        <div class="row" id="submitBox">
+            <div class="col-md-8">
+                <input type="button" id="submit" class="btn-submit" value="Pay now" />
+                <a href="/custom-octoparse-web-crawler/" target="_blank" class="tips">*Must Know Before Buying</a>
+            </div>
+        </div>
+    }
+
+   
+</div>
+
+<div class="modal fade" id="loadingBox">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="top"><img style="padding-top: 50px;padding-bottom: 15px;" src="/images/loading.gif" alt=""></div><div id="loadingMessage" class="bottom" style="padding-bottom: 50px;">Processing, please wait...</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+        <!-- Load the required client component. -->
+<script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
+<!-- Load additional components if desired. -->
+<script src="https://js.braintreegateway.com/web/3.3.0/js/hosted-fields.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.3.0/js/data-collector.min.js"></script>
+
+<script id="paymentjs">
+
+
+        function initBraintree(authorization) {
+            showLoading("");
+            var isOkCC = false;
+            var isOkPP = false;
+            var isCardVerified = false;
+            var submit = $("#creditCardSubmit");
+            var form = $("#checkoutForm");
+            var paypalButton = $(".paypal-button");
+            var acceptedCardTypes = ["master-card", "visa", "american-express", "discover", "jcb", "diners-club"];
+
+            braintree.client.create({
+                authorization: authorization
+            }, function (clientErr, clientInstance) {
+                if (clientErr) {
+                    // Handle error in client creation
+                    hideLoading();
+                    showDelayError(clientErr);
+                    return;
+                }
+
+                //--CreditCard--
+                braintree.hostedFields.create({
+                    client: clientInstance,
+                    styles: {
+                        'input': {
+                            'font-size': '14pt'
+                        },
+                        'input.invalid': {
+                            'color': 'red'
+                        },
+                        'input.valid': {
+                            'color': 'green'
+                        }
+                    },
+                    fields: {
+                        number: {
+                            selector: '#card-number',
+                            placeholder: 'Credit Card Number'
+                        },
+                        cvv: {
+                            selector: '#cvv',
+                            placeholder: 'CVV'
+                        },
+                        expirationDate: {
+                            selector: '#expiration-date',
+                            placeholder: 'MM / YYYY'
+                        }
+                    }
+                }, function (hostedFieldsErr, hostedFieldsInstance) {
+                    if (hostedFieldsErr) {
+                        // Handle error in Hosted Fields creation
+                        isOkCC = true;
+                        initLoadingHide();
+                        return;
+                    }
+
+                    hostedFieldsInstance.on('cardTypeChange', function (event) {
+                        hideDelayError();
+                        if (event.cards.length === 1) {
+                            var cardType = event.cards[0].type.toLowerCase();
+                            console.log(cardType);
+                            isCardVerified = acceptedCardTypes.indexOf(cardType) >= 0;
+                            $('.select-yhk>li[data-val="' + cardType + '"]').addClass('active').siblings('li').removeClass('active');
+
+
+                            /*
+                            american-express
+                            diners-club
+                            discover
+                            jcb
+                            maestro
+                            master-card
+                            unionpay
+                            visa
+                            */
+                        } else {
+                            isCardVerified = false;
+                            console.log('Type of card not yet known');
+                            $('.select-yhk>li').removeClass('active');
+                        }
+                    });
+
+                    submit.removeAttr("disabled");
+                    submit.on('click', function () {
+                        if (!isCardVerified) {
+                            showDelayError("Sorry, this credit card type is not accepted.");
+                            return;
+                        }
+                        hideDelayError();
+                        showLoading("");
+                        hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                            if (tokenizeErr) {
+                                // Handle error in Hosted Fields tokenization
+                                hideLoading();
+                                showDelayError("Uh-oh! We were unable to process your payment. Please try again later or change a credit card or Paypal account. Error details: " + tokenizeErr.message);
+                                return;
+                            }
+
+                            // Put `payload.nonce` into the `payment-method-nonce` input, and then
+                            // submit the form. Alternatively, you could send the nonce to your server
+                            // with AJAX.
+                            $('#paymentMethodNonce').val(payload.nonce);
+                            $("#paymentMethodType").val(1);
+                            form.submit();
+                        });
+                    });
+                    isOkCC = true;
+                    initLoadingHide();
+                });
+
+                //--paypal--
+
+                // Create a PayPal component.
+                braintree.paypal.create({
+                    client: clientInstance
+                }, function (paypalErr, paypalInstance) {
+
+                    // Stop if there was a problem creating PayPal.
+                    // This could happen if there was a network error or if it's incorrectly
+                    // configured.
+                    if (paypalErr) {
+                        console.error('Error creating PayPal:', paypalErr);
+                        if (paypalErr.code != "PAYPAL_NOT_ENABLED") {
+                            showDelayError(paypalErr);
+                        }
+                        isOkPP = true;
+                        initLoadingHide();
+                        return;
+                    }
+                    $("#paypalBox").show();
+                    hideDelayError();
+                    // Enable the button.
+                    paypalButton.removeAttr('disabled');
+
+                    // When the button is clicked, attempt to tokenize.
+                    paypalButton.on('click', function () {
+                        hideDelayError();
+                        showLoading("");
+                        // Because tokenization opens a popup, this has to be called as a result of
+                        // customer action, like clicking a button—you cannot call this at any time.
+                        paypalInstance.tokenize({
+                            flow: 'vault'
+                        }, function (tokenizeErr, payload) {
+
+                            // Stop if there was an error.
+                            if (tokenizeErr) {
+                                if (tokenizeErr.type !== 'CUSTOMER') {
+                                    console.error('Error tokenizing:', tokenizeErr);
+                                } else {
+                                    showDelayError("Uh-oh! We were unable to process your payment. Please try again later or change a credit card or Paypal account. Error details: " + tokenizeErr.message);
+                                }
+                                hideLoading();
+
+                                return;
+                            }
+
+                            // Tokenization succeeded!
+                            paypalButton.attr('disabled', true);
+                            console.log('Got a nonce! You should submit this to your server.');
+                            console.log(payload.nonce);
+                            $('#paymentMethodNonce').val(payload.nonce);
+                            $("#paymentMethodType").val(2);
+                            form.submit();
+
+                        });
+
+                    });
+                    isOkPP = true;
+                    initLoadingHide();
+                });
+            });
+
+            function initLoadingHide() {
+                if (isOkCC && isOkPP)
+                    $("#loadingBox").modal("hide");
+            }
+        }
+
+
+
+        function showLoading(message) {
+            if (message)
+                $("#loadingMessage").text(message);
+            else
+                $("#loadingMessage").text("Processing, please wait...");
+            $("#loadingBox").modal({ backdrop: "static", keyboard: false });
+        }
+        function hideLoading() {
+            $("#loadingBox").modal("hide");
+        }
+</script>
+<script>
+        $(function () {
+
+            initBraintree("@ViewBag.ClientToken");
+
+
+            $("#changePaymentMethod").on("click", function () {
+                $("#paymentMethod").toggle("slow");
+                $("#submitBox").toggle("slow");
+                $("#serverError").hide("fast");
+                hideDelayError();
+            });
+
+            $("#submit").on('click', function () {
+                showLoading("");
+                $("#checkoutForm").submit();
+            });
+
+            $("#cvvLabel").popover({
+                trigger: "hover",
+                placement: "left",
+                html: true,
+                content: '<img src="/images/profile/cvv.png"/>'
+            });
+
+            hideServerError();
+
+            function hideServerError() {
+                var serverError=$("#serverError");
+                if (serverError.length > 0) {
+                    setTimeout(function () {
+                        $("#serverError").hide("fast");
+                    }, 20000);
+                }
+            }
+
+        })
+
+        var timeOutHideId;
+        function showDelayError(msg) {
+            if (timeOutHideId)
+                window.clearTimeout(timeOutHideId);
+            $("#error-message").text(msg);
+            $("#error-message").show("fast");
+            timeOutHideId=setTimeout(hideDelayError, 20000);
+
+        }
+
+        function hideDelayError() {
+            if (timeOutHideId) {
+                window.clearTimeout(timeOutHideId);
+                timeOutHideId = null;
+            }
+            $("#error-message").hide("slow");
+        }
+
+</script>
+
+}

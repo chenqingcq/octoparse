@@ -1,0 +1,23 @@
+2018-12-02 08:30:02,551 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-02 08:30:02,567 [12] INFO  SkieerWeb - RefundJob checking.
+2018-12-02 08:30:02,567 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-02 08:30:02,567 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-02 16:10:20,864 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-02 16:10:20,879 [12] INFO  SkieerWeb - RefundJob checking.
+2018-12-02 16:10:20,879 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-02 16:10:20,879 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-02 18:25:32,395 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-02 18:25:32,411 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-02 18:25:32,411 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-02 18:25:32,411 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-02 18:33:26,261 [17] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/2 10:32:36] | Kind: subscription_went_active
+2018-12-02 18:33:27,653 [14] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/2 10:32:37] | Kind: subscription_charged_successfully
+2018-12-02 18:33:48,875 [14] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:26ad8802-1ea9-4bd1-81f8-62da691c4170
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

@@ -1,0 +1,54 @@
+2018-09-19 05:34:00,609 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-19 05:34:00,625 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-19 05:34:00,625 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-19 05:34:00,625 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-19 10:11:37,421 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-19 10:11:37,421 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-19 10:11:37,421 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-19 10:11:37,421 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-19 13:43:16,375 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-19 13:43:16,390 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-19 13:43:16,390 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-19 13:43:16,390 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-19 16:47:15,921 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-19 16:47:15,921 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-19 16:47:15,937 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-19 16:47:15,937 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-19 18:33:09,046 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-19 18:33:09,062 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-19 18:33:09,062 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-19 18:33:09,062 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-19 18:33:11,078 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/9/19 10:33:04] | Kind: subscription_charged_successfully
+2018-09-19 18:33:32,218 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:6961a10f-46fc-4552-a4da-9164eb178c81
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-09-19 18:33:33,312 [11] ERROR SkieerWeb - Process Error.SubscriptionId:3c1c5e76-27af-4179-b119-aafb080a4dac,PaymentNo:n5ze5a7j
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8012/ShareService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8012
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.OctopusShareService.IOctopusShareService.GetAccount(String userId)
+   在 Octoparse.Web.Controllers.SubscribeController.BtHandler()

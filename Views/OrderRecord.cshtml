@@ -1,0 +1,88 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Octoparse.Web.Models.OrdersModel>
+@{
+	Layout = "octLayout.cshtml";
+}
+@section styles{
+	<style>
+		.basc-right-main{width:80%;}
+		.head-img{display:inline-block;}
+        .head-img .img{display:inline-block;}
+        .head-img .name{display:block;font-size:20px;padding:5px 0;color:#006F94;}
+        .head-img .cpwd{margin-top:10px;font-size:12px;color:#666;}
+	
+		.pagination li{display: inline-block;margin: 0 2px;}
+        .pagination li a{color: #333;}
+        .pagination .active a,.pagination .active a:hover{background: none!important;color: #333!important;border: none;}
+        .pagination li .omit{border: none;background: none!important;color: #333!important;}
+		
+	</style>
+	
+}
+<div class="row" style="margin-left:0;margin-right:0;">
+            	<div class="col-lg-2 col-md-3 col-sm-3" style="padding-left:0;">
+            		<div class="basc-left">
+            			
+            			
+								@Html.Partial("octUserMenu","orders")
+            				
+            		</div>
+            	</div>
+            	<div class="con-lg-10 col-md-9 con-sm-9">
+            		<div class="basc-right">
+            			<div class="basc-right-main">
+            				<div style="max-width: 860px;">
+@if(Model!=null && Model.Orders!=null && Model.Orders.Count>0)
+{
+<table class="table my-table"  ID="tbl1" >
+        <thead class="basc-table-top">
+        <tr id="Tr1" runat="server" >
+            <th width="410"><span class="sp">Order Information</span></th>
+			<th width="90"><span>Sum</span></th>
+			<th width="170"><span>Create time</span></th>
+			<th width="100"><span>Status</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+            <td>
+                @order.No<br />
+                @order.Name
+            </td>
+            <td>
+              $@order.Amount
+            </td>
+               <td>
+              @order.CreatedDate.ToEnDateTime()
+            </td>
+            <td>
+              <label class="@((order.Status==1 || order.Status==2)?"label label-success":"")">@((order.Status!=1 && order.Status!=2 && order.CreatedDate.AddHours(48)<DateTime.Now)?"Closed":order.StatusName)</label>
+				  @if(order.Status==0 && order.CreatedDate.AddHours(48)>DateTime.Now)
+				  {
+					  <a href="/pay/@order.Id" class="btn btn-xs btn-warning">Pay now</a>
+				  }
+            </td>
+            
+          </tr>
+
+        }
+
+      </tbody>
+        </table>
+}else{
+       <span>No data found.</span>
+}
+						    </div>
+		@if(ViewBag.PageInfo!=null){
+                <div style="padding-left:18px;">
+                    @Html.Partial("_PagePartial", ViewBag.PageInfo as Octoparse.Web.Models.PageInfoModel)
+                </div>
+            }	
+								
+            			</div>
+            		</div>
+            	</div>
+            </div>

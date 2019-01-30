@@ -1,0 +1,89 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;    
+}
+@section styles{
+<style type="text/css">
+            .top-container{background-color: #2095f2;height:20rem;padding-top:52px;}
+            .top-container .t-title{text-align: center;color:#fff;font-weight:bold;letter-spacing: 1px;font-size:4rem;;padding-bottom:24px;}
+            .main-container{padding-top:40px;}
+            .main-container p{padding:1rem 2rem;font-family:BoldMT ; color: #193F65}
+            .main-container li{padding:1rem 2rem;font-family:BoldMT ; color: #193F65}
+            .main-container .address{padding-top:60px;}
+            .main-container .address span{margin-bottom:4px;display:block;font-size: 13px;color: #333;}
+            .main-container .address-map{padding:14px 0 100px;}
+            .textbodying{font-size: 2rem;};
+            .download-link {height: 40px; width:140px;font-size: 18px;}
+            .address h4{margin-left: -20px;font-size: 15px;font-weight: bold;color: #333;margin-bottom: 23px;}
+            .top-container h2.border{width: 12rem;height: .5rem;background: rgb(236, 172, 126);margin: 0 auto};
+            .firedom{ margin-bottom: 1rem;height: 10rem; display: flex;justify-content: center;align-items: center ;background: #2095f2};
+            .firedom p{font-size: 4rem;};
+            .firedom p span a {color: #193F65 ;font-family: BoldMT;font-weight: bold;font-size: 4rem;};
+        </style>
+}
+<div class="top-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="t-title">About Us</h3>
+                <h2 class="border"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-container">
+    <div class="aboutContainer">
+        <div class="row">
+            <div class="col-xs-12 textbodying">
+                @if (string.IsNullOrWhiteSpace(CurrentPage.Image) == false)
+                            {
+                <span class="image image-full">
+                    <img src="@CurrentPage.Image" alt="" />
+                </span>
+                }
+                      @CurrentPage.BodyText
+            </div>
+        </div>
+        <!-- <div class="row address">
+            <div class="col-xs-12">
+                <h4>Contact Us</h4>
+                <span>Octopus Datas Inc.</span>
+                <span>@Umbraco.Field("#Address")</span>
+                <span><a href="mailto: @Umbraco.Field("#Email")">@Umbraco.Field("#Email")</a></span>
+            </div>
+        </div>
+        <div class="row address-map">
+            <div class="col-xs-12">
+                <span>
+                    <img src="/images/map_address.png"></span>
+            </div>
+        </div> -->
+
+    </div>
+</div>
+<div class="firedown" style="margin-bottom:30px">
+    <p style="padding-top:0">
+        <span>
+            <!-- 先这样处理 -->
+            <a href="/download"  style="font-size:4rem;font-weight:bold;color:#193F65">
+                Download now and see how easy it is to get data.
+             </a>
+        </span>
+    </p>
+</div>
+<script>
+    var textContainers = document.querySelectorAll('.article-content p span');
+    var _textContainers = document.querySelectorAll('.article-content li span');
+    textContainers.forEach(function(item){
+        item.style['font-size'] = '3rem';
+    });
+    _textContainers.forEach(function(item){
+        item.style['font-size'] = '3rem';
+    })
+</script>

@@ -1,0 +1,28 @@
+2019-01-24 11:00:12,783 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-24 11:00:12,798 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-24 11:00:12,798 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-24 11:00:12,798 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-24 16:07:24,579 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-24 16:07:24,595 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-24 16:07:24,595 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-24 16:07:24,595 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-24 18:15:58,751 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-24 18:15:58,767 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-24 18:15:58,767 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-24 18:15:58,767 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-24 18:16:01,189 [11] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/24 10:15:49] | Kind: subscription_charged_successfully
+2019-01-24 18:16:22,626 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:48ac859c-9966-4a40-8aa2-a42b80a0d24b
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2019-01-24 19:16:32,267 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-24 19:16:32,283 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-24 19:16:32,283 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-24 19:16:32,283 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-24 19:16:34,611 [12] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/24 10:15:49] | Kind: subscription_charged_successfully
+2019-01-24 19:16:34,767 [12] INFO  SkieerWeb - duplicate order, braintree returned transactionId:apr3x25g,tradeId:2ea8d65c-4892-419b-be68-e4b776775263.existing transactionId:apr3x25g

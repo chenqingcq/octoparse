@@ -1,0 +1,529 @@
+﻿@using Umbraco.Web
+@using Umbraco.Core.Models
+@using Umbraco.Web.Models
+@inherits UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+// If the editor has not explicitly provided the "Page title" property page
+// then just show the name of the page otherwise show the provided title
+var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title) ? CurrentPage.Name : CurrentPage.Title;
+var blogCategory = string.IsNullOrWhiteSpace(CurrentPage.blogCategory) ? CurrentPage.blogCategory : "";
+var dateTime = CurrentPage.PublishDate == default(DateTime) ? CurrentPage.CreateDate : CurrentPage.PublishDate;
+
+var blogs = CurrentPage.Parent.Children;
+
+}
+
+@section styles{
+<style>
+    /*老版的教程页面，博客文章内容页面*/
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: #f7f8fa;
+    }
+
+    .tut-bread {
+        width: 1200px;
+        font-size: 16px;
+        text-align: left;
+        margin: 0px auto;
+        padding: 20px 0;
+
+    }
+
+    .tut-bread span a{
+        cursor: pointer;
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+    }
+
+    .tut-bread .part3 {
+        color: #333;
+        font-size: 16px;
+        text-align: left;
+        cursor: default;
+    }
+
+
+    .tut-content {
+        width: 1200px;
+        margin: 0 auto 45px;
+    }
+
+    .tut-content:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .tut-content .left {
+        width: 340px;
+        float: right;
+        margin-left: 10px;
+        padding: 20px 14px 20px 20px;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
+
+    .tut-content .left .social {
+        width: 100%;
+        height: 110px;
+        margin-bottom: 69px;
+    }
+
+    .tut-content .left .social p {
+        font-size: 20px;
+        color: #333333;
+        line-height: 32px;
+        text-align: left;
+        margin-bottom: 23px;
+        letter-spacing: -.8px;
+        font-weight: bold;
+    }
+
+    .tut-content .left .social ul {
+        list-style: none;
+        width: 100%;
+    }
+
+    .tut-content .left .social ul li {
+        float: left;
+        margin-right: 24px;
+    }
+
+    .tut-content .left .social ul li:last-child {
+        margin-right: 0;
+    }
+
+    .tut-content .left .pop {
+        width: 100%;
+        margin-bottom: 66px;
+    }
+    .tut-content .left .pop h2{
+        height: 40px;
+        font-size: 20px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tut-content .left .pop p {
+        height: 40px;
+        font-size: 20px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tut-content .left .pop ul {
+        list-style: none;
+    }
+
+    .tut-content .left .pop ul li {
+        height: 65px;
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        letter-spacing: -.4px;
+        line-height: 24px;
+    }
+    .tut-content .left .pop ul li a{
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        letter-spacing: -.4px;
+        line-height: 24px;
+    }
+
+    .tut-content .left .articleName {
+        height: 280px;
+    }
+
+    .tut-content .left .articleName p {
+        height: 40px;
+        font-size: 20px;
+        color: #333;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tut-content .left .articleName ul {
+        list-style: none;
+    }
+
+    .tut-content .left .articleName ul li {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 10px;
+    }
+    .tut-content .left .articleName ul li a{
+        color:black;
+        font-size:15px;
+    }
+
+    .tut-content .left .articleName ul li:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 14px;
+        left: 0;
+        top: 12px;
+    }
+
+    .color1:before {
+        background: #1e81fa;
+    }
+
+    .color2:before {
+        background: #17d2bc;
+    }
+
+    .color3:before {
+        background: #591efa;
+    }
+
+    .color4:before {
+        background: #fcba52;
+    }
+
+    .color5:before {
+        background: #d82222;
+    }
+
+    .color6:before {
+        background: #115278;
+    }
+
+    .tut-content .right {
+        background: #ffffff;
+        padding: 24px 20px;
+        box-sizing: border-box;
+        width: 850px;
+        float: left;
+    }
+
+    .tut-content .right .article {
+    }
+
+    .tut-content .right .article h2 {
+        font-size: 30px;
+        color: #333333;
+        margin-bottom: 24px;
+        margin-top:0;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .tut-content .right .article .date {
+        font-size: 16px;
+        color: #333333;
+        margin-bottom: 24px;
+        font-weight: normal;
+        display: block;
+    }
+
+    .tut-content .right .article p.line {
+        background: #d6dbe5;
+        width: 810px;
+        height: 1px;
+        margin-bottom: 27px;
+    }
+
+    .tut-content .right .article div.content {
+        font-size: 16px;
+        color: #333333;
+        line-height: 24px;
+        text-align: left;
+        margin: 18px 0 30px;
+        overflow: hidden;
+    }
+    /*解决文章中的有序无序列表的开头部分被超出影藏bug*/
+    .tut-content .right .article .content ul,.tut-content .right .article .content ol{
+        padding-left :  20px;
+    }
+    .tut-content .right .article table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-top:0.8rem;
+        margin-bottom:1.4rem
+    }
+    .tut-content .right .article tr{
+        border-top:1px solid
+    }
+    .tut-content .right .article th,td{
+        padding:5px 14px;
+        border:1px solid;
+    }
+
+    .page {
+        width: 100%;
+        margin-top: 40px;
+    }
+    .page .pre a:hover,.next a:hover{
+        color:#2a96ef;
+    }
+    .page .pre {
+        background: #ffffff;
+        width: 220px;
+        float: left;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .next {
+        background: #ffffff;
+        width: 220px;
+        float: right;
+        text-align: right;
+        cursor: pointer;
+        user-select: none;
+    }
+    .page .pre .wrap{
+        float:right;
+        width: 200px;
+    }
+    .page .pre .wrap .nextpost{
+        color:gray;
+        font-size:12px;
+    }
+    .page .pre .img{
+        float:left;
+        width: 20px;
+        color:gray;
+        line-height:60px
+    }
+    .page .next .wrap{
+        float:left;
+        width: 200px;
+    }
+    .page .next .wrap .nextpost{
+        color:gray;
+        font-size:12px;
+    }
+    .page .next .img{
+        float:right;
+        width: 20px;
+        color:gray;
+        line-height:60px
+    }
+
+    .page a {
+        color: #333333;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    .popular {
+        width: 100%;
+        height: 236px;
+        background-image: url("@Url.Content("~/images/bg.jpg")");
+        background-position: center top;
+    }
+
+    .popular .wrap {
+        width: 972px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .popular .wrap ul {
+        width: 280px;
+        height: 100%;
+        margin-right: 120px;
+        margin-left:86px;
+        list-style: none;
+        float: left;
+    }
+
+    .popular .wrap ul:last-child {
+        margin-right: 0;
+    }
+
+    .popular .wrap ul li {
+        width: 280px;
+        height: 37px;
+        line-height: 40px;
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .popular .wrap ul li a {
+        color: #337ab7;
+        font-weight: normal;
+    }
+    .download {
+        background: url("@Url.Content("~/images/morequestions.jpg")");
+        background-position: center top;
+        width: 100%;
+        height: 160px;
+        padding-top: 18px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .download p {
+        font-size: 20px;
+        color: #2e2e2f;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a {
+        border: 2px solid #ffffff;
+        border-radius: 3px;
+        line-height: 36px;
+        margin-top: 22px;
+        text-decoration: none;
+        background: #ffffff;
+        width: 136px;
+        height: 40px;
+        display: inline-block;
+        font-size: 20px;
+        color: #fbad29;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a:last-child {
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        background: #fcba52;
+        margin-left: 40px;
+    }
+    img{
+        max-width: 100%;
+    }
+</style>
+}
+
+<div class="tut-bread">
+    <span class="part1"><a href="/blog">Blog</a></span> >
+    @if (!string.IsNullOrWhiteSpace(CurrentPage.blogCategory))
+    {
+    <span><a href="/blog?pageindex=1&blogcategory=@CurrentPage.blogCategory">@CurrentPage.blogCategory</a></span> @(">")
+    }
+    <span class="part3">Post</span>
+</div>
+<div class="tut-content">
+    <div class="right">
+        <div class="article">
+            <h1>@pageTitle</h1>
+            <span class="date">@dateTime.GetDateTimeFormats('D')[0].ToString()</span>
+            <p class="line"></p>
+            <div class="content">
+                @CurrentPage.BodyText
+            </div>
+            <p class="line"></p>
+        </div>
+        <div class="page">
+            @{
+            var parent = CurrentPage.Parent;
+            if (parent != null)
+            {
+            List<DynamicPublishedContent> blogList = new List<DynamicPublishedContent>();
+            if (string.IsNullOrWhiteSpace(blogCategory))
+            {
+            blogList.AddRange(parent.Children.OrderBy("Id desc"));
+            }
+            else
+            {
+            blogList.AddRange(parent.Children.Where("BlogCategory == @0", blogCategory).OrderBy("Id desc"));
+            }
+            if (blogList != null && blogList.Count() > 1)
+            {
+            var count = blogList.Count();
+            int index = blogList.IndexOf(blogList.Where(p => p.Id == CurrentPage.Id).FirstOrDefault());
+            if (index - 1 >= 0)
+            {
+            dynamic pre = blogList[index - 1];
+            string preTitle = string.IsNullOrWhiteSpace(pre.Title) ? pre.Name : pre.Title;
+            <div class="pre">
+                <a target="_blank" href="@pre.Url" title="@preTitle">
+                    <span class="wrap">
+                        <span class="nextpost">PREVIOUS POST</span><br>
+                         <span class="title">@(preTitle)</span>
+                    </span>
+                    <span class="img"><</span>
+                </a>
+            </div>
+            }
+            if (index + 1 < count)
+            {
+            dynamic next = blogList[index + 1];
+            string nextTitle = string.IsNullOrWhiteSpace(next.Title) ? next.Name : next.Title;
+            <div class="next"><a target="_blank" href="@next.Url" title="@nextTitle">
+                <span class="wrap">
+                    <span class="nextpost">NEXT POST</span><br>
+                    <span class="title">@(nextTitle)</span>
+                </span>
+                <span class="img">></span>
+            </a></div>
+            }
+            }
+            }
+            }
+        </div>
+    </div>
+    <div class="left">
+        @{ Html.RenderPartial("octShare");}
+        @{ Html.RenderPartial("octLatestBlogWidget"); }
+        @{ Html.RenderPartial("octBlogCategory"); }
+    </div>
+</div>
+<div class="popular">
+    <div class="wrap">
+        <ul>
+            <li>Related articles</li>
+            @foreach (var item in blogs.Where("blogCategory == @0", CurrentPage.blogCategory).OrderBy("updateDate desc").Take(5))
+            {
+            string title = string.IsNullOrWhiteSpace(item.Title) ? item.Name : item.Title;
+            <li><a target="_blank" href="@item.Url" title="@title">@(title.Length > 45 ? title.Substring(0, 45) + "..." : title)</a></li>
+            }
+        </ul>
+        <ul>
+            <li>Latest articles</li>
+            @foreach (var item in blogs.OrderBy("updateDate desc").Take(5))
+            {
+            string title = string.IsNullOrWhiteSpace(item.Title) ? item.Name : item.Title;
+            <li><a target="_blank" href="@item.Url" title="@title">@(title.Length > 45 ? title.Substring(0, 45) + "..." : title)</a></li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="download">
+    <p>Download Octoparse to start web scraping or contact us for any<br> question about web scraping!</p>
+    <div>
+        <a target="_blank" href="/contact">Contact us</a>
+        <a target="_blank" href="/download">Download</a>
+    </div>
+</div>
+@*@section scripts {
+<script src="http://w.sharethis.com/button/buttons.js"></script>
+<script>
+    $(function () {
+        stLight.options({
+            publisher: "beff5847-b8e9-4ee4-82f8-a075354f3974",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    });
+
+
+</script>
+}*@

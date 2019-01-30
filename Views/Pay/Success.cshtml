@@ -1,0 +1,63 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.OrderMode
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+}
+@section styles{
+
+
+}
+@ViewBag.Response
+<div class="container" style="padding-top: 84px;">
+                <div class="row">
+                   <div class="col-xs-12">
+                   		<h3 class="ro-title">Payment Successful</h3>
+                   </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px;">
+                	<div class="col-xs-4" style="padding-right: 0;">
+                		<div class="st-jdt st-jdt-active st-jdt-bg3">
+                			<span>Review Order</span>
+                		</div>
+                	</div>
+                	<div class="col-xs-4" style="padding: 0;">
+                		<div class="st-jdt st-jdt-active st-jdt-bg3">
+                			<span>Pay</span>
+                		</div>
+                	</div>
+                	<div class="col-xs-4" style="padding-left: 0;">
+                		<div class="st-jdt st-jdt-active">
+                			<span>Payment Confirmation</span>
+                		</div>
+                	</div>
+                </div>
+                <div class="row" style="margin-bottom: 100px;">
+                	<div class="col-xs-12">
+                		<div style="text-align: center;margin-top: 100px;">
+                			<span style="display: inline-block;overflow: hidden;">
+                				<img src="/images/successful.png" alt="">
+                			</span>
+                		</div>
+                		<div style="text-align: center;margin-top: 20px;">
+                			<span style="font-size: 34px;color: #036C94;font-family: fantasy;letter-spacing: 2px;">Payment Successful</span>
+                		</div>
+                	</div>
+                </div>
+               
+                <div class="row" style="margin-bottom: 200px;">
+                	<div class="col-xs-12" style="text-align: center;">
+                		<a style="width: 180px;background: #08A9E3;color: #fff;padding: 14px 0;font-size: 14px; margin-right: 10px;" class="btn" href="/Subscribe/Transactions">View Transactions</a>
+                		<a class="btn" style="width: 180px;padding: 14px 0;font-size: 14px;color: #494949;border: 1px solid #BDBDBD;" href="/profile">Back to User Center</a>
+                	</div>
+                </div>
+            </div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+
+        });
+    </script>
+
+}

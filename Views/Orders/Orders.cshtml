@@ -1,0 +1,46 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.OrdersModel
+@{
+    Layout = null;
+}
+
+@if(Model!=null && Model.Orders!=null && Model.Orders.Count>0)
+{
+<table class="table my-table"  ID="tbl1" >
+        <thead class="basc-table-top">
+        <tr id="Tr1" runat="server" >
+            <th width="410"><span class="sp">order information</span></th>
+			<th width="90"><span>sum</span></th>
+			<th width="170"><span>create time</span></th>
+			<th width="100"><span>status</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+            <td>
+                @order.No<br />
+                @order.Name
+                @order.Detail
+            </td>
+            <td>
+              $@order.Amount
+            </td>
+               <td>
+              @order.CreatedDate.ToEnDateTime()
+            </td>
+            <td>
+              @order.StatusName
+            </td>
+            
+          </tr>
+
+        }
+
+      </tbody>
+        </table>
+}else{
+       <span>No data found.</span>
+}

@@ -1,0 +1,140 @@
+﻿@model Octoparse.Web.Models.FreeTrialModel
+@using Octoparse.Web;
+@{
+    ViewBag.Title = "Application Trial For "+ViewBag.ApplicationEdition;
+     Layout = "~/Views/octAccountLayout.cshtml";
+}
+@section styles{
+<style type="text/css">
+            .top-container{background:url('/images/top_min_bg.png') no-repeat center top;height:200px;padding-top:52px;}
+            .top-container .t-title{color:#fff;font-weight:bold;letter-spacing: 1px;font-size:24px;padding-bottom:24px;background:url('/images/top_h3_bg.png') no-repeat left bottom;}
+            .main-container{padding-top:40px;}
+            .main-container p{padding:10px 0;line-height:20px;margin-bottom: 0px;}
+            .m-tip>p{color: #999;font-size: 14px;}
+            .m-tip>p a{color: #08A9E3;margin-left: 6px;}
+            
+            .form-row{margin-top: 40px;}
+            .form-group-my{margin-bottom: 0;min-height: 96px;}
+            .form-group-my>label{font-size: 14px;color: #333;font-weight: normal;height: 26px;line-height: 26px;display: block;margin-bottom: 0;}
+            .form-group-my>label>i{font-style: normal;color: #ff5500;}
+            .form-group-my>.form-control{height: 50px;line-height: 50px;border: 1px solid #e5e5e5;border-radius: 0;background: #f8f8f8;box-shadow: none;display: block;}
+            .form-group-my>span{display: block;height: 20px;line-height: 20px;font-size: 12px;color: #ff5500;}
+            .submitbox{margin-top: 40px;margin-bottom: 100px;}
+            .submitbox>.btn-submit{width: 180px;height: 50px;line-height: 50px;text-align: center;background: #08A9E3;font-size: 15px;color: #fff;padding: 0;border-radius: 2px;margin-right: 10px;}
+            .submitbox>.btn-reset{width: 130px;height: 50px;line-height: 50px;text-align: center;background: none;font-size: 15px;color: #08A9E3;padding: 0;border-radius: 2px;margin-right: 10px;border: 1px solid #08A9E3;}
+            .radiobox{height: 50px;}
+            .radiobox>label{height: 24px;line-height: 24px;float: left;margin-right: 40px;margin-bottom: 0;margin-top: 13px;font-weight: normal;font-size: 14px;}
+            .radiobox>label>input{float: left;margin-top: 6px;margin-right: 10px;}
+        </style>
+}
+
+<div class="top-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="t-title">Request Free Trial</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-tip">
+                <p>Extract data within minutes, not hours! <br> Request your 5- Day free trial of Octoparse Professional Version</p>
+                <p style="color:#333;">Please complete the form below and then submit your request. Octoparse Team will contact you within three business days after receipt of your trial request.</p>
+            </div>
+        </div>
+        <form method="post" action="/Octopus/FreeTrial/CreateFreeTrial"  enctype="multipart/form-data">
+        <div class="row form-row">
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+<<<<<<< HEAD
+                    <label for="FirstName">First Name <i class="x">*</i></label>
+=======
+                    <input type="hidden" name="EditionType" value="3">
+                    <label for="FirstName">First name <i class="x">*</i></label>
+>>>>>>> ca847fbe33c704aee4799d38cd77686164cbaf2f
+                    <input type="text" class="form-control" name="FirstName" id="FirstName" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="LastName">Last Name <i class="x">*</i></label>
+                    <input type="text" class="form-control" name="LastName" id="LastName" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="Country">Country <i class="x">*</i></label>
+                    <input type="text" class="form-control" name="Country" id="Country" required placeholder="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="Email">Company Email <i class="x">*</i></label>
+                    <input type="email" class="form-control" name="Email" id="Email" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="CompanyName">Company Name <i class="x">*</i></label>
+                    <input type="text" class="form-control" name="CompanyName" id="CompanyName" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="JobTitle">Job Title<i class="x">*</i></label>
+                    <input type="text" class="form-control" name="JobTitle" id="JobTitle" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="exampleInputEmail1"> 1.Have you completed configuring an extraction rule?</label>
+                    <div class="radiobox">
+                        <label for="ConfiguredRule1"><input type="radio" name="ConfiguredRule" value="true" id="ConfiguredRule1" required> Yes</label>
+                        <label for="ConfiguredRule2"><input type="radio" name="ConfiguredRule" value="false" id="ConfiguredRule2" required> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="exampleInputEmail1"> 2.Have you run a task?</label>
+                    <div class="radiobox">
+                        <label for="RunTask1"><input type="radio" name="RunTask" value="true" id="RunTask1" required> Yes</label>
+                        <label for="RunTask2"><input type="radio" name="RunTask" value="false" id="RunTask2" required> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="exampleInputEmail1"> 3.Have you ever exported data using Octoparse?</label>
+                    <div class="radiobox">
+                        <label for="ExportedData1"><input type="radio" name="ExportedData" value="true" id="ExportedData1" required> Yes</label>
+                        <label for="ExportedData2"><input type="radio" name="ExportedData" value="false" id="ExportedData2" required> No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="ScrapeWebSites"> What websites did you scrape with Octoparse?</label>
+                    <input type="text" class="form-control" name="ScrapeWebSites" id="ScrapeWebSites" placeholder="" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 submitbox">
+                <button type="submit" class="btn btn-submit">Ruquest Free Trial</button>
+                <a href="/contact" class="btn btn-reset">Contact Us</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="firedown" style="background:#f8f8f8;height:200px;">
+    <p style="padding-top:42px;">Download now and see how easy it is to get data.</p>
+    <div class="download-btn">
+        <span><a href="/download" class="btn btn-my">Download</a></span>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octBlogOverviews.First();
+
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    // Finally, take the first 5 items to show in the news overview
+    var recentPosts = newsOverview.octBlogItems.Where("BlogCategory == @0", "Web Scraping").OrderBy("updateDate desc").Take(5);
+}
+
+@*<div class="recent-posts-wrap">
+        <h2 style="margin-top: 30px;">Recent Posts</h2>
+        <ul>
+            @foreach (var post in recentPosts) {
+                var title = string.IsNullOrWhiteSpace(post.Title) ? post.Name : post.Title;
+                <li><a target="_blank" href="@post.Url">@title</a></li>
+            }
+        </ul>
+    </div>*@
+
+<div class="pop">
+    <h2>Most popular posts</h2>
+    <ul>
+        @foreach (var post in recentPosts)
+        {
+            var title = string.IsNullOrWhiteSpace(post.Title) ? post.Name : post.Title;
+            <li>
+                <a target="_blank" target="_blank" href="@post.Url" title="@title"  target="_blank">
+                    @(title)
+                </a>
+            </li>
+        }
+    </ul>
+</div>

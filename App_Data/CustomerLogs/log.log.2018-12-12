@@ -1,0 +1,28 @@
+2018-12-12 11:11:28,482 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-12 11:11:28,497 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-12 11:11:28,497 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-12 11:11:28,497 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-12 15:07:30,622 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-12 15:07:30,622 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-12 15:07:30,622 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-12 15:07:30,622 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-12 18:42:56,169 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-12 18:42:56,185 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-12 18:42:56,185 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-12 18:42:56,185 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-12 18:42:58,482 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/12 10:42:48] | Kind: subscription_charged_successfully
+2018-12-12 18:42:58,560 [11] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:351bd1b1-7dc5-451a-a9d6-e6312eddfe75,Kind:subscription_charged_successfully
+2018-12-12 19:33:38,154 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-12 19:33:38,154 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-12 19:33:38,154 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-12 19:33:38,154 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-12 19:33:40,310 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/12 11:33:32] | Kind: subscription_charged_successfully
+2018-12-12 19:34:01,513 [12] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:e2f769da-7594-4f59-a6da-b66b07b6a63e
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

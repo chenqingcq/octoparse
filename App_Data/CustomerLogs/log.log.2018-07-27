@@ -1,0 +1,110 @@
+2018-07-27 13:42:59,002 [1] INFO  SkieerWeb - RefundJob starting.
+2018-07-27 13:42:59,002 [12] INFO  SkieerWeb - RefundJob checking.
+2018-07-27 13:42:59,018 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-07-27 13:42:59,018 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-07-27 13:43:40,966 [8] ERROR SkieerWeb - user login error
+System.ServiceModel.FaultException`1[System.ServiceModel.ExceptionDetail]: 值不能为空。
+参数名: key (Fault Detail is equal to An ExceptionDetail, likely created by IncludeExceptionDetailInFaults=true, whose value is:
+System.ArgumentNullException: 值不能为空。
+参数名: key
+   在 System.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   在 System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   在 System.Collections.Generic.Dictionary`2.TryGetValue(TKey key, TValue& value)
+   在 Skieer.Passport.Service.UserCache.ValidateUser(String userName, String password)
+   在 Skieer.Passport.Service.SkieerMembershipServiceImpl.ValidateUser(String username, String password)
+   在 SyncInvokeValidateUser(Object , Object[] , Object[] )
+   在 System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   在 System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   在 System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   在 System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage4(MessageRpc& rpc)
+   在 S...).
+2018-07-27 13:44:32,727 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:44:34,974 [8] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:44:37,626 [15] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:45:08,904 [16] INFO  SkieerWeb - save payment method error.customerId:857169314,error:Do Not Honor
+2018-07-27 13:45:08,904 [16] ERROR SkieerWeb - Do Not Honor
+2018-07-27 13:45:31,898 [16] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:47:24,234 [25] INFO  SkieerWeb - save payment method error.customerId:857169314,error:Processor Network Unavailable - Try Again
+2018-07-27 13:47:24,234 [25] ERROR SkieerWeb - Processor Network Unavailable - Try Again
+2018-07-27 13:47:46,932 [25] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:48:20,425 [29] INFO  SkieerWeb - save payment method error.customerId:857169314,error:Do Not Honor
+2018-07-27 13:48:20,425 [29] ERROR SkieerWeb - Do Not Honor
+2018-07-27 13:48:43,061 [29] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:49:22,233 [29] INFO  SkieerWeb - [Braintree Webhook Received 2018/7/27 5:49:22] | Kind: subscription_canceled
+2018-07-27 13:49:22,233 [29] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:2b57c347-d0eb-46c1-bfa2-d9638acff947,Kind:subscription_canceled
+2018-07-27 13:50:10,452 [27] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:52:14,519 [25] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:a3a670cd-4e42-419b-9700-3f31e2893d37
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-07-27 13:52:16,345 [25] INFO  SkieerWeb - Transaction Id:3awajtvm, Status:submitted_for_settlement
+2018-07-27 13:52:18,778 [23] INFO  SkieerWeb - [Braintree Webhook Received 2018/7/27 5:52:18] | Kind: subscription_canceled
+2018-07-27 13:52:18,778 [23] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:dbc6260c-4806-4319-b35b-f83fe40aa72f,Kind:subscription_canceled
+2018-07-27 14:12:59,027 [12] INFO  SkieerWeb - RefundJob checking.
+2018-07-27 14:12:59,027 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-07-27 14:12:59,027 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-07-27 14:34:42,051 [1] INFO  SkieerWeb - RefundJob starting.
+2018-07-27 14:34:42,051 [12] INFO  SkieerWeb - RefundJob checking.
+2018-07-27 14:34:42,051 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-07-27 14:34:42,051 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.

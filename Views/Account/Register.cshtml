@@ -1,0 +1,63 @@
+﻿@using Umbraco.Web;
+@model Octoparse.Web.Models.RegisterModel
+@{
+  Layout = null;
+}
+@{
+  Html.EnableClientValidation();
+}
+@using (
+  Html.BeginUmbracoForm(
+    "Register",
+    "Account",
+    new {
+      referralId = Request.QueryString["referralId"]
+    },
+    new {
+      @id = "form-sign-up",
+      @class = "flex flex-column"
+    }
+  )
+)
+
+{
+  <div class="flex flex-column group">
+    <label for="email">Email</label>
+    @Html.TextBoxFor(m => m.Email, new { @id="email", @type="mail", @maxlength="100" })
+    @Html.ValidationMessageFor(m => m.Email)
+  </div>
+  <div class="flex flex-column group">
+    <label for="username">Username</label>
+    @Html.TextBoxFor(m => m.UserName, new { @id="username", @type="text", @maxlength="16" })
+    @Html.ValidationMessageFor(m => m.UserName)
+  </div>
+  <div class="flex flex-column group">
+    <label for="password">Password</label>
+    @Html.PasswordFor(m => m.Password, new { @id="password", @type="password", @maxlength="16" })
+    @Html.ValidationMessageFor(m => m.Password)
+  </div>
+  <div class="flex flex-column group">
+    <label for="password2">Confirm Password</label>
+    @Html.PasswordFor(m => m.ConfirmPassword, new { @id="password2", @type="password", @maxlength="16" })
+    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+  </div>
+  <div class="flex flex-column group">
+    <label for="industry">Select an industry</label>
+    <select name="industry" id="industry">
+      <option value="ECOMMERCE">E commerce</option>
+      <option value="MARKETING">Marketing</option>
+      <option value="NEWS">News</option>
+      <option value="REALESTATE">Real Estate</option>
+      <option value="EDUCATION">Education</option>
+      <option value="JOURNALISM">Journalism</option>
+      <option value=MEDICAL&HEALTH"">Medical &amp; Health</option>
+      <option value="RECRUITMENT">Recruitment</option>
+    </select>
+  </div>
+  <input type="text" checked name="AcceptAgree" value="true" style="display:none">
+  <div class="flex flex-column group">@Html.ValidationSummary(true)</div>
+  <div class="flex flex-column group"><input type="submit" class="btn-regular" value="Submit"></div>
+  <div class="flex flex-column group">
+    <a href="/terms-and-conditions" target="_blank">By clicking Sign up, you agree to our Terms of Service.</a>
+  </div>
+}

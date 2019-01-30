@@ -1,0 +1,103 @@
+﻿@inherits UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+@section styles{
+  <link rel="stylesheet" href="/css/h5.css">
+  <style type="text/css">
+    ul,p,h1,h2 {padding:0;margin:0;}
+    .container {padding:0;margin:0;width:980px;margin:0 auto;}
+    .banner-box {background-color:rgba(13,163,226,1);}
+    .banner-box .container {height:485px;}
+    .banner-box .container h1 {font-family:futura-lt-w01-light,sans-serif;text-align:center;font-size:36px;color:#fff;margin-top:23px;}
+    .banner-box .container .content {margin-top:75px;}
+    .banner-box .container .content .c-left {margin-left:85px;}
+    .banner-box .container .content .c-right {margin-left:90px;}
+	.banner-box .container .content .c-right .btn-regular-reverse:nth-child(2){background-color:#20A4E0;}
+	.banner-box .container .content .c-right .btn-regular-reverse:nth-child(2):hover{background-color:#1b9bd6;}
+    .banner-box .container .content .download-btn {display:block;text-decoration:none;width:217px;height:46px;line-height:46px!important;text-align:center;color:#fff;font:normal normal normal 25px/1.4em Avenir-LT-W01_35-Light;transition:border-color 0.4s ease 0s,background-color 0.4s ease 0s;background-color:rgba(241,104,118,1);border:solid rgba(96,94,94,1) 0px;margin-bottom:20px;}
+    .banner-box .container .content .download-btn:hover {background-color:rgba(39,59,123,1);border-color:transparent;}
+    .banner-box .container .content .download-tips,.banner-box .container .content .download-tips a {margin-bottom:20px;font-size:15px;color:#fff;}
+    .version-box {background-color:rgba(250,250,250,1);}
+    .version-box .container {padding-bottom:65px;}
+    .version-box .version-item {margin-top:55px;}
+    .version-box .version-item h2 {color:#2F2E2E;font-size:26px;margin-bottom:20px;}
+    .version-box .version-item .version-interval span {height:30px;background-image:url(https://static.parastorage.com/services/skins/2.1229.63/images/wysiwyg/core/themes/base/fade_line.png);float:left}
+    .version-box .version-item .version-interval .i-left {width:45px;}
+    .version-box .version-item .version-interval .i-center {width:195px;background-position-y:87px;}
+    .version-box .version-item .version-interval .i-right {width:45px;background-position-x:40px;}
+    .version-box .version-item .content p {max-width:685px;font:normal normal normal 14px/1.4em;color:#2F2E2E;font-size:16px;line-height:26px;}
+  </style>
+}
+
+<div class="banner-box">
+  <div class="container">
+    <h1>Download Our Free Software</h1>
+    <div class='content oh'>
+      <img class='c-left fl' src="/images/download_banner.png" alt="download_banner.png">
+      <div class="c-right fl" style="position:relative">
+        <a class='btn-regular-reverse' style="width: 160px;font-size: 25px;height: 46px;margin-bottom: 20px;letter-spacing: -1px;
+			font-size: 21px;"
+			href="/Octoparse%20V7.0.0Setup.zip">Octoparse 7.0.0
+		</a>
+        <a class='btn-regular-reverse' style="color:white;width: 160px;height: 46px;margin-bottom: 20px;position: absolute;right: -50px;top: 0;letter-spacing: -1px;font-size: 21px;"
+			href="/Octoparse%20V6.4.4Setup.zip">Octoparse 6.4.4
+		</a>
+        <p class='download-tips'>Version @Umbraco.Field("#SoftVersion") (Zip file, @Umbraco.Field("#SoftSize"))</p>
+		<p class='download-tips'><a href="tutorial-7/about-octoparse-7x" style='font-weight:bold'>What's new in Octoparse 7.X</a></p>
+        <p class='download-tips'>Release date: @Umbraco.Field("#ReleasedDate")</p>
+		<p class='download-tips'>Support Windows XP, 7, 8, 10</p>
+        <p class='download-tips'><a href="/release-notes">Release Notes</a></p>
+        <p class="download-tips" style="font-weight:bold"><a style="color:#bbbbbbeb;font-size:13px;" target="_Blank"
+			href="/faq/statement-on-trojan-detected-by-windows-defenderanti-virus-software">
+			Statement on Trojan Detected<br>by Windows Defender/Anti-Virus Software</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="version-box">
+  <div class="container">
+    <div class="version-item">
+      <h2>Requirements:</h2>
+      <div class="content">
+        <p class='p-title'>Please make sure you meet these requirements before installing Octoparse.</p>
+        <p class='p-list'>1) Windows XP, 7, 8, and 10<br>2) Microsoft .NET Framework 3.5 service pack 1(.NET3.5 SP1) required<br>(Click<a href="http://www.filehorse.com/download-dotnet-framework-3/" target="_Blank"> here</a> to download .NET3.5 SP1 if it is not already installed on you computer)</p>
+      </div>
+    </div>
+    <div class="version-item">
+      <h2>How to install Octoparse</h2>
+      <div class="content">
+        <p class='p-title'>Please follow these steps to install Octoparse.</p>
+        <p class='p-list'>1) Download the installer and unzip the downloaded file<br>2) Double click on the setup.exe file<br>3) Follow the installation instructions<br>4) Log in with your Octoparse account (Sign up<a href="/SignUp">here</a>if you don't have an account yet.)</p>
+      </div>
+    </div>
+    <div class="version-item">
+      <h2>How to uninstall Octoparse</h2>
+      <div class="content">
+        <p class='p-title'>Please follow these steps to uninstall Octoparse if you want to remove the software from your computer.</p>
+        <p class='p-list'>1) Open the Windows Control Panel<br>2) Find Octoparse in the list of programs<br>3) Select “Uninstall Octoparse” or right-click Octoparse to uninstall it<br>4) Follow the uninstallation instructions to remove Octoparse program</p>
+      </div>
+    </div>
+    <div class="version-item">
+      <h2>Internet Access</h2>
+      <div class="content">
+        <p class='p-title'>Octoparse must be allowed to access the Internet. You will not be able to run the software if it cannot access the Internet.</p>
+        <p class='p-title'>When running scraping tasks with feature Cloud Extraction, the software is able to extract data even without Internet network.</p>
+      </div>
+    </div>
+    <div class="version-item">
+      <h2>Anti-virus Software</h2>
+      <div class="content">
+        <p class='p-title'>Anti-virus software doesn't like software that accesses the Internet, since viruses will often access the Internet to expose your private information. Octoparse needs to access the Internet to extract data, and anti-virus software will often try and block access and may even quarantine or remove some Octoparse files.</p>
+        <p class='p-title'>You will need to configure your anti-virus software to allow Internet access for Octoparse. You will also need to restore any Octoparse files that have been quarantined or removed by the anti-virus software.</p>
+      </div>
+    </div>
+    <div class="version-item">
+      <h2>Terms of Service & Privacy Policy</h2>
+      <div class="content">
+        <p class='p-title'>Please read the terms of service and privacy policy before installing Octoparse. By installing this version of Octoparse you agree to the<a href="/terms-and-conditions">terms of service</a>and<a href="/privacy-policy">privacy policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>

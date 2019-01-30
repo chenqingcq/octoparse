@@ -1,0 +1,21 @@
+﻿@if (Request.IsAuthenticated)
+{
+  var user=Membership.GetUser();
+  using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoutForm",@style="display:none;" }))
+  {}
+  <ul class="logged-info nav navbar-nav navbar-right" >
+    <li class="dropdown">
+      <a target="_blank" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(user!=null?user.UserName:"")&nbsp;<span class="caret"></span></a>
+      <ul class="dropdown-menu" style="min-width: 160px;text-align: center;">
+        <li><a target="_blank" href="/profile">User Center</a></li>
+        <li><a target="_blank" href="/changepassword">Change Password</a></li>
+        <li><a target="_blank" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+} else {
+  <ul class="n-right ">
+    <li class=" flex-middle"><a target="_blank" class=" flex-middle login btn-regular-reverse" href="/Login">Log in</a></li>
+    <li class=" flex-middle"><a target="_blank" class=" flex-middle sign-up btn-regular" href="/SignUp">Sign up</a></li>
+  </ul>
+}

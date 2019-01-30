@@ -1,0 +1,160 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+
+@section styles{
+	<style>
+        .price-row {}
+        .pricebox{border: 1px solid #BDBDBD;height: 622px;}
+        .pricetop h4{margin-top: 0;}
+        .pricetop .p-btn span{width: 170px;height: 36px;line-height: 36px;text-align: center;
+		    display: inline-block;
+		    background: #EEEEEE;
+		    color: #999;
+		    font-size: 15px;
+		    text-decoration: none;
+		    border-radius: 20px;
+		    font-weight: bold;
+		}
+		.top-kg{border: 1px solid #E5E5E5;background: #F4F4F4;padding: 20px;height: 88px;margin-bottom: 40px;padding-bottom: 0;position: relative;}
+		.top-kg>h4{margin-top: 0;font-size: 20px;color: #333;margin-bottom: 2px;}
+		.top-kg>p{font-size: 15px;color: #999;}
+		.top-kg>.pay-kg{position: absolute;right: 10px;top: 24px;height: 40px;overflow: hidden;}
+		.top-kg>.pay-kg>span{float: left;height: 40px;line-height: 40px;font-size: 15px;color: #333;margin-right: 20px;}
+		@@media (min-width: 992px){
+            .home-bodying .col-md-2 {
+                width: 12.666667%;
+            }
+        }
+
+	    #kg-tool{width: 63px;height: 38px;border-radius: 50px;position: relative;float: left;}
+	    #kto{width: 37px;height: 37px;border-radius: 48px;position: absolute;background: white;box-shadow: 0px 2px 4px rgba(0,0,0,0.4);}
+	    .open1{background: #08A9E3;}
+	    .open2{top: 0px;right: 1px;}
+	    .close1{background: rgba(255,255,255,0.4);border:1px solid rgba(0,0,0,0.15);border-left: transparent;}
+	    .close2{left: 1px;top: -1px;;}
+	</style>
+	
+}
+<div class="wrapbody">
+    <div class="basc-left">
+       @Html.Partial("octUserMenu","subscription")
+    </div>
+    <div class="home-bodying">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+            	<div class="row">
+					<div class="top-kg">
+						<h4>Automatic renewal</h4>
+						<p>Your plan will automatically renew on: September 23,2017</p>
+						<div class="pay-kg">
+							<span>update payment</span>
+							<div id="kg-tool" class="open1">
+						        <div id="kto" class="open2"></div>
+						        <input class="kto-val" type="hidden" value="true">
+						    </div>
+						</div>
+					</div>
+            	</div>
+                 <div class="row price-row">
+					<div class="col-md-4">
+						<div class="pricebox">
+							
+							<div class="pricetop text-center">
+								<h4>Basic</h4>
+								<div class="p-div"><span>$0</span></div>
+								<p>No credit card required</p>
+								<div class="p-btn">
+									<a href="/download">CHOOSE</a>
+								</div>
+							</div>
+							<div class="pricebody">
+								<ul>
+									<li><img src="/images/right.png" alt="">10 tasks</li>
+									<li><img src="/images/right.png" alt="">Extract unlimited web pages</li>
+									<li><img src="/images/right.png" alt="">2 concurrent tasks on local machine</li>
+									<li><img src="/images/right.png" alt="">IP Proxy</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="pricebox">
+							
+							<div class="pricetop text-center">
+								<h4>Standard Plan</h4>
+								<div class="p-div"><span>$75</span></div>
+								<p class="p-t c-9">Per month <br> when billed annually <br> $89 when billed monthly</p>
+								<div class="p-btn" style="padding-top:1px;">
+									<span>Current Plan</span>
+								</div>
+							</div>
+							<div class="pricebody">
+								<ul>
+									<li class="curr"><img src="/images/right.png" alt="">100 tasks</li>
+									<li class="curr"><img src="/images/right.png" alt="">4 cloud servers</li>
+									<li><img src="/images/right.png" alt="">Extract unlimited web pages</li>
+									<li><img src="/images/right.png" alt="">Unlimited concurrent tasks on local machine</li>
+									<li><img src="/images/right.png" alt="">IP Rotation</li>
+									<li><img src="/images/right.png" alt="">IP Proxy</li>
+									<li><img src="/images/right.png" alt="">Schedule to extract data</li>
+									<li><img src="/images/right.png" alt="">API access</li>
+									<li><img src="/images/right.png" alt="">Dedicated support from support team</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="pricebox">
+							
+							<div class="pricetop text-center">
+								<h4>Professional Plan</h4>
+								<div class="p-div"><span>$159</span></div>
+								<p class="p-t c-9">Per month <br> when billed annually <br> $189 when billed monthly</p>
+								<div class="p-btn" style="padding-top:1px;">
+									<a href="/StartStandard">UPGRADE</a>
+								</div>
+							</div>
+							<div class="pricebody">
+								<ul>
+									<li class="curr"><img src="/images/right.png" alt="">200 tasks</li>
+									<li class="curr"><img src="/images/right.png" alt="">10 cloud servers</li>
+									<li><img src="/images/right.png" alt="">Extract unlimited web pages</li>
+									<li><img src="/images/right.png" alt="">Unlimited concurrent tasks on local machine</li>
+									<li><img src="/images/right.png" alt="">IP Rotation</li>
+									<li><img src="/images/right.png" alt="">IP Proxy</li>
+									<li><img src="/images/right.png" alt="">Schedule to extract data</li>
+									<li><img src="/images/right.png" alt="">API access</li>
+									<li><img src="/images/right.png" alt="">Dedicated support from support team</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>  
+    </div>
+</div>
+@section scripts{
+	<script>
+	    $(function(){
+	    	$('#kto').on('click',function(){
+	    		if($(this).attr('class') == 'close2'){
+	    			$(this).attr('class','open2');
+	    			$(this).siblings('.kto-val').val(true);
+	    		}else{
+	    			$(this).attr('class','close2');
+	    			$(this).siblings('.kto-val').val(false);
+	    		}
+	    		if($('#kg-tool').attr('class') == 'close1'){
+	    			$('#kg-tool').attr('class','open1');
+	    		}else{
+	    			$('#kg-tool').attr('class','close1');
+	    		}
+	    	})
+	    })
+
+	</script>
+}

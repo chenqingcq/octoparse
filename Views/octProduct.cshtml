@@ -1,0 +1,238 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+}
+@section styles{
+  <link rel="stylesheet" href="/css/flex.css">
+  <style type="text/css">
+    body {font:normal normal normal 14px/30px Avenir-LT-W01_35-Light;}
+    li,ol {list-style:none;}
+    ul,li,h1,h2,h3,h4,p {margin:0;padding:0;}
+    a:hover {text-decoration:none;}
+    .container {margin:0;padding:0;width:980px;margin:0 auto;}
+
+    /* .width1200 {width: 1200px;} */
+
+    .banner-box {background-color:rgba(13,163,226,1);}
+    .banner-box .container {width:1100px;height:525px;position:relative;}
+    .banner-box .c-left {width:535px;}
+    .banner-box .c-left h1 {margin:100px 0 50px;font-size:40px;color:#fff;}
+    .banner-box .c-left p {font-size:22px;color:#fff;}
+    .banner-box .c-right {margin-top:110px;margin-left:40px;width:485px;height:337px;background:url(/images/h/home-new/icon_scene.png) center no-repeat;}
+    .banner-box .c-right:hover {background:url(/images/h/home-new/icon_scene_hover.png) center no-repeat;}
+    .banner-box .c-btn-group {width:360px;height:40px;position:absolute;left:0;right:0;top:412px;bottom:0;margin:auto;}
+    .banner-box .c-btn-group .btn-trial {text-decoration:none;width:175px;height:40px;border:solid rgba(0,0,0,1) 2px;transition:border-color 0.4s ease 0s,background-color 0.4s ease 0s,color 0.4s ease 0s;color:rgb(255,255,255);font-size:22px;text-align:center;font:normal normal normal 22px/1.4em Avenir-LT-W01_35-Light;}
+    .banner-box .c-btn-group .btn-trial:hover {background-color:transparent;border-color:transparent;color:rgb(209,42,60);}
+    .banner-box .c-btn-group .btn-signup {text-decoration:none;width:175px;height:40px;transition:border-color 0.4s ease 0s,background-color 0.4s ease 0s;background-color:rgba(241,104,118,1);font-size:22px;color:#fff;text-align:center;font:normal normal normal 22px/1.4em Avenir-LT-W01_35-Light;}
+    .banner-box .c-btn-group .btn-signup:hover {background-color:rgba(39,59,123,1);}
+    
+    .reqirement-wrap {margin:80px auto;}
+    .reqirement-wrap h1 {text-align:center;margin-bottom:40px;}
+    .reqirement-body {}
+    .reqirement-box {text-align:center;align-items:center;padding:0 20px;}
+    .reqirement-box img {}
+    .reqirement-box h2 {margin:20px 0;}
+    .reqirement-box p {font-size:16px;}
+
+    .bg-gray {background-color:#eee;}
+    .introduce-wrap {width:100%;}
+    .introduce {margin:60px auto;}
+    .introduce img {}
+    .introduce-body {padding-left:40px;justify-content:space-around;}
+    .introduce-body h2 {font-size:34px;}
+    .introduce-body p {font-size:20px;}
+    .introduce-body a {width:200px;font-size:20px;padding:8px 20px;}
+  </style>
+}
+<style>
+  .banner-wrap{
+    height: 54rem;    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .bannerImg{
+    width: 30rem;
+    height: 24rem;
+    position: absolute;
+    left: 50%;
+    top:4rem;
+    transform: translateX(-50%)
+  }
+  .textContent{
+    position: absolute;
+    top:30rem;
+    left: 0;
+  }
+   .textContent a , p {
+     font-size: 3rem;
+   }
+   .textContent .btns{
+     display: flex;
+     justify-content: center;
+   }
+   .reqirement-body img{
+     width: 32rem;
+     height: 32rem;
+   }
+  .reqirement-body p{
+     font-size: 3rem;
+     line-height: 3rem;
+     text-align: left;
+     color: #193F65;
+   }
+   .reqirement-body h2{
+     font-size: 4rem;
+     color: #193F65;
+     font-family: Helvetica;
+   }
+    .introduce-wrap  p{
+     font-size: 3rem;
+     line-height: 3rem;
+     text-align: left;
+     color: #193F65;
+     font-family: Helvetica;
+     margin-top: 3rem;
+     padding:  0 2rem;
+     text-align: left;
+   }
+   .introduce-wrap  h2{
+     font-size: 4rem;
+     color: #193F65;
+   }
+   .introduce img{
+     width: 95%;
+     height: 80%
+   }
+   .introduce {
+     position: relative;
+     text-align: center;
+   }
+   .introduce  h2{
+     color: #193F65;
+     font-size: 4rem;
+     font-weight: bold;
+   }
+   .introduce-wrap  .introduce .btn-regular{
+     width: auto;
+     padding: 2rem 4rem;
+     font-size: 3rem;
+     height: 6rem;
+     border-radius: 10px;
+   }
+   .introduce-body {
+     position: relative;
+     padding: 5rem 0 ;
+   }
+   .introduce-body a {
+     display: block;
+     margin:  0 auto;
+     margin-top: 3rem;
+     border-radius: 5%;
+     font-size: 2rem;
+   }
+</style>
+<div class="banner-wrap " style="background-color:#2095f2">
+  <div class="container" style="width:1200px;height:525px;align-items: center;">
+    <img class="bannerImg" src="/images/img_banner_product.png" alt="img_banner_product.png">
+    <div class="flex-one flex flex-column textContent" style="justify-content:center;">
+      <h1 style="font-family:Helvetica-Bold;font-size:3rem;color:#ffffff;text-align:center;">Easily <a target="_blank" href="/DataExtraction" style="color:inherit;text-decoration:none;font-family:inherit;">Extract Any Web</a> Data</h1>
+      <p style="line-height:3rem;lfont-family:Helvetica;font-size:2rem;padding-right: 22px;color:#ffffff;text-align:center;margin-top:2rem;">Octoparse is everything you need for automatic data extraction.
+                                                                                                     Quickly scrape web data without coding and turn web pages into structured data within clicks!</p>
+      <div class="btn-wrap flex btns " style="margin-top:50px;">
+        <a target="_blank" data-editiontype="3" href="javascript:;" class="btn-regular-o" style="width: 16rem;height: 6rem;font-size: 3rem;margin-right: 24px;">Start Trial</a>
+        <a target="_blank" href="/signup" class="btn-regular-reverse" style="width: 16rem;height: 6rem;font-size: 3rem;">Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reqirement-wrap  width1200">
+  <h1 style="font-size:3rem;font-weight:bold">Engineered for Most Data Extraction Requirements</h1>
+  <div class="reqirement-body">
+    <div class="reqirement-box">
+      <img src="/images/product/icon_product_07.png" alt="icon_product_07.png" width="154" height="154">
+      <h2>Price Monitoring</h2>
+      <p>Track and monitor prices. Extract data from your competitors. Scrape real-time data within several clicks.</p>
+    </div>
+    <div class="reqirement-box">
+      <img src="/images/product/icon_product_08.png" alt="icon_product_08.png" width="154" height="154">
+      <h2>Lead Generation</h2>
+      <p>Easily extract massive leads and build your sales list within minutes. No need to code at all.</p>
+    </div>
+    <div class="reqirement-box">
+      <img src="/images/product/icon_product_09.png" alt="icon_product_09.png" width="154" height="154">
+      <h2>Marketing</h2>
+      <p>Use scraped web data to improve your marketing strategies. Make better predictions and decisions.</p>
+    </div>
+    <div class=" reqirement-box">
+      <img src="/images/product/icon_product_10.png" alt="icon_product_10.png" width="154" height="154">
+      <h2>Research</h2>
+      <p>Extract online data to power your research or data models. Instantly get your research underway.</p>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap  bg-gray">
+  <div class="introduce width1200">
+    <img src="/images/product/img_product_1.png" alt="img_product_1.png" width="640" height="410">
+    <div class="introduce-body">
+      <h2>Point-and-Click Interface</h2>
+      <p>Click any web data to extract - Octoparse applies advanced machine learning algorithm to accurately locate the data at the moment you click on it. Open a website in the built-in browser and start a scraping task by clicking and dragging. Octoparse handles all the messy work behind the screen for you.</p>
+      <a target="_blank" href="/download" class="btn-regular" style="width:30rem;">Free Download</a>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap flex flex-column">
+  <div class=" introduce width1200">
+    <img src="/images/product/img_product_2.png" alt="img_product_2.png" width="640" height="410">
+    <div class="flex flex-column flex-one introduce-body">
+      <h2>Deal With All Sorts of Websites</h2>
+      <p>Never be frightened by any complicated website. JavaScript, AJAX, or any dynamic website, we have you all covered. <br>Easily scrape behind a login, fill in forms, input search terms, click through infinitive scroll, switch drop downs and so much more. <br>Capture anything from webpages like text, link, image URL, or html code...</p>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap flex flex-column bg-gray">
+  <div class=" introduce width1200">
+    <img src="/images/product/img_product_3.png" alt="img_product_3.png" width="640" height="410">
+    <div class="flex flex-column flex-one introduce-body">
+      <h2>Cloud Extraction</h2>
+      <p>No more worries about high cost hardware maintenance or network interruption. Octoparse’s Cloud platform allows for 6 to 20 times faster data extraction, running the extraction task 24/7. Data is scraped and stored in the cloud and accessible from any machine.</p>
+      <a target="_blank" href="/pricing" class="btn-regular">Buy Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap flex flex-column">
+  <div class=" introduce width1200">
+    <img src="/images/product/img_product_4.png" alt="img_product_4.png" width="640" height="410">
+    <div class="flex flex-column flex-one introduce-body">
+      <h2>Automatic IP Rotation</h2>
+      <p>Octoparse Cloud service is supported by hundreds of cloud servers, each with a unique IP address. When an extraction task is set to execute in the Cloud, requests are performed on the target website through various IPs, minimizing the chances of being traced and blocked.</p>
+      <a target="_blank" href="/pricing" class="btn-regular">Buy Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap flex flex-column bg-gray">
+  <div class="introduce width1200">
+    <img src="/images/product/img_product_5.png" alt="img_product_5.png" width="640" height="410">
+    <div class="flex flex-column flex-one introduce-body">
+      <h2>Schedule Extraction</h2>
+      <p>Do you need to get the new data from any website that updates consistently? Cloud Extraction enables a task to be scheduled to run at any specific time of the day, week or month. To further support real-time scraping, you can even schedule the task to run every 1-minute interval.</p>
+      <a target="_blank" href="/pricing" class="btn-regular">Buy Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="introduce-wrap flex flex-column">
+  <div class="introduce width1200">
+    <img src="/images/product/img_product_6.png" alt="img_product_6.png" width="640" height="410">
+    <div class="flex flex-column flex-one introduce-body">
+      <h2>API, CSV, Excel, Database</h2>
+      <p>Access the extracted data via Excel or API, or export to your own database. Connect with Octoparse API and have the data delivered automatically to your own systems. Get data, export data, publish data, or use it in any creative way via automatic integration.</p>
+      <a target="_blank" data-editiontype="3" href="javascript:;" class="btn-regular">Start Trial</a>
+    </div>
+  </div>
+</div>

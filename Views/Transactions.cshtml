@@ -1,0 +1,64 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+@section styles{
+	<style>
+		.page-title{font-size: 20px;font-weight: bold;color: #333;margin-top: 14px;margin-bottom: 36px;}
+		.mytable{border: 1px solid #E5E5E5;}
+		.mytable>thead>tr>th{border-width: 1px;padding: 10px;padding-right: 0;background: #363636;color: #fff;font-weight: normal;}
+		.mytable>thead>tr>th>span{display: block;border-right: 1px solid #fff;}
+		.mytable>thead>tr>th:last-child>span{border-right: none;}
+		.mytable>tbody>tr>td{padding: 13px;padding-right: 0;padding-left: 8px;}
+		@@media (min-width: 992px){
+            .home-bodying .col-md-2 {
+                width: 12.666667%;
+            }
+        }
+	</style>
+	
+}
+<div class="wrapbody">
+    <div class="basc-left">
+       @Html.Partial("octUserMenu","Transactions")
+    </div>
+    <div class="home-bodying">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <h4 class="page-title">Transaction View</h4>
+                <div class="row">
+					<div class="col-md-12">
+						<table class="table mytable">
+							<thead>
+								<tr>
+									<th><span>Date</span></th>
+									<th><span>Type</span></th>
+									<th><span>order No.</span></th>
+									<th><span>Product Details</span></th>
+									<th><span>Total</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span>Date</span></td>
+									<td><span>Type</span></td>
+									<td><span>order No.</span></td>
+									<td><span>Product Details</span></td>
+									<td><span>Total</span></td>
+								</tr>
+								<tr>
+									<td><span>Date</span></td>
+									<td><span>Type</span></td>
+									<td><span>order No.</span></td>
+									<td><span>Product Details</span></td>
+									<td><span>Total</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>

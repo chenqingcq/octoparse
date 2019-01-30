@@ -1,0 +1,271 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.ProfileModel
+@{
+    Layout = "octLayout.cshtml";
+}
+@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+
+@section styles {
+  <link rel="stylesheet" href="/css/flex.css">
+  <link rel="stylesheet" href="/css/account/index.css">
+  <style>
+    .content {flex-direction:column;}
+    .panel-title {font-size:30px;margin:40px 0 20px 0;padding-bottom: 14px;border-bottom: solid 1px #ddd;}
+    .panel-title a:hover {color: #888;}
+    .panel-title a, .panel-title a:hover, .panel-title a:focus {text-decoration: none;}
+
+    .panel-title-wrap > .panel-title {border: none;margin: 0;padding: 0;}
+    .panel-title-wrap {border-bottom: solid 1px #ddd;margin:40px 0 20px 0;padding-bottom: 14px;align-items: center;}
+
+    #toggle-form {font-size: 20px;margin-left: 10px;}
+    #toggle-form + span {margin-left: auto;}
+
+    .panel-account > img {height:100px;width:100px;margin:auto 30px;}
+    .panel-account > .account-info {flex-direction:column;justify-content:center;font-size:18px;}
+    .panel-account > .account-info > .item {margin:4px 0;min-height:34px;align-items:center;}
+    .panel-account > .account-info > .item > label {width:120px;font-weight:normal;color:#888;margin:0;}
+    .panel-account > .account-info > .item > span {display:inline-block;}
+    .panel-account > .account-info .btn-upgrade {height:30px;font-size:16px;width:150px;}
+    .panel-profile {flex-direction:column;}
+    .panel-profile > .form-control {margin-bottom:20px;width:400px;}
+    .panel-profile > label {color:#888;font-weight:normal;font-size:18px;margin:0 auto 10px 0;}
+    .panel-profile > button {width:200px;height:40px;font-size:16px;color:#fff;}
+  </style>
+}
+
+<div class="wrapper flex">
+  <div class="flex flex-one">
+    @Html.Partial("octUserMenu", "Profile")
+    <div class="content flex flex-one">
+      <h1 class="panel-title">Account</h1>
+      <div class="flex panel-account">
+        <img src="/images/user-center_face.png" alt="avatar.png" class="avatar">
+        <div class="flex flex-one account-info">
+          <div class="item flex"><label>Username</label><span class="username">@Model.UserName</span></div>
+          <div class="item flex">
+            <label>Email</label><span class="email">@Html.DisplayFor(m=>m.Email)</span>
+          </div>
+          @if (Model.IsApproved)
+          {
+            <div class="item flex">
+              <label>Current Plan</label><span class="plan">@(Model.IsExpired ? "Free" : Model.UserTypeDisplayName)&nbsp;&nbsp;</span>
+              @if (Model.UserType != (int)AccountType.Professional)
+              {
+                  var url = Model.UserType == (int)AccountType.Free || Model.UserType == (int)AccountType.Basic ? "/Subscribe" : "/Subscribe/Pay?plan=pro-yr";
+                <a href="@url" class="btn-regular btn-upgrade">Upgrade Now!</a>
+              }
+            </div>
+            <div class="item flex">
+              @if (Model.UserType != (int)AccountType.Free && (!Model.IsAutoRenewal || Model.IsAutoRenewal && Model.NextBillingDate!=null && Model.NextBillingDate.Value<DateTime.Now))
+              {
+                <label></label>
+                <a href="@(Model.UserType==(int)AccountType.Basic?"/Subscribe/Pay?plan=bsc-mo":(Model.UserType==(int)AccountType.Standard?"/Subscribe/Pay?plan=std-yr":"/Subscribe/Pay?plan=pro-yr"))">Renew Now</a>
+                <small>&nbsp;&nbsp;&nbsp;(Your plan will expire on <span style="color:#10a2d3">@Model.ExpireDate.Value.ToEnDate()</span>)</small>
+              }
+            </div>
+            if (!Model.IsExpired)
+            {
+              if (Model.PlanEffetiveDate.HasValue && Model.PlanEffetiveDate.Value > DateTime.Now && (int)Model.PlanType.GetAccountType() != Model.UserType && Model.IsAutoRenewal)
+              {
+                <div class="item flex">
+                  <label></label><small class="flex-one">Your plan will switch to <span style="color:#10a2d3">@Model.PlanType.GetAccountName()</span> plan on <span style="color:#10a2d3">@Model.PlanEffetiveDate.Value.ToEnDate()</span>.<br>Payment Amount: <span style="color:#10a2d3">$@Convert.ToInt32(Model.NextBillingAmount.Value)</span></small>
+                </div>
+              }
+              else if (Model.IsAutoRenewal)
+              {
+                <div class="item flex">
+                  <label></label><small class="flex-one">Your plan will automatically renew on: <span style="color:#10a2d3">@Model.NextBillingDate.Value.ToEnDate()</span>.<br>Payment Amount: <span style="color:#10a2d3">$@Convert.ToInt32(Model.NextBillingAmount.Value)</span>.<br>If your payment method has been declined, please change your payment method on the <a href="/subscribe/PaymentMethod" title="Update payment info">Payment Method</a> page.</small>
+                </div>
+              }
+            }
+          }
+          else
+          {
+            <div class="item flex">
+              <label></label><small id="unactivateMessage">Please activate your account or <a id="btnResendEmail" href="javascript:;">Resend activation email</a></small><small id="resendEmailMessage" style="display:none">An activation email has been sent to your inbox, valid for 48hours.<br>Please check your email.</small>
+            </div>
+          }
+          <div class="item flex">
+            <label></label><span class="reset-password"><a href="/changePassword">Change Password</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-title-wrap flex">
+        <h1 class="panel-title">Profiles</h1>
+        <a id="toggle-form" data-status="hide" href="javascript:;">Edit&nbsp;&nbsp;<span class="fa fa-caret-down"></span></a>
+        <span>(We'll give you discount based on the information you provided in your profile.)</span>
+      </div>
+      <form id="form-profile" class="flex panel-profile" style="display:none">
+        <label for="">Your Name</label>
+        <input class="form-control" type="text" name="user-name">
+        <label for="">Your Role</label>
+        <input class="form-control" type="text" name="user-role">
+        <label for="">Industry</label>
+        <select class="form-control" name="user-industry">
+          <option value="ECOMMERCE">E commerce</option>
+          <option value="MARKETING">Marketing</option>
+          <option value="NEWS">News</option>
+          <option value="REALESTATE">Real Estate</option>
+          <option value="EDUCATION">Education</option>
+          <option value="JOURNALISM">Journalism</option>
+          <option value="MEDICAL&HEALTH">Medical &amp; Health</option>
+          <option value="RECRUITMENT">Recruitment</option>
+        </select>
+        <label for="">Company Name</label>
+        <input class="form-control" type="text" name="user-company">
+        <button id="btn-submit" type="button" class="btn-regular">Update Profile</button>
+
+        <button id="btn-delete" type="button" class="btn btn-link" style="margin-top:10px;color:#337ab7;"  title="If you delete your account, your data will be gone forever." >Delete Account</button>
+      </form>
+    </div>
+  </div>
+  @Html.Partial("octProfileFooter")
+</div>
+
+<div class="modal fade" id="deleteConfirmBox">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="confirmMessage" style="font-size: 18px;text-align: center;">You will no longer be able to login on this account and your data cannot be restored after deletion.<br/>Are you sure you want to delete all data in your account?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btn-delete-no">No</button>
+                <button type="button" class="btn btn-primary" id="btn-delete-yes">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+  <script>
+    $(function() {
+      var btnResendEmail = $("#btnResendEmail");
+      var unactivateMessage = $("#unactivateMessage");
+      var resendEmailMessage = $("#resendEmailMessage");
+      var btnToggleForm = $("#toggle-form");
+      var profileForm = $("#form-profile");
+      var btnSubmit = $('#btn-submit');
+
+      var redirectToLoginPage = function() {
+        window.location.href = '/Login';
+      }
+
+      $.get('/umbraco/surface/account/GetUserProfile').done(function(res) {
+        var formData = res.data || {};
+
+        if (res.status === -1) {
+          return redirectToLoginPage();
+        }
+
+        if (res.status === 1) {
+          profileForm.find('[name=user-name]').val(formData.FullName || '');
+          profileForm.find('[name=user-role]').val(formData.Role || '');
+          profileForm.find('[name=user-industry]').val(formData.Industry || '');
+          profileForm.find('[name=user-company]').val(formData.CompanyName || '');
+          return;
+        }
+
+        alert('User profile cannot be loaded');
+      });
+
+      btnToggleForm.click(function() {
+        profileForm.toggle();
+
+        if (btnToggleForm.data('status') === "hide") {
+          btnToggleForm.data('status', "open");
+          return btnToggleForm.find(".fa").removeClass("fa-caret-down").addClass("fa-caret-up");
+        }
+
+        btnToggleForm.data('status', "hide");
+        btnToggleForm.find(".fa").removeClass("fa-caret-up").addClass("fa-caret-down");
+      });
+
+      btnSubmit.click(function() {
+        var formData = {
+          FullName: profileForm.find('[name=user-name]').val(),
+          Role: profileForm.find('[name=user-role]').val(),
+          Industry: profileForm.find('[name=user-industry]').val(),
+          CompanyName: profileForm.find('[name=user-company]').val()
+        }
+
+        if (btnSubmit.hasClass('disabled')) { return; }
+        btnSubmit.addClass('disabled');
+
+        $.post('/umbraco/surface/account/SaveUserProfile', formData).done(function(res) {
+          if (res.status === -1) {
+            return redirectToLoginPage();
+          }
+
+          btnSubmit.removeClass('disabled');
+
+          if (res.status === 0) {
+            return alert('Failed to update profile');
+          }
+
+          alert('Profile has been successfully updated');
+        });
+      });
+
+      btnResendEmail.click(function() {
+        btnResendEmail.attr("disabled", "disabled");
+        $.ajax({
+          url: "/umbraco/surface/account/resendActivateEmail",
+          type: "POST",
+          dataType: "json"
+        }).done(function(data) {
+          btnResendEmail.removeAttr("disabled");
+
+          if (data && data.status == 1) {
+            unactivateMessage.hide();
+            btnResendEmail.hide();
+            resendEmailMessage.show();
+            return;
+          }
+
+          if (data) {
+            if (data.status == -1) {
+              window.location.href = "/login";
+            } else if (data.status == 2) {
+              unactivateMessage.hide();
+              btnResendEmail.hide();
+              resendEmailMessage.hide();
+              alert("Your account has been activated.");
+            } else {
+              alert("Resend email failed, please try again.");
+            }
+            return;
+          }
+          
+          alert("Resend email failed, please try again.");
+        });
+      });
+      $("#btn-delete").click(function () {
+          $("#confirmMessage").html("You will no longer be able to login on this account and your data cannot be restored after deletion.<br/>Are you sure you want to delete all data in your account?");
+          $("#btn-delete-yes").removeAttr("disabled");
+          $("#btn-delete-no").removeAttr("disabled");
+          $("#deleteConfirmBox").modal({ backdrop: "static", keyboard: false });
+      });
+      
+      $("#btn-delete-yes").click(function () {
+          $(this).attr("disabled", "disabled");
+          $("#btn-delete-no").attr("disabled", "disabled");
+          $("#confirmMessage").text("Processing, please wait...");
+          $.post('/umbraco/surface/account/delete',function (res) {
+              if (res.status === -1) {
+                  return redirectToLoginPage();
+              }
+              else if (res.status === 1) {
+                  alert('Your account has been deleted.');
+                  window.location.href = '/';
+              } else {
+                  alert('Failed to delete account.');
+                  $("deleteConfirmBox").modal("hide");
+              }
+          });
+      });
+
+    })
+  </script>
+}

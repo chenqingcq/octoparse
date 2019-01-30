@@ -1,0 +1,60 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.ProfileModel
+@{
+    Layout = null;
+}
+@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+
+@{
+    string userName="";
+    if (Request.IsAuthenticated)
+    {
+        userName=Membership.GetUser().UserName;
+    }
+    var category=Request.QueryString["category"];
+    var baseUrl="/tutorial";
+}
+    
+
+
+        <div class="bacs-data">
+            <div class="head-img">
+                <span class="img">
+                  <img class="img-circle" src="/images/user-center_face.png">
+                </span> 
+            </div>
+            <span class="name">@userName</span>
+            <a class="btn btn-default cpwd" href="/changepassword"><i class="glyphicon glyphicon-lock"></i> Change Password</a>  
+            <span class="basc-email">@Html.DisplayFor(m=>m.Email)</span>        
+        </div>
+	    
+        <div class="basc-type">
+            <span>Current Plan: <span>@Html.DisplayFor(m=>m.UserTypeDisplayName)</span></span>
+            @if(Model.UserType!=(int)AccountType.Free){
+                <span>@(Model.IsExpired?"Expired":Model.ExpireDate.ToEnDate())</span>
+            }
+            @if(Model.UserType!=(int)AccountType.Free){
+                <a class="basc-btn" href="@(Model.UserType==(int)AccountType.Standard?"/buy/Standard":"/buy/Professional")" >Renew Now</a>
+            }
+            @if(Model.UserType!=(int)AccountType.Professional){
+                <a class="basc-btn" href="@(Model.UserType==(int)AccountType.Free?"/buy/Standard":"/buy/Professional")" >UPGRADE</a>
+            }           
+        </div>
+        <div class="basc-ud">
+            <p>Your paln will renew on September 23,2017,but...</p>
+            <a href="">Update payment</a>
+        </div>
+  
+	       @if(!Model.IsApproved){
+                <span class="basc-tips">
+                    <span runat="server" id="unactivateMessage">
+                        Please activate your account，or
+                    </span>
+                    <a id="btnResendEmail" >Resend activation email</a>
+                    <div id="resendEmailMessage" style="display:none">The activation email has been sent, within 48 hours of effective</div>
+                </span>
+            }                	
+
+

@@ -1,0 +1,8 @@
+﻿@inherits UmbracoTemplatePage
+@{
+	int id=Convert.ToInt32(Request.QueryString["id"]);
+	var page = Umbraco.Content(id);
+        
+	string result=Newtonsoft.Json.JsonConvert.SerializeObject(new {title=page.tutorialName,body=page.graphicTutorial.ToString(),created=page.CreateDate,updated=page.UpdateDate,url=@Umbraco.NiceUrlWithDomain(id),category=page.Category});
+}
+@Html.Raw(result)

@@ -1,0 +1,18 @@
+﻿@inherits UmbracoTemplatePage
+@{
+	var homePage = CurrentPage.AncestorsOrSelf(1).First();
+	var newsOverview = homePage.tutorial7Overviews.First();
+	List<int> ids=new List<int>();
+	string category=Request.QueryString["category"];;
+        var newsItems = newsOverview.tutorialItemV7s.Where("category==@0", category);
+        if (newsItems.Count() > 0)
+        {
+			
+            foreach (var item in newsItems)
+            {
+                ids.Add(item.id);
+            }
+        }
+	string result=Newtonsoft.Json.JsonConvert.SerializeObject(ids);
+}
+@Html.Raw(result)

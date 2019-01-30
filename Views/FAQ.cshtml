@@ -1,0 +1,69 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+    
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+	var  dateTime = CurrentPage.CreateDate;
+	var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    var faqOverview = homePage.octFaqOverviews.First();
+	var faqItems=faqOverview.octFAQItems;
+    int pageIndex = 0,pageSize=12,total=0;
+    int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+    string faqCategory=Request.QueryString["faqCategory"];
+	if(string.IsNullOrEmpty(faqCategory)){
+		faqCategory="All";
+	}
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+ 
+    string url="/faq?pageIndex="+pageIndex.ToString()+"&faqCategory=";
+	
+	ViewBag.Url=url;
+	ViewBag.FaqCategory=faqCategory;
+}
+
+@section styles{
+	<link rel="stylesheet" href="/css/flex.css">
+	<style>
+		body{background: #f8f8f8;}
+		.breadcrumb {background-color: transparent;padding: 0;margin: 20px 0;}
+		.docs-body{border: 1px solid #E5E5E5;padding: 10px 27px;padding-bottom: 200px;overflow: hidden;background: #fff;min-height: 700px;margin-bottom: 100px;}
+		.docsItem{height: 76px;line-height: 76px;border-bottom: 1px solid #e5e5e5;}
+		.docsItem>a{font-size: 15px;color: #333;text-decoration: none;display: block;padding-left: 20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+		.docsItem:hover>a{color: #006F94;text-decoration: none;}
+		.tutorial-nav>li.f>a{color: #333;}
+	</style>
+	
+}
+<div class="wrap-body">
+   <div class="tutorialBody">
+		<div class="container tutos-body">
+			<ol class="breadcrumb">
+				<li><a href="/faq">FAQ</a></li>
+				<li><a href="/faq?faqcategory=@CurrentPage.faqCategory">@CurrentPage.faqCategory</a></li>
+				<li class="active">@CurrentPage.Title</li>
+			</ol>
+			<div class="row tutos">
+				<div class="col-md-3">
+					<div class="leftbar">
+						@Html.Partial("octFaqLeft")
+						
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="docs-body">
+						<h2>@CurrentPage.faqTitle</h2>
+						<div>@CurrentPage.faqContent</div>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+</div>

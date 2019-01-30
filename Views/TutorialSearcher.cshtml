@@ -1,0 +1,188 @@
+﻿@using System.Text
+@using Umbraco.Web.Models
+@inherits UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+string query = Request.QueryString["query"];
+ViewBag.Query = query;
+string type = Request.QueryString["type"];
+string isseven = Request.QueryString["isseven"];
+string typeIgnoreCase = type.ToLower();
+int pageIndex = 0, pageSize = 10;
+int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+if (pageIndex == 0)
+{
+pageIndex = 1;
+}
+var searchResult = Umbraco.Search(query).Where("DocumentTypeAlias == \"octFAQItem\" || DocumentTypeAlias == \"octTutorialItem\" || DocumentTypeAlias == \"tutorialItemV7\"");
+int allCount = searchResult.ToList().Count();
+int tutorialCount = searchResult.Where("DocumentTypeAlias == \"octTutorialItem\" || DocumentTypeAlias == \"tutorialItemV7\"").ToList().Count();
+int faqCount = searchResult.Where("DocumentTypeAlias == \"octFAQItem\"").ToList().Count();
+if (typeIgnoreCase == "tutorial")
+{
+searchResult = searchResult.Where("DocumentTypeAlias == \"octTutorialItem\"");
+}
+else if(typeIgnoreCase == "tutorial7")
+{
+searchResult = searchResult.Where("DocumentTypeAlias == \"tutorialItemV7\"");
+}
+else if (typeIgnoreCase == "faq")
+{
+searchResult = searchResult.Where("DocumentTypeAlias == \"octFAQItem\"");
+}
+int total = searchResult.Count();
+searchResult = searchResult.Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+
+var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+{
+Total = total,
+PageSize = pageSize,
+PageIndex = pageIndex,
+BaseUrl = "/search?query=" + query + "&type=" + type + "&isseven=" + isseven
+};
+}
+
+@section styles{
+<link rel="stylesheet" href="/css/tutorial.css">
+<link rel="stylesheet" href="/css/tutorial-search-bar.css">
+<style>
+    .summary {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 3rem 2rem;
+    }
+    .content{
+        background-color: #f7f8fa;
+        padding-bottom:30px;
+    }
+    em{
+        background-color:yellow;
+        font-weight:bolder;
+    }
+
+    .tut-content {
+        width: 1170px;
+        margin: 0 auto ;
+    }
+    .tut-content .left .search {
+        display: none;
+    }
+    .tut-content:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+    }
+    .tut-content .section-7{
+        float: right;
+        width: 850px;
+    }
+    .tut-content .section-7 article{
+        background: #ffffff;
+        width: 850px;
+        height: 72px;
+        border:0;
+        padding:0;
+        margin-bottom: 10px;
+        text-indent: 1rem;;
+    }
+    .tut-content .section-7 .title_search{
+        font-size: 3rem;
+        color: #333333;
+        line-height: 72px;
+        text-decoration: none;
+        font-weight: normal;
+
+    }
+    .publish-time{
+        font-size: 2rem;
+    }
+    .article-list header{font-size: 3rem;}
+    .search-tips{font-size: 3rem;padding:  0 2rem;font-weight: 900}
+    header{padding: 0 2rem;}
+    .publish-time{padding:  0 2rem}
+    .search-tips b.keyword {color: #2095f2}
+    p.no-data-tips{font-size:3rem; }
+</style>
+}
+
+@Html.Partial("ocTutorialTop")
+
+
+<div class="tut-content">
+    <div>
+    @if(typeIgnoreCase == "tutorial7"){
+        <p class="search-tips"><b>@total</b> results for <em>@query</em></p>
+        @Html.Partial("octTutorial7Left")
+
+        <section class="article-list section-7">
+            @foreach (var article in searchResult)
+            {
+            dynamic item = article;
+            string desc = article.Description;
+            <article>
+                <header>
+                    @if (item.DocumentTypeAlias.ToLower().Contains("tutorial"))
+                    {
+                    string title = item.tutorialName;
+                    <a class="title_search"  href="@item.Url" target="_blank">@Html.Raw(title.Replace(query, "<em>" + query + "</em>", StringComparison.OrdinalIgnoreCase))</a>
+                    }
+                    else
+                    {
+                    string title = item.faqTitle;
+                    <a class="title_search" href="@item.Url" target="_blank">@Html.Raw(item.faqTitle.Replace(query, "<em>" + query + "</em>", StringComparison.OrdinalIgnoreCase))</a>
+                    }
+                </header>
+            </article>
+            }
+            @if (total > pageSize)
+            {
+            @Html.Partial("_PagePartial", pageInfo)
+            }
+        </section>
+        }else{
+        <div class="container">
+            <p class="search-tips">Received a total of <b>@total</b> issues related to <b class="keyword">@query</b></p>
+            @if (total > 0)
+            {
+            <section class="article-list">
+                @foreach (var article in searchResult)
+                {
+                dynamic item = article;
+                <article>
+                    <header>
+                        @if (item.DocumentTypeAlias.ToLower().Contains("tutorial"))
+                        {
+                        <a href="@item.Url">@item.tutorialName</a>
+                        }
+                        else
+                        {
+                        <a href="@item.Url">@item.faqTitle</a>
+                        }
+                    </header>
+                    <div class="summary">@(article.Description.Length > 200 ? article.Description.Substring(0, 200) + "..." : article.Description)</div>
+                    <div class="publish-time">@article.CreateDate.ToString("D")</div>
+                </article>
+                }
+                @if (total > pageSize)
+                {
+                @Html.Partial("_PagePartial", pageInfo)
+                }
+            </section>
+            }
+            else
+            {
+            <p class="no-data-tips"><span class="fa fa-frown-o"></span>&nbsp;no data found.</p>
+            }
+        </div>
+        }
+    </div>
+
+
+    @if (total > 0) { }
+    else
+    {
+    <p class="no-data-tips"><span class="fa fa-frown-o"></span>&nbsp;no data found.</p>
+    }
+</div>

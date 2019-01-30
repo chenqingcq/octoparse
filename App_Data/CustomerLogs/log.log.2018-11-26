@@ -1,0 +1,25 @@
+2018-11-26 08:49:28,483 [1] INFO  SkieerWeb - RefundJob starting.
+2018-11-26 08:49:28,498 [10] INFO  SkieerWeb - RefundJob checking.
+2018-11-26 08:49:28,498 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-11-26 08:49:28,498 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-11-26 17:50:59,316 [1] INFO  SkieerWeb - RefundJob starting.
+2018-11-26 17:50:59,331 [10] INFO  SkieerWeb - RefundJob checking.
+2018-11-26 17:50:59,331 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-11-26 17:50:59,331 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-11-26 18:16:45,477 [1] INFO  SkieerWeb - RefundJob starting.
+2018-11-26 18:16:45,477 [10] INFO  SkieerWeb - RefundJob checking.
+2018-11-26 18:16:45,492 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-11-26 18:16:45,492 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-11-26 18:16:47,383 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/11/26 10:16:40] | Kind: subscription_went_active
+2018-11-26 18:16:47,445 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/11/26 10:16:41] | Kind: subscription_charged_successfully
+2018-11-26 18:17:08,510 [12] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:08f0bcf9-7f03-4f41-a118-58a7ca06dc33
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-11-26 18:24:35,514 [22] INFO  SkieerWeb - [Braintree Webhook Received 2018/11/26 10:24:09] | Kind: subscription_charged_successfully
+2018-11-26 18:24:35,529 [22] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:9k6vqg,Kind:subscription_charged_successfully

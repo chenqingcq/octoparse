@@ -1,0 +1,167 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.ActivityBuyModel
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+}
+@section styles{
+
+
+}
+
+<div class="container" style="padding-top: 84px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="ro-title">Confirm Order</h3>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-xs-4" style="padding-right: 0;">
+            <div class="st-jdt st-jdt-active st-jdt-bg1">
+                <span>Review Order</span>
+            </div>
+        </div>
+        <div class="col-xs-4" style="padding: 0;">
+            <div class="st-jdt st-jdt-bg2">
+                <span>Pay</span>
+            </div>
+        </div>
+        <div class="col-xs-4" style="padding-left: 0;">
+            <div class="st-jdt ">
+                <span>Payment Confirmation</span>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.ProductTypeName, new { id = "productType" })
+    @if (Model.CanBuy.HasValue && Model.CanBuy.Value)
+    {
+        <form action="/activity/buy/@Model.ProductTypeName" enctype="multipart/form-data" method="post" id="buyForm">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-xs-12">
+                    <div class="co-item">
+                        <div class="coi-title">
+                            <span>Octoparse @Model.ProductTypeName Subscription</span>
+                        </div>
+                        <div class="coi-content">
+                            Price:
+                            @if (ViewBag.ActivityPrices != null)
+                            {
+                                var activityPrices = (Octoparse.Web.Models.ActivityPrice)ViewBag.ActivityPrices;
+                                <div style="margin-bottom:10px; font-weight:bold">
+                                    $@activityPrices.DiscountYearPrice per year <font style="text-decoration: line-through;color:#777;">$@activityPrices.NormalYearPrice</font>
+                                    <br /> or <br />$@activityPrices.DiscountMonthPrice per month <font style="text-decoration: line-through;color:#777;">$@activityPrices.NormalMonthPrice</font>
+                                </div>
+                            }
+                            <p style="color:#777;"><strong style="color:black">BUY 3 GET 1 FREE:</strong> Buy Std/Pro plan for 3 or more months and get 1 month free. Buyer will get a maximum number of 1-month free plan regardless of the number of monthly plan purchased.<a href="/octoparse-anniversary-sale/" target="_blank" style="margin-left:10px">Octoparse 1st Anniversary Give Back</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col-md-4">
+                    <div class="row co-month">
+                        <div class="col-md-6" style="padding-right: 0;">
+                            <div class="com-sp"><a href="/billing-payments/" target="_blank" style="font-weight:bold;">Subscription Term </a></div>
+                        </div>
+                        <div class="col-md-6" style="padding-left: 0;">
+                            <div class="com-main">
+                                @Html.DropDownListFor(m => m.QtyValue, ViewBag.QtyList as List<SelectListItem>, new { @style = "height:100%;border-radius:0;", @class = "form-control", @id = "qtyValue" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="pass-time">
+                        Valid before: <span style="color: #29799C;" id="endDate">@(Model.EndDate)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="totalAmountBox" style="margin-bottom: 20px;@(Model.UpgradeDiscount.HasValue && Model.UpgradeDiscount.Value > 0 ? "" : "display:none")">
+                <div class="col-xs-12" style="text-align: right;padding-right:50px;">
+                    <span style="display: inline-block;">Subtotal:<em id="totalAmount" style="color: #036C94; font-size: 26px; margin: 0 6px; font-style: normal;">$@(Model.TotalPrice.HasValue ? Model.TotalPrice.Value : 0)</em></span>
+                </div>
+            </div>
+            <div class="row" id="upgradeDiscountBox" style="margin-bottom: 20px;@(Model.UpgradeDiscount.HasValue && Model.UpgradeDiscount.Value > 0 ? "" : "display:none")">
+                <div class="col-xs-12" style="text-align: right;padding-right:50px;">
+                    <span style="display: inline-block;">Plan Conversion Discount:<em id="updradeDiscount" style="color: #036C94; font-size: 26px; margin: 0 6px; font-style: normal;">$@(Model.UpgradeDiscount.HasValue && Model.UpgradeDiscount.Value > 0 ? Model.UpgradeDiscount.Value : 0)</em><i class="fa fa-question-circle" title="Reminder: Payment will be automatically deducted from the remaining balance in your Octoparse Standard account."></i></span>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xs-12" style="text-align: right;padding-right:50px;">
+                    <span style="display: inline-block;">You Pay:<em id="grandTotal" style="color: #036C94; font-size: 26px; margin: 0 6px; font-style: normal;">$@(Model.GrandTotalAmount.HasValue ? Model.GrandTotalAmount.Value : 0)</em></span>
+                    <p id="totalError" style="display:none">Please contact <a href="mailto:support@octoparse.com">support@octoparse.com</a> directly.</p>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 200px;">
+                <div class="col-xs-12" style="text-align: right;padding-right:50px;">
+                    <button type="submit" id="btnBuy" style="width: 200px; background: #08A9E3; color: #fff; padding: 10px 0; font-size: 14px;" class="btn">Buy</button>
+                </div>
+            </div>
+        </form>
+    }
+
+    <div class="row" id="message" style="@(Model.CanBuy.HasValue && Model.CanBuy.Value ? "display:none" : "")">
+        <div class="col-md-12">
+            <p class="alert alert-danger">
+                Your account is the professional edition and couldn't buy the standard edition.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+            if ($("#grandTotal").text().indexOf('-') >= 0) {
+                $("#btnBuy").attr("disabled", "disabled");
+                $("#totalError").css("display", "");
+            }
+            $("#qtyValue").on("change", function () {
+                $.ajax({
+                    url: "/activity/buy/caculateprice?id=" + $("#productType").val() + "&qtyValue=" + $("#qtyValue").val(),
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null && data.status == 1 && data.result != null) {
+                            if (data.result.UpgradeDiscount != null && data.result.UpgradeDiscount > 0) {
+                                $("#totalAmountBox").show();
+                                $("#upgradeDiscountBox").show();
+                                $("#totalAmount").text("$" + data.result.TotalPrice);
+                                $("#updradeDiscount").text("$" + data.result.UpgradeDiscount);
+                            } else {
+                                $("#totalAmountBox").hide();
+                                $("#upgradeDiscountBox").hide();
+                            }
+                            $("#endDate").text(data.result.EndDate);
+                            $("#grandTotal").text("$" + data.result.GrandTotalAmount);
+                            if (data.result.GrandTotalAmount < 0) {
+                                $("#btnBuy").attr("disabled","disabled");
+                                $("#totalError").css("display", "");
+                            } else {
+                                $("#btnBuy").removeAttr("disabled");
+                                $("#totalError").css("display", "none");
+                            }
+                        } else {
+                            if (data != null) {
+                                if (data.status == -1) {
+                                    window.location.href = "/pricing";
+                                } else {
+                                    $("#buyForm").hide();
+                                    $("#message").show();
+                                }
+                            } else {
+                                $("#buyForm").hide();
+                                $("#message").show();
+                            }
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+
+}

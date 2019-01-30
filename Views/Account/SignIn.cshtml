@@ -1,0 +1,33 @@
+﻿@using Umbraco.Web;
+@model Octoparse.Web.Models.LoginModel
+@{
+    Layout = null;
+}
+@{ Html.EnableClientValidation(); }
+@using (Html.BeginUmbracoForm("SignIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new { @id="loginForm"}))
+{
+        <div class="form-group">
+            <p class="p-title">User name<span>*</span></p>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+            @Html.ValidationMessageFor(m => m.UserName, "*This field is required.", new { @class = "alert alert-danger" })
+        </div>
+        <div class="form-group" style="margin-bottom:0px;">
+            <p class="p-title">Password<span>*</span></p>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "*This field is required.", new { @class = "alert alert-danger" })
+        </div>
+        <div class="checkbox" style="margin-top:6px;">
+            <label> 
+                    @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                    <span></span>
+            </label>
+        </div>
+        <div class="form-group">
+                <div style="color:red;">
+                    @Html.ValidationSummary(true)
+                </div>
+		</div>
+        <div class="submit-btn-box">
+            <input type="submit" value="Log in" class="btn-regular" style="font-size:20px;height:40px;width:140px;"/>
+        </div>
+}

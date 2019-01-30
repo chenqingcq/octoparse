@@ -1,0 +1,25 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+	<div class="leftitem">
+		<div class="title"><a style="color:#fff;text-decoration:none;" href="/faq?faqCategory=All">All</a></div>
+			<ul class="leftnav">
+				@{
+					var df=ApplicationContext.Current.Services.DataTypeService.GetDataTypeDefinitionByName("FaqCategory");
+					XPathNodeIterator iterator = umbraco.library.GetPreValues(df.Id);
+					iterator.MoveNext();
+					XPathNodeIterator preValues = iterator.Current.SelectChildren("preValue", "");
+					string preValue="";
+					while (preValues.MoveNext())
+					{
+						if(preValues!=null&&preValues.Current!=null){
+							preValue = preValues.Current.Value;
+							<li class=" @(ViewBag.FaqCategory.ToString()==preValue?"list-group-active":"")">
+								<a href="@(ViewBag.Url.ToString()+preValue)">@preValue</a>
+							</li>
+						}
+					}
+
+				}
+		</ul>	
+	</div>

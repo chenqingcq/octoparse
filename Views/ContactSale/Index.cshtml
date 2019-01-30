@@ -1,0 +1,162 @@
+@{
+    Layout="~/Views/octAccountLayout.cshtml";  
+    //Layout="~/Views/octLayout.cshtml";
+    ViewBag.Title="Contact Sales";
+}
+@section styles{
+	<link href="/css/validation.css" rel="stylesheet"/>
+    <style type="text/css">
+            .top-container{background:url('/images/top_min_bg.png') no-repeat center top;height:100px;padding-top:12px;}
+            .top-container .t-title{color:#fff;font-weight:bold;letter-spacing: 1px;font-size:24px;padding-bottom:24px;background:url('/images/top_h3_bg.png') no-repeat left bottom;}
+            .main-container{padding-top:40px;}
+            .main-container p{padding:10px 0;line-height:20px;margin-bottom: 0px;}
+        	.m-tip>p{color: #999;font-size: 14px;}
+        	.m-tip>p a{color: #08A9E3;margin-left: 6px;}
+			
+			.form-row{margin-top: 40px;}
+        	.form-group-my{margin-bottom: 0;min-height: 96px;}
+        	.form-group-my>label{font-size: 14px;color: #333;font-weight: normal;height: 26px;line-height: 26px;display: block;margin-bottom: 0;}
+        	.form-group-my>label>i{font-style: normal;color: #ff5500;}
+        	.form-group-my>.form-control{height: 50px;line-height: 50px;border: 1px solid #e5e5e5;border-radius: 0;background: #f8f8f8;box-shadow: none;display: block;}
+        	.form-group-my>span{display: block;height: 20px;line-height: 20px;font-size: 12px;color: #ff5500;}
+        	.submitbox{margin-top: 40px;margin-bottom: 100px;}
+        	.submitbox>.btn-submit{width: 180px;height: 50px;line-height: 50px;text-align: center;background: #08A9E3;font-size: 15px;color: #fff;padding: 0;border-radius: 2px;margin-right: 10px;}
+        	.submitbox>.btn-reset{width: 130px;height: 50px;line-height: 50px;text-align: center;background: none;font-size: 15px;color: #08A9E3;padding: 0;border-radius: 2px;margin-right: 10px;border: 1px solid #08A9E3;}
+        </style>
+}
+
+<div class="top-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="t-title">Contact Sales</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-container">
+    <div class="container">
+       	<div class="row">
+			<div class="col-md-12 m-tip">
+				<p>Please fill out form and our sales team will contact you within 1 business day.</p>
+				<p>For more information please visit <a href="/Help">Help Center.</a></p>
+			</div>
+       	</div>
+		<form id="leaveMessageForm" method="post" action="/Octopus/ContactSale/Commit" enctype="multipart/form-data">
+        <div class="row form-row">
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="FirstName">First Name <i class="x">*</i></label>
+				    <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="" required> 
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="LastName">Last Name <i class="x">*</i></label>
+				    <input type="text" class="form-control" id="LastName" name="LastName" placeholder=""  required>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="Email">Email <i class="x">*</i></label>
+				    <input type="email" class="form-control" id="Email" name="Email" placeholder="" required value="">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="CompanyName">Company <i class="x">*</i></label>
+				    <input type="text" class="form-control" id="CompanyName" name="CompanyName" placeholder="" required>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="JobTitle">Job title <i class="x">*</i></label>
+				    <input type="text" class="form-control" id="JobTitle" name="JobTitle" placeholder="" required>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="WebSites">Website(s) you want to crawl<i class="x">*</i></label>
+				    <input type="text" class="form-control" name="WebSites" id="WebSites" placeholder="" required max-length="250">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-group-my">
+				    <label for="AdditionalInfo">Additional info <i class="x">*</i></label>
+				    <textarea class="form-control" rows="5" style="min-height:80px" id="AdditionalInfo" name="AdditionalInfo" placeholder="" required maxlength="250"></textarea>
+				</div>
+			</div>
+        </div>
+        <div class="row form-row">
+            <div class="col-md-6">
+                <div class="form-group form-group-my">
+                    <label for="VerificationCode">Verification<i class="x">*</i></label>
+                    <div class="g-recaptcha" id="recaptchaDiv" data-sitekey="6Les_icTAAAAAG2MbdZ__D2gEfQaciTJlSqvBM3S" data-callback="onSuccess"></div>
+                    <p class="inactive text-danger">Please verify that you are a human.</p>       
+                </div>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-md-12 submitbox">
+				<button type="submit" class="btn btn-submit">Submit</button>
+				<button type="reset" class="btn btn-reset">Reset</button>
+			</div>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="firedown" style="background:#f8f8f8;height:200px;">
+    <p style="padding-top:42px;">Download now and see how easy it is to get data.</p>
+    <div class="download-btn">
+        <span><a href="/download" class="btn btn-my">Download</a></span>
+    </div>
+</div>
+
+    @section scripts{
+        <script src="/scripts/jquery.validate.min.js" type="text/javascript"></script>   
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script type="text/javascript">
+        $(function(){
+            $("#leaveMessageForm").validate({
+                rules:{
+                    Email:{
+                        required:true,
+                        email:true
+                    }
+                },
+                messages:{
+                    Email:{
+                        required:"Please enter your email",
+                        email:"please enter a valid email address!"
+                    }
+                },
+                submitHandler:function(form){
+                    var val=$("#g-recaptcha-response").val();
+                    if(!val){
+                        $("#recaptchaDiv").siblings("p").removeClass("inactive");
+                        return;
+                    }else{
+                        $("#recaptchaDiv").siblings("p").addClass("inactive");
+                    }
+                    form.submit();
+                }
+          });
+
+        });
+
+        var onSuccess = function(response) {
+            var errorDivs = document.getElementsByClassName("recaptcha-error");
+            if (errorDivs.length) {
+            errorDivs[0].className = "";
+            }
+            var errorMsgs = document.getElementsByClassName("recaptcha-error-message");
+            if (errorMsgs.length) {
+            errorMsgs[0].parentNode.removeChild(errorMsgs[0]);
+            }
+        };
+    </script>
+}
+
+
+
+

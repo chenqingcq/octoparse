@@ -1,0 +1,71 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+@section styles{
+	<style type="text/css">
+            .top-container{background:url('/images/top_min_bg.png') no-repeat center top;height:200px;padding-top:50px;}
+            .top-container .t-title{color:#fff;font-family: fantasy;font-weight:normal;letter-spacing: 1px;font-size:28px;padding-bottom:20px;background:url('/images/top_h3_bg.png') no-repeat left bottom;}
+            .main-container{padding-top:40px;}
+            .main-container p{padding:10px 0;line-height:24px;}
+            .main-container .address{padding-top:60px;}
+            .main-container .address span{margin-bottom:4px;display:block;}
+            .main-container .address-map{padding:60px 0 120px;}
+	
+			.contourField{overflow:hidden;margin-bottom:20px;}
+            .contourField>label{width:16%;float:left;padding-top:13px;font-weight:normal!important;color:#555555;}
+			.contourField>label span{color:red;}
+            .contourField>div{width:84%;float:left;border:none;overflow:hidden;}
+			.contourField>div input{float:left;}
+			.contourField>div span{display:inline-block;float:left;padding-top:13px;}
+			.contourField>div select{padding:6px 24px;float:left;}
+			.contourField>div textarea{resize:none;height:80px;float:left;}
+			.primary{background:#08A9E3!important;color:#fff!important;border-color:#08A9E3!important;padding:10px 50px;margin-top:40px;}
+	
+			.email-us{border:1px solid #BDBDBD;padding: 20px;margin-bottom:10px;}
+            .email-us h4{color:#999;margin-bottom:40px;padding-bottom:10px;background: url('/images/us_bg.png') no-repeat left bottom;}
+            .email-us .email-list{overflow:hidden;margin-bottom:20px;}
+            .email-us .email-list span{display:block;margin-bottom:2px;}
+        </style>
+	
+}
+<div class="top-container">
+            <div class="container">
+                <div class="row">
+                   <div class="col-xs-12">
+                      <h3 class="t-title">Contact us</h3>
+                   </div>
+                </div>
+            </div>
+          </div>
+          <div class="main-container">
+            <div class="container">
+				<div class="row">
+                   <div class="col-xs-12">
+                     <p>If you have any questions regarding Octoparse, please feel free to contact us by filling out the form below or email.</p>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-xs-9" style="padding: 0 60px 0 20px;margin-bottom: 60px;min-height:400px;">
+					  @Umbraco.RenderMacro("FormsRenderForm", new {FormGuid="27af699c-e1ec-4cc8-ae94-aa06fd23cfcd"})
+                   </div>
+				  	<div class="col-md-3">
+                     <div class="email-us">
+                        <h4>Email Us</h4>
+                        <div class="email-list">
+                            <span>Sales</span>
+                            <span>sale@octoparse.com</span>
+                        </div>
+                        <div class="email-list">
+                            <span>Support</span>
+                            <span>Support@octoparse.com</span>
+                        </div>
+                        <div class="email-list">
+                            <span>Consulting</span>
+                            <span>Consulting@octoparse.com</span>
+                        </div>
+                     </div>
+                   </div>
+                </div>
+            </div>
+          </div>

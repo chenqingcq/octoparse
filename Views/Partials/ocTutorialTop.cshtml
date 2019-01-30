@@ -1,0 +1,108 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var category = Request.QueryString["category"];
+    string isseven = Request.QueryString["isseven"];
+    var baseUrl = "/tutorial";
+    string type = Request.QueryString["type"];
+    if (string.IsNullOrEmpty(type))
+    {
+        type = "all";
+    }
+    ViewBag.IsSeven = false;
+    if (Request.RawUrl.ToLower().Equals("/tutorial-7") || type.ToLower().Equals("tutorial7"))
+    {
+        ViewBag.IsSeven = true;
+        type = "tutorial7";
+    }
+    else if (Request.RawUrl.ToLower().Equals(baseUrl) || type.ToLower().Equals("tutorial"))
+    {
+        type = "tutorial";
+    }
+
+}
+<style>
+    .tutorial-search-bar{
+        height: 35rem;
+        letter-spacing: .5rem;
+        padding-top: 2rem;
+    }
+    .tutorial-search-barbar h1{
+        font-family: BoldMT;
+        font-size: 4rem;
+    }
+    .tutorial-search-bar a{
+        display: block;
+        margin: 0 auto;
+        font-size: 2rem;
+        font-family: BoldMT;
+        text-align: center;
+    }
+    .turtorial{
+        font-size: 4rem;
+        font-weight: bold;
+    }
+    .tutorial-search-bar form.tutortialSearch{
+        height: 6rem;
+        width: 90%;
+        margin:  0 auto;
+        margin-top: 3rem;
+    }
+    .tutorial-search-bar form.tutortialSearch input{
+        font-size: 3rem;
+        font-family: BoldMT;
+        margin-left: 4rem;
+    }
+    .tutorial-search-bar .fa:before {
+        font-size: 3rem;
+        margin-left: 1rem;
+    }
+    .quick-search-wrap {
+        width: 100%;
+        margin-top: 3rem;
+    }
+    .quick-search-wrap li a{
+        font-size: 3rem;
+        color: #fff;
+        font-family: ArialMT;
+        text-align: center;
+        flex: 1;
+    }
+    .quick-search-wrap li {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+    .tutorial-search-bar h1{font-size: 4rem;}
+</style>
+<div class="tutorial-search-bar ">
+    @if (ViewBag.IsSeven)
+    {
+        <h1 class="turtorial">Octoparse 7.X Tutorials</h1>
+        <a target="_blank" href="/tutorial" style="color:#fff;font-family: Futura-LT-W01-Light">(Switch to 6.X Tutorials >>)</a>
+    }
+    else
+    {
+        <h1>Octoparse Tutorial</h1>
+        <a target="_blank" href="/tutorial-7" style="color:#fff;font-family: Futura-LT-W01-Light">(Switch to 7.X Tutorials >>)</a>
+    }
+    <form action="/search" class="flex flex-middle tutortialSearch">
+        <span class="fa fa-search"></span>
+        <input type="text" class="flex-one" name="query" value="@ViewBag.Query">
+        <input type="hidden" name="type" value="@type">
+        <input type="hidden" name="isseven" value="@ViewBag.IsSeven.ToString()">
+    </form>
+    <div class="quick-search-wrap ">
+        <li>
+            <a target="_blank" href="/search?type=all&amp;query=ajax&amp;isseven=@ViewBag.IsSeven">AJAX</a>
+            <a target="_blank" href="/search?type=all&amp;query=export&amp;isseven=@ViewBag.IsSeven">Export</a>
+            <a target="_blank" href="/search?type=all&amp;query=pagination&amp;isseven=@ViewBag.IsSeven">Pagination</a>
+        </li>
+        <li>
+            <a target="_blank" href="/search?type=all&amp;query=Cloud&amp;isseven=@ViewBag.IsSeven">Cloud</a>
+            <a target="_blank" href="/search?type=all&amp;query=xPath&amp;isseven=@ViewBag.IsSeven">XPath</a>
+            <a target="_blank" href="/search?type=all&amp;query=amazon&amp;isseven=@ViewBag.IsSeven">Amazon</a>
+        </li>
+    </div>
+</div>

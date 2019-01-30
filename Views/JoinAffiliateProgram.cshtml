@@ -1,0 +1,268 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+	ViewBag.PageTitle="Octoparse Affiliate Program";
+}
+@section styles{
+	<style>
+            body{font-family: tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;}
+            .dl-banner{min-height: 480px;background: url(./images/dl/top_banner.jpg) no-repeat center top;font-family: tahoma;}
+            .dl-banner .container{padding-left: 70px;}
+            .dl-banner h3{color: #fff;font-size: 30px;margin-top: 130px;font-weight: bold;margin-bottom: 14px;}
+            .dl-banner .text1{font-size: 24px;color: #ddd;margin-bottom: 0;}
+            .dl-banner .text2{font-size: 16px;color: #ddd;}
+            .dl-banner .btns{overflow: hidden;margin-top: 86px;}
+            .dl-banner .btns>a{float: left;text-decoration: none;}
+            .dl-banner .btns .down{width: 380px;height: 54px;line-height: 54px;text-align: center;color: #fff;font-size: 16px;border-radius: 5px;background: #13A4DF;margin-right: 40px;}
+            .dl-banner .btns>span{float: left;height: 54px;line-height: 54px;font-size: 16px;color: #ddd;margin-right: 10px;}
+            .dl-banner .btns .log{width: 100px;height: 24px;line-height: 22px;border: 1px solid #ddd;text-align: center;color: #ddd;font-size: 14px;border-radius: 20px;margin-top: 15px;}
+            .dl-banner .btns .down:hover{background: #0898cc;}
+            .dl-banner .btns .log:hover{background: #ddd;color: #333;}
+
+            .dl-tool1{min-height: 480px;background: #fff;}
+            .dl-tool1 .title{margin-top: 100px;margin-bottom: 80px;}
+            .dl-tool1 .title h3{margin: 0;font-size: 24px;color: #384862;text-align: center;margin-bottom: 14px;}
+            .dl-tool1 .title p{font-size: 16px;color: #999;text-align: center;}
+
+            @@media (min-width: 992px){
+                .dl-tool1 .bodying>div{width: 20%;}
+            }
+            .dl-tool1 .bodying .hsbg{background:  url(./images/dl/h_bg.png) no-repeat right 20px;}
+            .dl-tool1 .bodying .t-item{overflow: hidden;}
+            .dl-tool1 .bodying .t-item img{display: block;margin: 0 auto;margin-bottom: 25px;}
+            .dl-tool1 .bodying .t-item span{display: block;text-align: center;color: #333;font-size: 16px;}
+            
+            .dl-tool2{background: #F8F8F8;}
+            .dl-tool2 .title{margin-top: 80px;margin-bottom: 80px;}
+            .dl-tool2 .title h3{margin: 0;font-size: 24px;color: #384862;text-align: center;margin-bottom: 14px;}
+            .dl-tool2 .title p{font-size: 16px;color: #999;text-align: center;}
+            
+            .h-item{width: 100%;}
+            .h-item img{display: block;margin: 0 auto;margin-bottom: 20px;}
+            .h-item h4{margin-top: 0;font-size: 20px;color: #384862;text-align: center;}
+            .h-item p{font-size: 14px;color: #999;text-align: center;}
+            .hasbg{background: url(./images/dl/arrow.png) no-repeat 0 70px;}
+            .dl-tool2 .bodying{margin-bottom: 40px;}
+
+            .x{width: 65px;height: 5px;display: block;margin: 0 auto;background: #08A9E3;}
+
+            .example-text h4{font-weight: bold;color: #999;font-size: 16px;margin-bottom: 12px;}
+            .example-text p{font-size: 16px;color: #333;line-height: 24px;margin-bottom: 4px;}
+            .example-text span{color: #999;font-size: 16px;}
+            .p3>p{margin-bottom: 2px;}
+
+            .dl-table{max-width: 1020px;margin: 0 auto;min-width: 680px;margin-bottom: 60px;}
+            .dl-table table{width: 100%;}
+            .dl-table .row{margin-bottom: 5px;}
+            .dl-table .row>td,.dl-table .row>th{padding: 0!important;}
+            .dl-table table td,.dl-table table th{font-weight: normal;}
+            .dl-table table td span,.dl-table table th span{height: 40px;line-height: 40px;background: #B6DBF5;color: #5c7f99;font-size: 14px;display: block;margin-bottom: 5px;margin-right: 5px;padding-left: 20px;}
+            .dl-table .tbg td span{background: #D9ECFA;color: #335066;}
+
+            .dl-tool3{background: #fff;}
+            .dl-tool3 .title{margin-top: 100px;margin-bottom: 100px;}
+            .dl-tool3 .title h3{margin: 0;font-size: 24px;color: #384862;text-align: center;margin-bottom: 32px;}
+            .dl-tool3 .title p{font-size: 16px;color: #555;text-align: center;line-height: 30px;}
+
+            .dl-tool4{background: url(./images/dl/foot_banner.jpg) no-repeat center top;min-height: 402px;}
+            .dl-tool4 .title{margin-top: 80px;margin-bottom: 100px;}
+            .dl-tool4 .title h3{margin: 0;font-size: 24px;color: #fff;text-align: center;margin-bottom: 32px;}
+            .dl-tool4 .title p{font-size: 16px;color: #fff;text-align: center;line-height: 36px;}
+            .dl-tool4 .title p a{color: #fff;}
+            .dl-tool4 .title .btns{margin-top: 32px;}
+            .dl-tool4 .title .btns a{width: 320px;height: 50px;line-height: 50px;text-align: center;background: #08a9e3;color: #fff;font-size: 16px;text-decoration: none;display: block;margin: 0 auto;border-radius: 50px;}
+            .dl-tool4 .title .btns a:hover{background: #0898cc;}
+        </style>
+}
+<div class="dl-banner">
+            <div class="container">
+                <h3>Octoparse Affiliate Program</h3>
+                <p class="text1">Become an Octoparse Affiliate and Make Money Today</p>
+                <p class="text2">Promote Octoparse on your site and make money when your referrers buy Octoparse plans.</p>
+                <div class="btns clearfix">
+                    <a class="down" href="/SignUp">Join the Free Octoparse Affiliate Program</a>
+                    <span>Already an affiliate?</span>
+                    <a class="log" href="http://agent.octoparse.com/login">Log in now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="dl-tool1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 title">
+                        <h3>How Much You Can Earn from Being an Octoparse Affiliate</h3>
+                        <p>We offer you a tool to promote Octoparse on your site and earn commissions. <br>Drive as many paying users as you can, and get paid for every Octoparse sale you refer.</p>
+                    </div>
+                </div>
+                <div class="row bodying">
+                    <div class="col-md-2 hsbg">
+                        <div class="t-item">
+                            <img src="/images/dl/dl_1.png" alt="">
+                            <span>15% commission rate</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hsbg">
+                        <div class="t-item">
+                            <img src="/images/dl/dl_2.png" alt="">
+                            <span>Unlimited referrals</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hsbg">
+                        <div class="t-item">
+                            <img src="/images/dl/dl_3.png" alt="">
+                            <span>Real-time reporting</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hsbg">
+                        <div class="t-item">
+                            <img src="/images/dl/dl_4.png" alt="">
+                            <span>A tool that creates the affiliate link for you</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="t-item">
+                            <img src="/images/dl/dl_5.png" alt="">
+                            <span>Free to sign up as an affiliate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dl-tool2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 title">
+                        <h3>How the Affiliate Program Works</h3>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="row bodying">
+                    <div class="col-md-4">
+                        <div class="h-item">
+                            <img src="/images/dl/h1.png" alt="">
+                            <h4>Sign up</h4>
+                            <p>Sign up an account on Octoparse website</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-item hasbg">
+                            <img src="/images/dl/h2.png" alt="">
+                            <h4>Promote Octoparse</h4>
+                            <p>Add the affiliate link to your website</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-item hasbg">
+                            <img src="/images/dl/h3.png" alt="">
+                            <h4>Make money</h4>
+                            <p>Earn commissions when your referrals subscribe Octoparse plan</p>
+                        </div>
+                    </div>           
+                </div>
+                <div class="row text-center">
+                    <span class="x"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 title" style="margin-top:40px;margin-bottom:40px;">
+                        <p>When you become an affiliate, we'll provide you with tracking codes and create <br> a unique link for you to add to your website; this link will contain your unique ID.</p>
+                    </div>
+                </div>
+                <div class="row bodying">
+                    <div class="col-md-6">
+                        <img src="/images/dl/example.png" alt="">
+                    </div>
+                    <div class="col-md-6 example-text">
+                        <div style="height:180px;"></div>
+                        <h4>Example</h4>
+                        <p>Enter the Octoparse web page into our tool and <br> we will create a unique link for you.</p>
+                        <span>http://www.octoparse.com/product/?AgentCode=182</span>
+                    </div>
+                </div>
+                 <div class="row text-center">
+                    <span class="x"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 title p3" style="margin-top:40px;margin-bottom:40px;">
+                        <p>When a new user clicks your referral link, signs up for an account and purchases an Octoparse <br> plan through your link, you will receive 15% of that user's first purchase price of the Octoparse plan.</p>
+                        <p>If the user purchases the Standard plan(1 Year) - $890, you get $133.5;</p>
+                        <p>if the user purchases the Standard plan(1 Month) - $89, you get $13.35.</p>
+                    </div>
+                </div>
+                <div class="row bodying">
+                    <div class="col-md-12">
+                        <div class="dl-table">
+                            <table>
+                                <thead>
+                                    <tr class="row">
+                                        <th class="col-md-3"><span>Octoparse Paid Packages</span></th>
+                                        <th class="col-md-3"><span>Sale Price</span></th>
+                                        <th class="col-md-3"><span>Referral Fee Percentage</span></th>
+                                        <th class="col-md-3"><span>Program Commission(USD)</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row tbg">
+                                        <td class="col-md-3"><span>Standard Plan (Month)</span></td>
+                                        <td class="col-md-3"><span>$89</span></td>
+                                        <td class="col-md-3"><span>15%</span></td>
+                                        <td class="col-md-3"><span>$13.35</span></td>
+                                    </tr>
+                                    <tr class="row">
+                                        <td class="col-md-3"><span>Professional Plan (Month)</span></td>
+                                        <td class="col-md-3"><span>$189</span></td>
+                                        <td class="col-md-3"><span>15%</span></td>
+                                        <td class="col-md-3"><span>$28.35</span></td>
+                                    </tr>
+                                    <tr class="row tbg">
+                                        <td class="col-md-3"><span>Standard Plan (Year)</span></td>
+                                        <td class="col-md-3"><span>$890</span></td>
+                                        <td class="col-md-3"><span>15%</span></td>
+                                        <td class="col-md-3"><span>$133.5</span></td>
+                                    </tr>
+                                    <tr class="row">
+                                        <td class="col-md-3"><span>Professional Plan (Year)</span></td>
+                                        <td class="col-md-3"><span>$1890</span></td>
+                                        <td class="col-md-3"><span>15%</span></td>
+                                        <td class="col-md-3"><span>$283.5</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dl-tool3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 title">
+                        <h3>How to Get Your Money?</h3>
+                        <p>Octoparse will pay affiliate fees on tracking codes that are automatically <br> tracked and reported by Octoparse affiliation system. Log in to our Octoparse site and <br>request payment of the referral fee from 20th to 25th of every month. You will receive your commission via PayPal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dl-tool4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 title">
+                        <h3>Have Questions?</h3>
+                        <p>For questions about Octoparse affiliate program, affiliate support or advice on <br> becoming an affiliate, please feel free to contact us via <a href="mailto:affiliate@octoparse.com"><img src="/images/dl/dlyx.png" alt="" style="margin-top: -4px;margin-left: 10px;"> affiliate@octoparse.com</a></p>
+
+                        <div class="btns">
+                            <a href="/SignUp">Join Us Now! Earn Money Today!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <div class="firedown">
+            <p>Try Octoparse for Free</p>
+            <div class="download-btn">
+                <span>
+                    <a href="http://www.octoparse.com/download" class="btn btn-my">Download</a>
+                </span>
+            </div>
+        </div>

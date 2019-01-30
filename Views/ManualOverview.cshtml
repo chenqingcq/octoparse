@@ -1,0 +1,7 @@
+﻿@inherits UmbracoTemplatePage
+@{
+	var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    var newsOverview = homePage.octManualOverviews.First();
+    var item = newsOverview.octManualItems.OrderBy("publishDate asc, createDate asc").First();
+	Response.Redirect(item.Url);
+}

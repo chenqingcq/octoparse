@@ -1,0 +1,542 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+  Layout = "octLayout.cshtml";
+  ViewBag.Description = "The Best Deal for Black Friday 2017 at Octoparse - Easy & Powerful Data Extraction Software";
+}
+
+@section styles {
+<style>
+@@-webkit-keyframes img-1-move { from {top: 47px;left: -158px;} to {top: 19px;left: -56px;} }
+@@-webkit-keyframes img-2-move { from {right: 102px;top: -26px;} to {right: 140px;top: 0;} }
+@@-webkit-keyframes img-3-move { from {bottom: -60px;right: -72px;} to {bottom: -27px;right: -9px; } }
+
+li{list-style: none;}
+i{font-style: normal;}
+button{outline: none;background: none;border: none;cursor: pointer;}
+
+.body, .body * {font-family:Helvetica;}
+.body {background-color:#1b1c1e;align-items: center;position: relative;}
+.body .banner {width: 100%;background-image: url(/images/black-friday/top-banner.png);background-size:100% 500px;background-repeat: no-repeat;}
+.body .banner .banner-content{width: 788px;text-align: center;margin: 15px auto 5px;}
+.body .banner .header-logo{display: inline-block;margin-bottom: 16px;}
+.body .banner .header-logo img{width: 170px;}
+.body .banner .section-title{line-height: 58px;font-size: 35px;color: #C02E0E;font-family:ArialMT;background-image:url(/images/black-friday/top.png);margin-bottom: 24px;}
+.body .banner .section-title .strong{font-weight: 900;}
+.body .banner .focus-title{height: 126px;background-image:url(/images/black-friday/40.png);background-size:contain;background-repeat: no-repeat;margin-bottom: 18px;}
+.body .banner .bl{height: 58px;background-image:url(/images/black-friday/BL.png);background-size:contain;background-repeat: no-repeat;background-position-x: center;margin-bottom: 10px;}
+.body .banner .time-plug-wrap{height: 208px;box-sizing: content-box;text-align: center;position: relative;}
+.time-plug-wrap .top-time-bg{width: 100%;height: 78px;background: #c00f1d;opacity: .8;}
+.time-plug-wrap .bottom-time-bg{width: 100%;height: 130px;background: #c00f1d;opacity: .8;overflow: hidden;border-bottom-left-radius: 50%;border-bottom-right-radius: 50%;}
+.real-content{width: 100%;height: 208px;padding-top: 20px;position: absolute;left: 0;top: 0;}
+.time-plug-wrap .time-header{font-size: 18px;line-height: 20px;color: #fff;margin-bottom: 14px;}
+.time-plug-wrap .time-plug{display: flex;justify-content: center;}
+.time-plug-wrap .time-plug .time-card-wrap ~ .time-card-wrap{margin-left: 30px;}
+.time-plug-wrap .card-wrap{display: flex;margin-bottom: 16px;}
+.time-plug-wrap .card-wrap .time-card{width: 42px;height: 50px;font-size: 42px;line-height: 54px;font-family:Impact;color: #e32227;background: #fff;border-radius: 4px;}
+.time-plug-wrap .card-wrap .time-card:first-child{margin-right: 12px;}
+.body .time-plug-wrap .card-text{font-size: 18px;line-height: 1;color: #fff;}
+.body .time-plug-wrap .explain{width: 348px;line-height: 26px;font-family:ArialMT;font-size:18px;color: #fff;background: #CF3C26;margin: 0 auto;}
+.body .plans{display: flex;align-items: center;flex-direction: column;background-image:url(/images/black-friday/octoparse-bg.png);background-repeat: no-repeat;background-position: top center;padding-top: 30px;margin: 0 auto 110px;}
+.body .quarterly{margin-bottom: 30px;}
+.body .plans .plans-title{width: 726px;text-align: center;font-size: 36px;font-family:Arial-BoldMT;font-weight:bold;color: #fff;line-height: 1;margin-bottom: 20px;}
+.body .plans .plans-tip{height: 42px;font-size:30px;line-height: 42px;font-family:Arial-BoldMT;font-weight:bold;color: #010101;display: inline-block;background-image: url(/images/black-friday/top.png);background-size:100% 100%;background-repeat: no-repeat;padding: 0 40px;margin: 0 auto 40px;}
+.body .plans .red-strong{color: #e01125;}
+.body .plans .plans-products{width: 726px;display: flex;justify-content: center;}
+.body .plans .plans-product-item{width: 316px;height: 360px;border-radius:4px;background: #bd3917;padding-top: 18px;position: relative;}
+.body .annual .plans-product-item{background: #c21b28;}
+.body .plans .plans-product-item:first-child{margin-right: 94px;}
+.body .plans-product-item .item-tip{width: 118px;height: 118px;background-image:url(/images/black-friday/BS.png);background-size:contain;position: absolute;top: -59px;right: -59px;}
+.body .plans .product-sign{width: 162px;line-height: 34px;text-align: center;color: #bd3917;font-size: 24px;font-family:Arial-BoldMT;font-weight:bold;background: #fff;margin-bottom: 24px;}
+.body .annual .product-sign{color: #e01125;}
+.body .plans-product-item .product-price{height: 80px;margin-bottom: 27px;margin-left: 14px;display: flex;}
+.product-price .cur-price{height: 80px;}
+.product-price .old-price{flex: 1;align-self: flex-end;}
+.body .plans-product-item .product-tips{height: 94px;padding: 0 14px;font-size: 24px;line-height: 34px;font-family:ArialMT;color: #fff;margin-bottom: 20px;}
+.product-tips .product-tip i{color: #fff9b1;}
+.body .plans-product-item .buy-cont{text-align: center;}
+.body .plans-product-item .buy-btn{width: 184px;height: 42px;background: #fff9b1;line-height: 42px;border-radius:2px;font-size:18px;font-weight:bold;font-family:Arial-BoldMT;color: #010101;display: inline-block;}
+.buy-btn:hover{text-decoration: none}
+.body .contact .plans-title{margin-bottom: 50px;}
+.body .contact{margin-bottom: 20px;}
+.body .plans .contact-form{width: 788px;font-size: 18px;}
+.contact-form .input{text-indent: 20px;line-height: 40px;border-radius:4px;color: #6b6b6b;border:1px solid #1f1f1f;background: #000;margin-bottom: 12px;}
+.contact-form .input:last-child{margin-bottom: 21px;}
+.contact-form .submit-btn{width: 216px;height: 42px;color: #fff;border-radius:4px;background: #bd3616;display: block;margin: 0 auto 26px;}
+.contact-tip{width: 786px;font-size: 12px;line-height: 20px;font-family:ArialMT;color: #747474;margin-bottom: 0px;}
+.body .change-time{text-align: center;line-height: 42px;background: #2282f2;color: #fff;font-size: 18px;cursor: pointer;border-radius: 4px;padding: 0 20px;position: fixed;right: 40px;top: 180px;z-index: 99;}
+</style>
+}
+
+<!-- social media icon -->
+<svg style="position:absolute; width:0; height:0; overflow:hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol id="icon-facebook" viewBox="0 0 20 20"><path d="M17 1h-14c-1.1 0-2 0.9-2 2v14c0 1.101 0.9 2 2 2h7v-7h-2v-2.475h2v-2.050c0-2.164 1.212-3.684 3.766-3.684l1.803 0.002v2.605h-1.197c-0.994 0-1.372 0.746-1.372 1.438v1.69h2.568l-0.568 2.474h-2v7h4c1.1 0 2-0.899 2-2v-14c0-1.1-0.9-2-2-2z"></path></symbol><symbol id="icon-linkedin" viewBox="0 0 20 20"><path d="M5 3c0 1.062-0.71 1.976-2.001 1.976-1.215 0-1.999-0.862-1.999-1.924 0-1.090 0.76-2.052 2-2.052s1.976 0.91 2 2zM1 19v-13h4v13h-4z"></path><path d="M7 10.444c0-1.545-0.051-2.836-0.102-3.951h3.594l0.178 1.723h0.076c0.506-0.811 1.746-2 3.822-2 2.532 0 4.432 1.695 4.432 5.342v7.442h-4v-6.861c0-1.594-0.607-2.81-2-2.81-1.062 0-1.594 0.86-1.873 1.569-0.102 0.254-0.127 0.608-0.127 0.963v7.139h-4v-8.556z"></path></symbol><symbol id="icon-twitter" viewBox="0 0 20 20"><path d="M17.316 6.246c0.008 0.162 0.011 0.326 0.011 0.488 0 4.99-3.797 10.742-10.74 10.742-2.133 0-4.116-0.625-5.787-1.697 0.296 0.035 0.596 0.053 0.9 0.053 1.77 0 3.397-0.604 4.688-1.615-1.651-0.031-3.046-1.121-3.526-2.621 0.23 0.043 0.467 0.066 0.71 0.066 0.345 0 0.679-0.045 0.995-0.131-1.727-0.348-3.028-1.873-3.028-3.703 0-0.016 0-0.031 0-0.047 0.509 0.283 1.092 0.453 1.71 0.473-1.013-0.678-1.68-1.832-1.68-3.143 0-0.691 0.186-1.34 0.512-1.898 1.861 2.285 4.644 3.787 7.781 3.945-0.064-0.277-0.097-0.564-0.097-0.861 0-2.084 1.689-3.773 3.774-3.773 1.086 0 2.067 0.457 2.756 1.191 0.859-0.17 1.667-0.484 2.397-0.916-0.282 0.881-0.881 1.621-1.66 2.088 0.764-0.092 1.49-0.293 2.168-0.594-0.506 0.758-1.146 1.422-1.884 1.953z"></path></symbol></svg>
+
+<div class="body flex flex-column">
+  <div class="banner">
+    <div class="banner-content">
+      <a class="header-logo" href="/" _blank><img src="/images/black-friday/headerlogo.png" /></a>
+      <div class="section-title">
+        Save EXTRA <i class="strong">10%</i> in the <i class="strong">first 24 hrs</i>
+      </div>
+      <div class="focus-title"></div>
+      <div class="bl"></div>
+      <div class="time-plug-wrap">
+        <div class="top-time-bg"></div>
+        <div class="bottom-time-bg"></div>
+        <div class="real-content">
+          <div class="time-header">Sale starting in</div>
+          <ul class="time-plug">
+            <li class="time-card-wrap">
+              <div class="card-wrap" id="board-day">
+                <span class="time-card days-card ten-digits">0</span>
+                <span class="time-card days-card single-digits">0</span>
+              </div>
+              <div class="card-text">days</div>
+            </li>
+            <li class="time-card-wrap">
+              <div class="card-wrap" id="board-hours">
+                <span class="time-card hours-card ten-digits">0</span>
+                <span class="time-card hours-card single-digits">0</span>
+              </div>
+              <div class="card-text">hours</div>
+            </li>
+            <li class="time-card-wrap">
+              <div class="card-wrap" id="board-minutes">
+                <span class="time-card mins-card ten-digits">0</span>
+                <span class="time-card mins-card single-digits">0</span>
+              </div>
+              <div class="card-text">mins</div>
+            </li>
+          </ul>
+          <div class="explain">EST 11.20 00:00 am - 11.28 11:59 pm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="plans annual">
+    <h4 class="plans-title">— Annual Plans —</h4>
+    <div class="plans-tip">Up to <i class="red-strong">40% off</i></div>
+    <div class="plans-products">
+      <div class="plans-product-item">
+        <div class="product-sign">Standard</div>
+        <div class="product-price">
+          <div class="cur-price annual-standard-price">
+            <img src="/images/black-friday/$629.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/900.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Get 1 customized crawler for free</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?plan=std-yr" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+      <div class="plans-product-item">
+        <div class="item-tip"></div>
+        <div class="product-sign">Professional</div>
+        <div class="product-price">
+          <div class="cur-price annual-professional-price">
+            <img src="/images/black-friday/$1529.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/2499.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Get 1 customized crawler for free</li>
+          <li class="product-tip">Get one-hour free training</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?plan=pro-yr" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="plans quarterly">
+    <h4 class="plans-title">— Quarterly Plans —</h4>
+    <div class="plans-tip">Over <i class="red-strong">20% off</i></div>
+    <div class="plans-products">
+      <div class="plans-product-item">
+        <div class="product-sign">Standard</div>
+        <div class="product-price">
+          <div class="cur-price quarterly-standard-price">
+            <img src="/images/black-friday/$170.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/239.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Only cost <i>$56</i> per month</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?plan=std-qt" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+      <div class="plans-product-item">
+        <div class="product-sign">Professional</div>
+        <div class="product-price">
+          <div class="cur-price quarterly-professional-price">
+            <img src="/images/black-friday/$467.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/519.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Get one-hour free training</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?plan=pro-qt" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="plans monthly">
+    <h4 class="plans-title">— Monthly Plans —</h4>
+    <div class="plans-tip"><i class="red-strong">50% off</i> 2nd month subscription</div>
+    <div class="plans-products">
+      <div class="plans-product-item">
+        <div class="product-sign">Standard</div>
+        <div class="product-price">
+          <div class="cur-price monthly-standard-price">
+            <img src="/images/black-friday/$80.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/89.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Get 50% off for 2nd month subscription</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?plan=std-mo" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+      <div class="plans-product-item">
+        <div class="product-sign">Professional</div>
+        <div class="product-price">
+          <div class="cur-price monthly-professional-price">
+            <img src="/images/black-friday/$179.png" />
+          </div>
+          <div class="old-price">
+            <img src="/images/black-friday/199.png" />
+          </div>
+        </div>
+        <ul class="product-tips">
+          <li class="product-tip">Get one-hour free training Get 50% off for 2nd month subscription</li>
+        </ul>
+        <div class="buy-cont">
+          <a href="/subscribe/payactivity?payactivity=pro-mo" class="buy-btn">BUY NOW</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="plans contact">
+    <h4 class="plans-title">— Contact us —</h4>
+    <form id="contact-form" class="flex flex-column contact-form">
+      <input required name="name" class="input" type="text" placeholder="Name">
+      <input required name="email" class="input" type="text" placeholder="E-mail">
+      <input required name="company" class="input" type="text" placeholder="Company">
+      <input required name="issue" class="input" type="text" placeholder="Describe the issue">
+      <button id="btn-submit" class="submit-btn" type="button" value="button">Send</button>
+    </form>
+    <p class="contact-tip">Terms and conditions:Offer is valid from 11.20.2018(0:00 EST) until 11.28.2018(11:59 pm EST). Full refund is available within 5 days of purchase. To request a refund, please contact us here. All subscriptions will resume to original prices once the offer is over. Coupon cannot be applied during offer period. We reserve the right to cancel any order due to unauthorized, altered, or ineligible use of the offer and to modify or cancel this promotion due to system errors or unforeseen problems. Cannot be applied to previous orders. Other conditions may apply. Offer is subject to change without notice.</p>
+  </section>
+</div>
+
+@section scripts {
+  <script>
+    (function (window) {
+      let timePoint = {
+        preheatTime: '2018/11/14 13:00',
+        firstDay: '2018/11/20 13:00',
+        activities: '2018/11/21 13:00',
+        endTime: '2018/11/29 13:00'
+      }
+
+      function timestampToTime (time) {
+        var date = new Date(time);
+        let Y = date.getFullYear() + '-';
+        let M = (date.getMonth()+1 < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1) + '-';
+        let D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ';
+        let h = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
+        let m = date.getMinutes() < 10 ? '0' + date.getMinutes(): date.getMinutes();
+        return Y+M+D+h+m;
+      }
+
+      let timer = setInterval(() => {
+        let curTime = new Date(); 
+        let curTimeStamp = curTime.getTime();
+        if (curTimeStamp < getTimeStamp(timePoint.firstDay)) {
+          preheatTime()
+        } else if (curTimeStamp < getTimeStamp(timePoint.activities)) {
+          firstDay()
+        } else if (curTimeStamp < getTimeStamp(timePoint.endTime)) {
+          activities()
+        } else {
+          let buyBtns = document.querySelectorAll('.buy-btn');
+          buyBtns = Array.prototype.slice.call(buyBtns);
+          buyBtns.map(btn => {
+            btn.setAttribute('href', 'javascript:void(0);');
+          })
+          console.log('activities end')
+          clearTimeout(timer);
+        }
+      }, 1000);
+
+      function preheatTime() {
+        countDown(1);
+        extraCheck(1);
+        timeTipChange(1);
+        changePic(1);
+        discount(1);
+      }
+
+      function firstDay() {
+        countDown(2);
+        extraCheck(2);
+        timeTipChange(2);
+        changePic(1);
+        discount(1);
+      }
+
+      function activities() {
+        countDown(3);
+        extraCheck(2);
+        timeTipChange(3);
+        changePic(2);
+        discount(2);
+      }
+
+      function countDown(type) {
+        let date = new Date();
+        let curTimeStamp = date.getTime();
+        let endTime;
+        switch (type) {
+          case 1:
+            endTime = getTimeStamp(timePoint.firstDay);
+            break;
+          case 2:
+            endTime = getTimeStamp(timePoint.activities);
+            break;
+          case 3:
+            endTime = getTimeStamp(timePoint.endTime);
+            break;
+        }
+        let diff = endTime - curTimeStamp;
+        let timeStr = changeStartTime(diff);
+        resetTime(timeStr);
+      }
+      
+      function discount(type) {
+        let focusTitle = document.querySelector('.focus-title');
+        let url = getStyle('.focus-title', 'background-image');
+        let plansTip = document.querySelector('.annual .red-strong');
+        switch (type) {
+          case 1:
+            if (url.indexOf('40') === -1) {
+              focusTitle.style.backgroundImage = 'url(/images/black-friday/40.png)';
+              plansTip.innerText = '40% off';
+            }
+            break;
+          case 2:
+            if (url.indexOf('35') === -1) {
+              focusTitle.style.backgroundImage = 'url(/images/black-friday/35.png)';
+              plansTip.innerText = '35% off';
+            }
+            break;
+        }
+      }
+
+      function getTimeStamp(time) {
+        let date = new Date(time);
+        return date.getTime()
+      }
+
+      function changeStartTime (diff) {
+        let timeStr = '';
+        let count_down = {};
+        if (diff > 0) {
+            count_down.day = parseInt(diff / (1000 * 60 * 60 * 24));
+            count_down.hour = parseInt((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            count_down.min = parseInt((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            if (count_down.day>=0) {
+                if (count_down.day<10) {
+                    count_down.day = "0" + count_down.day;
+                }
+                timeStr += count_down.day + "天";
+            }
+            if (count_down.hour<10) {
+                count_down.hour = "0" + count_down.hour;
+            }
+            if (count_down.min<10) {
+                count_down.min = "0" + count_down.min;
+            }
+            return '' + count_down.day + count_down.hour + count_down.min;
+        } else {
+          return '000000';
+        }
+      }
+
+      function resetTime(str) {
+        let daysTen = document.querySelector('.days-card.ten-digits')
+        let daysSingle = document.querySelector('.days-card.single-digits')
+        let hoursTen = document.querySelector('.hours-card.ten-digits')
+        let hoursSingle = document.querySelector('.hours-card.single-digits')
+        let minsTen = document.querySelector('.mins-card.ten-digits')
+        let minsSingle = document.querySelector('.mins-card.single-digits')
+        daysTen.innerText = str.charAt(0);
+        daysSingle.innerText = str.charAt(1);
+        hoursTen.innerText = str.charAt(2);
+        hoursSingle.innerText = str.charAt(3);
+        minsTen.innerText = str.charAt(4);
+        minsSingle.innerText = str.charAt(5);
+      }
+
+      function extraCheck(type) {
+        let extra = document.querySelector('.section-title');
+        switch (type) {
+          case 2:
+            if (extra) {
+              extra.parentNode.removeChild(extra);
+              let banner = document.querySelector('.banner');
+              let height = parseInt(getStyle('.banner', 'height'));
+              banner.style.backgroundSize = '100% ' + (height-90) + 'px';
+            }
+            break;
+        }
+      }
+
+      function changePic(type) {
+        let sectionTitle = document.querySelector('.banner-content .section-title');
+        let timeHeader = document.querySelector('.time-header');
+        let annualStandard = document.querySelector('.annual-standard-price img');
+        let annualProfessional = document.querySelector('.annual-professional-price img');
+        let quarterlyStandard = document.querySelector('.quarterly-standard-price img');
+        let quarterlyProfessional = document.querySelector('.quarterly-professional-price img');
+        let monthlyStandard = document.querySelector('.monthly-standard-price img');
+        let monthlyProfessional = document.querySelector('.monthly-professional-price img');
+
+        switch (type) {
+          case 1:
+            if (annualStandard.getAttribute('src') !== '/images/black-friday/$629.png') {
+              annualStandard.setAttribute('src', '/images/black-friday/$629.png');
+            }
+            if (annualProfessional.getAttribute('src') !== '/images/black-friday/$1529.png') {
+              annualProfessional.setAttribute('src', '/images/black-friday/$1529.png');
+            }
+            if (quarterlyStandard.getAttribute('src') !== '/images/black-friday/$170.png') {
+              quarterlyStandard.setAttribute('src', '/images/black-friday/$170.png');
+            }
+            if (quarterlyProfessional.getAttribute('src') !== '/images/black-friday/$467.png') {
+              quarterlyProfessional.setAttribute('src', '/images/black-friday/$467.png');
+            }
+            if (monthlyStandard.getAttribute('src') !== '/images/black-friday/$80.png') {
+              monthlyStandard.setAttribute('src', '/images/black-friday/$80.png');
+            }
+            if (monthlyProfessional.getAttribute('src') !== '/images/black-friday/$179.png') {
+              monthlyProfessional.setAttribute('src', '/images/black-friday/$179.png');
+            }
+            break;
+
+          case 2:
+            if (annualStandard.getAttribute('src') !== '/images/black-friday/$699.png') {
+              annualStandard.setAttribute('src', '/images/black-friday/$699.png');
+            }
+            if (annualProfessional.getAttribute('src') !== '/images/black-friday/$1699.png') {
+              annualProfessional.setAttribute('src', '/images/black-friday/$1699.png');
+            }
+            if (quarterlyStandard.getAttribute('src') !== '/images/black-friday/$189.png') {
+              quarterlyStandard.setAttribute('src', '/images/black-friday/$189.png');
+            }
+            if (quarterlyProfessional.getAttribute('src') !== '/images/black-friday/$519.png') {
+              quarterlyProfessional.setAttribute('src', '/images/black-friday/$519.png');
+            }
+            if (monthlyStandard.getAttribute('src') !== '/images/black-friday/$89.png') {
+              monthlyStandard.setAttribute('src', '/images/black-friday/$89.png');
+            }
+            if (monthlyProfessional.getAttribute('src') !== '/images/black-friday/$199.png') {
+              monthlyProfessional.setAttribute('src', '/images/black-friday/$199.png');
+            }
+            break;
+        }
+      }
+
+      function timeTipChange(type) {
+        let timeTip = document.querySelector('.time-header');
+        let text = timeTip.innerText;
+        switch (type) {
+          case 1:
+            if (text !== 'Sale starting in') {
+              timeTip.innerText = 'Sale starting in';
+            }
+            break;
+          case 2:
+            if (text !== 'Get Extra 10% off in') {
+              timeTip.innerText = 'Get Extra 10% off in';
+            }
+            break;
+          case 3:
+            if (text !== 'Sale ending in') {
+              timeTip.innerText = 'Sale ending in';
+            }
+            break;
+        }
+      }
+
+      function getStyle(selector, style) {
+        let dom = document.querySelector(selector);
+        return dom.style[style] ? dom.style[style] : dom.currentStyle ? dom.currentStyle[style]: getComputedStyle(dom , null)[style];
+      }
+    })(window);
+
+    (function(window) {
+      let formDOM = document.getElementById('contact-form')
+      let btnSubmit = document.getElementById('btn-submit')
+
+      btnSubmit.addEventListener('click', e => {
+        let i = formDOM.childNodes.length
+        let hasInvaildValue = false
+
+        while(i-- > 0) {
+          let dom = formDOM.childNodes[i]
+          if ('value' in dom) {
+            if (dom.value.trim() === '') {
+              hasInvaildValue = true
+              break
+            }
+          }
+        }
+
+        if (hasInvaildValue) {
+          return alert('all info can not empty!')
+        }
+
+        let formData = new FormData(formDOM);
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('post', '/Octopus/ContactSale/support');
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200 && JSON.parse(xhr.responseText).success===true) {
+              window.location.href = "/committed-successful";
+              return;
+            } else {
+              alert('Unable to submit your request. Please try again.');
+              btnSubmit.removeAttribute('disabled');
+            }
+          }
+        }
+
+        btnSubmit.setAttribute('disabled', 'disable');
+        xhr.send(formData);
+      })
+    })(window)
+  </script>
+}

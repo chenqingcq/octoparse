@@ -1,0 +1,349 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="/css/price-card.css">
+    <style>
+        body {
+            font: normal normal normal 14px/30px Avenir-LT-W01_35-Light;
+        }
+
+        li, ol {
+            list-style: none;
+        }
+
+        ul, li, h1, h2, h3, h4, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .container {
+            margin: 0;
+            padding: 0;
+            width: 980px;
+            margin: 0 auto;
+        }
+    </style>
+    <style>
+        .pay-methods-wrap {
+            height: 200px;
+        }
+
+            .pay-methods-wrap > h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        .faq-wrap {
+            height: 600px;
+            background-color: #eee;
+            padding: 30px 0;
+        }
+
+            .faq-wrap h1 {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .faq-wrap .ul-wrap {
+                justify-content: space-between;
+                width: 1000px;
+            }
+
+            .faq-wrap ul {
+                width: 45%;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .faq-wrap li {
+                width: 100%;
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+                .faq-wrap li a {
+                    font-weight: bold
+                }
+
+        .discounts-wrap {
+            text-align: center;
+            background-color: #2095f2;
+            padding: 60px 0;
+        }
+
+            .discounts-wrap h1 {
+                color: #fff;
+                margin-bottom: 30px;
+            }
+
+            .discounts-wrap .discount-box {
+                width: 1000px;
+                justify-content: space-between;
+            }
+
+            .discounts-wrap section {
+                position: relative;
+                width: 316px;
+                height: 419px;
+                padding: 80px 0;
+                background-color: #045184;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+                .discounts-wrap section h2 {
+                    z-index: 1;
+                    font-family: helvetica;
+                    font-size: 30px;
+                    color: #f16876;
+                    font-weight: bold;
+                }
+
+                .discounts-wrap section p {
+                    z-index: 1;
+                    font-size: 22px;
+                    color: #fff;
+                    font-family: bree;
+                    width: 250px;
+                }
+
+                .discounts-wrap section a {
+                    z-index: 1;
+                    width: 120px;
+                }
+
+                .discounts-wrap section img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: .2;
+                }
+    </style>
+    <style>
+        .price-area {
+            background: url('/images/pricing/img_banner_pricing.png') no-repeat center top;
+            background-size: cover;
+        }
+
+            .price-area > h1 {
+                margin-top: 86px;
+                font-weight: bold;
+            }
+
+            .price-area > p {
+                font-size: 20px;
+                margin-bottom: 62px;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+
+        .price-card-wrap {
+            width: 1252px;
+            justify-content: space-between;
+            margin-bottom: 52px;
+        }
+    </style>
+}
+
+<div class="price-area flex flex-column flex-middle">
+    <h1>Octoparse Premium Pricing &amp; Packaging</h1>
+    <p>5 Day Money Back Guarantee on All Octoparse Plans</p>
+    <div class="price-card-wrap flex">
+        <section class="price-card flex flex-column">
+            <header class="flex flex-column">
+                <h1 class="card-title">Free Plan</h1>
+                <span class="flex flex-middle">Always free!</span>
+                <h2 class="price">FREE</h2>
+                <span>No credit card required</span>
+                <a target="_blank" href="/SignUp" class="btn-buy flex flex-middle">Sign up Now</a>
+            </header>
+            <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li><a target="_blank" href="/subscribe/pay?plan=bsc-mo">10,000 records per export<span class="fa fa-question-circle free-plan-export" data-toggle="popover" data-placement="right" data-content="Free Plan is limited to 10,000 records per export. Upgrade to Basic Plan or other premium plans for unlimited export or purchase a one-time export credit."></span></a></li>
+                <li>2 concurrent local run<span class="fa fa-question-circle free-local-run-tips" data-toggle="popover" data-placement="right" data-content="Free Plan is limited to 2 runs in parallel on local machine."></span></li>
+                <li>10 Crawlers<span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Community, lazy support</li>
+            </ul>
+        </section>
+        <section class="price-card flex flex-column">
+            <img id="most-popular-tag" src="/images/most-popular-tag.png" alt="most-popular-tag.png">
+            <header class="flex flex-column most-popular">
+                <h1 class="card-title">Standard Plan</h1>
+                <span class="flex flex-middle">Subscribe yearly to save 16%</span>
+                <h2 class="price">$75&nbsp;/&nbsp;Month</h2>
+                <span>when billed annually<br>or $89 when billed monthly</span>
+                <a target="_blank" href="/subscribe/pay?plan=std-yr" class="btn-buy flex flex-middle">Buy Now</a>
+            </header>
+            <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li>Unlimited data export<span class="fa fa-question-circle charge-plan-export" data-toggle="popover" data-placement="right" data-content="No limit on data export"></span></li>
+                <li>Unlimited concurrent local run<span class="fa fa-question-circle charge-local-run-tips" data-toggle="popover" data-placement="right" data-content="No limit on concurrent run on local machine."></span></li>
+            </ul>
+            <ul class="plan-content blue">
+                <li><strong>100 Crawlers</strong><span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Scheduled Extractions<span class="fa fa-question-circle scheduled-tips" data-toggle="popover" data-placement="right" data-content="Schedule a crawler to run at at any specific time of the day, week or month."></span></li>
+                <li>6 concurrent cloud extractions<span class="fa fa-question-circle cloud-tips" data-toggle="popover" data-placement="right" data-content="Execute 6 concurrent extractions in Octoparse Cloud 24/7. Data scraped can be accessed from any machine. No hardware maintenance."></span></li>
+                <li>Average speed extraction<span class="fa fa-question-circle upgrade-tips" data-toggle="popover" data-placement="right" data-content="6 servers distributed across all running extractions in Octoparse Cloud."></span></li>
+                <li>Auto IP rotation<span class="fa fa-question-circle ip-tips" data-toggle="popover" data-placement="right" data-content="Automatically rotates IP addresses by thousands of in-app shared servers."></span></li>
+                <li>API access<span class="fa fa-question-circle api-tips" data-toggle="popover" data-placement="right" data-content="Connect with Octoparse APIs and have the data delivered automatically to your own systems."></span></li>
+                <li>Email support</li>
+            </ul>
+        </section>
+        <section class="price-card flex flex-column">
+            <header class="flex flex-column">
+                <h1 class="card-title">Professional Plan</h1>
+                <span class="flex flex-middle">Subscribe yearly to save 16%</span>
+                <h2 class="price">$209&nbsp;/&nbsp;Month</h2>
+                <span>when billed annually<br>or $249 when billed monthly</span>
+                <a target="_blank" href="/subscribe/pay?plan=pro-yr" class="btn-buy flex flex-middle">Buy Now</a>
+                <a target="_blank" href="javascript:;" data-editiontype="3" class="request-pro-tiral">Request Pro Trial</a>
+            </header>
+            <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li>Unlimited data export<span class="fa fa-question-circle charge-plan-export" data-toggle="popover" data-placement="right" data-content="No limit on data export"></span></li>
+                <li>Unlimited concurrent local run<span class="fa fa-question-circle charge-local-run-tips" data-toggle="popover" data-placement="right" data-content="No limit on concurrent run on local machine."></span></li>
+            </ul>
+            <ul class="plan-content blue">
+                <li><strong>250 Crawlers</strong><span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Scheduled Extractions<span class="fa fa-question-circle scheduled-tips" data-toggle="popover" data-placement="right" data-content="Schedule a crawler to run at at any specific time of the day, week or month."></span></li>
+                <li>20 concurrent cloud extractions<span class="fa fa-question-circle cloud-tips" data-toggle="popover" data-placement="right" data-content="Execute 20 concurrent extractions in Octoparse Cloud 24/7. Data scraped can be accessed from any machine. No hardware maintenance."></span></li>
+                <li>High speed extraction<span class="fa fa-question-circle upgrade-tips" data-toggle="popover" data-placement="right" data-content="20 servers distributed across all running extractions in Octoparse Cloud."></span></li>
+                <li>Auto IP rotation<span class="fa fa-question-circle ip-tips" data-toggle="popover" data-placement="right" data-content="Automatically rotates IP addresses by thousands of in-app shared servers."></span></li>
+                <li>Advanced API<span class="fa fa-question-circle api-tips" data-toggle="popover" data-placement="right" data-content="Manipulate extractions and the results with Octoparse."></span></li>
+                <li>Email, High-priority support,</li>
+                <li>Free task review, 1 on 1 training</li>
+            </ul>
+        </section>
+<section class="price-card flex flex-column" style="background: transparent;box-shadow: none;">
+<section class="price-card flex flex-column" style="height: 420px;">
+            <header class="flex flex-column" style="height: 100%;">
+                <h1 class="card-title">Enterprise</h1>
+                <span class="flex flex-middle">Starting from $4899 / Year</span>
+                <div class="other-info" style="padding: 15px;margin-top:0">For large scale data extraction and high-capacity cloud solution. <font style="font-weight: bold;">Get 70 million+ pages per year with 40+ concurrent cloud processes. 4-hour advanced training with data experts and top priority.</font></div>
+                <a target="_blank" href="/contact-sales" class="btn-buy flex flex-middle" style="margin-top: 130px;">Contact sales</a>
+            </header>
+            
+        </section>
+    <section class="price-card flex flex-column" style="height: 420px;margin-top: 12px;">
+            <header class="flex flex-column" style="height: 100%;">
+                <h1 class="card-title">Data Service</h1>
+                <span class="flex flex-middle">Starting from $399</span>
+                <div class="other-info" style="padding: 15px;margin-top:0">Simply relax and leave the work to us.
+Our data team will meet with you to
+discuss your web crawling and data
+processing requirements.</div>
+                <a target="_blank" href="/contact#request-a-quote" class="btn-buy flex flex-middle" style="margin-top: 130px;">Request a quote</a>
+            </header>
+            
+        </section>
+    </section>
+    </div>
+</div>
+
+<div class="pay-methods-wrap flex flex-column flex-middle">
+    <h2>We accept the following forms of payment</h2>
+    <ul class="flex">
+        <li><img title="Paypal" alt="Paypal.jpg" src="/images/zftype/Paypal.jpg"></li>
+        <li><img title="VISA" alt="VISA.jpg" src="/images/zftype/VISA.jpg"></li>
+        <li><img title="Discover" alt="Discover.jpg" src="/images/zftype/Discover.jpg"></li>
+        <li><img title="MasterCard" alt="MasterCard.jpg" src="/images/zftype/MasterCard.jpg"></li>
+        <li><img title="American-express" alt="American-express.jpg" src="/images/zftype/American-express.jpg"></li>
+        <li><img title="diners-club" alt="diners-club.jpg" src="/images/zftype/diners-club.jpg"></li>
+        <li><img title="jcb" alt="jcb.jpg" src="/images/zftype/jcb.jpg"></li>
+    </ul>
+</div>
+
+<div class="faq-wrap flex flex-column flex-middle">
+    <h1>Some Questions You Might Have</h1>
+    <div class="ul-wrap flex">
+        <ul class="flex flex-column">
+            <li>
+                <label>What is a task/crawler?</label>
+                <p>Tasks or crawlers run in Octoparse are determined by the scraping tasks configured. A task means a crawler for scraping data from usually one website with unlimited Page/URL inquiries.</p>
+            </li>
+            <li>
+                <label>What is the difference between one-time export & unlimited export?</label>
+                <p><a target="_blank" href="/subscribe/pay?plan=bsc-mo">Basic plan</a> allows you export unlimited data during the effective period when subscribed. If you don't want to subscribe the Basic Plan, purchase one-time export credit that allows you to export the data records exceed 10,000 rows for once. <a target="_blank" href="/subscribe/pay?plan=bsc-mo">Upgrade to Basic Plan!</a></p>
+            </li>
+        </ul>
+        <ul class="flex flex-column">
+            <li>
+                <label>Do you give refunds?</label>
+                <p>Yes! If you are not happy with your plan we will give you a full refund within 5 days of your purchase.</p>
+            </li>
+            <li>
+                <label>Do you give discounts?</label>
+                <p>We offer discounts to education, journalism, and non-profits institutions. <a target="_blank" href="/contact#apply-for-discount">Contact us</a> and let us know!</p>
+            </li>
+            <li>
+                <label>I'm having issues getting data. What's wrong?</label>
+                <p><a target="_blank" href="/contact#task-configuration">Contact us</a> and we will help you. Check out our <a target="_blank" href="/tutorial">tutorials</a> for more answers.</p>
+            </li>
+            <li>
+                <label>Can you collect data for me?</label>
+                <p>Yes, we can collect data for you and deliver data on-demand for an extra fee. <a target="_blank" href="/contact#request-a-quote">Get a quote!</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="discounts-wrap flex flex-column flex-middle">
+    <h1>Discounts</h1>
+    <div class="flex discount-box">
+        <section class="flex flex-column">
+            <h2>Education</h2>
+            <p>Students, teachers or researchers using Octoparse for academic purposes</p>
+            <a target="_blank" href="/contact#apply-for-discount" class="button btn-regular">Apply</a>
+            <img width="316" height="419" alt="discount-education-box-bg.webp" src="/images/pricing/discount-education-box-bg.webp">
+        </section>
+        <section class="flex flex-column">
+            <h2>Customer Review</h2>
+            <p>We offer discounts for you if you get us exposed somewhere.</p>
+            <a target="_blank" href="/contact#apply-for-discount" class="button btn-regular">Apply</a>
+            <img width="316" height="419" alt="discount-journalism-box-bg.webp" src="/images/pricing/discount-journalism-box-bg.webp">
+        </section>
+        <section class="flex flex-column">
+            <h2>Non-Profits<br>Institutions</h2>
+            <p>Charity or any non-profits institutions</p>
+            <a target="_blank" href="/contact#apply-for-discount" class="button btn-regular">Apply</a>
+            <img width="316" height="419" alt="discount-non-profits-institutions-bg.webp" src="/images/pricing/discount-non-profits-institutions-bg.webp">
+        </section>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            var getPopoverTemplate = function (width) {
+                return '<div class="popover" style="width:' + width + 'px" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+            }
+
+            var getOptions = function (template) {
+                return {
+                    trigger: 'hover',
+                    template: template
+                }
+            }
+
+            $('.free-plan-export').popover(getOptions(getPopoverTemplate(300)))
+            $('.charge-plan-export').popover(getOptions(getPopoverTemplate(180)))
+            $('.cloud-tips').popover(getOptions(getPopoverTemplate(300)))
+            $('.free-local-run-tips').popover(getOptions(getPopoverTemplate(220)))
+            $('.charge-local-run-tips').popover(getOptions(getPopoverTemplate(220)))
+            $('.crawlers-tips').popover(getOptions(getPopoverTemplate(260)))
+            $('.upgrade-tips').popover(getOptions(getPopoverTemplate(220)))
+            $('.ip-tips').popover(getOptions(getPopoverTemplate(300)))
+            $('.api-tips').popover(getOptions(getPopoverTemplate(200)))
+            $('.scheduled-tips').popover(getOptions(getPopoverTemplate(200)))
+        })
+    </script>
+}

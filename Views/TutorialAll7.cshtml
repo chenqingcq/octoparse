@@ -1,0 +1,304 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page
+    // then just show the name of the page otherwise show the provided title
+    //var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+    //    ? CurrentPage.Name
+    //    : CurrentPage.Title;
+
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+    var tutorialOverview = homePage.tutorial7Overviews.First();
+    var introductoryLessonsItems = tutorialOverview.tutorialItemV7s.Where("category=@0", "octoparse-introductory-lessons").OrderBy("publishDate desc, createDate desc");
+}
+
+@section styles{
+    <link rel="stylesheet" href="/css/tutorial-search-bar.css">
+    <style>
+        .wrap-body {
+            padding-top: 0px;
+        }
+
+        .main-container {
+            align-items: center;
+            padding-bottom: 100px;
+        }
+
+        .main-banner {
+            background: #2A96EF;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            height: 180px;
+        }
+
+            .main-banner a {
+                color: #fff;
+            }
+
+        .list-card.block {
+            width: 100%;
+        }
+
+        .tutorial-class-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            width: 800px;
+            border-bottom: solid 1px #ccc;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        .list-wrap {
+            width: 800px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .list-card {
+            width: 380px;
+            margin-bottom: 30px;
+        }
+
+            .list-card h3 {
+                font-size: 26px;
+                margin: 0;
+            }
+
+            .list-card ul {
+                font-size: 20px;
+                margin: 10px 0 0 40px;
+            }
+
+        .more-class {
+            width: 100%;
+            display: block;
+            text-align: right;
+            padding-right: 200px;
+        }
+        .black_a1{
+            color:black
+        }
+        .black_a1:hover{
+            color:black
+        }
+        .black_a2{
+            color:#333
+        }
+        .black_a2:hover{
+            color:#333
+        }
+        .tutorial-container{
+            padding: 2rem;
+        }
+        .tutorial-class-title{
+            width: 100%;
+            border: none;
+        }
+         .tutorial-class-title a{
+            display: block;
+            text-align: left;
+            font-size: 4rem;
+            color: #193F65;
+            font-weight: bold;
+            width: 100%;
+        }
+        .list-wrap ,.list-card{
+            width: 100%;
+            margin: 5rem 0;
+        }
+        .list-card h3 {
+            width: 100%;
+        }
+        .list-card h3 a ,.list-card h2 a {
+            font-size: 3rem;
+            color: #193F65;
+            font-family: ArialMT;
+            font-weight: 500;
+        }
+        .list-card ul li{
+            margin-top: 2rem;
+        }
+        .list-card ul {
+            margin: 1rem  0 0 0 ;
+        }
+        .list-card ul li a{
+            font-size: 2.5rem;
+            font-family: ArialMT;
+        }
+        .tutorial-class-title {
+            border-bottom: 1px solid #bbb;
+            padding-bottom: 2rem;
+        }
+        .black_a1{
+            padding-top: 2rem;
+        }
+        .list-wrap .list-card ul li a {
+            color: #2A96EF;
+        }
+        h2.tutorial-class-title{
+            font-size: 4rem;
+            text-align: left;
+            border-top: 1px solid #bbb;
+            padding-top: 2rem;
+        }
+    </style>
+
+}
+<div class="wrap-body">
+    @*<div class="main-banner tutorial-search-bar ">
+        <h2 style="font-size:3rem;font-weight:600"> Octoparse 7.X Tutorials</h2>
+        <p style="font-size:1rem">Step-by-step tutorials for you to get started with Octoparse new UI</p>
+        <a target="_blank" href="/tutorial" style="font-size:18px">(Switch to 6.X Tutorials >>)</a>
+        <form action="/search" class="flex flex-middle">
+            <span class="fa fa-search"></span>
+            <input type="text" class="flex-one" name="query" value="@ViewBag.Query">
+            <input type="hidden" name="type" value="all">
+        </form>
+        <div class="quick-search-wrap ">
+            <a target="_blank" href="/search?type=all&amp;query=ajax">AJAX</a>
+            <a target="_blank" href="/search?type=all&amp;query=export">Export</a>
+            <a target="_blank" href="/search?type=all&amp;query=pagination">Pagination</a>
+            <a target="_blank" href="/search?type=all&amp;query=Cloud">Cloud</a>
+            <a target="_blank" href="/search?type=all&amp;query=xPath">XPath</a>
+            <a target="_blank" href="/search?type=all&amp;query=amazon">Amazogn</a>
+        </div>
+    </div>*@
+    <!-- @foreach (var item in introductoryLessonsItems)
+        { 
+         <li><a target="_blank" href="@item.Url">@item.tutorialName</a></li>
+    } -->
+    @Html.Partial("ocTutorialTop")
+    <div class="tutorial-container main-container">
+        <h2 style="border-top:none" class="tutorial-class-title"><a style="text-align:center;border-top:none" target="_blank" href="/getting-started" class="black_a1">Getting Started</a></h2>
+        <div class="list-wrap">
+            <div class="list-card block">
+                <h3><a target="_blank" href="/getting-started/octoparse-introductory-lessons" class="black_a2">Octoparse Introductory Lessons</a></h3>
+                <ul>
+                        <li><a target="_blank" href="/tutorial-7/about-octoparse-7x">What's new in Octoparse 7.X?</a></li>
+                        <li><a target="_blank" href="/tutorial-7/downloading-and-getting-started">Lesson 1: Downloading and getting started</a></li>
+                        <li><a target="_blank" href="/tutorial-7/getting-to-know-octoparse">Lesson 2: Getting to know Octoparse</a></li>
+                        <li><a target="_blank" href="/tutorial-7/capture-text-from-a-page">Lesson 3: Getting data - Capture text from a page</a></li>
+                        <li><a target="_blank" href="/tutorial-7/capture-a-list-of-items">Lesson 4: Getting data - Capture a list of items</a></li>
+                        <li><a target="_blank" href="/tutorial-7/capture-data-from-each-item-page">Lesson 5: Getting data - Click on a list and capture data from each item page</a></li>
+                        <li><a target="_blank" href="/tutorial-7/capture-data-from-multiple-pages">Lesson 6: Pagination - Capture data from multiple pages</a></li>
+                        <li><a target="_blank" href="/tutorial-7/execute-tasks">Lesson 7: Execute tasks</a></li>
+                </ul>
+            </div>
+        </div>
+        @**@
+        <div class="list-wrap ">
+            <div class="list-card">
+                <h3><a target="_blank" href="/getting-started/modes-to-scrape" class="black_a2">Modes to Scrape</a></h3>
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/wizard-mode">Wizard Mode</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/advanced-mode">Advanced Mode</a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <h3><a target="_blank" href="/getting-started/basic-concepts" class="black_a2">Basic Concepts</a></h3>
+                <ul>
+                    <li><a target="_blank" href="/tutorial-7/octoparse-tasks">What is a task? </a></li>
+                    <li><a target="_blank" href="/tutorial-7/concurrent-run">What is concurrent run?</a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <h3><a target="_blank" href="/getting-started/ways-to-getting-data" class="black_a2">Ways to Getting Data</a></h3>
+                <ul>
+                    <li><a target="_blank" href="/tutorial-7/local-extraction">Run tasks on local machine</a></li>
+                    <li><a target="_blank" href="/tutorial-7/cloud-extraction">Run/Schedule tasks in the cloud</a></li>
+                    <li><a target="_blank" href="http://dataapi.octoparse.com/help">Connect to Octoparse API</a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <h3><a target="_blank" href="/getting-started/download-data" class="black_a2">Download Data</a></h3>
+                <ul>
+                    <li><a target="_blank" href="/tutorial-7/export-extracted-data">CSV, Excel, JSON, HTML </a></li>
+                    <li><a target="_blank" href="/tutorial-7/export-to-database">Export to database</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="tutorial-class-title"><a target="_blank" href="/building-tasks" class="black_a1">Building Tasks </a></h2>
+        <div class="list-wrap ">
+            <div class="list-card">
+                <h3><a target="_blank" href="/building-tasks/select-data" class="black_a2">Select Data</a></h3>
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/extract-data">Select and extract text/URL/image/HTML</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/use-lists-to-extract">Use lists to extract</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/extract-multiple-pages-through-pagination">Extract multiple pages through pagination </a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <h3><a target="_blank" href="/building-tasks/interact-with-webpage" class="black_a2">Interact with Webpage</a></h3>
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/extract-data-behind-a-login">Extract behind a login</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/text-input">Text/keyword input</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/infinite-scrolling-and-load-more">Load with infinite scrolling/Load more</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/drop-down-menu">Select items in a drop-down menu</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/ajax">Deal with AJAX</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/hover-on">Hover-on</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-wrap ">
+            <div class="list-card">
+                <h3><a target="_blank" href="/building-tasks/customize-action" class="black_a2">Customize Action</a></h3>
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/xpath">Locate elements with XPath</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/associate-data-with-nearby-text">Associate data with nearby text</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/extract-data-from-source-code">Extract from source code</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/extract-page-level-data">Extract page-level data</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/re-format-data-extracted">Re-format data extracted</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/conglomerate-data-extracted">Conglomerate data extracted</a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <h3><a target="_blank" href="/building-tasks/more-techniques" class="black_a2">More Techniques</a></h3>
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/condition-based-scraping">Condition-based scraping</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/extract-data-from-a-list-of-urls">Extract from a list of URLs</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/set-up-wait-time">Set up wait time</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/set-up-proxies">Set up proxies</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/retry-actions">Retry actions</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/ad-blocking">Ad blocking/Clear cache</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="tutorial-class-title"><a target="_blank" href="/case-tutorials" class="black_a1">Case Tutorials</a></h2>
+        <div class="list-wrap flex-one flex">
+            <div class="list-card block">
+                <ul>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-product-information-from-amazon">Example: Scrape product information from Amazon</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-pricing-from-ebay">Example: Scrape pricing from eBay</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-business-information-from-yelp">Example: Scrape business information from Yelp</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-leads-from-yellowpage">Example: Scrape leads from Yellowpage</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-tweets-from-twitter">Example: Scrape tweets from Twitter</a></li>
+                    <li><a target="_Blank" href="/tutorial-7/scrape-job-information-from-indeed">Example: Scrape job information from Indeed</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="tutorial-class-title">More Resources</a></h2>
+        <div class="list-wrap ">
+            <div class="list-card">
+                <ul>
+                    <li><a target="_Blank" href="http://advancedapi.octoparse.com/help">Advanced API Documentation</a></li>
+                    <li><a target="_Blank" href="http://dataapi.octoparse.com/help">Data export API Documentation</a></li>
+                    <li><a target="_Blank" href="/troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </div>
+            <div class="list-card">
+                <ul>
+                    <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=Billing%20and%20Payments">Billing and payments</a></li>
+                    <li><a target="_Blank" href="/doc-wf/preface">User guide documentation</a></li>
+                    <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=System%20Requirements">Installation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

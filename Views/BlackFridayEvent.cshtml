@@ -1,0 +1,386 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+  Layout = "octLayout.cshtml";
+  ViewBag.Description = "The Best Deal for Black Friday 2017 at Octoparse - Easy & Powerful Data Extraction Software";
+}
+
+@section styles {
+<style>
+@@-webkit-keyframes img-1-move { from {top: 47px;left: -158px;} to {top: 19px;left: -56px;} }
+@@-webkit-keyframes img-2-move { from {right: 102px;top: -26px;} to {right: 140px;top: 0;} }
+@@-webkit-keyframes img-3-move { from {bottom: -60px;right: -72px;} to {bottom: -27px;right: -9px; } }
+
+.body, .body * {font-family:Helvetica;}
+.body {background-size:cover;background-image:url(/images/black-friday/img-fg.jpg);background-repeat:no-repeat;background-color:#1b1c1e;align-items:center;position:relative;}
+.body .banner {position:relative;margin-top:100px;width:1000px;height:320px;background-image:url(/images/black-friday/img-banner.png);background-size:contain;background-position:center;background-repeat:no-repeat;}    .main-body .banner img {position: absolute;-webkit-animation-fill-mode:forwards;}
+.body .banner img {position: absolute;}
+.body .banner .img-1 {top: 47px;left: -158px; -webkit-animation: img-1-move 1s ease-out forwards;}
+.body .banner .img-2 {right: 102px;top: -26px; -webkit-animation: img-2-move 1s ease-out forwards; animation-delay:.3s; }
+.body .banner .img-3 {bottom: -60px;right: -72px; -webkit-animation: img-3-move 1s ease-out forwards; animation-delay:.6s; }
+
+.body .btn {width:130px;height:40px;background-color:#e69d26;color:#fff;text-decoration:none;font-size:16px;border-radius:0;border:0;}
+.body .btn:hover {background-color:#e1881e;}
+
+.panel-counter {color:#fff;height:340px;width:610px;background-color:#000;position:absolute;background-image:url(/images/black-friday/img-timeboard.png);align-items:center;top:464px;left:50%;transform:translateX(-50%);background-position: center;background-size: 100% 100%;background-repeat: no-repeat;}
+.panel-counter .panel-title {width:100%;height:50px;font-size:24px;font-weight: bold;color: #ce1118;}
+.panel-counter .event-time {margin-top:20px;width:100%;font-size:16px;}
+.panel-counter .time-board {margin-top:32px;width:326px;justify-content:space-around;}
+.panel-counter .time-board .time-unit {width:98px;align-items:center;}
+.panel-counter .time-board .time-card-wrap {margin-bottom:8px;justify-content:space-between;width:100%;}
+.panel-counter .time-board .number-panel {width:46px;text-align:center;background-image:url(/images/black-friday/img-card.png);height:72px;font-size:56px;font-weight:bold;box-sizing:border-box;}
+.panel-counter .btn-buy-now {width:290px;height:40px;color:#fff;text-decoration:none;background-color:#df2332;margin-top:30px;}
+.panel-counter .btn-buy-now:hover {background-color:#ce1118;}
+.panel-counter .sale-tips {font-size:12px;margin-top:16px;}
+
+.body .sub-title {font-size:26px;color:#fff;text-align:center;margin:430px 0 50px;}
+.body .box {width:1000px;position:relative;background-color:#2e2e30;position:relative;align-items:center;overflow:hidden;}
+.body .box .box-title {font-size:32px;color:#fff;margin:30px 0 5px;padding:0;}
+.body .box .title-devide {width:300px;border:0;border-top:solid 3px #ffb031;}
+
+@@media (min-width:1720px) {
+  .panel-counter {top:104px;left:auto;right:-120px;width:340px;}
+  .sub-title {margin:50px 0 !important;}
+}
+
+.box-price {margin-bottom:10px;padding-bottom:60px;}
+.box-price .sale-flag {position:absolute;top:15px;left:-66px;transform:rotate(-45deg);width:200px;height:36px;line-height:36px;font-size:20px;text-align:center;color:#fff;background-color:#ffb031;font-weight:bold;box-shadow:0px 3px 3px 0px #000;}
+.box-price .subscription-list {width:700px;}
+.box-price .list-item {height:80px;align-items:center;}
+.box-price .plan-name {width:270px;font-size:24px;color:#fff;}
+.box-price .plan-price {font-size:32px;color:#ffb031;display:flex;justify-content:center;font-weight:bold;}
+.box-price .plan-price > span {display: flex;align-items: center;}
+.box-price .origin-price {color:#fff;font-size:24px;text-decoration:line-through;font-weight:normal;margin-left:20px;}
+.box-price .price-tips, .box-price .plan-name-tips {font-size:14px;font-weight: bold;margin-top:8px;}
+.box-price .plan-price .price-tips {margin:0;color:#fff;}
+
+.box-contact {padding-bottom:33px;}
+.box-contact form {margin-top:35px;align-items:center;}
+.box-contact textarea {height:130px;resize:none;}
+.box-contact .form-control {width:400px;min-height:40px;background:#3d3e3f;border:1px solid #a1a1a1;margin-top:8px;padding:4px 10px;color:#fff;border-radius:0;}
+.box-contact select.form-control {margin: 0;height: 100%;min-height:100%;width:100%;outline:none;border: 0;}
+.box-contact .form-control-wrap {width:400px;height:40px;min-height:40px;background:#3d3e3f;border:1px solid #a1a1a1;margin-top:8px;color:#fff;border-radius:0;}
+.box-contact .form-control:focus {outline:#ffb031 solid 2px}
+.box-contact .btn-submit {margin-top:8px}
+
+.footer-p {height:400px;width:100%;color:#fff;align-items:center;}
+
+.footer-p .link-wrap {margin:50px 0 40px;}
+.footer-p .link-group {width:200px;}
+.footer-p .link-group .title {font-size:20px;font-weight:bold;margin-bottom:20px;}
+.footer-p .link-group > a {color:#a1a1a1;font-size:20px;text-decoration:none;margin-bottom:8px;}
+.footer-p .link-group > a:hover {color:#fff}
+.footer-p .social-media-link {width:110px;justify-content:space-between;}
+.footer-p .social-media-link svg {height:22px;overflow:hidden;fill:#a1a1a1;width:22px;}
+.footer-p .social-media-link svg:hover {fill:#fff;}
+.footer-p .devide {width:1px;height:130px;background-color:#393939;margin:0 70px;}
+.footer-p .term-of-service {color:#a1a1a1;font-size:12px;width:800px;}
+</style>
+}
+
+<!-- social media icon -->
+<svg style="position:absolute; width:0; height:0; overflow:hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol id="icon-facebook" viewBox="0 0 20 20"><path d="M17 1h-14c-1.1 0-2 0.9-2 2v14c0 1.101 0.9 2 2 2h7v-7h-2v-2.475h2v-2.050c0-2.164 1.212-3.684 3.766-3.684l1.803 0.002v2.605h-1.197c-0.994 0-1.372 0.746-1.372 1.438v1.69h2.568l-0.568 2.474h-2v7h4c1.1 0 2-0.899 2-2v-14c0-1.1-0.9-2-2-2z"></path></symbol><symbol id="icon-linkedin" viewBox="0 0 20 20"><path d="M5 3c0 1.062-0.71 1.976-2.001 1.976-1.215 0-1.999-0.862-1.999-1.924 0-1.090 0.76-2.052 2-2.052s1.976 0.91 2 2zM1 19v-13h4v13h-4z"></path><path d="M7 10.444c0-1.545-0.051-2.836-0.102-3.951h3.594l0.178 1.723h0.076c0.506-0.811 1.746-2 3.822-2 2.532 0 4.432 1.695 4.432 5.342v7.442h-4v-6.861c0-1.594-0.607-2.81-2-2.81-1.062 0-1.594 0.86-1.873 1.569-0.102 0.254-0.127 0.608-0.127 0.963v7.139h-4v-8.556z"></path></symbol><symbol id="icon-twitter" viewBox="0 0 20 20"><path d="M17.316 6.246c0.008 0.162 0.011 0.326 0.011 0.488 0 4.99-3.797 10.742-10.74 10.742-2.133 0-4.116-0.625-5.787-1.697 0.296 0.035 0.596 0.053 0.9 0.053 1.77 0 3.397-0.604 4.688-1.615-1.651-0.031-3.046-1.121-3.526-2.621 0.23 0.043 0.467 0.066 0.71 0.066 0.345 0 0.679-0.045 0.995-0.131-1.727-0.348-3.028-1.873-3.028-3.703 0-0.016 0-0.031 0-0.047 0.509 0.283 1.092 0.453 1.71 0.473-1.013-0.678-1.68-1.832-1.68-3.143 0-0.691 0.186-1.34 0.512-1.898 1.861 2.285 4.644 3.787 7.781 3.945-0.064-0.277-0.097-0.564-0.097-0.861 0-2.084 1.689-3.773 3.774-3.773 1.086 0 2.067 0.457 2.756 1.191 0.859-0.17 1.667-0.484 2.397-0.916-0.282 0.881-0.881 1.621-1.66 2.088 0.764-0.092 1.49-0.293 2.168-0.594-0.506 0.758-1.146 1.422-1.884 1.953z"></path></symbol></svg>
+
+<div class="body flex flex-column">
+  <div class="banner">
+    <img src="/images/black-friday/img-banner-l.png" alt="img-banner-l.png" class="img-1">
+    <img src="/images/black-friday/img-banner-r-1.png" alt="img-banner-r-1.png" class="img-2">
+    <img src="/images/black-friday/img-banner-r-2.png" alt="img-banner-r-2.png" class="img-3">
+  </div>
+  <div class="panel-counter flex flex-column">
+    <div class="panel-title flex flex-middle">Limited Time Offerx</div>
+    <div class="event-time flex flex-middle">Offers ending in</div>
+    <div class="time-board flex">
+      <div class="time-unit flex flex-column">
+        <div class="time-card-wrap flex" id="board-day">
+          <div class="number-panel flex flex-middle">0</div>
+          <div class="number-panel flex flex-middle">0</div>
+        </div>
+        DAYS
+      </div>
+      <div class="time-unit flex flex-column">
+        <div class="time-card-wrap flex" id="board-hours">
+          <div class="number-panel flex flex-middle">0</div>
+          <div class="number-panel flex flex-middle">0</div>
+        </div>
+        HRS
+      </div>
+      <div class="time-unit flex flex-column">
+        <div class="time-card-wrap flex" id="board-minutes">
+          <div class="number-panel flex flex-middle">0</div>
+          <div class="number-panel flex flex-middle">0</div>
+        </div>
+        MINS
+      </div>
+    </div>
+    <a href="/Pricing" class="btn-buy-now flex flex-middle">Buy Now</a>
+    <p class="sale-tips">* Sales excludes Data Service, and previous sold items.</p>
+  </div>
+  <div class="sub-title">Stock up on premium plans for data hunting.<br>The biggest sales of the year is here!</div>
+  <div class="box box-price flex flex-column">
+    <div class="sale-flag">SALE</div>
+    <h2 class="box-title">Standard Subscription</h2>
+    <hr class="title-devide">
+    <div class="subscription-list">
+      <div class="list-item flex">
+        <div class="plan-name flex flex-column">Annual Plan<div class="plan-name-tips">Get 1 Customized Crawler for Free</div></div>
+        <div class="plan-price flex-one flex-column">
+          <span>$699<span class="origin-price">$900</span></span>
+        </div>
+        <a href="/Subscribe/PayActivity?plan=std-yr" class="btn flex flex-middle">Buy Now</a>
+      </div>
+      <hr>
+      <div class="list-item flex">
+        <div class="plan-name flex">Quarterly Plan</div>
+        <div class="plan-price flex-one flex-column">
+          <span>$209<span class="origin-price">$239</span></span>
+        </div>
+        <a href="/Subscribe/PayActivity?plan=std-qt" class="btn flex flex-middle">Buy Now</a>
+      </div>
+      <hr>
+      <div class="list-item flex">
+        <div class="plan-name flex flex-column">Monthly Plan<div class="plan-name-tips">Get 2nd month at half price!</div></div>
+        <div class="plan-name flex flex-column flex-one">50%OFF<div class="price-tips">2nd Month Subcription</div></div>
+        <a href="/Subscribe/PayActivity?plan=std-mo" class="btn flex flex-middle">Buy Now</a>
+      </div>
+    </div>
+    <h2 class="box-title" style="margin-top:100px;">Professional Subscription</h2>
+    <hr class="title-devide">
+    <div class="subscription-list">
+      <div class="list-item flex">
+        <div class="plan-name flex flex-column">Annual Plan<div class="plan-name-tips">Get 3 Customized Crawlers for Free</div></div>
+        <div class="plan-price flex-one flex-column">
+          <span>$1329<span class="origin-price">$1896</span></span>
+        </div>
+        <a href="/Subscribe/PayActivity?plan=pro-yr" class="btn flex flex-middle">Buy Now</a>
+      </div>
+      <hr>
+      <div class="list-item flex">
+        <div class="plan-name flex">Quarterly Plan</div>
+        <div class="plan-price flex-one flex-column">
+          <span>$399<span class="origin-price">$509</span></span>
+        </div>
+        <a href="/Subscribe/PayActivity?plan=pro-qt" class="btn flex flex-middle">Buy Now</a>
+      </div>
+      <hr>
+      <div class="list-item flex">
+        <div class="plan-name flex flex-column">Monthly Plan<div class="plan-name-tips">Get 2nd month at half price!</div></div>
+        <div class="plan-name flex flex-column flex-one">50%OFF<div class="price-tips">2nd Month Subcription</div></div>
+        <a href="/Subscribe/PayActivity?plan=pro-mo" class="btn flex flex-middle">Buy Now</a>
+      </div>
+    </div>
+  </div>
+  <div class="box box-contact flex flex-column">
+    <h2 class="box-title">Reach out to us</h2>
+    <hr class="title-devide">
+    <form id="contact-form" class="flex flex-column">
+      <input required name="name" class="form-control" type="text" placeholder="Name">
+      <input required name="email" class="form-control" type="text" placeholder="E-mail">
+      <input required name="company" class="form-control" type="text" placeholder="Company">
+      <div class="form-control-wrap">
+        <select required name="about" class="form-control">
+          <option value="task-configuration">Task configuration</option>
+          <option value="request-a-quote">Request a quote</option>
+          <option value="apply-for-discount">Apply for discount</option>
+          <option value="bug-report">Bug Report</option>
+        </select>
+      </div>
+      <textarea required name="issue" class="form-control" placeholder="Describe the issue"></textarea>
+      <button id="btn-submit" class="btn btn-submit" type="button" value="button">Send</button>
+    </form>
+  </div>
+  <div class="footer-p flex flex-column">
+    <div class="link-wrap flex">
+      <div class="link-group flex flex-column">
+        <div class="title">Learn more</div>
+        <a href="/Download">Download Octoparse</a>
+        <a href="/Pricing">Pricing</a>
+        <a href="/tutorial">Tutorials</a>
+        <a href="/Blog">Blog</a>
+      </div>
+      <div class="devide"></div>
+      <div class="link-group flex flex-column">
+        <div class="title">Follow us on</div>
+        <div class="social-media-link flex">
+          <a class="flex flex-middle" href="https://www.facebook.com/Octoparse"><svg><use xlink:href="#icon-facebook"></use></svg></a>
+          <a class="flex flex-middle" href="https://twitter.com/Octoparse"><svg><use xlink:href="#icon-twitter"></use></svg></a>
+          <a class="flex flex-middle" href="https://www.linkedin.com/m/login"><svg><use xlink:href="#icon-linkedin"></use></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="term-of-service">Terms and conditions:Offer valid from 11.21.2017(0:00 EST) until 11.28.2017(11:59 pm EST).  Full refund is available within 5 days of purchase. To request a refund, please contact support&#0064;octoparse.com. All subscription will resume to original prices once the offer is over. Coupon cannot be applied during offer period. We reserve the right to cancel any order due to unauthorized, altered, or ineligible use of the offer and to modify or cancel this promotion due to system errors or unforeseen problems. Cannot be applied to previous orders. Other conditions may apply. Offer is subject to change without notice.</p>
+  </div>
+</div>
+
+@section scripts {
+<script>
+(function(window) {
+  var ONE_MINUTE_TIME = 60000
+  var ONE_HOUR_TIME = 3600000
+  var ONE_DAY_TIME = 86400000
+  var FIVE_HOURS_TIME = 18000000
+
+  var boardDay = document.getElementById('board-day')
+  var boardHours = document.getElementById('board-hours')
+  var boardMinutes = document.getElementById('board-minutes')
+
+  // EST 11.21 0:00
+  var getEventStartTime = function(time) {
+    var date = new Date(time)
+
+    date.setFullYear(2017)
+    date.setMonth(10)
+    date.setDate(20)
+    date.setHours(23)
+    date.setMinutes(59)
+    date.setSeconds(59)
+
+    return date.getTime()
+  }
+
+  // EST 11.22 0:00
+  var getEventEndTime = function(time) {
+    var date = new Date(time)
+
+    date.setFullYear(2017)
+    date.setMonth(10)
+    date.setDate(21)
+    date.setHours(23)
+    date.setMinutes(59)
+    date.setSeconds(59)
+
+    return date.getTime()
+  }
+
+  // EST 11.29 0:00
+  var getEventEndTime2 = function(time) {
+    var date = new Date(time)
+
+    date.setFullYear(2017)
+    date.setMonth(10)
+    date.setDate(28)
+    date.setHours(23)
+    date.setMinutes(59)
+    date.setSeconds(59)
+
+    return date.getTime()
+  }
+
+  var getESTTime = function(date) {
+    var time = date.getTime()
+    var offsetMin = date.getTimezoneOffset()
+    var UTCZeroTime = time - offsetMin * -1 * ONE_MINUTE_TIME
+
+    return UTCZeroTime - FIVE_HOURS_TIME
+  }
+
+  var fixedNumberString = function(number) {
+    var str = number.toString()
+    return str.length > 1 ? str : '0' + str
+  }
+
+  var renderTimePanel = function(remainingTime) {
+    var remainingDays = parseInt(remainingTime / ONE_DAY_TIME)
+    var remainingHours = parseInt((remainingTime % ONE_DAY_TIME) / ONE_HOUR_TIME)
+    var remainingMinutes = parseInt((remainingTime % ONE_DAY_TIME % ONE_HOUR_TIME) / ONE_MINUTE_TIME)
+
+    boardDay.innerHTML = 
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingDays)[0] + '</div>' +
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingDays)[1] + '</div>'
+
+    boardHours.innerHTML = 
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingHours)[0] + '</div>' +
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingHours)[1] + '</div>'
+
+    boardMinutes.innerHTML = 
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingMinutes)[0] + '</div>' +
+      '<div class="number-panel felx flex-middle">' + fixedNumberString(remainingMinutes)[1] + '</div>'
+  }
+
+  var updateTimePanel = function() {
+    remainingTime = remainingTime - ONE_MINUTE_TIME
+
+    if (remainingTime < 0) {
+      window.location.reload()
+      return false
+    }
+
+    renderTimePanel(remainingTime)
+    setTimeout(updateTimePanel, ONE_MINUTE_TIME)
+  }
+
+  var current = new Date()
+  var currentMinutes = current.getMinutes()
+  var currentEstTime = getESTTime(current)
+
+  var firstUpdateTime = ONE_MINUTE_TIME - (currentMinutes === 0 ? ONE_MINUTE_TIME : currentMinutes * 1000)
+
+  // var eventEndTime = getEventStartTime(currentEstTime)
+  // var remainingTime = eventEndTime - currentEstTime
+  var timeNode = [
+    getEventStartTime(currentEstTime),
+    getEventEndTime(currentEstTime),
+    getEventEndTime2(currentEstTime)
+  ]
+
+  var remainingTime = 0
+  timeNode.some(function(node) {
+    if (node - currentEstTime > 0) {
+      remainingTime = node - currentEstTime
+      return true
+    }
+
+    return false
+  })
+
+  if (remainingTime > 0) {
+    renderTimePanel(remainingTime)
+    setTimeout(updateTimePanel, firstUpdateTime)
+  }
+})(window);
+
+(function(window) {
+  var formDOM = document.getElementById('contact-form')
+  var btnSubmit = document.getElementById('btn-submit')
+
+  btnSubmit.addEventListener('click', function(e) {
+    var i = formDOM.childNodes.length
+    var hasInvaildValue = false
+
+    while(i-- > 0) {
+      var dom = formDOM.childNodes[i]
+      if ('value' in dom) {
+        if (dom.value.trim() === '') {
+          debugger
+          hasInvaildValue = true
+          break
+        }
+      }
+    }
+
+    if (hasInvaildValue) {
+      return alert('all info can not empty!')
+    }
+
+    var formData = new FormData(formDOM);
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('post', '/Octopus/ContactSale/support');
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200 && JSON.parse(xhr.responseText).success===true) {
+          window.location.href = "/committed-successful";
+          return;
+        }
+
+        alert('Unable to submit your request. Please try again.');
+        btnSubmit.removeAttribute('disabled');
+      }
+    }
+
+    btnSubmit.setAttribute('disabled', 'disable');
+    xhr.send(formData);
+  })
+})(window)
+</script>
+}

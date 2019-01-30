@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "Partials/_Layout.cshtml";
+    Dictionary<string, string> metas = new Dictionary<string, string>();
+    metas["PageTitle"] = ViewBag.Title+" | Octoparse.com";
+    metas["PageKeywords"] = metas["PageDescription"] = "";
+}
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+@section metas{
+    @Html.Partial("_PageMeta", metas)
+}
+@RenderBody()
+@section scripts{
+    @RenderSection("scripts", required: false)
+}
+
+

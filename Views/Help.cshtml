@@ -1,0 +1,222 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+}
+@section styles{
+<link rel="stylesheet" href="/css/flex.css">
+<style>
+    /*Help Reset CSS*/
+    .container {
+        width: 980px;
+        padding: 0;
+    }
+
+    /*Reset END*/
+
+    /* title-box */
+    .title-box {
+        background-color: #2095f2;
+    }
+
+    .title-box .container {
+        height: 165px;
+    }
+
+    .title-box .container h1 {
+        font-family: futura-lt-w01-light, sans-serif;
+        font-size: 36px;
+        margin: 25px 0 15px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .title-box .container .interval-border {
+        width: 50px;
+        border-bottom: 4px solid #fff;
+        margin: 0 auto;
+    }
+
+    .title-box .container p {
+        margin-top: 25px;
+        color: #fff;
+        text-align: center;
+        font-family: futura-lt-w01-light, sans-serif;
+        font-size: 16px;
+    }
+
+    /* title-box END */
+
+    /* itemTop-box */
+    .items,
+    .items:hover,
+    .items:focus,
+    .items:link {
+        text-decoration: none;
+    }
+
+    .itemTop-box {
+        background-color: #fff;
+    }
+
+    .itemTop-box .container {
+        height: 380px;
+        padding-top: 40px;
+        text-align: center;
+    }
+
+    .itemTop-box .container .top-item1,
+    .itemTop-box .container .top-item2,
+    .itemBtm-box .container .btm-item3,
+    .itemBtm-box .container .btm-item4 {
+        width: 484px;
+        height: 328px;
+        background-color: rgba(255, 255, 255, 1);
+        border-radius: 5px;
+        transition: box-shadow 300ms;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        border: 1px solid #e1e1e1;
+        background-repeat: repeat-x;
+        background-position: 0 0;
+    }
+
+    .itemTop-box .container .top-item1:hover,
+    .itemTop-box .container .top-item2:hover,
+    .itemBtm-box .container .btm-item3:hover,
+    .itemBtm-box .container .btm-item4:hover {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .itemTop-box .container .top-item1 img {
+        margin-top: 44px;
+        width: 121px;
+    }
+
+    .itemTop-box .container .top-item2 img {
+        margin-top: 25px;
+        width: 122px;
+    }
+
+    .container .item-img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .container .item-title {
+        margin: 20px 0;
+        color: #2F2E2E;
+        font-size: 26px;
+    }
+
+    .container .item-p {
+        font-family: Futura-LT-W01-Light;
+        width: 345px;
+        margin: 0 auto;
+        color: #2F2E2E;
+        font-size: 18px;
+        line-height: 30px;
+    }
+
+    /* itemTop-box END */
+
+    /* itemBtm-title */
+    .itemBtm-box .container {
+        height: 424px;
+        padding-top: 12px;
+        text-align: center;
+    }
+
+    .itemBtm-box .container .btm-item3 img {
+        margin-top: 40px;
+        width: 113px;
+    }
+
+    .itemBtm-box .container .btm-item4 img {
+        margin-top: 25px;
+        width: 122px;
+    }
+
+    /* itemBtm-title END */
+</style>
+<style>
+    .main-container {
+        width: 900px;
+        height: 720px;
+        flex-wrap: wrap;
+        margin: 50px auto;
+        justify-content: space-between;
+    }
+
+    .main-container>a {
+        width: 434px;
+        height: 328px;
+        border: solid 1px #ccc;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #2F2E2E;
+        transition: box-shadow 300ms;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .main-container>a:hover {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .main-container p {
+        text-align: center;
+    }
+</style>
+}
+
+<div class="title-box">
+    <div class="container">
+        <h1>OCTOPARSE RESOURCES</h1>
+        <div class="interval-border"></div>
+        <p>Help center, articles, videos and guides</p>
+    </div>
+</div>
+
+<div class="main-container flex">
+    <a target="_blank" class="flex flex-column flex-middle" href="https://helpecenter.octoparse.com">
+        <img width="154" height="154" src="/images/help/icon_help_04.png" alt="icon_help_04.png">
+        <h3>Help Center</h3>
+        <p>Get instant answers to your questions<br>and learn how to use Octoparse like a pro</p>
+    </a>
+    <a class="flex flex-column flex-middle" href="https://www.youtube.com/channel/UCweDWm1QY2G67SDAKX7nreg/playlists"
+        target="_blank">
+        <img width="154" height="154" src="/images/help/icon_help_02.png" alt="icon_help_02.png">
+        <h3>Videos</h3>
+        <p>Learn web scraping by watching our<br>step-by-step video tutorials on Youtube</p>
+    </a>
+
+    <a class="flex flex-column flex-middle" href="/contact" target="_blank">
+        <img width="154" height="154" src="/images/help/icon_help_03.png" alt="icon_help_03.png">
+        <h3>Contact Support</h3>
+        <p>Contact Octoparse Support Team for any<br /> questions you may have</p>
+    </a>
+    <a target="_blank" class="flex flex-column flex-middle">
+    <!-- <a class="flex flex-column flex-middle"> -->
+        <!-- <img width="154" height="154" src="/images/help/icon_help_01.png" alt="icon_help_01.png"> -->
+        <h3>
+            <span style="color:#337ab7;cursor:pointer" onclick="openCommunity()" >Community</span>
+        </h3>
+            <p>
+                Join Octoparse Community to ask for help<br /> or share everything you know about web scraping!
+            </p>
+        <h3>
+            <span style="color:#337ab7;cursor:pointer" onclick="open7()">Tutorials 7.X</span> |
+            <span style="color:#337ab7;cursor:pointer" onclick="open6()">6.X</span>
+        </h3>
+        <p>Articles and guides to get you started<br>on your own scraping projects</p>
+    </a>
+</div>
+<script>
+    var openCommunity = function (){
+        window.open("https://www.facebook.com/groups/1700643603550408")
+    }
+    var open7 = function () {
+        window.open("/tutorial-7")
+    }
+    var open6 = function () {
+        window.open("/tutorial")
+    }
+</script>

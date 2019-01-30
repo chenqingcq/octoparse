@@ -1,0 +1,109 @@
+﻿@inherits UmbracoTemplatePage
+@{
+  Layout = "octLayout.cshtml";
+  if(!string.IsNullOrWhiteSpace(Request.QueryString["category"]))
+  {
+    ViewBag.PageTitle=Request.QueryString["category"];
+  }
+
+  var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+  var newsOverview = homePage.octTutorialOverviews.First();
+
+  int pageIndex = 0,pageSize=12,total=0;
+  int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+  if (pageIndex == 0)
+  {
+    pageIndex = 1;
+  }
+
+  var baseUrl = "/features-tutorial";
+  var category=Request.QueryString["category"];
+  var newsItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Features");
+  var topBool=pageIndex==1 && string.IsNullOrWhiteSpace(category);
+  var topItems=newsItems.Where("onTop && "+topBool.ToString().ToUpper()).Take(3).OrderBy("publishDate desc, createDate desc");
+
+  if(!string.IsNullOrWhiteSpace(category))
+  {
+    baseUrl=baseUrl+"?category="+category;  
+    newsItems = newsOverview.octTutorialItems.Where("category==@0 && learnCategory=@1",category.ToUpper(),"Features");
+  }
+
+  total=newsItems!=null?newsItems.Count():0;
+
+  if(total>0)
+  {
+    newsItems=newsItems.OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+  }
+
+  var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+
+  {
+    Total = total,
+    PageSize = pageSize,
+    PageIndex = pageIndex,
+    BaseUrl = baseUrl
+  };
+}
+
+@section styles{
+  <link rel="stylesheet" href="/css/tutorial.css">
+}
+
+@if (category == null)
+{
+  <h1 class="page-title flex flex-middle">Feature Tutorial</h1>
+}
+else
+{
+  <h1 class="page-title flex flex-middle">@(category.ToUpper())&nbsp;Tutorial</h1>
+}
+
+<div class="container">
+  @{
+    if (category == null)
+    {
+      <ol class="breadcrumb">
+        <li><a href="/tutorial">Tutorial</a></li>
+        <li class="active">Feature Tutorial</li>
+      </ol>
+    }
+    else
+    {
+      <ol class="breadcrumb">
+        <li><a href="/tutorial">Tutorial</a></li>
+        <li><a href="/features-tutorial">Feature Tutorial</a></li>
+        <li class="active">@(category.ToLower())</li>
+      </ol>
+    }
+  }
+
+  @if (total > 0)
+  {
+    <section class="article-list">
+      @foreach (var article in newsItems)
+      {
+        var dateTime = article.PublishDate == default(DateTime) ? article.CreateDate : article.PublishDate;
+        var categoryURL = "/features-tutorial?category=" + article.category;
+
+        <article>
+          <header>
+            <a href="@article.Url">@article.tutorialName</a>
+          </header>
+          <div class="publish-time">@dateTime.ToString("f")</div>
+          <ul class="category-list flex">
+            <li class="flex flex-middle"><a href="@categoryURL">@article.category</a></li>
+          </ul>
+        </article>
+      }
+    </section>
+
+    if(total > pageSize)
+    {
+      @Html.Partial("_PagePartial", pageInfo)
+    }
+  }
+  else
+  {
+    <p class="no-data-tips"><span class="fa fa-frown-o"></span>&nbsp;no data found.</p>
+  }
+</div>

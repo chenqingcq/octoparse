@@ -1,0 +1,49 @@
+﻿@using Umbraco.Web;
+@model Octoparse.Web.Models.BuyModel
+
+@using(Html.BeginUmbracoForm<Octoparse.Web.Controllers.BuyController>("PostBuy"))
+{
+    if(Model.CanBuy){
+    <div class="row">						  
+	    <div class="col-md-4 input-group">
+		    <span class="input-group-addon">Please choose quantity for purchase</span>
+            
+	    </div>
+	    <div class="col-md-7" style="padding-top:7px">
+		    <span>Expiration date：</span><span class="span-orange">@Html.TextBoxFor(m=>m.EndDate)</span>
+	    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+             
+                 <p class="text-right"><span class="">Total amount：</span><span class="span-orange span-large">USD$@Html.DisplayFor(m=>m.TotalPrice)</span></p>
+            
+	    </div>
+        @if(Model.UpgradeDiscount>0){
+        <div class="col-md-12">
+             <asp:Panel ID="Panel_Discount" runat="server">
+                 <p class="text-right"><span class="">Upgrade disount amount(Professional Edition to Ultimate Edition)：</span><span class="span-orange span-large">-USD$@Html.DisplayFor(m=>m.UpgradeDiscount)</span></p>
+             </asp:Panel>
+	    </div>
+        }
+	    <div class="col-md-12">
+		    <p class="text-right"><span class="">Grand total amount：</span><span class="span-orange span-large">USD$&nbsp;@Html.DisplayFor(m=>m.GrandTotalAmount)</span></p>
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col-md-12">
+		    <p class="text-right">
+                <input type="submit" class="btn btn-warning" value="Pay now"  />
+		    </p>
+	    </div>
+    </div>
+}else{
+        <div class="row">
+	    <div class="col-md-12">
+		    <p class="alert alert-danger">
+                Can't buy the product.
+		    </p>
+	    </div>
+    </div>
+    }
+}

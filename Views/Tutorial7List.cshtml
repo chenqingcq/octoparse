@@ -1,0 +1,417 @@
+﻿@inherits UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+int tutorial7Id = 5985;// Tutorial v7 Id
+string category = Request.QueryString["category"];
+if (!string.IsNullOrWhiteSpace(category) && !"octoparse-introductory-lessons".Equals(category))
+{
+category = category.Replace('-', ' ').ToFirstUpper();
+}
+if (!string.IsNullOrWhiteSpace(category))
+{
+ViewBag.PageTitle = category;
+}
+
+var homePage = CurrentPage.AncestorsOrSelf(1).First();
+var newsOverview = homePage.tutorial7Overviews.First();
+
+int pageIndex = 0, pageSize = 10, total = 0;
+int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+if (pageIndex == 0)
+{
+pageIndex = 1;
+}
+
+var baseUrl = Request.Url.AbsolutePath;
+var learnCategory = CurrentPage.Name;
+
+var newsItems = newsOverview.tutorialItemV7s.Where("learnCategory=@0", learnCategory);
+var topBool = pageIndex == 1 && string.IsNullOrWhiteSpace(category);
+var topItems = newsItems.Where("onTop && " + topBool.ToString().ToUpper()).Take(3).OrderBy("updateDate desc");
+var currentCategoryUrl = baseUrl;
+if (!string.IsNullOrWhiteSpace(category))
+{
+currentCategoryUrl = baseUrl + "?category=" + category;
+newsItems = newsItems.Where("category==@0", category);
+}
+
+total = newsItems != null ? newsItems.Count() : 0;
+
+if (total > 0)
+{
+newsItems = newsItems.OrderBy("updateDate desc").Skip((pageIndex - 1) * pageSize).Take(pageSize);
+}
+
+var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+{
+Total = total,
+PageSize = pageSize,
+PageIndex = pageIndex,
+BaseUrl = currentCategoryUrl
+};
+}
+
+@section styles{
+<link rel="stylesheet" href="/css/tutorial.css">
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: #f7f8fa;
+    }
+
+    .tut-header {
+        background: #2095f2;
+        width: 100%;
+        height: 160px;
+        padding-top: 20px;
+        box-sizing: border-box;
+    }
+
+    .tut-header h1 {
+        font-size: 32px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 40px;
+        margin:0;
+        height:unset;
+        font-family:Futura-LT-W01-Light
+    }
+
+    .tut-header a {
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #ffffff;
+        border-radius: 3px;
+        width: 220px;
+        height: 46px;
+        line-height: 46px;
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        margin-top: 32px;
+        text-decoration: none;
+        font-family:Futura-LT-W01-Light
+
+    }
+
+    .tut-bread {
+        width: 1200px;
+        margin: 10px auto -12px;
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+    }
+    .tut-bread .breadcrumb{
+        border:0;
+    }
+    .tut-bread .breadcrumb>.active{
+        color:#333
+    }
+    .tut-bread li{
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+        color: #333;
+    }
+    .tut-bread li .active{
+        cursor: default;
+    }
+    .tut-bread li a{
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+    }
+
+    .tut-bread span {
+        cursor: pointer;
+    }
+
+    .tut-bread .part2 {
+        color: #333;
+        cursor: default;
+    }
+
+    .tut-content {
+        width: 1170px;
+        margin: 0 auto 45px;
+    }
+
+    .tut-content:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+    }
+    .tut-content .right {
+        width: 850px;
+        float: right;
+    }
+
+    .tut-content .right .lesson {
+        list-style: none;
+    }
+
+    .tut-content .right .lesson li {
+        background: #ffffff;
+        width: 850px;
+        height: 72px;
+        margin-bottom: 10px;
+        text-indent: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .tut-content .right .lesson li a {
+        font-size: 20px;
+        color: #333333;
+        line-height: 72px;
+        text-decoration: none;
+    }
+
+    .page {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .page .pre {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 118px;
+        height: 38px;
+        float: left;
+        line-height: 38px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .next {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 118px;
+        height: 38px;
+        float: right;
+        line-height: 38px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .pages {
+        float: left;
+        width: 610px;
+        height: 40px;
+    }
+
+    .page .pages ul {
+        list-style: none;
+        text-align: center;
+    }
+
+    .page .pages li {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 38px;
+        height: 38px;
+        display: inline-block;
+        line-height: 38px;
+        text-align: center;
+        margin-right: 20px;
+        cursor: pointer;
+        color: #333333;
+    }
+
+    .page .pages a {
+        line-height: 38px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #333333;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .page .pages li.disabled {
+        color: #2095f2;
+        cursor: default;
+    }
+
+    .page .pages li.dot {
+        cursor: default;
+    }
+
+    .popular {
+        width: 100%;
+        height: 236px;
+        background-image: url("@Url.Content("~/images/bg.jpg")");
+        background-image: url(/images/bg.jpg);
+        background-position: center top;
+    }
+
+    .popular .wrap {
+        width: 972px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .popular .wrap ul {
+        width: 280px;
+        height: 100%;
+        margin-right: 120px;
+        margin-left:86px;
+        list-style: none;
+        float: left;
+    }
+
+    .popular .wrap ul:last-child {
+        margin-right: 0;
+    }
+
+    .popular .wrap ul li {
+        width: 280px;
+        height: 37px;
+        line-height: 40px;
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .popular .wrap ul li a {
+        color: #337ab7;
+        font-weight: normal;
+        width: 400px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+
+    .download {
+        /*background: url("@Url.Content("~/images/morequestions.jpg")");*/
+        background: url("/images/morequestions.jpg");
+        background-position: center top;
+        width: 100%;
+        height: 160px;
+        padding-top: 18px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .download p {
+        font-size: 20px;
+        color: #2e2e2f;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a {
+        border: 2px solid #ffffff;
+        border-radius: 3px;
+        line-height: 36px;
+        margin-top: 22px;
+        text-decoration: none;
+        background: #ffffff;
+        width: 136px;
+        height: 40px;
+        display: inline-block;
+        font-size: 20px;
+        color: #fbad29;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a:last-child {
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        background: #fcba52;
+        margin-left: 40px;
+    }
+</style>
+}
+
+<div class="tut-header">
+    @if (category == null)
+    {
+    <h1 class="page-title flex flex-middle">Web Scraping Tutorials - @learnCategory</h1>
+    }
+    else
+    {
+    <h1 class="page-title flex flex-middle">Web Scraping Tutorials - @category</h1>
+    }
+    <a target="_blank" href="/download">Download Octoparse</a>
+</div>
+<div class="tut-bread">
+    @if (category == null)
+    {
+    <ol class="breadcrumb">
+        <li><a href="/tutorial-7">Tutorial</a></li>
+        <li class="active">@learnCategory</li>
+    </ol>
+    }
+    else
+    {
+    <ol class="breadcrumb">
+        <li><a href="/tutorial-7">Tutorial</a></li>
+        <li><a href="@baseUrl">@learnCategory</a></li>
+        <li class="active">@(category)</li>
+    </ol>
+    }
+    @*<span class="part1">Getting Started</span> >
+    <span class="part2">octoparse-introductory-lessons</span>*@
+</div>
+<div class="tut-content">
+    @{ Html.RenderPartial("octTutorial7Left");}
+    <div class="right">
+        <ul class="lesson">
+            @foreach (var article in newsItems)
+            {
+            var dateTime = article.UpdateDate == default(DateTime) ? article.CreateDate : article.UpdateDate;
+            var categoryURL = baseUrl + "?category=" + article.category;
+            <li><a target="_blank" href="@article.Url">@article.tutorialName</a></li>
+
+            }
+        </ul>
+        @if (total > pageSize)
+        {
+        @Html.Partial("_PagePartial", pageInfo)
+        }
+    </div>
+</div>
+<div class="popular">
+    <div class="wrap">
+        <ul>
+            <li>Related tutorials</li>
+            @foreach (var item in newsOverview.tutorialItemV7s.OrderBy("updateDate desc").Take(5))
+            {
+            <li><a target="_blank" href="@item.Url" title="@item.tutorialName">@(item.tutorialName)</a></li>
+            }
+        </ul>
+        <ul>
+            <li>Recently view tutorials</li>
+            @foreach (var item in newsOverview.tutorialItemV7s.Where("learnCategory == @0", "Case Tutorials").OrderBy("updateDate desc").Take(5))
+            {
+            <li><a target="_blank" href="@item.Url" title="@item.tutorialName">@(item.tutorialName)</a></li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="download">
+    <p>Download Octoparse to start web scraping or contact us for any<br> question about web scraping!</p>
+    <div>
+        <a target="_blank" href="/contact">Contact us</a>
+        <a target="_blank" href="/download">Download</a>
+    </div>
+</div>
+<script>
+
+</script>

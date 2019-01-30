@@ -1,0 +1,177 @@
+﻿@inherits UmbracoTemplatePage
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=1920, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale= 0, user-scalable=yes">
+    <title>@(ViewBag.PageTitle!=null?ViewBag.PageTitle+" ":"")@Umbraco.Field("title", altFieldAlias: "pageName") | @Umbraco.Field("siteName", recursive: true)</title>
+    <meta name="keywords" content="@(ViewBag.PageKeywords != null ? ViewBag.PageKeywords : Umbraco.Field("keyWords"))">
+    <meta name="description" content="@(ViewBag.Description != null ? ViewBag.Description : Umbraco.Field("description"))">
+    <link rel="shortcut icon" href="/images/logo_blue.png">
+    <link rel="apple-touch-icon" href= "/images/logo_blue.png">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/flex.css">
+    <!--[if lt IE 9]>
+    <script src="/scripts/html5shiv.min.js"></script>
+    <script src="/scripts/respond.min.js"></script>
+    <![endif]-->
+      <!-- Start of octoparse Zendesk Widget script -->
+      <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=b1cbeaf5-69a2-4e59-8f79-57a36817dd56"> </script>
+      <!-- End of octoparse Zendesk Widget script -->		
+    @RenderSection("styles", required: false)
+    <style type="text/css">
+      .chat a{opacity:0.7;}
+      .chat a:hover{opacity:1;}
+    </style>
+	</head>
+	<body>
+    @{Html.RenderPartial("octHeader"); }
+    <div class="content" style="margin-top:160px">
+      @RenderBody()
+    </div>
+    @{Html.RenderPartial("octFooter"); }
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/jquery.cookie.js"></script>
+    <script src="/scripts/app.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+      let timePoint = {
+        preheatTime: '2018-11-14 12:00',
+        firstDay: '2018-11-20 12:00',
+        activities: '2018-11-20 12:00',
+        lastDay: '2018-11-21 12:00',
+      }
+      let curHref = window.location.href;
+      let changeTimeBtn = document.querySelector('.change-banner-time');
+      if (curHref.indexOf('t.op.skieer.com') === -1) {
+        changeTimeBtn.style.display = 'none';
+      }
+      changeTimeBtn.addEventListener('click', () => {
+        let curTime = new Date(),
+            min = curTime.getMinutes(),
+            preheatTime = curTime.setMinutes(min+1),
+            firstDay = curTime.setMinutes(min+2),
+            activities = curTime.setMinutes(min+3),
+            lastDay = curTime.setMinutes(min+4),
+            preheatTimePoint = timestampToTime(preheatTime),
+            firstDayPoint = timestampToTime(firstDay),
+            activitiesPoint = timestampToTime(activities),
+            lastDayPoint = timestampToTime(lastDay);
+
+        timePoint = {
+          preheatTime: preheatTimePoint,
+          firstDay: firstDayPoint,
+          activities: activitiesPoint,
+          lastDay: lastDayPoint
+        }
+      }, false);
+
+      function timestampToTime (time) {
+        var date = new Date(time);
+        let Y = date.getFullYear() + '-',
+            M = (date.getMonth()+1 < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1) + '-',
+            D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ',
+            h = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':',
+            m = date.getMinutes() < 10 ? '0' + date.getMinutes(): date.getMinutes();
+        return Y+M+D+h+m;
+      }
+
+      if (curHref.indexOf('black-friday') > -1) {
+        changeTimeBtn.style.display = 'none';
+        let banner = document.querySelector('.top-banner'),
+            header = document.querySelector('.common-header'),
+            content = document.querySelector('.content'),
+            newFooter = document.querySelector('.newfooter'),
+            footer = document.querySelector('.footer'),
+            tool = document.querySelector('.slide-tool');
+        banner.style.display = 'none';
+        header.style.display = 'none';
+        content.style.marginTop = '0';
+        newFooter.style.display = 'none';
+        footer.style.display = 'none';
+        tool.style.display = 'none';
+        let timer = setInterval(()=>{
+          let children = document.body.children;
+          children = Array.prototype.slice.call(children);
+          children.map((child, index) => {
+            if (child.children.length && child.children[0].id === 'launcher') {
+              child.style.display = 'none';
+              clearInterval(timer);
+              return false;
+            }
+          })
+        }, 100)
+      }
+      let img = document.querySelector('.top-banner img');
+      let timer = setInterval(() => {
+        let curTime = new Date(), 
+            curTimeStamp = curTime.getTime();
+        let a = document.querySelector('.top-banner a'),
+            href = a.getAttribute('href'),
+            img = document.querySelector('.top-banner img'),
+            src = img.getAttribute('src');
+        if (curTimeStamp < getTimeStamp(timePoint.preheatTime)) {
+          if (src !== '/images/black-friday/english-1.png') {
+            img.setAttribute('src', '/images/black-friday/english-1.png');
+          }
+          if (href !== '/black-friday-2018?EB-01') {
+            a.setAttribute('href', '/black-friday-2018?EB-01');
+          }
+        } else if (curTimeStamp < getTimeStamp(timePoint.firstDay)) {
+          if (src !== '/images/black-friday/english-2.png') {
+            img.setAttribute('src', '/images/black-friday/english-2.png');
+          }
+          if (href !== '/black-friday-2018?EB-02') {
+            a.setAttribute('href', '/black-friday-2018?EB-01');
+          }
+        } else if (curTimeStamp < getTimeStamp(timePoint.activities)) {
+          if (src !== '/images/black-friday/english-3.png') {
+            img.setAttribute('src', '/images/black-friday/english-3.png');
+          }
+          if (href !== '/black-friday-2018?EB-03') {
+            a.setAttribute('href', '/black-friday-2018?EB-01');
+          }
+        } else if (curTimeStamp < getTimeStamp(timePoint.lastDay)) {
+          if (src !== '/images/black-friday/english-4.png') {
+            img.setAttribute('src', '/images/black-friday/english-4.png');
+          }
+          if (href !== '/black-friday-2018?EB-04') {
+            a.setAttribute('href', '/black-friday-2018?EB-01');
+          }
+        } else {
+          let banner = document.querySelector('.top-banner');
+          let header = document.querySelector('.common-header');
+          let content = document.querySelector('.content');
+          document.body.removeChild(banner);
+          header.style.top = '0px';
+          content.style.marginTop = '80px';
+          clearTimeout(timer);
+        }
+      }, 1000);
+
+      function getTimeStamp(time) {
+        let date = new Date(time);
+        return date.getTime()
+      }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-69472089-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

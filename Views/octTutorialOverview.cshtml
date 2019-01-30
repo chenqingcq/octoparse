@@ -1,0 +1,131 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    //var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+    //    ? CurrentPage.Name
+    //    : CurrentPage.Title;
+    if(!string.IsNullOrWhiteSpace(Request.QueryString["category"]))
+    {
+        ViewBag.PageTitle=Request.QueryString["category"];
+    }
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octTutorialOverviews.First();
+
+    int pageIndex = 0,pageSize=12,total=0;
+    int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+    var baseUrl = "/Tutorial";
+    var category=Request.QueryString["category"];
+    var newsItems=newsOverview.octTutorialItems;
+    if(!string.IsNullOrWhiteSpace(category))
+    {
+        baseUrl=baseUrl+"?category="+category;  
+        newsItems = newsOverview.octTutorialItems.Where("category==@0",category.ToUpper());
+    }
+    total=newsItems!=null?newsItems.Count():0;
+    if(total>0){
+        newsItems=newsItems.OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+    }
+    var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+            {
+                Total = total,
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                BaseUrl = baseUrl
+            };
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+        
+    var topBool=pageIndex==1 && string.IsNullOrWhiteSpace(category);
+    var topItems=newsOverview.octTutorialItems.Where("onTop && "+topBool.ToString().ToUpper()).OrderBy("publishDate desc, createDate desc");
+
+}
+@section styles{
+<style type="text/css">
+            .tutorials-main .thumbnail{border: none;padding: 0;}
+            .tutorials-main .thumbnail a{color: #444;text-decoration: none;}
+            .tutorials-main .thumbnail .caption{font-weight: bold;padding:6px 0;color: #333;}
+            .video-item{list-style: none;overflow: hidden;margin: 0;padding: 0;}
+            .video-item li{width: 100%;overflow: hidden;border-bottom: 1px solid #E5E5E5;padding-bottom: 16px;padding-top: 16px;}
+            .video-item li p{font-size: 16px;color: #006F94;display: block;font-size: 16px;margin-bottom: 0px;}
+            .video-item li span{font-size: 12px;color: #A1A1A1;}
+            .pagination li{display: inline-block;margin: 0 2px;}
+            .pagination li a{color: #333;}
+            .pagination .active a,.pagination .active a:hover{background: none!important;color: #333!important;border: none;}
+            .pagination li .omit{border: none;background: none!important;color: #333!important;}
+        </style>
+}
+
+<div class="wrapbody">
+    <div class="basc-left">
+        @Html.Partial("octTutorialLeft")
+    </div>
+    <div class="basc-bodying">
+        <div class="tutorials-main">
+                <div class="row-con">
+                    @if(topBool){
+                    <div class="row">
+                        @foreach (var item in topItems)
+                                    {
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <a href="@item.Url">
+                                    <img src="@item.thumbnail"></a>
+                                <div class="caption">
+                                    <p>
+                                        <a href="@(item.Url+"?category="+item.category)">@item.tutorialName</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    }
+                    <div class="row>
+                        <div class="col-xs-12">
+                            @if(total>0){
+                            <ul class="video-item">
+                                @foreach (var item in newsItems)
+                                  {
+                                        var dateTime = item.PublishDate == default(DateTime) ? item.CreateDate : item.PublishDate;
+										<li>
+											<p>
+												<a href="@(item.Url+"?category="+item.category)">@item.tutorialName</a>
+											</p>
+											<span>@dateTime.ToString("f")</span>
+
+										</li>
+                                }
+                            </ul>
+                            }else{
+                            <span>No data found.</span>
+                            }
+                        </div>
+
+                        <div class="row>
+                            <div class="col-xs-12">
+                                @if(total>pageSize){
+                                            @Html.Partial("_PagePartial", pageInfo)
+                                        }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

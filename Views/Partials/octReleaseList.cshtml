@@ -1,0 +1,28 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+
+    var download = homePage.downloads.First();
+
+	
+    var releaseItems = download.releaseItems.OrderBy("releaseDate desc,publishDate desc, createDate desc");
+
+}
+@section styles{
+
+}
+
+
+                				<ul>
+									@foreach (var item in releaseItems)
+                        {
+
+                					<li>
+                						<span style="font-size:16px;">@item.currentVersion</span>
+                							<span style="color:#999;font-size:14px;padding-left:10px;">@item.releaseDate.ToString("f")</span>
+										<span>@item.notes</span>
+                						
+                					</li>
+						}
+                				</ul>

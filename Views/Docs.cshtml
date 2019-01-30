@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+	 var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octManualOverviews.First();
+
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    var newsItems = newsOverview.octManualItems.OrderBy("publishDate asc, createDate asc");
+}
+
+
+@section styles{
+	<style>
+		body{background: #f8f8f8;}
+		
+		.docs-body{border: 1px solid #E5E5E5;padding: 10px 36px;padding-bottom: 200px;overflow: hidden;background: #fff;min-height: 700px;margin-bottom: 100px;}
+		.docs-body>h3{font-size: 26px;color: #333;margin-top: 20px;margin-bottom: 30px;}
+		.docs-body>h4{font-size: 20px;color: #006F94;margin-bottom: 30px;margin-top: 28px;}
+		.docs-body>p{font-size: 18px;color: #555;line-height: 20px;}
+		.tutorial-nav>li.e>a{color: #333;}
+	</style>
+	
+}
+<div class="wrap-body">
+   @Html.Partial("ocTutorialTop")
+   <div class="tutorialBody">
+		<div class="container tutos-body">
+			<div class="row tutos">
+				@Html.Partial("octManualLeft")
+				<div class="col-md-9" style="padding-left: 60px;">
+					<div class="docs-body">
+						<h3>@Umbraco.Field("sectionName")</h3>
+						<p>@Umbraco.Field("bodyText")</p>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+</div>
+@section scripts{
+	<script>
+	    $(function(){
+	    	
+	    })
+	</script>
+}

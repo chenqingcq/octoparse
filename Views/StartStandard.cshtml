@@ -1,0 +1,149 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+}
+
+@section styles{
+	<style>
+		@@media (min-width: 992px){
+            .home-bodying .col-md-2 {
+                width: 12.666667%;
+            }
+        }
+
+        .title-tip{font-size: 20px;color: #333;font-weight: bold;margin-top: 20px;margin-bottom: 40px;}
+        .stand-tab{overflow: hidden;float: left;margin-left: 30px;margin-bottom: 30px;}
+        .stand-tab>a{float: left;width: 300px;height: 40px;line-height: 38px;font-size: 15px;color: #333;text-decoration: none;border: 1px solid #363636;font-weight: bold;text-align: center;}
+        .stand-tab>a.active{background: #363636;color: #fff;}
+        .stand-tab>a>span{font-size: 13px;color: #555;}
+        .stand-tab>a:first-child{border-radius: 10px 0 0 10px;}
+        .stand-tab>a:last-child{border-radius: 0 10px 10px 0;}
+		
+		.show-total{height: 55px;line-height: 55px;color: #333;font-size: 15px;border-bottom: 1px solid #e5e5e5;margin-bottom: 10px;}
+		.tatol-placing p{line-height: 24px;margin-top: 26px;}
+		.bold-f15-cf50{font-size: 15px;font-weight: bold;color: #ff5050;}
+		.p-tit{font-size: 20px;color: #999;height: 40px;line-height: 40px;border-bottom: 1px solid #bdbdbd;margin-top: 34px;margin-bottom: 30px;}
+
+		.cardform{width: 480px;}
+		.cardform>label{font-size: 15px;margin-bottom: 5px;font-weight: normal;color: #333;display: block;width: 480px;}
+		.cardform>.form-control{box-shadow: none;border-radius: 0;height: 50px;background: #F8F8F8;width: 480px;border-color: #e5e5e5;}
+	    .select-yhk{list-style: none;padding-left: 0;margin-bottom: 20px;}
+	    .select-yhk li{width: 55px;height: 34px;border: 1px solid #E5E5E5;float: left;margin-right: 10px;overflow: hidden;border-radius: 3px;cursor: pointer;}
+	    .select-yhk li>img{display: block;margin-left: -1px;margin-top: -1px;opacity: 0.6;}
+	    .select-yhk li.active{border-color: #08A9E3;}
+	    .select-yhk li.active img{opacity: 1;}
+	    .cardform>select{color: #999;}
+		
+		.dates{margin-bottom: 20px;}
+	    .dates>label>span{float: right;width: 120px;}
+	    .dates>.form-control{width: 120px;float: left;}
+	    .dates>span{float: left;height: 50px;line-height: 50px;margin: 0 10px;}
+	    .btn-submit{width: 210px;height: 36px;line-height: 32px;background: #08A9E3;color: #fff;font-size: 15px;font-weight: bold;border-radius: 36px;text-align: center;display: block;border: 1px solid #08A9E3;margin-top: 48px;margin-bottom: 200px;outline: none;}
+	    .rig-img{border-left: 1px solid #e5e5e5;height: 320px;padding-top: 100px;padding-left: 100px;}
+	    .rig-img>img{display: block;}
+	</style>
+	
+}
+<div class="wrapbody">
+    <div class="basc-left">
+       @Html.Partial("octUserMenu","subscription")
+    </div>
+    <div class="home-bodying">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+            	<div class="row">
+					<h4 class="title-tip">Start your Standard plan today</h4>
+            	</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="stand-tab">
+							<a href="javascript:;">$89.00/month</a>
+							<a class="active" href="javascript:;">$900.00/year <span>($75.00/month)</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="row tatol-placing">
+					<div class="col-md-12">
+						<div class="show-total">
+							<span class="pull-left">Standard Plan (1year)</span>
+							<span class="pull-right">$900</span>
+						</div>
+						<div class="show-total">
+							<span class="pull-left">Total billed Now</span>
+							<span class="pull-right bold-f15-cf50">$900</span>
+						</div>
+						<p>Your subscription will automatically renew annually on a recurring basic on <br> September 23,2017 <br> Don't worry,you can cancel at any time om your Subscription page</p>
+					</div>
+				</div>
+				<h3 class="p-tit">Pay with</h3>
+				<div class="row">
+					<div class="col-md-8">
+						<form role="form">
+						    <div class="form-group cardform">
+						    	<label for="cardnumber" style="font-weight: bold; margin-top: 20px;">Credit card number</label>
+						    	<input type="text" class="form-control" id="cardnumber" placeholder="">
+						    </div>
+						    <ul class="select-yhk clearfix">
+								<li class="active" data-val="1" ><img src="/images/profile/visa.png" alt=""></li>
+								<li data-val="2" ><img src="/images/profile/Mastercard.png" alt=""></li>
+								<li data-val="3" ><img src="/images/profile/AmericanExpress.png" alt=""></li>
+								<li data-val="4" ><img src="/images/profile/Discover-Card.png" alt=""></li>
+								<li data-val="5" ><img src="/images/profile/JCB.png" alt=""></li>
+								<li data-val="6" ><img src="/images/profile/Diner's-Club.png" alt=""></li>
+								<input class="yhk-val" type="hidden" val="">
+						    </ul>
+						    <div class="form-group cardform dates clearfix">
+						    	<label for="cardnumber">Expiration(MM/YY) <span>CW (?)</span></label>
+						    	<input type="text" class="form-control" id="cardnumber" placeholder="MM">
+						    	<span> / </span>
+						    	<input type="text" class="form-control" id="cardnumber" placeholder="YY">
+						    	<input type="text" class="form-control pull-right" id="cardnumber" placeholder="YY">
+						    </div>
+						    <div class="form-group cardform">
+						    	<label for="cardnumber">Country</label>
+						    	<select class="form-control" name="" id="">
+									<option value="">Choose country</option>
+						    	</select>
+						    </div>
+						    <button type="submit" class="btn-submit">Subscribe now</button>
+						</form>
+
+					</div>
+					<div class="col-md-4">
+						<div class="rig-img">
+							<img src="/images/profile/paypal.png" alt="">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>  
+    </div>
+</div>
+@section scripts{
+	<script>
+	    $(function(){
+	    	$('.select-yhk>li').on('click',function(){
+	    		$(this).addClass('active').siblings('li').removeClass('active');
+	    		$(this).siblings('input').val($(this).data('val'));
+	    	})
+
+	    	$('.stand-tab a:nth-child(1)').on('click',function(){
+	    		$(this).siblings().removeClass('active');
+	    		$(this).addClass('active');
+	    		$(".show-total .pull-right").html("$89");
+	    		$(".show-total:nth-child(1) .pull-left").html("Standard Plan (1month)");
+	    	})
+
+	    	$('.stand-tab a:nth-child(2)').on('click',function(){
+	    		$(this).siblings().removeClass('active');
+	    		$(this).addClass('active');
+	    		$(".show-total .pull-right").html("$900");
+	    		$(".show-total:nth-child(1) .pull-left").html("Standard Plan (1year)");
+	    	})
+	    })
+
+
+
+	</script>
+}

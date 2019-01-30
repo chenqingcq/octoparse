@@ -1,0 +1,188 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    if (Request.RawUrl.ToLower().Contains("tutorial-7"))
+    {
+        ViewBag.IsSeven = true;
+    }
+    else
+    {
+        ViewBag.IsSeven = false;
+    }
+}
+<style>
+    .tut-content .left {
+        width: 260px;
+        float: left;
+        margin-right: 60px;
+    }
+
+    .tut-content .left .search {
+        width: 260px;
+        height: 46px;
+        position: relative;
+        margin-bottom: 20px;
+        border:0;
+    }
+    .tut-content .left form {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+    .tut-content .left form span{
+        position: absolute;
+        right: 20px;
+    }
+
+    .tut-content .left .search input {
+        background: #ffffff;
+        border: 1px solid #e1e1e1;
+        width: 100%;
+        height: 100%;
+        padding-right: 36px;
+        text-indent: 10px;
+        box-sizing: border-box;
+    }
+
+    .tut-content .left .search img {
+        position: absolute;
+        right: 16px;
+        top: 8px;
+    }
+
+    .tut-content .left .wrap {
+        width: 260px;
+    }
+
+    .tut-content .left .wrap ul {
+        width: 260px;
+        list-style: none;
+        overflow: hidden;
+    }
+
+    .tut-content .left .wrap ul li {
+        width: 260px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #333333;
+        text-indent: 20px;
+    }
+
+    .tut-content .left .wrap ul li a {
+        cursor: pointer;
+        width: 260px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        color: #333333;
+        text-indent: 20px;
+    }
+
+    .tut-content .left .wrap ul li.topHeader {
+        color: #333333;
+        font-weight: bold;
+        position: relative;
+    }
+    .tut-content .left .wrap ul li.topHeader a{
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+    }
+
+    .tut-content .left .wrap ul li.topHeader span {
+        transform: rotate(90deg);
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: -7px;
+        font-size: 19px;
+        left: 26px;
+        cursor:pointer;
+        transform-origin: center center;
+        user-select: none;
+    }
+    .tut-content .left .wrap ul li.topHeader span:hover {
+        color:#2A96EF
+    }
+</style>
+<div class="left">
+    <div class="search">
+        <form action="/search" class="flex flex-middle">
+            <span class="fa fa-search"></span>
+            <input type="text" placeholder="Search" class="flex-one" name="query" value="@ViewBag.Query">
+            <input type="hidden" name="type" value="tutorial7">
+            <input type="hidden" name="isseven" value="true">
+        </form>
+
+    </div>
+    <div class="wrap">
+        <ul class="started">
+            <li class="topHeader"><span> > </span><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/getting-started/octoparse-introductory-lessons">Octoparse introductory lessons</a></li>
+            <li><a href="/getting-started/modes-to-scrape">Modes to scrape</a></li>
+            <li><a href="/getting-started/ways-to-getting-data">Ways to getting data</a></li>
+            <li><a href="/getting-started/download-data">Download data</a></li>
+        </ul>
+        <ul class="tasks">
+            <li class="topHeader"><span> > </span><a href="/building-tasks">Building Tasks</a></li>
+            <li><a href="/building-tasks/select-data">Select data</a></li>
+            <li><a href="/building-tasks/interact-with-webpage">Interact with webpage</a></li>
+            <li><a href="/building-tasks/customize-action">Customize action</a></li>
+            <li><a href="/building-tasks/more-techniques">More techniques</a></li>
+        </ul>
+        <ul class="case">
+            <li class="topHeader"><span> > </span><a href="/case-tutorials">Case Tutorials</a></li>
+            <li><a href="/case-tutorials/common-cases">Common cases</a></li>
+        </ul>
+        <!--<ul class="troubleshooting">-->
+            <!--<li class="topHeader"><span> > </span><a href="/troubleshooting">Troubleshooting</a></li>-->
+            <!--<li><a href="/troubleshooting/billing-and-payment">Billing and payment</a></li>-->
+            <!--<li><a href="/troubleshooting/looping-issues">Looping issues</a></li>-->
+            <!--<li><a href="/troubleshooting/pagination-issues">Pagination issues</a></li>-->
+            <!--<li><a href="/troubleshooting/missing-data">Missing data</a></li>-->
+            <!--<li><a href="/troubleshooting/download-installation-issues">Download installation issues</a></li>-->
+        <!--</ul>-->
+        <ul class="troubleshooting">
+            <li class="topHeader"><span> > </span><a href="/troubleshooting">Troubleshooting</a></li>
+            <li><a href="/troubleshooting/looping-issues">Looping issues</a></li>
+            <li><a href="/troubleshooting/pagination-issues">Pagination issues</a></li>
+            <li><a href="/troubleshooting/data-issues ">Data issues</a></li>
+            <li><a href="/troubleshooting/cloud-issues ">Cloud issues</a></li>
+            <li><a href="/troubleshooting/installation-issues">Installation issues</a></li>
+            <li><a href="/troubleshooting/account-issues">Account issues</a></li>
+            <li><a href="/troubleshooting/basic-inquiries">Basic inquiries</a></li>
+            <li><a href="/troubleshooting/billing-and-payment ">Billing and payment</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+        var bread2 = document.querySelector('.breadcrumb li:nth-child(2)') ? document.querySelector('.breadcrumb li:nth-child(2)').innerText : '';
+        var bread3 = document.querySelector('.breadcrumb li:nth-child(3)') ? document.querySelector('.breadcrumb li:nth-child(3)').innerText : '';
+        var list = document.querySelectorAll('.left .wrap ul li a');
+        var format = function (val) {
+            return val.replace(/-/g, ' ').toLowerCase()
+        }
+        for (let i = 0; i <= list.length; i++) {
+            if (bread2 && list[i] && format(list[i].innerText) === format(bread2)) {
+                list[i].style.color = '#2A96EF'
+            } else if (bread3 && list[i] && format(list[i].innerText) === format(bread3)) {
+                list[i].style.color = '#2A96EF'
+            }
+        }
+        document.querySelectorAll('.left .wrap ul .topHeader span').forEach(function(e){
+            e.onclick = function(){
+                if(e.parentNode.parentNode.style.height !=='40px') {
+                    e.parentNode.parentNode.style.height = '40px';
+                    e.style.transform = 'rotate(-90deg)';
+                    e.style.top = '46px';
+                    e.style.left = '-14px';
+                } else {
+                    e.parentNode.parentNode.style.height = 'unset';
+                    e.style.transform = 'rotate(90deg)';
+                    e.style.top = '-5px';
+                    e.style.left = '26px';
+                }
+            }
+        })
+</script>

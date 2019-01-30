@@ -1,0 +1,46 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "Partials/_Layout.cshtml";
+    Dictionary<string, string> metas = new Dictionary<string, string>();
+    string keywords="";
+    string description="";
+    string title = "";
+    string siteName = "";
+    var fieldKeywords = Umbraco.Field("keyWords");
+    if (fieldKeywords != null)
+    {
+        keywords = fieldKeywords.ToString();
+    }
+    var fieldDescription = Umbraco.Field("description");
+    if (fieldDescription != null)
+    {
+        description = fieldDescription.ToString();
+    }
+    var fieldTitle = Umbraco.Field("title", altFieldAlias: "pageName");
+    if (fieldTitle != null)
+    {
+        title = fieldTitle.ToString();
+    }
+    var fieldSiteName = Umbraco.Field("siteName", recursive: true);
+    if (fieldSiteName != null)
+    {
+        siteName = fieldSiteName.ToString();
+    }
+
+    metas["PageTitle"] = (ViewBag.PageTitle != null ? ViewBag.PageTitle + " " : "") + title + " | " + siteName;
+    metas["PageKeywords"] = ViewBag.PageKeywords != null ? ViewBag.PageKeywords : keywords;
+    metas["PageDescription"] = ViewBag.Description != null ? ViewBag.Description : description;
+    ViewBag.ContentName = Model.Content.Name;
+}
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+@section metas{
+    @Html.Partial("_PageMeta", metas)
+}
+
+@RenderBody()
+@section scripts{
+    @RenderSection("scripts", required: false)
+}

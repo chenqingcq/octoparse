@@ -1,0 +1,21 @@
+2018-10-31 18:26:20,757 [1] INFO  SkieerWeb - RefundJob starting.
+2018-10-31 18:26:20,803 [12] INFO  SkieerWeb - RefundJob checking.
+2018-10-31 18:26:20,819 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-10-31 18:26:20,819 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-10-31 18:26:27,585 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/10/31 10:26:17] | Kind: subscription_charged_successfully
+2018-10-31 18:26:49,397 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:8c4e7328-41f4-4dd9-afc2-926f0dc311c7
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-10-31 18:26:54,350 [11] ERROR SkieerWeb - ShareService:SendMailForRenewSuccessAsync,ExceptionMessage未将对象引用设置到对象的实例。
+2018-10-31 19:26:52,272 [1] INFO  SkieerWeb - RefundJob starting.
+2018-10-31 19:26:52,303 [12] INFO  SkieerWeb - RefundJob checking.
+2018-10-31 19:26:52,303 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-10-31 19:26:52,303 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-10-31 19:26:58,382 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/10/31 10:26:17] | Kind: subscription_charged_successfully
+2018-10-31 19:26:58,694 [11] INFO  SkieerWeb - duplicate order, braintree returned transactionId:4dx7newt,tradeId:cb67ba2a-c196-48f6-b3d6-3db6a072f0cd.existing transactionId:4dx7newt

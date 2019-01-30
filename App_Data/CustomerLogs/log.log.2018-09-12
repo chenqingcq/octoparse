@@ -1,0 +1,135 @@
+2018-09-12 03:35:20,078 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 03:35:20,078 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 03:35:20,078 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 03:35:20,078 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 03:38:09,906 [21] ERROR SkieerWeb - user login error
+System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.0.103:8016/SkieerMembershipService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8016
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Octoparse.Web.SkieerMembershipService.ISkieerMembershipService.ValidateUser(String username, String password)
+   at Octoparse.Web.Controllers.AccountController.SignIn(LoginModel model, String returnUrl)
+2018-09-12 03:41:03,109 [26] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 03:41:03,109 [15] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 03:41:03,109 [15] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 03:41:03,109 [15] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 04:22:18,562 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 04:22:18,562 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 04:22:18,562 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 04:22:18,562 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 06:25:59,828 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 06:25:59,828 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 06:25:59,828 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 06:25:59,828 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 07:15:39,250 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 07:15:39,265 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 07:15:39,265 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 07:15:39,265 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 08:08:43,203 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 08:08:43,203 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 08:08:43,218 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 08:08:43,218 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 08:09:12,187 [18] ERROR SkieerWeb - user login error
+System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.0.103:8026/SkieerMembershipService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.0.103:8026
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Octoparse.Web.SkieerMembershipService.ISkieerMembershipService.ValidateUser(String username, String password)
+   at Octoparse.Web.Controllers.AccountController.SignIn(LoginModel model, String returnUrl)
+2018-09-12 08:14:25,750 [37] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 08:14:25,750 [41] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 08:14:25,750 [41] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 08:14:25,750 [41] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 10:01:41,421 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 10:01:41,437 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 10:01:41,437 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 10:01:41,437 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 10:02:03,765 [17] INFO  SkieerWeb - Not found braintree customer.CustomerId:27527515
+2018-09-12 10:04:25,546 [9] INFO  SkieerWeb - Not found braintree customer.CustomerId:27527515
+2018-09-12 10:04:31,984 [9] INFO  SkieerWeb - One-time Transaction Id:01yd3c4h, Status:submitted_for_settlement
+2018-09-12 10:08:24,734 [5] INFO  SkieerWeb - One-time Transaction Id:2c5rawdh, Status:submitted_for_settlement
+2018-09-12 10:36:30,656 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 10:36:30,671 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 10:36:30,671 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 10:36:30,671 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 10:36:33,171 [10] INFO  SkieerWeb - [Braintree Webhook Received 2018/9/12 10:36:35] | Kind: subscription_charged_successfully
+2018-09-12 10:36:33,484 [10] INFO  SkieerWeb - [WebhookNotification]Subscription not found.SubscriptionId:351bd1b1-7dc5-451a-a9d6-e6312eddfe75,Kind:subscription_charged_successfully
+2018-09-12 12:09:16,703 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 12:09:16,718 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 12:09:16,718 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 12:09:16,718 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 12:11:52,953 [13] INFO  SkieerWeb - One-time Transaction Id:5m5m58g1, Status:submitted_for_settlement
+2018-09-12 12:13:49,281 [23] ERROR SkieerWeb - get customer error.user id:2de50013-5eef-4211-a51b-f22aa58d5824,customer id:
+System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 http://192.168.0.103:8017/ChargeService。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 远程服务器返回错误: (404) 未找到。
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpChannelUtilities.ProcessGetResponseWebException(WebException webException, HttpWebRequest request, HttpAbortReason abortReason)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 Octoparse.Web.SkieerBillingService.ICharging.GetBraintreeCustomerByUserId(String userId)
+   在 Octoparse.Web.Controllers.SubscribeController.GetPaymentMethod(String userId)
+2018-09-12 12:14:13,296 [17] INFO  SkieerWeb - One-time Transaction Id:nzc8p9dt, Status:submitted_for_settlement
+2018-09-12 15:26:42,921 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 15:26:42,921 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 15:26:42,921 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 15:26:42,937 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 18:04:21,593 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 18:04:21,593 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 18:04:21,609 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 18:04:21,609 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 18:56:58,984 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 18:56:59,000 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 18:56:59,000 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 18:56:59,000 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 20:55:10,656 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 20:55:10,671 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 20:55:10,671 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 20:55:10,671 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-09-12 23:29:54,781 [1] INFO  SkieerWeb - RefundJob starting.
+2018-09-12 23:29:54,781 [12] INFO  SkieerWeb - RefundJob checking.
+2018-09-12 23:29:54,796 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-09-12 23:29:54,796 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.

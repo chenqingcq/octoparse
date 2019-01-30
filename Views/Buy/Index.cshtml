@@ -1,0 +1,95 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.BuyModel
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+}
+@section styles{
+    <style>
+        .content-esp .form-control{
+            width: 300px;
+            display: inline-block;
+        }
+        .co-item .coi-content{
+            padding: 12px 20px;
+        }
+        .co-item .coi-content span{
+            margin-bottom: 0;
+        }
+        .coi-content .item-name{
+            display: inline-block!important;
+            width: 70px;
+            text-align: right;
+            margin-right: 5px;
+        }
+    </style>
+}
+
+<div class="container" style="padding-top: 84px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="ro-title">Confirm Order</h3>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-xs-4" style="padding-right: 0;">
+            <div class="st-jdt st-jdt-active st-jdt-bg1">
+                <span>Review Order</span>
+            </div>
+        </div>
+        <div class="col-xs-4" style="padding: 0;">
+            <div class="st-jdt st-jdt-bg2">
+                <span>Pay</span>
+            </div>
+        </div>
+        <div class="col-xs-4" style="padding-left: 0;">
+            <div class="st-jdt ">
+                <span>Payment Confirmation</span>
+            </div>
+        </div>
+    </div>
+
+            <form action="/crawler/buy" enctype="multipart/form-data" method="post" id="buyForm">
+                <div class="row" style="margin-bottom: 60px;">
+                    <div class="col-xs-12">
+                        <div class="co-item">
+                            <div class="coi-title">
+                                <span>Purchase @Model.ProductName</span>
+                            </div>
+                            <div class="coi-content">
+                                <span><span class="item-name">Unit Price:</span> $@Model.UnitPrice</span>
+                            </div>
+                            <div class="coi-content content-esp">
+                                <span><span class="item-name">Quantity:</span> @Html.DropDownListFor(m => m.Qty, ViewBag.QtyList as List<SelectListItem>, new { @style = "height:100%;border-radius:0;", @class = "form-control", @id = "qty",@name="qty" })</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-xs-12" style="text-align: center;">
+                        <span style="display: inline-block;">Total Amount:<em id="totalAmount" style="color: #036C94; font-size: 26px; margin: 0 6px; font-style: normal;">$@(Model.TotalPrice)</em></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 200px;">
+                    <div class="col-xs-12" style="text-align: center;">
+                        <button type="submit" style="width: 200px; background: #08A9E3; color: #fff; padding: 10px 0; font-size: 14px;" class="btn">Buy</button></div>
+                </div>
+            </form>
+        
+
+
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+            var unitPrice=@Model.UnitPrice;
+            $("#qty").on("change", function () {
+                var qty=parseInt($(this).val());
+                $("#totalAmount").text("$"+qty*unitPrice);    
+            });
+        });
+    </script>
+}

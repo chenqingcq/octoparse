@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+}<?xml version='1.0' encoding='UTF-8' ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    @foreach (var item in Umbraco.ContentAtRoot().First().Descendants())
+    {
+        if (!string.IsNullOrWhiteSpace(item.Url) || item.Url.Contains("/index"))
+        {
+            if (item.Url.Contains("doc-wf"))
+            {
+                @*<url>
+                    <loc>
+                        @(string.Format("http://{0}{1}", Request.ServerVariables["HTTP_HOST"], "/tutorial/xsksrm"))
+                    </loc>
+                    <lastmod>
+                        @item.UpdateDate.ToString("yyyy-MM-dd")
+                    </lastmod>
+                </url>*@
+            }
+            else
+            {
+                <url>
+                    <loc>
+                        @(string.Format("http://{0}{1}", Request.ServerVariables["HTTP_HOST"], item.Url))
+                    </loc>
+                    <lastmod>
+                        @item.CreateDate.ToString("yyyy-MM-dd")
+                    </lastmod>
+                </url>
+            }
+        }
+    }
+
+</urlset>

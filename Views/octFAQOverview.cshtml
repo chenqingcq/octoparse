@@ -1,0 +1,92 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    var faqOverview = homePage.octFaqOverviews.First();
+
+    int pageIndex = 0,pageSize=12,total=0;
+    int.TryParse(Request.QueryString["pageindex"], out pageIndex);
+    string faqCategory=Request.QueryString["faqcategory"];
+	if(string.IsNullOrEmpty(faqCategory)){
+		faqCategory="All";
+	}
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+    total=faqOverview.octFAQItems.Count();
+    var pageInfo = new Octoparse.Web.Models.PageInfoModel()
+            {
+                Total = total,
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                BaseUrl = "/faq"
+            };
+    var faqItems=faqOverview.octFAQItems;
+    if(string.IsNullOrWhiteSpace(faqCategory)||"All"==faqCategory){
+        faqItems = faqItems.OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+    }else{
+        faqItems = faqItems.Where("faqCategory==@0",faqCategory).OrderBy("publishDate desc, createDate desc").Skip((pageIndex-1)*pageSize).Take(pageSize);
+        pageInfo.Total=faqItems.Count();
+    }
+    //Get FaqCategory
+    string url="/faq?pageindex="+pageIndex.ToString()+"&faqcategory=";
+	
+	ViewBag.Url=url;
+	ViewBag.FaqCategory=faqCategory;
+}
+
+@section styles{
+	<link rel="stylesheet" href="/css/tutorial.css">
+}
+
+@if (faqCategory == "All")
+{
+  <h1 class="page-title flex flex-middle">FAQ</h1>
+}
+else
+{
+  <h1 class="page-title flex flex-middle">FAQ&nbsp;(@faqCategory)</h1>
+}
+
+<div class="container">
+  @{
+    if (faqCategory != "All")
+    {
+      <ol class="breadcrumb">
+        <li><a href="/faq">FAQ</a></li>
+		<li class="active">@faqCategory</li>
+      </ol>
+    }
+  }
+
+  @if (total > 0)
+  {
+    <section class="article-list">
+      @foreach (var question in faqItems)
+      {
+        <article>
+          <header>
+            <a href="@question.Url">@question.faqTitle</a>
+          </header>
+          <ul class="category-list flex">
+            <li class="flex flex-middle"><a href="/faq?faqcategory=@question.faqCategory">@question.faqCategory</a></li>
+          </ul>
+        </article>
+      }
+    </section>
+
+    if(total > pageSize)
+    {
+      @Html.Partial("_PagePartial", pageInfo)
+    }
+  }
+  else
+  {
+    <p class="no-data-tips"><span class="fa fa-frown-o"></span>&nbsp;no data found.</p>
+  }
+</div>

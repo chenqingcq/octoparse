@@ -1,0 +1,157 @@
+﻿@using Octoparse.Web;
+@model Octoparse.Web.Models.Common.ClientUninstQuesModel
+@{    Layout = null; }
+<!DOCTYPE html>
+<html data-embedded="">
+
+<head>
+    <meta charset="utf-8">
+    <title> @Model.AppName Uninstallation Questionnaire</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content='Octoparse Uninstallation Questionnaire'>
+    <script type="text/javascript">
+        function checkInput(event) {
+            var eles = document.getElementsByName('UninstallReasons');
+            for (var i = 0; i < eles.length; i++) {
+                if (eles[i].checked == true) {
+                    if (eles[eles.length - 1].checked == true) {
+                        if (!document.getElementById('TextArea_otherReason').value) {
+                            document.getElementById('otherError').style.display = '';
+                            event.preventDefault();
+                            return false;
+                        }
+                        else {
+                            document.getElementById('otherError').style.display = 'none';
+                        }
+                    }
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('completedQues').style.display = '';
+                    return true;
+                }
+            }
+            return false;
+        }
+    </script>
+    <style type="text/css">
+        .btn-blue {
+            -webkit-appearance: button;
+            cursor: pointer;
+            background: #006DCC;
+            border-color: #006DCC;
+            color: #fff !important;
+            text-shadow: none !important;
+            display: inline-block;
+            padding: 5px 12px;
+            margin-bottom: 0;
+            font-family: "Helvetica Neue",Helvetica,Tahoma,Arial,'Microsoft Yahei','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.53846154;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            user-select: none;
+            transition: all .4s cubic-bezier(.175,.885,.32,1);
+            margin: 0;
+            box-sizing: border-box;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+
+<body class="entry-container" style="background: #DCD9D0;font-family:微软雅黑">
+    <div id="mainContent">
+        <div style="margin-top: 57px; background-color: rgba(255, 255, 255, 0.8); max-width: 700px; border-width: 0; border-color: rgb(106, 106, 106); box-shadow: 0 3px 5px rgba(0,0,0,0.15); border-style: solid; margin-left: auto; margin-right: auto;">
+            <div style="height: 35px; background-color: #6A6A6A; max-width: 700px; margin-left: auto; margin-right: auto;"></div>
+            <div style="padding: 20px;">
+                <div>
+                    <div class="banner font-family-inherit">
+                        <div class="banner-text"></div>
+                    </div>
+                    @if (!Model.FinishedQuestionnaire)
+                    {
+                        using (Html.BeginForm("Index", "ClientUninstQues/Index", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "checkInput(event)" }))
+                        {
+                            <h2> Help us serve you better!</h2>
+                            <p>
+                                <span>We value any feedback from you to help us improve our service and product.</span>
+                            </p>
+                            <hr />
+                            <p>
+                                <b>
+                                    How did you intend to use Octoparse when you installed it?
+                                </b>
+                            </p>
+                            <div>
+                                <p>
+                                    <input id="Radio2" name="HowStart" type="radio" value="1" /> To use in addition to another web scraper
+                                </p>
+                                <p>
+                                    <input id="Radio3" name="HowStart" type="radio" value="2" /> I need data, just wanted to try it out
+                                </p>
+                                <p>
+                                    <input id="Radio4" name="HowStart" type="radio" value="3" /> Wanted to learn about web scraping
+                                </p>
+                                <p>
+                                    <input id="Radio5" name="HowStart" type="radio" value="4" /> To fully replace my previous scraper
+                                </p>
+                                <p>
+                                    <input id="Radio1" name="HowStart" type="radio" value="0" checked='checked' /> None of the above
+                                </p>
+                            </div>
+                            <p>
+                                <b>
+                                    Why did you uninstall Octoparse? (Check all that apply)
+                                </b>
+                            </p>
+                            <div>
+                                <p>
+                                    <input id="checkbox17" name="UninstallReasons" type="checkbox" value="1" /> Too many crashes
+                                </p>
+                                <p>
+                                    <input id="checkbox11" name="UninstallReasons" type="checkbox" value="2" /> Too slow
+                                </p>
+                                <p>
+                                    <input id="checkbox12" name="UninstallReasons" type="checkbox" value="3" /> I want to re-install the app or install other versions.
+                                </p>
+                                <p>
+                                    <input id="checkbox13" name="UninstallReasons" type="checkbox" value="4" /> Hard to use/confusing
+                                </p>
+                                <p>
+                                    <input id="checkbox14" name="UninstallReasons" type="checkbox" value="5" /> I don't like the new UI
+                                </p>
+                                <p>
+                                    <input id="checkbox15" name="UninstallReasons" type="checkbox" value="6" /> Got what I need and does not need to scrape more data
+                                </p>
+                                <p>
+                                    <input id="checkbox16" name="UninstallReasons" type="checkbox" value="7" /> Prefer data service over a tool
+                                </p>
+                                <p>
+                                    <input id="checkbox10" name="UninstallReasons" type="checkbox" value="0" checked='checked' /> Other
+                                </p>
+                                <span style="color:red;display:none" id="otherError">Please give a specific reason.</span>
+                                <textarea id="TextArea_otherReason" name="Comment" style="font-family:微软雅黑" rows="5" cols="85"></textarea>
+                            </div>
+                            <hr />
+                            <input id="Hidden1" name="AppName" type="hidden" value="@Model.AppName" />
+                            <input id="Hidden2" name="MacAddress" type="hidden" value="@Model.MacAddress" />
+                            <input id="SubmitButton" type="submit" class="btn btn-blue btn-submit" Width="110" value="Submit" />
+
+                        }
+                    }
+                    @if (Model.FinishedQuestionnaire)
+                    {
+                        <div id="completedQues">
+                            <center>Thank you! We have received your feedback.</center>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

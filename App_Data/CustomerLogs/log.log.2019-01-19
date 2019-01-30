@@ -1,0 +1,22 @@
+2019-01-19 17:10:55,234 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-19 17:10:55,234 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-19 17:10:55,234 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-19 17:10:55,234 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-19 18:39:18,160 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-19 18:39:18,175 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-19 18:39:18,175 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-19 18:39:18,175 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-19 18:39:20,597 [12] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/19 10:38:30] | Kind: subscription_charged_successfully
+2019-01-19 18:39:41,785 [12] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:6961a10f-46fc-4552-a4da-9164eb178c81
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2019-01-19 19:20:20,364 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-19 19:20:20,379 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-19 19:20:20,379 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-19 19:20:20,379 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.

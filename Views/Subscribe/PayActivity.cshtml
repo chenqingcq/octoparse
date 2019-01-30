@@ -1,0 +1,522 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@using Octoparse.Web.Models;
+@model SubscriptionModel
+@{
+    Layout = "~/Views/octAccountLayout.cshtml";
+    ViewBag.Title = "Subscribe for Activity";
+    var prepare = ViewBag.PrepareInfo == null ? new SubscriptionPrepareModel() : (SubscriptionPrepareModel)ViewBag.PrepareInfo;
+    var activityInfo = ViewBag.ActivityInfo == null ? new ActivityInfoModel() : (ActivityInfoModel)ViewBag.ActivityInfo;
+}
+
+@section styles {
+  <link rel="stylesheet" href="/css/flex.css">
+  <link rel="stylesheet" href="/css/account/index.css">
+  <style>
+    .content {flex-direction: column}
+    .custom-panel {}
+    .custom-panel h1 {font-weight: bold;font-size: 24px;height: 60px;display: flex;align-items: center;padding-left: 20px;border-bottom: solid 1px #d8d8d8;}
+    .custom-panel .main-content {padding-right: 10px;}
+    .custom-panel .tips {}
+    .custom-panel .item-group {font-size: 20px;height: 50px;}
+    .custom-panel .item-group > .item-text {padding: 0 30px;align-items: center;}
+    .custom-panel .item-group > .price {width: 80px;align-items: center;}
+    .custom-panel .item-group.item-order-tips {height: auto;padding: 0 30px;font-size: 14px;}
+
+    .select-plan-panel {margin-bottom: 40px;}
+    .select-plan-panel .item-plan {margin: 30px 0;}
+    .select-plan-panel .item-plan a {margin: 0;align-items: center;justify-content: center;color:inherit;text-decoration: none;}
+    .select-plan-panel .radio {align-items: center;}
+    .select-plan-panel .item-plan .fa {font-size: 26px;margin-right: 10px;}
+    .select-plan-panel .item-plan .fa.fa-check-circle {color: #E00054}
+    .select-plan-panel .item-plan .fa.fa-circle-o {color: #666}
+
+    .select-plan-panel .item-selected {}
+    .select-plan-panel .item-selected .price {}
+    .select-plan-panel .item-coupon {}
+    .select-plan-panel .item-coupon .price {color: #0093ff;}
+    .select-plan-panel hr {margin: 0 30px;}
+    .select-plan-panel .item-total {}
+    .select-plan-panel .item-total .price {color: #F16876}
+    .select-plan-panel .tips {width: 190px;background-color: #eaf7ff;}
+    .select-plan-panel .tips svg {stroke-width: 0px;width: 100%;height: 100%;position: absolute;top: 0;right: 0;bottom: 0;left: 0;margin: auto;fill: #5EABEE;fill-opacity: 1;stroke: rgba(0, 0, 0, 1);}
+
+    .payment-method-panel {}
+    .payment-method-panel .alert {margin: 20px 0 0 0;}
+    .payment-method-panel .main-content {}
+    .payment-method-panel .main-content > div {padding: 0 30px;}
+    .payment-method-panel .payment-info-wrap {margin: 20px 0;}
+    .payment-method-panel .label-credit-card-no {font-size: 20px;font-weight: normal;margin-top: 20px;}
+    .payment-method-panel .input-credit-card-no {width: 100%;}
+    .payment-method-panel ul {margin: 20px 0;padding: 0;width: 440px;justify-content: space-between;}
+    .payment-method-panel li {list-style: none;}
+    .payment-method-panel li img {border: solid 1px #ccc; border-radius: 6px;}
+    .payment-method-panel li:not(.selected) img {filter: grayscale(1);}
+    .payment-method-panel li.selected img {border-color: #333;}
+    .payment-method-panel .other-info-wrap {font-size: 20px;justify-content: space-between;}
+    .payment-method-panel .other-info-wrap > div {}
+    .payment-method-panel .other-info-wrap .cvv-wrap {width: 100px;margin-right: 30px;}
+    .payment-method-panel .other-info-wrap label {font-weight: normal;}
+    .payment-method-panel .btn-submit-wrap {margin: 20px 0;}
+    .payment-method-panel .btn-submit-wrap button {width: 120px;height: 40px;font-size: 18px;}
+    .payment-method-panel .btn-submit-wrap .security-tips {align-items: center;margin-left: 20px;color: #44c11c;}
+    .payment-method-panel .btn-submit-wrap .security-tips .fa {margin-right: 6px;}
+    .payment-method-panel .terms-wrap {background-color: #eee;padding: 20px 30px !important;font-size: 16px;}
+    .payment-method-panel .terms-wrap p {margin: 0;padding: 0;font-size: 14px;}
+    .payment-method-panel .tips {width: 300px;border-left: solid 1px #d8d8d8;}
+    .payment-method-panel .tips p {text-align: center;margin: 0px 20px 10px 20px;}
+    #btn-paypal:disabled {cursor: not-allowed;}
+  </style>
+  <style>
+    #payment-successful { text-align: center; }
+    #payment-successful img {margin-top: 50px;}
+    #payment-successful h1 {margin: 40px 0;}
+    #payment-successful p {width: 700px;font-size: 22px;}
+    #payment-successful .btn-regular {width: 170px;height: 40px;font-size: 20px;}
+  </style>
+}
+
+<div class="wrapper flex">
+  <div class="flex flex-one">
+    @if (ViewBag.IsNotAvalible == "1")
+    {
+        <div class="flex flex-one flex-column flex-middle" id="payment-successful">
+            <h1>Message</h1>
+            <p>The existing account couldn't be upgraded to this plan. Please choose a higher plan. If you have any question, please contact our support team via support@octoparse.com.</p>
+            <a class="btn-regular" href="/profile">User Center</a>
+        </div>
+    }
+    else if (ViewBag.IsSuccess != null && ViewBag.IsSuccess)
+    {
+      <div class="flex flex-one flex-column flex-middle" id="payment-successful">
+        <img src="/images/payment-successful.png" width="222" height="169" alt="payment-successful.png">
+        <h1>Payment Successful</h1>
+         <p>Thank you for your payment. You've upgraded to Octoparse premium! Go to your user center to check the transaction details.</p>
+          
+        <a class="btn-regular" href="/profile">User Center</a>
+        </div>
+    }
+    else
+    {
+        var planPrice = Convert.ToInt32(prepare.PeriodType.Equals("month") ? prepare.MonthlyPrice : prepare.PeriodType.Equals("year") ? prepare.YearlyPrice : prepare.QuarterlyPrice);
+        var upgradeDiscountAmount = prepare.ChangingPlan.NowBillingAmount > 0 && planPrice > prepare.ChangingPlan.NowBillingAmount ? planPrice - prepare.ChangingPlan.NowBillingAmount : 0;
+        var couponAmount = prepare.AvailableCoupon != null ? prepare.AvailableCoupon.DiscountAmount : 0;
+      @Html.Partial("octUserMenu", "Subscription")
+      <div class="content flex flex-one">
+        <div class="custom-panel select-plan-panel flex">
+          <div class="main-content flex-one">
+            <h1 class="panel-title">Octoparse @prepare.AccountName Plan</h1>
+            <div class="item-group item-plan flex">
+            <a
+            @(activityInfo.IsAvailableMonth?"href=/Subscribe/PayActivity?plan="+(prepare.MonthlyPlanType == (int)PlanType.BasicMonthly ? "bsc-mo" : (prepare.MonthlyPlanType == (int)PlanType.StandardMonthly ? "std-mo" : "pro-mo")):"disabled=disabled")
+            class="flex @(prepare.MonthlyPlanType != (int)PlanType.BasicMonthly ? "flex-one" : "") @(activityInfo.IsAvailableMonth?" radio-plan":"")"
+            data-plantype="@((int)prepare.MonthlyPlanType)"
+            data-name="@prepare.AccountName"
+            data-period="month"
+            data-price="@(prepare.MonthlyPrice)"
+            @(prepare.MonthlyPlanType != (int)PlanType.BasicMonthly ? "" : " style=width:33%; ")>
+            <span class="radio flex">
+                @if (prepare.PeriodType.Equals("month"))
+                { <span class="fa fa-check-circle"></span> }
+                else
+                { <span class="fa fa-circle-o"></span> }
+                <span>Billed monthly ($@(Convert.ToInt32(activityInfo.MonthlyPrice)))</span>
+            </span>
+            </a>
+
+          @if (prepare.MonthlyPlanType != (int)PlanType.BasicMonthly)
+          {
+                <a 
+                   @(activityInfo.IsAvailableQuarter?"href=/Subscribe/PayActivity?plan="+(prepare.QuarterlyPlanType == (int)PlanType.StandardQuarterly ? "std-qt" : "pro-qt"):"disabled=disabled")
+                   class="flex flex-one @(activityInfo.IsAvailableQuarter?"radio-plan":"")"
+                   data-plantype="@((int)prepare.QuarterlyPlanType)"
+                   data-name="@prepare.AccountName"
+                   data-period="year"
+                   data-price="@(prepare.QuarterlyPrice)"
+                   style="width:33%; "
+                   >
+                    <span class="radio flex">
+                        @if (prepare.PeriodType.Equals("quarter"))
+                        { <span class="fa fa-check-circle"></span> }
+                        else
+                        { <span class="fa fa-circle-o"></span> }
+                        <span>Billed quarterly ($@(Convert.ToInt32(activityInfo.QuarterlyPrice)))</span>
+                    </span>
+                </a>
+
+
+                <a 
+                   @(activityInfo.IsAvailableYear?"href=/Subscribe/PayActivity?plan="+(prepare.YearlyPlanType == (int)PlanType.StandardYearly ? "std-yr" : "pro-yr"):"disabled=disabled")
+                   class="flex flex-one @(activityInfo.IsAvailableYear?"radio-plan":"")"
+                   data-plantype="@((int)prepare.YearlyPlanType)"
+                   data-name="@prepare.AccountName"
+                   data-period="year"
+                   data-price="@(prepare.YearlyPrice)"
+                   style="width:33%; ">
+                    <span class="radio flex">
+                        @if (prepare.PeriodType.Equals("year"))
+                        { <span class="fa fa-check-circle"></span> }
+                        else
+                        { <span class="fa fa-circle-o"></span> }
+                        <span>Billed yearly ($@(Convert.ToInt32(activityInfo.YearlyPrice)))</span>
+                    </span>
+                </a>
+
+                }
+            
+            </div>
+            <div class="item-group item-selected flex">
+              <div class="item-text flex flex-one"><span id="account-name">@prepare.AccountName</span>&nbsp;plan</div>
+              <div class="flex price" id="plan-price">$@planPrice</div>
+            </div>
+            <div class="item-group item-coupon flex" style="@(upgradeDiscountAmount > 0 ? "" : "display:none;")">
+              <div class="item-text flex flex-one">Plan Conversion Discount:</div>
+              <div class="flex price">- $@upgradeDiscountAmount</div>
+            </div>
+            <div class="item-group item-coupon flex" style="@(activityInfo.DisountAmount > 0 ? "" : "display:none;")">
+                <div class="item-text flex flex-one">Activity Discount:</div>
+                <div class="flex price">- $@activityInfo.DisountAmount</div>
+            </div>
+            <div class="item-group item-coupon flex" style="@(couponAmount > 0 ? "" : "display:none;")">
+                <div class="item-text flex flex-one">Discount Code: @(prepare.AvailableCoupon != null ? prepare.AvailableCoupon.CouponCode : string.Empty)</div>
+                <div class="flex price">- $@couponAmount</div>
+            </div>
+            <hr class="devide">
+            <div class="item-group item-total flex">
+              <div class="item-text flex flex-one">Grand Total</div>
+              <div class="flex price" id="now-billing-amount">$@(Convert.ToInt32(prepare.ChangingPlan.NowBillingAmount) - activityInfo.DisountAmount - couponAmount)</div>
+            </div>
+            <div class="item-group item-order-tips">You will be charged <span style="font-weight: bold;" id="nextBillingAmount">$@Convert.ToInt32(prepare.ChangingPlan.NextBillingAmount)</span> per <span id="perPeriod">@prepare.PeriodType</span> starting from <span style="font-weight: bold;" id="nextBillingDate">@prepare.ChangingPlan.NextBillingDate.ToEnDate()</span>.</div>
+              <div class="item-group item-order-tips">All subscriptions will resume to original prices once the offer is over.</div>
+          </div>
+          <div class="tips flex flex-middle flex-column">
+            <div style="position: relative;height: 92px;width: 92px;">
+              <span class="flex flex-middle" style="z-index: 1;flex-direction: column;position: absolute;top: 50%;transform: translateY(-50%);color: #fff;font-size: 20px;width: 100%;text-align: center;text-shadow: black -1px -1px 2px;">
+                <span style="font-weight: bold;font-size: 30px;height: 30px;">5</span><span>Days</span>
+              </span>
+              <svg viewBox="60.78703308105469 56.7950439453125 478.42694091796875 478.4119873046875" preserveAspectRatio="xMidYMid meet">
+                <path d="M534.135 345.155l-24.656 17.296 10.172 28.349-26.547 11.579 4.394 28.633-29.395 6.545-1.449 30.087-28.96.54-6.894 28.134-29.666-5.202-12.843 27.221-26.961-10.58-17.134 23.351-25.414-16.151-22.291 20.25-20.861-20.097-24.766 15.023-17.304-24.661-28.351 10.182-11.583-26.553-28.629 4.403-6.547-29.396-30.083-1.45-.539-28.957-28.136-6.896 5.202-29.662-27.247-12.849 10.586-26.966-23.358-17.133 16.162-25.419-20.25-22.298 20.1-20.856-15.022-24.772 24.655-17.293-10.18-28.339 26.554-11.582-4.405-28.631 29.396-6.545 1.444-30.09 28.962-.537 6.892-28.139 29.672 5.205 12.853-27.238 26.958 10.582 17.137-23.353 25.415 16.156 22.294-20.251 20.861 20.098 24.767-15.022 17.299 24.656 28.348-10.172 11.582 26.546 28.629-4.396 6.547 29.389 30.079 1.446.541 28.96 28.133 6.892-5.2 29.67 27.246 12.853-10.582 26.964 23.352 17.132-16.155 25.418 20.255 22.298-20.102 20.86 15.023 24.768z"></path>
+              </svg>
+            </div>
+            <div style="margin-top: 10px;background-color: #5eabee;color: #fff;padding: 3px 6px;font-size: 12px;text-shadow: black -1px -1px 1px;">5 Days Money Back Guarantee</div>
+            <div style="width: 178px;margin-top: 10px;">Try Octoparse for 5 days and if you are not 100% satisfied, get your money back.</div>
+          </div>
+        </div>
+        @if (prepare.PaymentMethod != null)
+        {
+          <div class="custom-panel payment-method-panel flex" id="payment-method">
+            <div class="main-content flex flex-one flex-column">
+              <h1 class="panel-title">Payment Info</h1>
+              <div class="payment-info-wrap">
+                <div style="border:1px solid #e7e7e7;display: inline-block;width: 410px;height: 50px;line-height: 50px;"><img style="padding-left: 20px;" src="../images/right-1.png" alt=""><img src="@prepare.PaymentMethod.ImgUrl" title="@prepare.PaymentMethod.PaymentMethodType" style="max-height:30px;padding-left: 10px;padding-right: 20px;" /> @prepare.PaymentMethod.Addtional</div>
+                <a href="javascript:;" id="change-payment-method">Change</a>
+              </div>
+              <div class="btn-submit-wrap flex">
+                <button id="btn-submit-2" class="btn-regular">Buy Now</button>
+                <span class="security-tips flex"><span class="fa fa-lock"></span>Safe &amp; Secure Payment</span>
+              </div>
+              <div class="flex terms-wrap">
+                <p>By clicking Buy Now, you agree to our Terms of Use and Privacy Policy. To ensure uninterrupted service, your subscription will automatically renew prior to its expiration date. You may disable auto-renewal or cancel your subscription at any time through your Octoparse user center.</p>
+              </div>
+            </div>
+          </div>
+        }
+        <div class="custom-panel payment-method-panel flex" id="payment-method-form" style="display:@(prepare.PaymentMethod != null ? "none" : "")">
+          <div class="main-content flex flex-one flex-column">
+            <h1 class="panel-title">Payment method</h1>
+            <div class="flex-one flex flex-column">
+              @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+              {
+                <div class="alert alert-danger fade in" role="alert" id="serverError">Uh-oh! We were unable to process your payment. Please try again later or change a credit card or Paypal account.</div>
+              }
+              <div id="error-message" class="alert alert-danger fade in" role="alert" style="display:none"></div>
+              <label class="label-credit-card-no">Credit Card No.</label>
+              <div id='creadit-card-no' type="text" class="form-control input-lg input-credit-card-no"></div>
+              <ul id="credit-card-type-list" class="flex">
+                <li data-val="visa"><img src="/images/profile/visa.png" alt="Visa" title="Visa"></li>
+                <li data-val="master-card"><img src="/images/profile/Mastercard.png" alt="Master Card" title="Master Card"></li>
+                <li data-val="american-express"><img src="/images/profile/AmericanExpress.png" alt="American Express" title="American Express"></li>
+                <li data-val="discover"><img src="/images/profile/Discover-Card.png" alt="Discover Card" title="Discover Card"></li>
+                <li data-val="jcb"><img src="/images/profile/JCB.png" alt="JCB" title="JCB"></li>
+                <li data-val="diners-club"><img src="/images/profile/Diner's-Club.png" alt="Diner's Club" title="Diner's Club"></li>
+              </ul>
+              <div class="other-info-wrap flex">
+                <div class="cvv-wrap flex flex-column">
+                  <label id="label-cvv">CVV ?</label>
+                  <div id="cvv" class="form-control input-lg" maxlength="4"></div>
+                </div>
+                <div class="flex flex-column">
+                  <label>Expiration Date</label>
+                  <div id="expiration-date" class="form-control input-lg" placeholder="MM/YYYY"></div>
+                </div>
+              </div>
+              <div class="btn-submit-wrap flex">
+                <button id="btn-submit" class="btn-regular">Buy Now</button>
+                <span class="security-tips flex"><span class="fa fa-lock"></span>Safe &amp; Secure Payment</span>
+              </div>
+              <div class="flex terms-wrap">
+                <p>By clicking Buy Now, you agree to our <a href="/billing-payments" target="_Blank">Billing & Payments</a>. To ensure uninterrupted service, your subscription will automatically renew prior to its expiration date. You may disable auto-renewal or cancel your subscription at any time through your Octoparse user center.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tips flex flex-column flex-middle" id="paypal-box" style="display: none">
+            <p>By clicking the button below, you will be transferred to PayPal where you can set PayPal to be used as your method of payment.</p>
+            <script src="https://www.paypalobjects.com/api/button.js"
+              data-merchant="braintree"
+              data-id="btn-paypal"
+              data-button="checkout"
+              data-color="blue"
+              data-size="medium"
+              data-shape="pill"
+              data-button_type="submit"
+              data-button_disabled="false"
+            ></script>
+            <form id="checkout-form" action="/subscribe/payActivity" method="post" role="form" style="display:none">
+              <input type="hidden" name="paymentMethodType" id="payment-method-type">
+              <input type="hidden" name="paymentMethodNonce" id="payment-method-nonce">
+              <input type="hidden" name="planType" id="plan-type" value="@(prepare.PeriodType.Equals("month") ? (int)prepare.MonthlyPlanType : prepare.PeriodType.Equals("year")?(int)prepare.YearlyPlanType:(int)prepare.QuarterlyPlanType)">
+              <input type="hidden" name="paymentIsExport" id="payment-is-export" value="@ViewBag.ExportFlag">
+            </form>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  @Html.Partial("octProfileFooter")
+</div>
+
+@if (ViewBag.IsSuccess == null || !ViewBag.IsSuccess)
+{
+  <div class="modal fade" id="loading-box">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center;">
+          <div class="top">
+            <img style="padding-top: 50px;padding-bottom: 15px;" src="/images/loading.gif" alt="">
+          </div>
+          <div id="loading-message" class="bottom" style="padding-bottom: 50px;">Processing, please wait...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @section scripts {
+    <script src="~/js/date.format.js"></script>
+
+    <!-- Load the required client component. -->
+    <script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.3.0/js/paypal.min.js"></script>
+
+    <!-- Load additional components if desired. -->
+    <script src="https://js.braintreegateway.com/web/3.3.0/js/hosted-fields.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.3.0/js/data-collector.min.js"></script>
+
+    <script>
+      var timeOutHideId;
+
+      var getDateFromJson = function(jsondate) {
+        jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+
+        if (jsondate.indexOf("+") > 0) {
+          jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+        } else if (jsondate.indexOf("-") > 0) {
+          jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+        }
+
+        return new Date(parseInt(jsondate, 10));
+      }
+
+      var showLoading = function(message) {
+        $("#loading-message").text(message || "Processing, please wait...");
+        $("#loading-box").modal({ backdrop: "static", keyboard: false });
+      }
+
+      var hideLoading = function() {
+        $("#loading-box").modal("hide");
+      }
+
+      var hideDelayError = function() {
+        if (timeOutHideId) {
+          window.clearTimeout(timeOutHideId);
+          timeOutHideId = null;
+        }
+
+        $("#error-message").hide("slow");
+      }
+
+      var showDelayError = function(msg) {
+        var errorMessage = $("#error-message");
+
+        if (timeOutHideId)
+          window.clearTimeout(timeOutHideId);
+
+        errorMessage.text(msg);
+        errorMessage.show("fast");
+        timeOutHideId = setTimeout(hideDelayError, 20000);
+      }
+
+      var initBraintree = function(authorization) {
+        var isOkCC = false;
+        var isOkPP = false;
+        var isCardVerified = false;
+        var btnSubmit = $("#btn-submit");
+        var form = $("#checkout-form");
+        var btnPaypal = $("#btn-paypal");
+        var acceptedCardTypes = ["master-card", "visa", "american-express", "discover", "jcb", "diners-club"];
+        var initLoadingHide = function() {
+          isOkCC && isOkPP && $("#loading-box").modal("hide");
+        }
+
+        showLoading('');
+        window.braintree.client.create({
+          authorization: authorization
+        }, function(clientErr, clientInstance) {
+          if (clientErr) {
+            // Handle error in client creation
+            hideLoading();
+            showDelayError(clientErr);
+            return;
+          }
+
+          braintree.hostedFields.create({
+            client: clientInstance,
+            styles: {
+              'input': { 'font-size': '14pt' },
+              'input.invalid': { 'color': 'red' },
+              'input.valid': { 'color': 'green' }
+            },
+            fields: {
+              number: { selector: '#creadit-card-no' },
+              cvv: { selector: '#cvv' },
+              expirationDate: { selector: '#expiration-date', placeholder: 'MM/YYYY' }
+            }
+          }, function(hostedFieldsErr, hostedFieldsInstance) {
+            if (hostedFieldsErr) {
+              // Handle error in Hosted Fields creation
+              isOkCC = true;
+              initLoadingHide();
+              return;
+            }
+
+            hostedFieldsInstance.on('cardTypeChange', function (event) {
+              hideDelayError();
+
+              if (event.cards.length === 1) {
+                var cardType = event.cards[0].type.toLowerCase();
+                isCardVerified = acceptedCardTypes.indexOf(cardType) >= 0;
+                $('#credit-card-type-list > li[data-val="' + cardType + '"')
+                  .addClass('selected')
+                  .siblings('li')
+                  .removeClass('selected');
+              } else {
+                isCardVerified = false;
+                $('#credit-card-type-list > li').removeClass('selected');
+              }
+            });
+
+            btnSubmit.removeAttr('disabled');
+            btnSubmit.click(function() {
+              if (!isCardVerified) {
+                return showDelayError("Sorry, this credit card type is not accepted.");
+              }
+
+              hideDelayError();
+              showLoading();
+
+              hostedFieldsInstance.tokenize(function(tokenizeErr, payload) {
+                if (tokenizeErr) {
+                  hideLoading();
+                  showDelayError("Uh-oh! We were unable to process your payment. Please try again later or change a credit card or Paypal account. Error details: " + tokenizeErr.message)
+                  return;
+                }
+
+                $('#payment-method-nonce').val(payload.nonce);
+                $("#payment-method-type").val(1);
+                form.submit();
+              });
+            });
+
+            isOkCC = true;
+            initLoadingHide();
+          });
+
+          window.braintree.paypal.create({
+            client: clientInstance
+          }, function(paypalErr, paypalInstance) {
+            if (paypalErr) {
+              if (paypalErr.code !== "PAYPAL_NOT_ENABLED") {
+                showDelayError(paypalErr);
+              }
+              isOkPP = true;
+              initLoadingHide();
+              return;
+            }
+
+            $("#paypal-box").show();
+            hideDelayError();
+            btnPaypal.removeAttr('disabled');
+            btnPaypal.click(function() {
+              hideDelayError();
+              showLoading();
+
+              paypalInstance.tokenize({
+                flow: 'vault'
+              }, function(tokenizeErr, payload) {
+                if (tokenizeErr) {
+                  tokenizeErr.type === 'CUSTOMER' && showDelayError("Uh-oh! We were unable to process your payment. Please try again later or change a credit card or Paypal account. Error details: " + tokenizeErr.message);
+                  hideLoading();
+                  return;
+                }
+
+                btnPaypal.attr('disabled', true);
+                $('#payment-method-nonce').val(payload.nonce);
+                $("#payment-method-type").val(2);
+                form.submit();
+              });
+            });
+
+            isOkPP = true;
+            initLoadingHide();
+          });
+        });
+      }
+
+      var hideServerError = function() {
+        var serverError = $("#server-error");
+        if (serverError.length > 0) {
+          setTimeout(function() {
+            serverError.hide("fast");
+          }, 20000);
+        }
+      }
+
+      $(function() {
+        $("#label-cvv").popover({
+          trigger: "hover",
+          placement: "left",
+          html: true,
+          content: '<img src="/images/profile/cvv.png"/>'
+        });
+
+        $("#change-payment-method").click(function () {
+          $("#payment-method").toggle("slow");
+          $("#payment-method-form").toggle("slow");
+          $("#server-error").hide("fast");
+          hideDelayError();
+        });
+
+        $('.radio-plan').click(function() {
+          showLoading('');
+        });
+
+        $("#btn-submit-2").click(function() {
+          showLoading();
+          $("#checkout-form").submit();
+        });
+
+        hideServerError();
+        initBraintree("@prepare.ClientToken");
+      });
+    </script>
+  }
+}

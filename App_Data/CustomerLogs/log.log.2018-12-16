@@ -1,0 +1,32 @@
+2018-12-16 00:01:52,529 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-16 00:01:52,544 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-16 00:01:52,544 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-16 00:01:52,544 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-16 06:13:09,341 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-16 06:13:09,357 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-16 06:13:09,357 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-16 06:13:09,357 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-16 12:02:21,794 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-16 12:02:21,810 [12] INFO  SkieerWeb - RefundJob checking.
+2018-12-16 12:02:21,810 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-16 12:02:21,810 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-16 18:16:29,466 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-16 18:16:29,482 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-16 18:16:29,482 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-16 18:16:29,482 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-16 18:16:31,638 [11] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/16 10:16:15] | Kind: subscription_charged_successfully
+2018-12-16 18:16:52,794 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:7ea4d356-7546-4c41-8e9f-633477cb295c
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2018-12-16 19:16:53,779 [1] INFO  SkieerWeb - RefundJob starting.
+2018-12-16 19:16:53,779 [10] INFO  SkieerWeb - RefundJob checking.
+2018-12-16 19:16:53,779 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2018-12-16 19:16:53,779 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2018-12-16 19:16:55,779 [12] INFO  SkieerWeb - [Braintree Webhook Received 2018/12/16 10:16:15] | Kind: subscription_charged_successfully
+2018-12-16 19:16:55,904 [12] INFO  SkieerWeb - duplicate order, braintree returned transactionId:b8bs3p4v,tradeId:8d079184-0796-4110-9ea0-be0f6d371ca2.existing transactionId:b8bs3p4v

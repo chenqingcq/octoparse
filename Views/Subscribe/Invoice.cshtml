@@ -1,0 +1,507 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.InvoiceModel
+@{
+    Layout = null;
+    ViewBag.Title = "Invoice Preview";
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    	*{
+    		margin:0 auto;
+    		padding:0;
+    	}
+    	a{
+    		text-decoration: none;
+    	}
+        #printP{
+        	width:600px;
+        	height:800px;
+        	font-family: Tahoma;
+        }
+   		h4{
+   			text-align: center;
+   		}
+   		li{
+   			list-style: none;
+   		}
+   		.firLeft{
+   			width:50%;
+   			float:left;
+   			margin-top:10px;
+   			height:180px;
+   		}
+   		.firRight{
+   			width:50%;
+   			float:right;
+   			margin-top:10px;
+   			height:180px;
+   			font-family: Tahoma;
+   		}
+		.firRiTitle{
+			width:100%;
+			text-align: right;
+			margin-bottom: 30px;
+		}
+		.firRight span{
+			display: block;
+			width:100%;
+			text-align: right;
+			margin-bottom:4px;
+		}
+		.firRight strong{
+		    display: block;
+			width:100%;
+			text-align: right;
+			margin-bottom: 4px;
+		}
+		.fir{
+			margin-bottom:40px;
+			overflow: hidden;
+		}
+		.sec{
+			width:100%;
+			min-height:170px;
+			float:left;
+			margin-bottom:20px;
+		}
+		.insert{
+			width:100%;
+			float:left;
+			padding-top:15px;
+			border-top:1px solid #C2C6C6;
+			margin-bottom: 30px;
+		}
+		.fourth{
+			margin-top:40px;
+			width:100%;
+			border-collapse: collapse; 
+			border: 1px solid #c0c0c0; 
+			height:150px;
+			text-align:center;
+		}
+		.fourth caption{
+			margin-bottom:10px;
+			text-align:left;
+		}
+		.fourth tr:nth-of-type(1){
+			background:#d8d8d8;
+			font-size:14px;
+			color:#595959;
+		}
+		.fourth tr:nth-of-type(2){
+			font-size:14px;
+		}
+		.fourth tr:nth-of-type(3){
+			background:#d8d8d8;
+			font-size:14px;
+			color:#595959;
+		}
+		.fourth td{
+			border:1px solid #e5e5e5;
+		}
+		.priPage{
+			width:250px;
+			height:50px;
+			margin:40px 25% 0;
+			background:#08A9E3;
+			border-radius: 50px;
+			text-align:center;
+			font-size:16px;		
+			font-weight:600;
+			color:#fff;
+			border:0;
+			line-height:50px;
+		}
+		.priPage a{
+			color:#fff;
+			text-decoration: none;
+		}
+		td{
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		@@media print { 
+			.noprint { display: none;color:green } 
+		} 
+		.sec li{
+			margin-bottom:6px;
+		}
+    </style>
+
+	</head>
+	<body>
+		<div id="printP" >
+@if (Model.ErrorType == 0)
+{
+	
+		<h4>Octopus Data Inc.</h4>
+		<div class="fir">
+			<div class="firLeft">
+				<img src="/images/bazhuayu.png" />
+				<h2>Octoparse</h2>
+			</div>
+			<div class="firRight">
+				<h2 class="firRiTitle">INVOICE</h2>
+				<strong>Octopus Data Inc.</strong>
+				<span>721 Brea Canyon Road, Suite 1</span>
+				<span>Walnut, CA 91789</span>
+				<span>United States of America</span>
+			</div>
+		</div>
+		<ul class="sec">
+			<ul style="width:45%;float:left;padding-right:5%;">
+				<li>@Model.BillingSettings.FirstName @Model.BillingSettings.LastName</li>
+				<li>@Model.BillingSettings.AddressLine1</li>
+				@if (!string.IsNullOrWhiteSpace(@Model.BillingSettings.AddressLine2))
+		        {
+		            <li>@Model.BillingSettings.AddressLine2</li>
+		        }
+		        <li>@Model.BillingSettings.City, @Model.BillingSettings.StateOrRegion, @Model.BillingSettings.PostalCode</li>
+		        <li id="country" data-country="@Model.BillingSettings.Country"></li>
+		       	@if (!string.IsNullOrWhiteSpace(@Model.BillingSettings.Phone))
+		        {
+		            <li>@Model.BillingSettings.Phone</li>
+		        }
+		        <li>@Model.BillingSettings.Email</li>
+			</ul>
+			<ul style="width:20%;float:left;">
+				<li>Invoice Number</li>
+				<li>Invoice Date</li>
+				<li>Amount Due</li>
+			</ul>
+			<ul style="width:30%;float:left;text-align: right;">
+				<li>@Model.No</li>
+				<li>@Model.Date.ToEnDate()</li>
+				<li>$@Model.TotalAmount.ToString("#.0")</li>
+			</ul>
+		</ul>
+
+        if (Model.SubscriptionLog != null)
+        {
+		    <div class="insert">Payment Method: @Model.SubscriptionLog.PaymentMethod.DisplayName()</div>
+    }
+
+    if (Model.SubscriptionLog != null)
+    {
+		<table class="fourth"  cellpadding="0" cellspacing="0">
+			<caption>Notes</caption>
+			<tr>
+				<td>Item Description</td>
+				<td>Start Date</td>
+				<td>End Date</td>
+				<td>Sales Price</td>
+				<td>Total</td>
+			</tr>
+			<tr>
+				<td>@Model.SubscriptionLog.ToPlanType.GetInvoiceDisplayName()</td>
+				<td>@Model.SubscriptionLog.DateFrom.ToEnDate()</td>
+				<td>@Model.SubscriptionLog.DateTo.ToEnDate()</td>
+				<td>$@Model.SubscriptionLog.TotalAmount.ToString("#.0")</td>
+				<td>$@Model.SubscriptionLog.TotalAmount.ToString("#.0")</td>
+			</tr>
+			<tr>
+				<td colspan="3"></td>
+				<td>TOTAL</td>
+				<td>$@Model.SubscriptionLog.TotalAmount.ToString("#.0")</td>
+			</tr>
+		</table>
+    }
+    else if (Model.Order != null)
+    {
+        <table class="fourth" cellpadding="0" cellspacing="0">
+            <caption>Notes</caption>
+            <tr>
+                <td>Item Description</td>
+                <td>Sales Price</td>
+                <td>Total</td>
+            </tr>
+            <tr>
+                <td>@Model.Order.Detail</td>
+                <td>$@Model.Order.Amount.ToString("#.0")</td>
+                <td>$@Model.Order.Amount.ToString("#.0")</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>TOTAL</td>
+                <td>$@Model.Order.Amount.ToString("#.0")</td>
+            </tr>
+        </table>
+    }
+
+        <div class="priPage noprint">
+            <i class="fa fa-print"></i>
+            <a class="buttonPrint" href="javascript:window.print()">Print</a>
+        </div>
+}
+else
+{
+    if (Model.ErrorType == 1)
+    {
+        //not found address
+		        <div class="alert alert-warning" style="margin-top:10px;">Before printing your invoice, please complete the <a href="/subscribe/billingSettings" target="_top">Billing Settings</a>.</div>
+		    }
+		    else
+		    {
+		        //not found subscription log
+		        <div class="alert alert-danger"  style="margin-top:10px;">No invoice data found.</div>
+		    }
+		}
+			
+		</div>
+		<script src="/js/jquery.min.js" ></script>
+        <script>
+            $(function () {
+                var countryDict = {
+					"AFG":"Afghanistan",
+                    "ALB":"Albania",
+                    "DZA":"Algeria",
+                    "ASM":"American Samoa",
+                    "AND":"Andorra",
+                    "AGO":"Angola",
+                    "AIA":"Anguilla",
+                    "ATA":"Antarctica",
+                    "ATG":"Antigua And Barbuda",
+                    "ARG":"Argentina",
+                    "ARM":"Armenia",
+                    "ABW":"Aruba",
+                    "AUS":"Australia",
+                    "AUT":"Austria",
+                    "AZE":"Azerbaijan",
+                    "BHS":"Bahamas",
+                    "BHR":"Bahrain",
+                    "BGD":"Bangladesh",
+                    "BRB":"Barbados",
+                    "BLR":"Belarus",
+                    "BEL":"Belgium",
+                    "BLZ":"Belize",
+                    "BEN":"Benin",
+                    "BMU":"Bermuda",
+                    "BTN":"Bhutan",
+                    "BOL":"Bolivia",
+                    "BIH":"Bosnia and Herzegovina",
+                    "BWA":"Botswana",
+                    "BVT":"Bouvet Island",
+                    "BRA":"Brazil",
+                    "IOT":"British Indian Ocean Territory",
+                    "VGB":"British Virgin Islands",
+                    "BRN":"Brunei Darussalam",
+                    "BGR":"Bulgaria",
+                    "BFA":"Burkina Faso",
+                    "BDI":"Burundi",
+                    "KHM":"Cambodia",
+                    "CMR":"Cameroon",
+                    "CAN":"Canada",
+                    "CPV":"Cape Verde",
+                    "BES":"Caribbean Netherlands",
+                    "CYM":"Cayman Islands",
+                    "CAF":"Central African Republic",
+                    "TCD":"Chad",
+                    "CHL":"Chile",
+                    "CHN":"China",
+                    "CXR":"Christmas Island",
+                    "CCK":"Cocos (Keeling) Islands",
+                    "COL":"Colombia",
+                    "COM":"Comoros",
+                    "COK":"Cook Islands",
+                    "CRI":"Costa Rica",
+                    "CIV":"Côte d'Ivoire",
+                    "HRV":"Croatia",
+                    "CUW":"Curaçao",
+                    "CYP":"Cyprus",
+                    "CZE":"Czech Republic",
+                    "COD":"Democratic Republic of the Congo",
+                    "DNK":"Denmark",
+                    "DJI":"Djibouti",
+                    "DMA":"Dominica",
+                    "DOM":"Dominican Republic",
+                    "ECU":"Ecuador",
+                    "EGY":"Egypt",
+                    "SLV":"El Salvador",
+                    "GNQ":"Equatorial Guinea",
+                    "ERI":"Eritrea",
+                    "EST":"Estonia",
+                    "ETH":"Ethiopia",
+                    "FLK":"Falkland Islands",
+                    "FRO":"Faroe Islands",
+                    "FJI":"Fiji",
+                    "FIN":"Finland",
+                    "FRA":"France",
+                    "GUF":"French Guiana",
+                    "PYF":"French Polynesia",
+                    "ATF":"French Southern Territories",
+                    "GAB":"Gabon",
+                    "GMB":"Gambia",
+                    "GEO":"Georgia",
+                    "DEU":"Germany",
+                    "GHA":"Ghana",
+                    "GIB":"Gibraltar",
+                    "GRC":"Greece",
+                    "GRL":"Greenland",
+                    "GRD":"Grenada",
+                    "GLP":"Guadeloupe",
+                    "GUM":"Guam",
+                    "GTM":"Guatemala",
+                    "GIN":"Guinea",
+                    "GNB":"Guinea-Bissau",
+                    "GUY":"Guyana",
+                    "HTI":"Haiti",
+                    "HMD":"Heard And Mc Donald Islands",
+                    "HND":"Honduras",
+                    "HKG":"Hong Kong",
+                    "HUN":"Hungary",
+                    "ISL":"Iceland",
+                    "IND":"India",
+                    "IDN":"Indonesia",
+                    "IRQ":"Iraq",
+                    "IRL":"Ireland",
+                    "ISR":"Israel",
+                    "ITA":"Italy",
+                    "JAM":"Jamaica",
+                    "JPN":"Japan",
+                    "JOR":"Jordan",
+                    "KAZ":"Kazakhstan",
+                    "KEN":"Kenya",
+                    "KIR":"Kiribati",
+                    "KWT":"Kuwait",
+                    "KGZ":"Kyrgyzstan",
+                    "LAO":"Laos",
+                    "LVA":"Latvia",
+                    "LBN":"Lebanon",
+                    "LSO":"Lesotho",
+                    "LBR":"Liberia",
+                    "LIE":"Liechtenstein",
+                    "LTU":"Lithuania",
+                    "LUX":"Luxembourg",
+                    "MAC":"Macau",
+                    "MKD":"Macedonia",
+                    "MDG":"Madagascar",
+                    "MWI":"Malawi",
+                    "MYS":"Malaysia",
+                    "MDV":"Maldives",
+                    "MLI":"Mali",
+                    "MLT":"Malta",
+                    "MHL":"Marshall Islands",
+                    "MTQ":"Martinique",
+                    "MRT":"Mauritania",
+                    "MUS":"Mauritius",
+                    "MYT":"Mayotte",
+                    "MEX":"Mexico",
+                    "FSM":"Micronesia",
+                    "MDA":"Moldova",
+                    "MCO":"Monaco",
+                    "MNG":"Mongolia",
+                    "MSR":"Montserrat",
+                    "MAR":"Morocco",
+                    "MOZ":"Mozambique",
+                    "MMR":"Myanmar",
+                    "NAM":"Namibia",
+                    "NRU":"Nauru",
+                    "NPL":"Nepal",
+                    "NLD":"Netherlands",
+                    "ANT":"Netherlands Antilles",
+                    "NCL":"New Caledonia",
+                    "NZL":"New Zealand",
+                    "NIC":"Nicaragua",
+                    "NER":"Niger",
+                    "NGA":"Nigeria",
+                    "NIU":"Niue",
+                    "NFK":"Norfolk Island",
+                    "MNP":"Northern Mariana Islands",
+                    "NOR":"Norway",
+                    "OMN":"Oman",
+                    "PAK":"Pakistan",
+                    "PLW":"Palau",
+                    "PSE":"Palestinian Territories",
+                    "PAN":"Panama",
+                    "PNG":"Papua New Guinea",
+                    "PRY":"Paraguay",
+                    "PER":"Peru",
+                    "PHL":"Philippines",
+                    "PCN":"Pitcairn",
+                    "POL":"Poland",
+                    "PRT":"Portugal",
+                    "PRI":"Puerto Rico",
+                    "QAT":"Qatar",
+                    "COG":"Republic of the Congo",
+                    "REU":"Réunion",
+                    "ROU":"Romania",
+                    "RUS":"Russia",
+                    "RWA":"Rwanda",
+                    "SHN":"Saint Helena",
+                    "KNA":"Saint Kitts And Nevis",
+                    "LCA":"Saint Lucia",
+                    "VCT":"Saint Vincent and the Grenadines",
+                    "SMR":"San Marino",
+                    "STP":"Sao Tome And Principe",
+                    "SAU":"Saudi Arabia",
+                    "SEN":"Senegal",
+                    "SRB":"Serbia",
+                    "SYC":"Seychelles",
+                    "SLE":"Sierra Leone",
+                    "SGP":"Singapore",
+                    "SXM":"Sint Maarten",
+                    "SVK":"Slovakia",
+                    "SVN":"Slovenia",
+                    "SLB":"Solomon Islands",
+                    "SOM":"Somalia",
+                    "ZAF":"South Africa",
+                    "SGS":"South Georgia and South Sandwich Islands",
+                    "KOR":"South Korea",
+                    "ESP":"Spain",
+                    "LKA":"Sri Lanka",
+                    "SPM":"St. Pierre And Miquelon",
+                    "SUR":"Suriname",
+                    "SJM":"Svalbard And Jan Mayen Islands",
+                    "SWZ":"Swaziland",
+                    "SWE":"Sweden",
+                    "CHE":"Switzerland",
+                    "TWN":"Taiwan",
+                    "TJK":"Tajikistan",
+                    "TZA":"Tanzania",
+                    "THA":"Thailand",
+                    "TMP":"Timor-Leste",
+                    "TGO":"Togo",
+                    "TKL":"Tokelau",
+                    "TON":"Tonga",
+                    "TTO":"Trinidad and Tobago",
+                    "TUN":"Tunisia",
+                    "TUR":"Turkey",
+                    "TKM":"Turkmenistan",
+                    "TCA":"Turks and Caicos Islands",
+                    "TUV":"Tuvalu",
+                    "UGA":"Uganda",
+                    "UKR":"Ukraine",
+                    "ARE":"United Arab Emirates",
+                    "GBR":"United Kingdom",
+                    "USA":"United States",
+                    "UMI":"United States Minor Outlying",
+                    "URY":"Uruguay",
+                    "UZB":"Uzbekistan",
+                    "VUT":"Vanuatu",
+                    "VAT":"Vatican",
+                    "VEN":"Venezuela",
+                    "VNM":"Vietnam",
+                    "VIR":"Virgin Islands (U.S.)",
+                    "WLF":"Wallis And Futuna Islands",
+                    "ESH":"Western Sahara",
+                    "YEM":"Yemen",
+                    "ZMB":"Zambia",
+                    "ZWE":"Zimbabwe"
+                };
+                var country = countryDict[$("#country").data("country")]; 
+                if(country){
+					$("#country").text(country);
+				}
+            })
+        </script>
+
+</body>
+</html>

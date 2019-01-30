@@ -1,0 +1,13 @@
+2016-11-16 15:35:56,217 [346] ERROR SkieerWeb - GetBraintreeClientToken
+System.IO.FileNotFoundException: 未能加载文件或程序集“Braintree, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31b586f34d3e96c7”或它的某一个依赖项。系统找不到指定的文件。
+文件名:“Braintree, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31b586f34d3e96c7”
+   在 Octoparse.Web.ServiceWrapper.BraintreeWrapper.<GetClientToken>b__0()
+   在 Octoparse.Web.Operation.Retry[T,Ex,Ex2](Func`1 func, Int32 maxRetry, Int32 waitingMsec)
+   在 Octoparse.Web.ServiceWrapper.BraintreeWrapper.GetClientToken()
+   在 Octoparse.Web.Controllers.SubscribeController.GetBraintreeClientToken()
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+

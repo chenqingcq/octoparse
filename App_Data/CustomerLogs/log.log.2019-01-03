@@ -1,0 +1,57 @@
+2019-01-03 00:23:45,386 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 00:23:45,401 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 00:23:45,401 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 00:23:45,401 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 00:53:45,407 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 00:53:45,407 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 00:53:45,407 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 03:10:09,428 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 03:10:09,443 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 03:10:09,443 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 03:10:09,443 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 03:40:09,448 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 03:40:09,448 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 03:40:09,448 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 04:36:15,954 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 04:36:15,970 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 04:36:15,970 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 04:36:15,970 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 08:49:10,551 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 08:49:10,566 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 08:49:10,566 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 08:49:10,566 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 09:11:15,102 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 09:11:15,118 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 09:11:15,118 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 09:11:15,118 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 09:43:34,797 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 09:43:34,812 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 09:43:34,812 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 09:43:34,812 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 10:13:34,817 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 10:13:34,817 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 10:13:34,817 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 18:30:30,179 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-03 18:30:30,194 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-03 18:30:30,194 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-03 18:30:30,194 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-03 18:30:32,397 [11] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/3 10:30:17] | Kind: subscription_charged_successfully
+2019-01-03 18:30:53,554 [11] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:df2d7be0-4466-4147-8e5c-ee968a8fbdf0
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2019-01-03 18:31:25,616 [15] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/3 10:31:16] | Kind: subscription_charged_successfully
+2019-01-03 18:31:46,663 [15] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:030b8151-8fdb-49f0-b00b-34a69c3b69c3
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)

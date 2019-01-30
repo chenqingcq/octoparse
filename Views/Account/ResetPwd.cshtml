@@ -1,0 +1,48 @@
+﻿@model  Octoparse.Web.Models.ResetPasswordModel
+@{
+    ViewBag.Title = "Reset password";
+    Layout = "~/Views/octAccountLayout.cshtml";
+}
+
+@section styles {
+    <style>
+        .container.reset-password {width: 600px;margin: 100px auto;}
+        input + .field-validation-error {display: block;padding: 15px;margin-top: 20px;border: 1px solid transparent;border-radius: 4px;color: #a94442;background-color: #f2dede;border-color: #ebccd1;}
+    </style>
+}
+
+<div class="container reset-password">
+    <h1>Reset Password</h1>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+    {
+        <div class="form-group">
+            <div class="alert alert-danger">Invalid parameters.</div>
+        </div>
+    }
+    else if (ViewBag.IsChanged == null || ViewBag.IsChanged == false)
+    {
+        Html.EnableClientValidation();
+        <form action="/account/resetpwd" enctype="multipart/form-data" id="resetPasswordForm" method="post">
+            @Html.HiddenFor(m => m.Token, new { @class = "form-control", @placeholder = "Current password" })
+            <div class="form-group" style="margin-bottom: 10px;">
+                @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control", @placeholder = "New password" })
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </div>
+            <div class="form-group" style="margin-bottom: 0px;">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm new password" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+            <div class="form-group" style="padding-top: 10px;">
+                @Html.ValidationSummary(true)
+            </div>               
+            <div class="submit-btn-box">
+                <input type="submit" value="Apply" class="login-submit btn-regular" style="font-size:20px;width:140px;height:40px;" />
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="alert alert-success">Reset password successfully.</div>
+        <a class="btn-regular" style="font-size:20px;width:210px;height:40px;" href="/profile">Go to User Center</a>
+    }
+</div>

@@ -1,0 +1,44 @@
+﻿@{
+  ViewBag.Title = "Activate account";
+  Layout = "~/Views/octAccountLayout.cshtml";
+}
+
+@section styles{
+  <style>
+    .container {margin: 200px auto 100px auto;}
+    .container p {font-size: 20px;}
+    .anchor-wrap {width: 500px;justify-content: space-between;}
+    .anchor-wrap > a {font-size: 18px;width: 240px;height: 40px;}
+  </style>
+}
+
+<div class="container flex flex-column flex-middle">
+  @if(ViewBag.Error == null)
+  {
+    <img src="/images/rage.png" alt="rage.png">
+    <h1>Account's ready!</h1>
+    <p>Come on in! Download Octoparse and start data hunting!</p>
+    <div class="anchor-wrap flex">
+      <a class="btn-o" href="/download">Download</a>
+      <a class="btn-regular" data-editiontype="3" href="javascript:;">Request Pro Free Trial</a>
+    </div>
+  }
+  else
+  {
+    <div class="row" style="margin-bottom: 100px;">
+      <div class="col-xs-12">
+        <div style="text-align: center;margin-top: 100px;">
+          <span style="display: inline-block;overflow: hidden;"><img src="/images/sorry.png" alt=""></span>
+        </div>
+        <div style="text-align: center;margin-top: 20px;">
+          <span style="font-size: 22px;color: #036C94;letter-spacing: 1px;font-family: fantasy;font-weight: normal;">Sorry, <br> Your account failed to activate.<br>Please login to your account to try reactivating.</span>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 200px;">
+      <div class="col-xs-12" style="text-align: center;">
+        <a style="background: #08A9E3;color: #fff;padding: 14px 20px;font-size: 14px; margin-right: 10px;" class="btn" href="/Login">Login</a>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,367 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.SubscriptionSumaryModel
+@{
+  Layout = "~/Views/octAccountLayout.cshtml";
+  ViewBag.Title = "Subscription Summary";
+}
+
+@section styles{
+  <link rel="stylesheet" href="/css/account/index.css">
+  <link rel="stylesheet" href="/css/price-card.css">
+  <style>
+    .page-title {font-size:30px;margin:40px 0 20px 0;padding-bottom: 14px;border-bottom: solid 1px #ddd;}
+    .modal-dialog {margin:250px auto;text-align:center;}
+    .modal-dialog:not(.modal-lg) {width:500px;}
+    
+    .subscription-tips {height: 60px;margin-bottom: 30px;align-items: center;justify-content: space-between;}
+    .subscription-tips > p {font-size: 18px;margin:0;}
+    .subscription-tips .btn-o, .subscription-tips .btn-regular {width: 160px;height: 40px;}
+
+    .pricing-box .pricetop h4 {margin-top:0;}
+    .pricing-box .pricetop .p-btn span {width:170px;height:36px;line-height:36px;text-align:center;display:inline-block;background:#EEEEEE;color:#999;font-size:15px;text-decoration:none;border-radius:20px;font-weight:bold;}
+    .pricing-box .top-kg {border:1px solid #E5E5E5;background:#F4F4F4;padding:20px;height:88px;margin-bottom:40px;padding-bottom:0;position:relative;}
+    .pricing-box .top-kg > h4 {margin-top:0;font-size:20px;color:#333;margin-bottom:2px;}
+    .pricing-box .top-kg > p {font-size:15px;color:#999;}
+    .pricing-box .top-kg > .pay-kg {position:absolute;right:10px;top:24px;height:40px;overflow:hidden;}
+    .pricing-box .top-kg > .pay-kg > span {float:left;height:40px;line-height:40px;font-size:15px;color:#333;margin-right:20px;}
+    .pricing-box #kg-tool {width:63px;height:38px;border-radius:50px;position:relative;float:left;cursor:pointer;}
+    .pricing-box #kto {width:37px;height:37px;border-radius:48px;position:absolute;background:white;box-shadow:0px 2px 4px rgba(0,0,0,0.4);}
+    .pricing-box .open1 {background:#08A9E3;}
+    .pricing-box .open2 {top:0px;right:1px;}
+    .pricing-box .close1 {background:rgba(255,255,255,0.4);border:1px solid rgba(0,0,0,0.15);border-left:transparent;}
+    .pricing-box .close2 {left:1px;top:-1px;}
+    .pricing-box .panel-heading .panel-title {font-weight:bold;font-size:24px;color:#999;margin-top:15px;margin-bottom:16px;width:250px;}
+    .pricing-box .panel-heading {position:relative;left:-30px;}
+    .pricing-box .panel-heading .panel-title a {color:#337ab7;font-size:13px;text-decoration:none;padding-right:12px;height:100%;float:right;padding-top:7px;}
+
+    .price-card-wrap {width:920px;justify-content:space-between;margin-bottom:52px;}
+  </style>
+}
+
+<div class="wrapper flex">
+  <div class="flex flex-one">
+    @Html.Partial("octUserMenu", "Subscription")
+    <div class="content flex flex-one flex-column">
+      <div class="pricing-box flex flex-one">
+        <div class="flex-one">
+          <h1 class="page-title">Subscription <a href="/faq?faqCategory=Billing%20and%20Payments" class="fa fa-question-circle" style="text-decoration: none;"></a></h1>
+          @if (Model != null && Model.Plan != PlanType.None)
+          {
+            <div class="subscription-tips flex">
+              <p><span id="autoRenewText" style="@(Model.IsAutoRenewal?"":"display:none")">Your plan will automatically renew on: @Model.NextBillingDate.Value.ToEnDate(). Payment Amount: $@Convert.ToInt32(Model.NextBillingAmount.Value).</span></p>
+              @if (Model.IsAutoRenewal)
+              {
+                <a id="cancel-subscription" class="btn-o">Cancel Subscription</a>
+              }
+              else
+              {
+                <a id="auto-subscription" href="javascript:;" class="btn-regular">Auto Subscription</a>
+              }
+            </div>
+          }
+          <div class="flex price-card-wrap">
+            <section class="price-card flex flex-column">
+              <header class="flex flex-column">
+                  @if (Model.Plan == PlanType.BasicMonthly)
+                  {
+                      <img id="current-plan-tag" src="/images/current-plan-tag.png" alt="current-plan-tag.png">
+                  }
+                <h1 class="card-title">Basic Plan</h1>
+                <span class="flex flex-middle">Unlimited data export</span>
+                <h2 class="price">$19&nbsp;/&nbsp;Month</h2>
+                <span> &nbsp;</span>
+                <a href="/Subscribe/pay?plan=bsc-mo" class="btn-buy flex flex-middle">Upgrade Now</a>
+              </header>
+              <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li>Unlimited data export<span class="fa fa-question-circle charge-plan-export" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="No limit on data export"></span></li>
+                <li>2 concurrent local run<span class="fa fa-question-circle basic-local-run-tips" data-toggle="popover" data-placement="right" data-content="Basic Plan is limited to 2 runs in parallel on local machine."></span></li>
+                <li>10 Crawlers<span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Community, lazy support</li>
+              </ul>
+            </section>
+            <section class="price-card flex flex-column">
+              <header class="flex flex-column">
+                @if (Model.Plan == PlanType.StandardMonthly || Model.Plan == PlanType.StandardYearly || Model.Plan == PlanType.StandardQuarterly)
+                {
+                  <img id="current-plan-tag" src="/images/current-plan-tag.png" alt="current-plan-tag.png">
+                }
+                <h1 class="card-title">Standard Plan</h1>
+                <span class="flex flex-middle">Subscribe yearly to save 16%</span>
+                <h2 class="price">$@(Model.StandardYearlyPrice / 12)&nbsp;/&nbsp;Month</h2>
+                <span>when billed annually<br>or $@Model.StandardMonthlyPrice when billed monthly</span>
+                @if ((Model.Plan == PlanType.StandardMonthly || Model.Plan == PlanType.StandardYearly || Model.Plan == PlanType.StandardQuarterly) && Model.NextBillingDate.HasValue && Model.NextBillingDate.Value >= DateTime.Now)
+                {
+                  <a href="/Subscribe/Pay?plan=@(Model.Plan == PlanType.StandardMonthly?"std-mo": Model.Plan == PlanType.StandardQuarterly?"std-qt":"std-yr")" class="btn-buy flex flex-middle">Options Settings</a>
+                }
+                else
+                {
+                  <a href="/Subscribe/Pay?plan=std-yr" class="btn-buy flex flex-middle">@((Model.Plan == PlanType.None || Model.Plan == PlanType.BasicMonthly) ? "UPGRADE" : "CHOOSE")</a>
+                }
+              </header>
+              <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li>Unlimited data export<span class="fa fa-question-circle charge-plan-export" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="No limit on data export"></span></li>
+                <li>Unlimited concurrent local run<span class="fa fa-question-circle charge-local-run-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="No limit on concurrent run on local machine."></span></li>
+              </ul>
+              <ul class="plan-content blue">
+                <li><strong>100 Crawlers</strong><span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Scheduled Extractions<span class="fa fa-question-circle scheduled-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Schedule a crawler to run at at any specific time of the day, week or month."></span></li>
+                <li>6 concurrent cloud extractions<span class="fa fa-question-circle cloud-tips" data-toggle="popover" data-placement="right" data-content="Execute 6 concurrent extractions in Octoparse Cloud 24/7. Data scraped can be accessed from any machine. No hardware maintenance."></span></li>
+                <li>Average speed extraction<span class="fa fa-question-circle upgrade-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="6 servers distributed across all running extractions in Octoparse Cloud."></span></li>
+                <li>Auto IP rotation<span class="fa fa-question-circle ip-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Automatically rotates IP addresses by thousands of in-app shared servers."></span></li>
+                <li>API access<span class="fa fa-question-circle api-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Connect with Octoparse APIs and have the data delivered automatically to your own systems."></span></li>
+                <li>Email support</li>
+              </ul>
+            </section>
+            <section class="price-card flex flex-column">
+              <header class="flex flex-column most-popular">
+                @if (Model.Plan == PlanType.ProfessionalMonthly || Model.Plan == PlanType.ProfessionalYearly || Model.Plan == PlanType.ProfessionalQuarterly)
+                {
+                  <img id="current-plan-tag" src="/images/current-plan-tag.png" alt="current-plan-tag.png">
+                }
+                <h1 class="card-title">Professional Plan</h1>
+                <span class="flex flex-middle">Subscribe yearly to save 16%</span>
+                <h2 class="price">$209&nbsp;/&nbsp;Month</h2>
+                <span>when billed annually<br>or $@(Model.ProfessionalMonthlyPrice) when billed monthly</span>
+                @if ((Model.Plan == PlanType.ProfessionalMonthly || Model.Plan == PlanType.ProfessionalYearly || Model.Plan == PlanType.ProfessionalQuarterly) && Model.NextBillingDate.HasValue && Model.NextBillingDate.Value>=DateTime.Now)
+                {
+                  <a href="/Subscribe/Pay?plan=@(Model.Plan == PlanType.ProfessionalMonthly?"pro-mo":Model.Plan == PlanType.ProfessionalQuarterly?"pro-qt":"pro-yr")" class="btn-buy flex flex-middle">Options Settings</a>
+                }
+                else
+                {
+                  <a href="/Subscribe/Pay?plan=pro-yr" class="btn-buy flex flex-middle">UPGRADE</a>
+                }
+                <a href="javascript:;" data-editiontype="3" class="request-pro-tiral">Request Pro Trial</a>
+              </header>
+              <ul class="plan-content">
+                <li>Unlimited pages per crawl</li>
+                <li>Unlimited computers</li>
+                <li>Unlimited data export<span class="fa fa-question-circle charge-plan-export" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="No limit on data export"></span></li>
+                <li>Unlimited concurrent local run<span class="fa fa-question-circle charge-local-run-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="No limit on concurrent run on local machine."></span></li>
+              </ul>
+              <ul class="plan-content blue">
+                <li><strong>250 Crawlers</strong><span class="fa fa-question-circle crawlers-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="A crawler is a set of configuration for scraping data from any website."></span></li>
+                <li>Scheduled Extractions<span class="fa fa-question-circle scheduled-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Schedule a crawler to run at at any specific time of the day, week or month."></span></li>
+                <li>20 concurrent cloud extractions<span class="fa fa-question-circle cloud-tips" data-toggle="popover" data-placement="right" data-content="Execute 20 concurrent extractions in Octoparse Cloud 24/7. Data scraped can be accessed from any machine. No hardware maintenance."></span></li>
+                <li>High speed extraction<span class="fa fa-question-circle upgrade-tips" data-toggle="popover" data-placement="right" data-content="20 servers distributed across all running extractions in Octoparse Cloud."></span></li>
+                <li>Auto IP rotation<span class="fa fa-question-circle ip-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Automatically rotates IP addresses by thousands of in-app shared servers."></span></li>
+                <li>Advanced API<span class="fa fa-question-circle api-tips" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Manipulate extractions and the results with Octoparse."></span></li>
+                <li>Email, High-priority support,</li>
+                <li>Free task review, 1 on 1 training</li>
+              </ul>
+            </section>
+            <!-- <section class="price-card flex flex-column">
+              <header class="flex flex-column">
+                <h1 class="card-title">Data Service</h1>
+                <span class="flex flex-middle">Customizable to your need</span>
+                <div class="other-info">Data delivery on demand<br>Customized Crawler</div>
+                <a href="/contact#request-a-quote" class="btn-buy flex flex-middle">Request a quote</a>
+              </header>
+              <ul class="plan-content">
+                <li>Simply relax and leave the work to us.</li>
+                <li>Our data team meet with you to discuss</li>
+                <li>your web crawling and data processing</li>
+                <li>requirements. <a href="/contact#request-a-quote">Contact us for a quote</a>!</li>
+              </ul>
+            </section> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @Html.Partial("octProfileFooter")
+</div>
+
+<div class="modal fade" id="confirmBox">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Confirm</h4>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Do you want to turn on auto-renewal?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="confirmBtn">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loadingBox">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="top"><img style="padding-top: 50px;padding-bottom: 15px;" src="/images/loading.gif" alt="loading.gif"></div>
+        <div class="bottom" style="padding-bottom: 50px;">Processing, please wait...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cancel-subscription-form" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Cancel Subscription</h2>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:22px;">We are very sad to see you cancel your subscription to Octoparse.<br>Tell us why you are thinking of leaving.</p>
+        <form style="text-align: left;font-size:18px;width: 310px;margin: 30px auto 0;">
+          <div class="radio">
+            <label><input type="radio" name="cancel-reason" value="I'm lost.">I'm lost.</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="cancel-reason" value="I found another App I like better.">I found another App I like better.</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="cancel-reason" value="I don't like the Octoparse Premium.">I don't like the Octoparse Premium.</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="cancel-reason" value="The premium costs too much.">The premium costs too much.</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="cancel-reason" value="I want to stick on the free plan.">I want to stick on the free plan.</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">I want to stay</button>
+        <button id="submit-cancel-reason" type="button" class="btn btn-default">Cancel Subscription</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+  <script>
+    $(function() {
+      var kgTool = $("#kg-tool");
+      var confirmBox = $("#confirmBox");
+      var loadingBox = $("#loadingBox");
+      var cancelForm = $('#cancel-subscription-form');
+      var btnAutoSubscription = $('#auto-subscription');
+      var btnSubmitForm = $('#submit-cancel-reason');
+
+      var showCancelFormHandler = function() {
+        cancelForm.modal('show');
+      }
+
+      $('#cancel-subscription').click(showCancelFormHandler);
+
+      btnSubmitForm.click(function() {
+        var reason = cancelForm.find('input[type=radio]:checked').val();
+
+        if (!reason || btnSubmitForm.hasClass('disabled')) { return; }
+
+        btnSubmitForm.addClass('disabled');
+        $.post('/umbraco/surface/subscribe/cancelSubscribe?reason=' + encodeURI(reason)).done(function(res) {
+          if (res.status === -1) {
+            window.location.href = '/Login';
+            return;
+          }
+
+          if (res.status === 0) {
+            btnSubmitForm.removeClass('disabled');
+            return alert('Failed to cancel subscription. Please try again.');
+          }
+
+          window.location.href = '/subscription-cancelled';
+        });
+      });
+
+      kgTool.on("click", function() {
+        var isAuto = kgTool.attr('class') == 'close1';
+        var message = "";
+        if (isAuto) {
+          message = "Do you want to turn on auto-renewal?";
+        } else {
+          message = "Do you want to turn off auto-renewal?<br/>When you disable auto-renewal, your plan will downgrade to a BASIC Plan at the next billing date.";
+        }
+        $("#confirmMessage").html(message);
+        confirmBox.modal();
+      });
+
+      btnAutoSubscription.click(function() {
+        if (btnAutoSubscription.hasClass('disabled')) {
+          return;
+        }
+
+        btnAutoSubscription.addClass('disabled');
+        $.post('/umbraco/surface/subscribe/AutoRenew').done(function(res) {
+          if (res.status === -1) {
+            window.location.href = '/Login';
+            return;
+          }
+
+          if (res.status === 0) {
+            btnAutoSubscription.removeClass('disabled');
+            return alert('Unable to renew subscription.\nPlease contact support@octoparse.com');
+          }
+
+          btnAutoSubscription.replaceWith('<a id="cancel-subscription" class="btn-o">Cancel Subscription</a>');
+          $('#cancel-subscription').click(showCancelFormHandler);
+          $('#autoRenewText').show();
+        });
+      });
+
+      $('#confirmBtn').click(function() {
+        confirmBox.modal("hide");
+        loadingBox.modal({
+          backdrop: "static",
+          keyboard: false
+        });
+        var isAuto = kgTool.attr('class') == 'close1';
+        $.ajax({
+          url: "/umbraco/surface/subscribe/AjaxAutoRenew?isAuto=" + isAuto,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            var kto = $("#kto");
+
+            loadingBox.modal("hide");
+            if (data && data.status == 1) {
+              if (isAuto) {
+                kgTool.attr('class', 'open1');
+                kto.attr('class', 'open2');
+              } else {
+                kgTool.attr('class', 'close1');
+                kto.attr('class', 'close2');
+              }
+            } else {
+              if (data && data.status == -1) {
+                window.location.href = "/login";
+              } else {
+                alert("Server error, please try again.");
+              }
+            }
+          }
+        });
+      });
+    });
+  </script>
+	<script>
+	$(function () {
+		var getPopoverTemplate = function(width) {
+			return '<div class="popover" style="width:' + width + 'px" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+		}
+
+        $('.cloud-tips').popover({ trigger: 'hover', template: getPopoverTemplate(300) })
+        $('.charge-plan-export').popover({ trigger: 'hover', template: getPopoverTemplate(180) })
+        $('.charge-local-run-tips').popover({ trigger: 'hover', template: getPopoverTemplate(220) })
+        $('.basic-local-run-tips').popover({ trigger: 'hover', template: getPopoverTemplate(220) })
+        $('.crawlers-tips').popover({ trigger: 'hover', template: getPopoverTemplate(260) })
+        $('.upgrade-tips').popover({ trigger: 'hover', template: getPopoverTemplate(220) })
+        $('.ip-tips').popover({ trigger: 'hover', template: getPopoverTemplate(300) })
+        $('.api-tips').popover({ trigger: 'hover', template: getPopoverTemplate(200) })
+        $('.scheduled-tips').popover({ trigger: 'hover', template: getPopoverTemplate(200) })
+	})
+	</script>
+}

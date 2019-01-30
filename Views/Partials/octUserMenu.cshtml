@@ -1,0 +1,17 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<string>
+
+<div class="side-bar">
+  <nav>
+    <ul>
+      <li><a class="flex @(Model=="Profile" ? "active" : null)" href="/profile">Account & Profile</a></li>
+      <li><a class="flex @(Model=="Subscription" ? "active" : null)" href="/subscribe">Plan & Subscription</a></li>
+      <li><a class="flex @(Model=="Coupons" ? "active" : null)" href="/subscribe/coupons">Coupons</a></li>
+      <li><a class="flex @(Model=="Transactions" ? "active" : null)" href="/subscribe/transactions">Transactions</a></li>
+      <li><a class="flex @(Model=="PaymentMethod" ? "active" : null)" href="/subscribe/paymentmethod">Payment Settings</a></li>
+      <li><a class="flex @(Model=="BillingSettings" ? "active" : null)" href="/subscribe/billingsettings">Billing Settings</a></li>
+      <li><a class="flex" href="https://helpcenter.octoparse.com/hc/en-us/requests" target="_blank" title="View your submitted requests and interested tutorial articles here" style="">Activities<i class="fa fa-question-circle " style="color:#ccc;margin-left:3px"></i></a></li>
+    </ul>
+  </nav>
+</div>

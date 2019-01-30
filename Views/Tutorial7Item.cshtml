@@ -1,0 +1,501 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@using Umbraco.Web
+@using Umbraco.Core.Models
+@using Umbraco.Web.Models
+@inherits UmbracoTemplatePage
+@{
+Layout = "octLayout.cshtml";
+
+// If the editor has not explicitly provided the "Page title" property page
+// then just show the name of the page otherwise show the provided title
+var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+? CurrentPage.Name
+: CurrentPage.Title;
+var homePage = CurrentPage.AncestorsOrSelf(1).First();
+var newsOverview = homePage.octTutorialOverviews.First();
+var items = newsOverview.octTutorialItems.OrderBy("updateDate desc").Take(5);
+
+var newsOverview7 = homePage.tutorial7Overviews.First();
+var newsItems7 = newsOverview7.tutorialItemV7s;
+
+var category = Request.QueryString["category"];
+var currentPageCategory = CurrentPage.category;
+}
+@section styles{
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: #f7f8fa;
+    }
+
+    .tut-header {
+        background: #2095f2;
+        width: 100%;
+        height: 160px;
+        padding-top: 20px;
+        box-sizing: border-box;
+    }
+
+    .tut-header p {
+        font-size: 32px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 40px;
+        font-family:Futura-LT-W01-Light
+
+    }
+
+    .tut-header a {
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #ffffff;
+        border-radius: 3px;
+        width: 220px;
+        height: 46px;
+        line-height: 46px;
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        margin-top: 32px;
+        text-decoration: none;
+        font-family:Futura-LT-W01-Light
+    }
+
+    .tut-bread {
+        width: 1200px;
+        margin: 18px auto -4px;
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+    }
+    .tut-bread .breadcrumb{
+        border:0;
+        background:unset
+    }
+    .tut-bread .breadcrumb>.active{
+        color:#333
+    }
+    .tut-bread li{
+        font-size: 16px;
+        text-align: left;
+        color: #333;
+    }
+    .tut-bread li .active{
+        cursor: default;
+    }
+    .tut-bread li a{
+        font-size: 16px;
+        color: #666666;
+        text-align: left;
+    }
+
+    .tut-bread span {
+        cursor: pointer;
+    }
+
+    .tut-bread .part2 {
+        color: #333;
+        cursor: default;
+    }
+
+    .tut-content {
+        width: 1170px;
+        margin: 0 auto 45px;
+    }
+
+    .tut-content:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .tut-content .right {
+        width: 850px;
+        float: right;
+        background: #ffffff;
+        padding: 24px 20px;
+        box-sizing: border-box;
+    }
+
+    .tut-content .right .article {
+    }
+
+    .tut-content .right .article .title{
+        font-size: 30px;
+        line-height:1.4;
+        font-weight:bold;
+        margin:0;
+        margin-bottom: 10px;
+    }
+
+    .tut-content .right .article .date {
+        font-size: 16px;
+        color: #333333;
+        margin-bottom: 24px;
+        font-weight: normal;
+        display: block;
+    }
+
+    .tut-content .right .article p.line {
+        background: #d6dbe5;
+        width: 810px;
+        height: 1px;
+        margin-bottom: 27px;
+    }
+
+    .tut-content .right .article .content {
+        font-size: 16px;
+        color: #333333;
+        line-height: 24px;
+        text-align: left;
+        overflow: hidden;
+        margin: 18px 0 30px;
+    }
+    /*解决文章中的有序无序列表的开头部分被超出影藏bug*/
+    .tut-content .right .article .content ul,.tut-content .right .article .content ol{
+        padding-left :  20px;
+    }
+    .tut-content .right .article table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-top:0.8rem;
+        margin-bottom:1.4rem
+    }
+    .tut-content .right .article tr{
+        border-top:1px solid
+    }
+    .tut-content .right .article th,td{
+        padding:5px 14px;
+        border:1px solid;
+    }
+
+    .page {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .page .pre a:hover,.next a:hover
+    {
+        color:#2a96ef;
+    }
+    .page .pre {
+        background: #ffffff;
+        width: 220px;
+        min-height: 38px;
+        float: left;
+        text-align: left;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .page .next {
+        background: #ffffff;
+        width: 220px;
+        float: right;
+        min-height: 38px;
+        text-align: right;
+        cursor: pointer;
+        user-select: none;
+    }
+    .page .pre .wrap{
+        float:right;
+        width: 200px;
+    }
+    .page .pre .wrap .nextpost{
+        color:gray;
+        font-size:12px;
+    }
+    .page .pre .img{
+        float:left;
+        width: 20px;
+        color:gray;
+        line-height:60px
+    }
+    .page .next .wrap{
+        float:left;
+        width: 200px;
+    }
+    .page .next .wrap .nextpost{
+        color:gray;
+        font-size:12px;
+    }
+    .page .next .img{
+        float:right;
+        width: 20px;
+        color:gray;
+        line-height:60px
+    }
+
+    .page a {
+        color: #333333;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .popular {
+        width: 100%;
+        height: 236px;
+        background-image: url("@Url.Content("~/images/bg.jpg")");
+        background-position: center top;
+    }
+
+    .popular .wrap {
+        width: 972px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .popular .wrap ul {
+        width: 280px;
+        height: 100%;
+        margin-right: 120px;
+        margin-left:86px;
+        list-style: none;
+        float: left;
+    }
+
+    .popular .wrap ul:last-child {
+        margin-right: 0;
+    }
+
+    .popular .wrap ul li {
+        width: 280px;
+        height: 37px;
+        line-height: 40px;
+        font-size: 16px;
+        color: #333333;
+        text-align: left;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .popular .wrap ul li a {
+        color: #337ab7;
+        font-weight: normal;
+        width: 400px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+
+    .download {
+        background: url("@Url.Content("~/images/morequestions.jpg")");
+        background-position: center top;
+        width: 100%;
+        height: 160px;
+        padding-top: 18px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .download p {
+        font-size: 20px;
+        color: #2e2e2f;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a {
+        border: 2px solid #ffffff;
+        border-radius: 3px;
+        line-height: 36px;
+        margin-top: 22px;
+        text-decoration: none;
+        background: #ffffff;
+        width: 136px;
+        height: 40px;
+        display: inline-block;
+        font-size: 20px;
+        color: #fbad29;
+        text-align: center;
+        font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        font-weight: bold;
+    }
+
+    .download a:last-child {
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        background: #fcba52;
+        margin-left: 40px;
+    }
+    .changeView{
+        height: 42px;
+        font-size: 18px;
+        color: black;
+        font-weight: bold;
+    }
+    .changeView span{
+        float: left;
+        color:gray;
+        margin:0 20px;
+    }
+    .changeView p{
+        float: left;
+        cursor:pointer;
+    }
+    .changeView p:last-child{
+        color:#2095f2
+    }
+    img{
+        max-width: 100%;
+    }
+</style>
+}
+<div class="tut-header">
+    <p>Step-by-step tutorials for you to get started with web scraping</p>
+    <a target="_blank" href="/download">Download Octoparse</a>
+</div>
+<div class="tut-bread">
+    <ol class="breadcrumb">
+        <li><a href="/tutorial-7">Tutorial</a></li>
+        @{
+        if (CurrentPage.learnCategory == "Getting Started")
+        {
+        <li><a href="/getting-started">Getting Started</a></li>
+        <li><a href="/getting-started?category=@currentPageCategory">@currentPageCategory</a></li>
+        }
+        else if (CurrentPage.learnCategory == "Building Tasks")
+        {
+        <li><a href="/building-tasks">Building Tasks</a></li>
+        <li><a href="/building-tasks?category=@currentPageCategory">@currentPageCategory</a></li>
+        }
+        else if (CurrentPage.learnCategory == "Case Tutorials")
+        {
+        <li><a href="/case-tutorials">Cases Tutorials</a></li>
+        <li><a href="/case-tutorials?category=@currentPageCategory">@currentPageCategory</a></li>
+        }
+        else if (CurrentPage.learnCategory == "Troubleshooting")
+        {
+        <li><a href="/case-tutorials">Troubleshooting</a></li>
+        <li><a href="/case-tutorials?category=@currentPageCategory">@currentPageCategory</a></li>
+        }
+        }
+        <li class="active">@(pageTitle.Length>20?pageTitle.Substring(0,20)+"...":pageTitle)</li>
+    </ol>
+
+    @*<span class="part1">Getting Started</span> >
+    <span class="part2">octoparse-introductory-lessons</span> >
+    <span class="part3">Article</span>*@
+</div>
+<div class="tut-content">
+    @{ Html.RenderPartial("octTutorial7Left");}
+    <div class="right">
+        <div class="article">
+            <h1 class="title">@CurrentPage.tutorialName</h1>
+            <span class="date">@((CurrentPage.UpdateDate == default(DateTime) ? CurrentPage.CreateDate : CurrentPage.UpdateDate).ToString("D"))</span>
+            @if (!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
+            {
+            <div class="changeView">
+                <p>Graphic tutorial</p><span>|</span>
+                <p>Video tutorial</p>
+            </div>
+            }
+            <p class="line"></p>
+            <div class="content contentarticle">
+                @if (CurrentPage.graphicTutorial != null && CurrentPage.graphicTutorial.ToString() != "")
+                {
+                <div  role="tabpanel" class="tab-pane @(string.IsNullOrWhiteSpace(CurrentPage.videoTutorial)?"active":"")" id="profile">@CurrentPage.graphicTutorial</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
+            {
+            <div style="display: none" class="video">
+                <iframe  width="800" height="450" id="video" src="@CurrentPage.videoTutorial" frameborder="0" allowfullscreen></iframe>
+                <p>If this video tutorial is not available for you, you can&nbsp;<a target="_blank" id="video-view" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">click here</a>to see the corresponding graphic tutorial.</p>
+                <br class="divider">
+            </div>
+            }
+        </div>
+        <p class="line"></p>
+    </div>
+    <div class="page">
+        @{
+        var tutorials = newsItems7.OrderBy("updateDate desc");
+        List<DynamicPublishedContent> tutorialList = new List<DynamicPublishedContent>();
+        tutorialList.AddRange(tutorials);
+        if (tutorialList != null && tutorialList.Count() > 1)
+        {
+        var count = tutorialList.Count();
+        int index = tutorialList.IndexOf(tutorialList.Where(p => p.Id == CurrentPage.Id).FirstOrDefault());
+        if (index - 1 >= 0)
+        {
+        dynamic pre = tutorialList[index - 1];
+        string preTitle = string.IsNullOrWhiteSpace(pre.Title) ? pre.Name : pre.Title;
+        <div class="pre">
+            <a target="_blank" href="@pre.Url" title="@preTitle">
+                <span class="wrap">
+                <span class="nextpost">PREVIOUS POST</span><br>
+                <span class="title">@(preTitle)</span>
+            </span>
+                <span class="img"><</span>
+            </a>
+        </div>
+        }
+        if (index + 1 < count)
+        {
+        dynamic next = tutorialList[index + 1];
+        string nextTitle = string.IsNullOrWhiteSpace(next.Title) ? next.Name : next.Title;
+        <div class="next"><a target="_blank" href="@next.Url" title="@nextTitle">
+            <span class="wrap">
+                <span class="nextpost">NEXT POST</span><br>
+                <span class="title">@(nextTitle)</span>
+            </span>
+            <span class="img">></span>
+        </a></div>
+        }
+        }
+        }
+    </div>
+</div>
+</div>
+<div class="popular">
+    <div class="wrap">
+        <ul>
+            <li>Most popular tutorials</li>
+            @foreach (var item in newsItems7.OrderBy("updateDate desc").Take(5))
+            {
+            <li><a target="_blank" target="_blank" href="@item.Url">@item.tutorialName</a></li>
+            }
+        </ul>
+        <ul>
+            <li>Recently view tutorials</li>
+            @foreach (var item in newsItems7.Where("learnCategory == @0", "Case Tutorials").OrderBy("updateDate desc").Take(5))
+            {
+            <li><a target="_blank" href="@item.Url">@item.tutorialName</a></li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="download">
+    <p>Download Octoparse to start web scraping or contact us for any<br> question about web scraping!</p>
+    <div>
+        <a target="_blank" href="/contact">Contact us</a>
+        <a target="_blank" href="/download">Download</a>
+    </div>
+</div>
+<script>
+    if(document.querySelector('.changeView p:first-child'))
+        document.querySelector('.changeView p:first-child').onclick = function(){
+            this.style.color = 'black'
+            document.querySelector('.changeView p:last-child').style.color = '#2095f2'
+            document.querySelector('.tab-pane').style.display = 'block'
+            document.querySelector('.video').style.display = 'none'
+        }
+    if(document.querySelector('.changeView p:last-child'))
+        document.querySelector('.changeView p:last-child').onclick = function(){
+            this.style.color = 'black'
+            document.querySelector('.changeView p:first-child').style.color = '#2095f2'
+            document.querySelector('.tab-pane').style.display = 'none'
+            document.querySelector('.video').style.display = 'block'
+        }
+</script>

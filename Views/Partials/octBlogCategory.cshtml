@@ -1,0 +1,32 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@{
+    var pageIndex = Request.QueryString["pageIndex"];
+    string url = "/Blog?pageIndex=" + pageIndex + "&blogCategory=";
+}
+<div class="articleName">
+    <p>Posts by topic</p>
+    <ul id="blogCategory">
+        @{
+            var df = ApplicationContext.Current.Services.DataTypeService.GetDataTypeDefinitionByName("BlogCategory");
+            XPathNodeIterator iterator = umbraco.library.GetPreValues(df.Id);
+            iterator.MoveNext();
+            XPathNodeIterator preValues = iterator.Current.SelectChildren("preValue", "");
+            string preValue = "";
+            int i = 0;
+            while (preValues.MoveNext())
+            {
+                preValue = preValues.Current.Value;
+                i++;
+                string cate = preValue; ;
+                if (!cate.Contains("-"))
+                {
+                    cate = cate.Replace(" ", "-");
+                }
+                cate = cate.ToLower();
+                string u = "/blog?blogCategory=" + preValue;
+                <li class="@("color"+i.ToString()) "><a href="@u" target="_blank">@preValue</a></li>
+            }
+        }
+    </ul>
+</div>

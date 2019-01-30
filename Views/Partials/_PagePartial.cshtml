@@ -1,0 +1,67 @@
+﻿@model Octoparse.Web.Models.PageInfoModel
+@{
+    int maxPage = 5;
+}
+@if (Model != null && Model.Total > 0 && Model.TotalPage > 1)
+{
+    int currentMaxPage = Model.TotalPage;
+    int currentMinPage = 1;
+    if (Model.TotalPage > maxPage)
+    {
+        if (Model.PageIndex <= maxPage)
+        {
+            currentMaxPage = maxPage;
+        }
+        else
+        {
+            currentMaxPage = Math.Ceiling(Model.PageIndex * 1.0 / maxPage) * maxPage < Model.TotalPage ? Convert.ToInt32(Math.Ceiling(Model.PageIndex * 1.0 / maxPage) * maxPage) : Model.TotalPage;
+        }
+
+        currentMinPage = currentMaxPage - maxPage + 1 > 1 ? currentMaxPage - maxPage + 1 : 1;
+    }
+    bool isFirst = currentMinPage > 1;
+    bool isLast = currentMaxPage < Model.TotalPage;
+
+    bool isPrevious = Model.PageIndex > 1;
+    bool isNext = Model.PageIndex < Model.TotalPage;
+    <div class="row">
+        <div class="col-md-12">
+            <nav style="text-align:center;">
+                <ul class="pagination pagination-lg" style="float:left;">
+                    <li style="float:left;" class="@(isPrevious ? "":"disabled")">
+                        <a style="font-size:3rem" href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,Model.PageIndex-1):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName,Model.PageIndex-1))"  style="width:120px;"  title="Previous">« Previous</a>
+                    </li>
+                </ul>
+                <ul class="pagination pagination-lg">
+                    @*<li class="@(isFirst ? "":"disabled")"><a href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,1):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName,1))" title="First"><<</a></li>*@
+
+                    @for (var i = currentMinPage; i <= currentMaxPage; i++)
+                    {
+                        <li @Html.Raw(Model.PageIndex == i ? "class='active'" : "")><a href="@(Model.BaseUrl.IndexOf('?') > 0 ? string.Format("{0}&{1}={2}", Model.BaseUrl, Model.ParamName, i) : string.Format("{0}?{1}={2}", Model.BaseUrl, Model.ParamName, i))" style="border-radius: 0px;margin-right:20px;">@i</a></li>
+                    }
+
+                    @if (currentMaxPage < Model.TotalPage)
+                    {
+                        <li><a style="border-radius: 0px;margin-right:20px;" href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,currentMaxPage+1):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName,currentMaxPage+1))">...</a></li>
+                        @*<li><a href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,Model.TotalPage):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName, Model.TotalPage))">@Model.TotalPage</a></li>*@
+                    }
+                    @*<li class="@(isLast ? "":"disabled")"><a href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,Model.TotalPage):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName,Model.TotalPage))" title="Last">>></a></li>*@
+
+                </ul>
+
+                <ul class="pagination pagination-lg" style="float:right;">
+                    <li style="float:right;" class="@(isNext ? "":"disabled")"><a href="@(Model.BaseUrl.IndexOf('?')>0?string.Format("{0}&{1}={2}",Model.BaseUrl,Model.ParamName,Model.PageIndex+1):string.Format("{0}?{1}={2}",Model.BaseUrl,Model.ParamName,Model.PageIndex+1))"  title="Next">Next »</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+}
+<style>
+    .tut-content{width: 100% !important;}
+    nav{width:100%; };
+    .container{width: 100%}
+    ul.pagination  li a{
+        font-size: 3rem;
+        font-family: BoldMT;
+    }
+</style>

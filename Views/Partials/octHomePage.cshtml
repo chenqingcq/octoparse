@@ -1,0 +1,956 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+    int blogId = 1061;//博客的根目录Id
+    var blogList = Umbraco.Content(blogId);
+    var blogs = blogList.Children.OrderBy("CreateDate desc").Take(6);
+}
+@section styles{
+    <link rel="alternate" href="https://www.octoparse.com" hreflang="en" />
+    <link rel="alternate" href="http://www.bazhuayu.com/" hreflang="zh-CN" />
+    <link rel="alternate" href="http://jp.octoparse.com/" hreflang="ja" />
+    <link rel="stylesheet" href="/css/flex.css">
+    <style type="text/css">
+        .why-box {padding-bottom:80px;}
+        .h-title {font-size:24px;font-weight:bold;color:#333;margin-top:56px;margin-bottom:40px;}
+        .h-title>p {font-size:14px;font-weight:normal;color:#999;margin-top:10px;}
+        .why-item {overflow:hidden;margin-top:35px;}
+        .why-item>img {display:block;margin:0 auto;}
+        .why-item>h3 {margin-top:14px;font-size:20px;color:#333;font-weight:normal;text-align:center;margin-bottom:16px;}
+        .why-item>p {font-size:14px;color:#999;line-height:20px;text-align:center;}
+        .web-box {background:#F8F8F8;}
+        .web-row {padding-top:20px;padding-bottom:97px;}
+        .web-ul {padding-left:0;list-style:none;overflow:hidden;margin-bottom:16px;}
+        .web-ul>li {display:block;}
+        .web-ul>li:first-child {padding-top:1px;}
+        .web-ul>li>a {display:block;height:60px;border:1px solid #e5e5e5;border-radius:5px;line-height:60px;margin-top:-1px;width:500px;background:#fff;padding-left:20px;font-size:16px;color:#333;text-decoration:none;position:relative;}
+        .web-ul>li>a:hover {border-color:#363636;z-index:2;}
+        .web-row .more {font-size:14px;color:#999;margin-left:20px;}
+        .tool {padding-top:20px;}
+        .tool-row {padding-top:30px;margin-bottom:80px;}
+        .tool-left {background:#F8F8F8;border-radius:6px;padding-bottom:30px;}
+        .tool-l {width:100%;overflow:hidden;margin-top:20px;}
+        .tool-l>img {display:block;margin:0 auto;}
+        .tool-l>p {font-size:12px;color:#333;text-align:center;margin-bottom:0;}
+        .tool-r {width:100%;overflow:hidden;margin-top:8px;}
+        .tool-r>img {display:block;margin:0 auto;}
+        .tool-r>p {font-size:12px;color:#333;text-align:center;margin-bottom:0;}
+        .tool-c {height:370px;background:url(/images/arrow2.png) no-repeat right center;}
+        .tool-c-arrow {width:40px;height:100%;background:url(/images/arrow.png) no-repeat center center;float:left;margin-left:40px;}
+        .tool-c-y {width:100px;height:100%;background:url(/images/h/t.png) no-repeat center center;float:left;margin-left:50px;}
+        .what-box {background:#F8F8F8;padding-bottom:60px;}
+        .what-item {border:1px solid #E5E5E5;border-radius:6px;padding-left:134px;padding-top:44px;position:relative;background:#fff;height:170px;padding-right:26px;overflow:hidden;margin-bottom:20px;}
+        .what-item>img {position:absolute;left:34px;top:34px;}
+        .what-item>h4 {margin-top:0;font-size:16px;color:#333;font-weight:bold;margin-bottom:6px;}
+        .what-item>p {font-size:14px;color:#999;line-height:20px;margin-bottom:0;}
+        .what-item>.hide-div {width:99.8%;height:164px;position:absolute;left:1px;top:1px;background:#fff;display:none;}
+        .what-item>.hide-div>.co>p {padding-left:34px;color:#333;font-size:13px;margin-bottom:0;}
+        .what-item>.hide-div>.co {position:relative;height:164px;padding-top:16px;}
+        .what-item>.hide-div>.co>span {position:absolute;bottom:14px;left:0;width:100%;}
+        .what-item>.hide-div>.co .a {width:120px;height:25px;line-height:25px;background:#3E3E3E;color:#fff;border-radius:25px;display:block;margin:10px auto 0;text-align:center;text-decoration:none;}
+        .ly-box {padding-top:20px;padding-bottom:60px;}
+        .ly-content {overflow:hidden;padding-top:45px;margin-bottom:20px;}
+        .ly-content>p {font-size:14px;color:#333;width:810px;margin-bottom:25px;line-height:20px;}
+        .ly-content>span {font-size:16px;color:#999;}
+        .ly-content-1 {background:url(/images/h/lybg1.png) no-repeat center center;width:1181px;height:180px;padding-left:210px;}
+        .ly-content-2 {background:url(/images/h/lybg2.png) no-repeat center center;width:1181px;height:180px;padding-left:80px;}
+        .blog-box {background:#f8f8f8;padding-bottom:60px;}
+        .blog-tem {overflow:hidden;position:relative;border-radius:5px;margin-bottom:10px;}
+        .blog-tem>img {display:block;width:100%;height:auto;border-radius:5px;}
+        .blog-tem>a {display:block;position:absolute;left:0;top:0;width:100%;height:100%;text-align:center;background:rgba(0,0,0,.4);color:#fff;padding-top:56px;text-align:center;font-size:15px;font-weight:bold;text-decoration:none;}
+        .blog-tem>a:hover {background:rgba(0,0,0,.7);}
+        .blog-row {padding-left:-5px;padding-right:-5px;}
+        .blog-row>div {padding-left:10px;padding-right:10px;padding-bottom:20px;}
+        .blog-box .more {width:250px;height:42px;line-height:42px;color:#999;text-align:center;border:1px solid #bdbdbd;font-weight:bold;font-size:15px;display:block;margin:0 auto;margin-top:20px;background:#EEEEEE;border-radius:42px;text-decoration:none;}
+        .blog-box .more:hover {background:#13A4DF;color:#fff;}
+        .data-tool {padding-bottom:60px;border-bottom:1px solid #e5e5e5;}
+        .what-item:hover {border-color:#363636;}
+        .what-item:hover>.hide-div {display:block;}
+        .blog-tem-top,.blog-tem-btm {padding:20px;overflow:hidden;border-radius:5px;background-color:#fff;border:1px solid #e5e5e5;}
+        .blog-tem-top .img {float:left;margin-right:30px;}
+        .blog-tem-top .img img {width:220px;height:220px;border-radius:5px;}
+        .fl {float:left;}
+        .content .p-time {margin-bottom:0;padding-top:20px;font-size:13px;font-weight:bold;color:#999;}
+        .content .h3-title {margin-top:30px;margin-bottom:15px;font-size:20px;font-weight:bold;}
+        .content .h3-title a {color:#333;text-decoration:none;display:inline-block;min-height:66px;}
+        .content .p-content {width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;color:#999;margin-bottom:0;}
+        .blog-tem-top:hover .h3-title a,.blog-tem-top:hover .p-content,.blog-tem-btm:hover .h3-title a,.blog-tem-btm:hover .p-content {color:#fff;}
+        .blog-tem-top:hover,.blog-tem-btm:hover {background-color:#08A9E3;}
+        .blog-tem-btm .img img {width:328px;height:220px;border-radius:5px;}
+        .blog-tem-btm .content .p-content {width:370px;}
+        .blog-tem-top:hover .p-time,.blog-tem-btm:hover .p-time {color:#ddd;}
+        body {color:#2F2E2E;font-size:10px;font-family:Arial,Helvetica,sans-serif;}
+        .jumbotron {height:710px;background:rgba(13,163,226,1);padding-top:235px;}
+        .jumbotron .container {text-align:center;}
+        .jumbotron .container .btn-primary-my {float:none;}
+        .jumbotron .container h3 {font-size:54px;font-family:avenir-lt-w01_85-heavy1475544,sans-serif;font-weight:normal;margin-bottom:18px;}
+        .jumbotron .container p {margin:0;}
+        .jumbotron .container.text-left.banner-btns {padding-top:80px;}
+        .jumbotron .container .download-btn {width:200px;height:54px;line-height:54px;border-radius:0px;background-color:rgba(241,104,118,1);border:solid rgba(96,94,94,1) 0px;transition:background-color 0.4s ease 0s;color:#fff;font-size:20px;font-weight:normal;margin-bottom:22px;}
+        .jumbotron .container .download-btn:hover {background-color:rgba(39,59,123,1);border-color:transparent;}
+        .jumbotron .container .video-btn {margin:0 auto;padding:0;background:none;color:#2F2E2E!important;text-decoration:underline;font-size:20px;}
+        .why-box .h-title {margin:6px 0 10px;font-size:33px;font-weight:normal;font-family:open sans,sans-serif;color:#2F2E2E;}
+        .why-box .p-title {text-align:center;font-size:17px;color:#2F2E2E;}
+        .why-box .icon-advance {width:155px;height:155px;margin:0 auto;cursor:pointer;}
+        .why-box .container {width:980px;padding-bottom:100px;}
+        .why-box .why-item-1 .icon-advance {background:url(/images/h/home-new/icon_advance_1.png) center no-repeat;}
+        .why-box .why-item-2 .icon-advance {background:url(/images/h/home-new/icon_advance_2.png) center no-repeat;}
+        .why-box .why-item-3 .icon-advance {background:url(/images/h/home-new/icon_advance_3.png) center no-repeat;}
+        .why-box .why-item-4 .icon-advance {background:url(/images/h/home-new/icon_advance_4.png) center no-repeat;}
+        .why-box .why-item-5 .icon-advance {background:url(/images/h/home-new/icon_advance_5.png) center no-repeat;}
+        .why-box .why-item-6 .icon-advance {background:url(/images/h/home-new/icon_advance_6.png) center no-repeat;}
+        .why-box .icon-advance:hover {background:url(/images/h/home-new/icon_pie_hover.png) center no-repeat;}
+        .web-box {background-color:rgba(204,204,204,0.25);}
+        .web-box .container {width:980px;padding:45px 0;}
+        .b-content {width:490px;}
+        .b-content .b-img {width:50%;}
+        .b-content .b-title {font-size:33px;font-family:avenir-lt-w01_85-heavy1475544,sans-serif;}
+        .b-content .s-1 {line-height:28px!important;margin:30px 0;font-size:15px!important;font:normal normal normal 17px/1.4em Avenir-LT-W01_35-Light;}
+        .b-content .s-2 p {line-height:26px;margin-bottom:6px;font-size:14px;}
+        .b-content .s-2 p b {font-size:16px;}
+        .b-content .btm-btn {display:block;margin:30px 0 0 100px;width:146px;height:41px;line-height:41px;font-size:17px;color:#fff;text-align:center;background-color:#fff;transition:border-color 0.4s ease 0s,background-color 0.4s ease 0s;background-color:#2095f2;text-decoration:none;}
+        .b-img {margin-top:40px;}
+        .cr-box .container {width:980px;padding-bottom:140px;}
+        .cr-box .cr-item {margin-bottom:35px;}
+        .cr-box .cr-title {font-family:avenir-lt-w01_85-heavy1475544,sans-serif;margin:40px 0 40px;font-size:33px;}
+        .cr-box .i-content {width:728px;}
+        .cr-box .i-content .p-1 {font:normal normal normal 17px/1.4em Avenir-LT-W01_35-Light;font-size:17px;line-height:22px;}
+        .cr-box .i-content .p-2 {font-size:19px;font-weight:bold;text-align:right;}
+        .clients-box {height:544px;background:url(/images/h/home-new/btm_bg.jpg) center;-webkit-background-size:cover;background-size:cover;}
+        .clients-box .box-outer {height:100%;width:100%;background-color:rgba(4,81,132,.9);}
+        .clients-box .container {width:980px;}
+        .clients-box .container h2 {margin-top:140px;color:#3588CC;font-size:46px;text-align:center;font-weight:bold;}
+        .clients-box .container .clients-logo {width:920px;margin:130px auto 0;}
+    </style>
+
+    <style>
+        #section-2 {
+            margin: 50px auto;
+            width: 1200px;
+            align-items: center;
+            text-align: center;
+        }
+
+            #section-2 > h2 {
+                font-size: 40px;
+                font-weight: bold;
+            }
+            #section-2 > h2 a{
+                color:#2F2E2E;
+                text-decoration: none;
+            }
+
+            #section-2 > p {
+                font-size: 18px;
+            }
+            #section-2 > p a{
+                color:#2F2E2E;
+                text-decoration: none;
+            }
+
+            #section-2 .block img {
+            }
+
+            #section-2 .block h2 {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            #section-2 .block p {
+                font-size: 16px;
+            }
+    </style>
+
+    <style>
+        .width1200 {width: 1200px;}
+        .bg-gray {background-color:#eee;}
+        .introduce-wrap {width:100%;}
+        .introduce {margin:60px auto;}
+        .introduce img.margin-left {margin-left: 20px}
+        .introduce img.margin-right {margin-right: 20px}
+        .introduce-body {justify-content:space-around;}
+        .introduce-body h2 {font-size: 34px; font-weight: bold; margin-bottom: 40px;}
+        .introduce-body p {font-size:18px;}
+        .introduce-body ul {padding: 0;margin: 20px 0;}
+        .introduce-body li {margin-left: 20px;font-size: 16px;margin-bottom: 10px;}
+        .introduce-body a {width:254px;font-size:20px;padding:8px 20px;}
+    </style>
+    <style type="text/css" media="screen">
+            .steps{
+            height:720px;
+            padding-top: 51px;
+            width:100%;
+            box-sizing: border-box;
+            background-image: url('/images/home/bg.jpg');
+            background-position: center top;
+            font-family:Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+        }
+        .steps h2{
+            font-size:40px;
+            color:#2e2e2e;
+            text-align:center;
+        }
+            .steps h2 a{
+                color:#2e2e2e;
+                text-decoration: none;
+            }
+        .steps h4{
+            font-size:20px;
+            color:#232323;
+            text-align:center;
+            margin: 12px 0 41px;
+            font-weight: normal;
+        }
+        .steps .wrap{
+            width: 1060px;
+            height: 447px;
+            margin: 40px auto;
+            list-style: none;
+            padding: 0;
+        }
+        .steps .wrap > li{
+            float: left;
+            height: 100%;
+        }
+        .steps .wrap > li:first-child{
+            width: 340px;
+        }
+        .steps .wrap > li:nth-child(2){
+            width: 60px;
+            background-image: url(/images/home/line.png);
+            background-repeat: no-repeat;
+            background-position: 0 52%;
+        }
+        .steps .wrap > li:nth-child(3){
+            position: relative;
+            width: 660px;
+        }
+        .steps .wrap > li:first-child div{
+            width: 320px;
+            height: 110px;
+            background-color: #ffffff;
+            border:2px solid #c2c9d6;
+            box-sizing: border-box;
+            position: relative;
+            padding: 13px 0 7px 20px;
+            margin-bottom: 31px;
+            margin-left: 20px;
+            color:#333;
+            cursor: pointer;
+            transition: all .3s;
+        }
+        .steps .wrap > li:first-child div:first-child{
+            margin-top: 30px;
+        }
+        .steps .wrap > li:first-child div:after{
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: -1px;
+            border-bottom: 8px solid #c2c9d6;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            transform: rotate(45deg);
+        }
+        .steps .wrap > li:first-child div span{
+            font-family:Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+            display: block;
+            font-size:16px;
+            font-weight: bold;
+            text-align:left;
+            margin-bottom:17px;
+        }
+        .steps .wrap > li:first-child div p{
+            font-family:Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
+            display: block;
+            font-size:18px;
+            line-height:25px;
+            text-align:left;
+            margin-top:10px;
+        }
+        .steps .wrap > li:first-child div.sel{
+            margin-left: 0;
+            width: 340px;
+            background-color: #2095f2;
+            color: white;
+            border:2px solid #2095f2;
+            padding: 13px 16px 7px 23px;
+        }
+        .steps .wrap > li:first-child div.sel:after{
+            border-bottom: 8px solid white;
+        }
+        .steps .wrap > li:nth-child(3) img{
+            position: absolute;
+            left: 30px;
+            top: 30px;
+        }
+        .steps .wrap > li:nth-child(3) .macbook{
+            position: absolute;
+            left: -10px;
+            top: 0;
+        }
+
+            .infor{
+                width: 100%;
+                background-color: #eee;
+                height: 480px;
+                box-sizing: border-box;
+            }
+            .special{
+                background-color: #fff;
+            }
+            .infor:after{
+                content: '';
+                display: block;
+                height: 0;
+                clear: both;
+                visibility: hidden;
+            }
+            .infor h1{
+                font-size:40px;
+                color:#2e2e2e;
+                height: 100px;
+                line-height: 150px;
+                text-align:center;
+            }
+            .infor .wrap{
+                width: 1200px;
+                list-style: none;
+                margin: 0 auto;
+                height: 450px;
+                padding:0;
+                padding-top: 40px;
+                box-sizing: border-box;
+            }
+            .infor .wrap li{
+                float: left;
+                height: 410px;
+            }
+            .infor .wrap .img{
+                width: 640px;
+                margin-right: 60px;
+            }
+            .infor .wrap .word{
+                width: 500px;
+            }
+            .infor .wrap .word h3{
+                font-size:24px;
+                color:#232323;
+                text-align:left;
+                margin-bottom: 23px;
+                margin-top:0;
+            }
+            .infor .wrap .word h3 a{
+                color:#232323;
+                text-decoration: none;
+            }
+            .infor .wrap .word p{
+                font-size:18px;
+                color:#232323;
+                letter-spacing:0;
+                line-height:25px;
+                text-align:left;
+                padding-left: 45px;
+                box-sizing: border-box;
+                position: relative;
+            }
+            .infor .wrap .word p a{
+                color:#232323;
+                text-decoration: none;
+            }
+            .infor .wrap .word span{
+                display: block;
+                font-size:18px;
+                color:#232323;
+                line-height:25px;
+                text-align:left;
+                font-weight: normal;
+                margin-bottom: 10px;
+            }
+
+            .infor .wrap .word>a{
+                display: block;
+                background:#2095f2;
+                border-radius:3px;
+                width:200px;
+                height:48px;
+                line-height: 48px;
+                margin-top: 23px;
+                color: white;
+                font-size:18px;
+                text-align:center;
+                text-decoration: none;
+                transition:all .3s;
+            }
+            .infor .wrap .word>a:hover{
+                background:#1788e2;
+            }
+            .infor .wrap .word p:after{
+                content: '';
+                position: absolute;
+                top: 9px;
+                left: 20px;
+                height: 5px;
+                width: 5px;
+                border-radius: 50%;
+                background-color: #232323;
+            }
+                .trustedBy{
+                    position: relative;
+                    width:100%;
+                    height:496px;
+                    background-image: url(/images/home/bg-1.jpg);
+                    background-position: center top;
+                    user-select:none;
+                }
+                .trustedBy h1{
+                    font-size:40px;
+                    color:#ffffff;
+                    text-align:center;
+                    height:85px;
+                    line-height:120px;
+                    position: relative;
+                    margin:0;
+                }
+                .trustedBy h1:after{
+                    content:'';
+                    position: absolute;
+                    background:#ffffff;
+                    width:56px;
+                    height:4px;
+                    top:107%;
+                    left:48%;
+                }
+                .trustedBy ul{
+                    width: 1100px;
+                    margin:34px auto;
+                    list-style: none;
+                    padding:0;
+                }
+                .trustedBy ul li{
+                    position: relative;
+                    height:247px;
+                    float: left;
+                    width: 500px;
+                    font-size:19px;
+                    color:#ffffff;
+                    line-height:25px;
+                    text-shadow:0 2px 1px rgba(0,0,0,0.50);
+                    text-align:left;
+                     margin-top: 32px;
+                }
+                .trustedBy ul li:after{
+                    content:'- Hayk Antonyan';
+                    position: absolute;
+                    top:88%;
+                    right:0;
+                    font-size:23px;
+                    color:#ffffff;
+                    text-shadow:0 2px 1px rgba(0,0,0,0.50);
+                }
+                .trustedBy ul li:first-child:after{
+                    content:'- Taylor Harris';
+                }
+                .trustedBy ul li:first-child{
+                    margin-right: 100px;
+                }
+                .trustedBy .img{
+                    position: absolute;
+                    width: 140px;
+                    height: 140px;
+                    border-radius: 50%;
+                    top:92%;
+                    left:50%;
+                    margin-left:-70px;
+                }
+                .logo{
+                    margin-top:194px;
+                    margin-bottom:163px;
+                    width: 100%;
+                    height: 222px;
+                }
+                .logo ul{
+                    width: 1050px;
+                    height: 222px;
+                    padding:0;
+                    list-style: none;
+                    margin: 0 auto;
+                }
+                .logo ul li{
+                    float: left;
+                    height: 96px;
+                    width: 240px;
+                    margin-right:30px;
+                    position: relative;
+                }
+                .logo ul li img{
+                    height: 96px;
+                    width: 240px;
+                }
+                .logo ul li:after{
+                    content:'';
+                    position: absolute;
+                    background:#d6dbe5;
+                    border-radius:1px;
+                    width:2px;
+                    height:76px;
+                    right:-14px;
+                    top:12px;
+                }
+                .logo ul li:nth-child(4n){
+                    margin-right:0;
+                }
+                .logo ul li:nth-child(4n):after{
+                    content:none;
+                }
+                .logo ul li:nth-child(n+5){
+                    margin-top:30px
+                }
+                .logo ul li:nth-child(n+5):before{
+                    content:'';
+                    position: absolute;
+                    background:#d6dbe5;
+                    border-radius:1px;
+                    width:220px;
+                    height:2px;
+                    right:12px;
+                    top:-10px;
+                }
+
+                .blog{
+                        width:100%;
+                        height:490px;
+                        background-image: url(/images/home/bg-2.jpg);
+                        background-position: center top;
+                    }
+                    .blog h1{
+                        height: 90px;
+                        font-size:40px;
+                        color:#ffffff;
+                        text-align:center;
+                        line-height:132px;
+                        margin:0;
+                    }
+                    .blog h3{
+                        text-align:center;
+                        height: 23px;
+                        margin:10px 0 25px 0;
+                    }
+                    .blog h3 a{
+                        font-size:20px;
+                        color:#ffffff;
+                        text-align:center;
+                        text-decoration: none;
+                    }
+                    .blog .container{
+                        width: 1124px;
+                        margin:0 auto;
+                        height: 270px;
+                        position: relative;
+                    }
+                    .blog .container img{
+                        position: absolute;
+                        top:40%;
+                        cursor:pointer;
+                    }
+                    .blog .container img.left{
+                        left:0
+                    }
+                    .blog .container img.right{
+                        right:0
+                    }
+                    .blog .container .warp{
+                        height: 270px;
+                        width: 1000px;
+                        overflow:hidden;
+                        position: absolute;
+                        left:62px;
+                        top:0;
+                    }
+                    .blog .container .warp ul{
+                        height: 270px;
+                        position: absolute;
+                        width: 1360px;
+                        top:0;
+                        left:0;
+                        list-style: none;
+                        transition: all .3s;
+                        padding:0;
+                    }
+                    .blog .container .warp ul li{
+                        float: left;
+                        height: 270px;
+                        width: 320px;
+                        margin-right:20px;
+                        background-color: #fff;
+                        box-sizing: border-box;
+                        padding:17px 6px 20px 24px;
+                        text-align:right;
+                    }
+                    .blog .container .warp ul li .head{
+                        font-size:18px;
+                        color:#232323;
+                        text-align:left;
+                        margin-bottom:9px;
+                        font-weight: bold;
+                    }
+                    .blog .container .warp ul li .date{
+                        font-size:16px;
+                        color:#666666;
+                        text-align:left;
+                        margin-bottom:16px;
+                    }
+                    .blog .container .warp ul li p{
+                        height: 120px;
+                        width: 290px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        font-size:15px;
+                        color:#232323;
+                        line-height:24px;
+                        text-align:left;
+                        margin:0;
+                    }
+                    .blog .container .warp ul li a{
+                        font-size:16px;
+                        color:#1e73fa;
+                        text-decoration: none;
+                    }
+    </style>
+}
+<!-- Modal -->
+<div class="modal fade" id="Video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="top:30%;">
+    <div class="modal-dialog" role="document" style="width:840px;">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <iframe width="800" height="460" src="" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="width:100%;height:460px;position:relative;text-align:center;background-image: url(/images/home/banner.jpg);background-position: center top;">
+    <!--<img src="/images/home/banner.jpg" alt="banner.jpg" style="width: 100%;">-->
+    <section class="flex flex-column flex-middle" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        <h1 style="font-family:HelveticaNeue-Bold;font-weight: bold;font-size:2rem;color:#ffffff;text-align:center;line-height:40px;"> Test Easy Web Scraping for Anyone</h1>
+        <p style="font-family:HelveticaNeue-Medium;font-size:24px;color:#ffffff;text-align:center;line-height:36px;margin: 30px 75px;">Quickly scrape web data without coding<br>Turn web pages into structured spreadsheets within clicks</p>
+        <div class="btn-wrap flex" style="margin-top:40px;width:390px;justify-content:space-between;">
+            <button id="video-btn" class="btn-regular-o" style="width: 178px;height: 46px;font-size: 20px;">Watch Demo</button>
+            <a class="btn-regular-reverse" target="_blank" style="width: 178px;height: 46px;font-size: 20px;" href="/Download">Download</a>
+        </div>
+    </section>
+</div>
+<div class='steps'>
+    <h2><a href="/DataExtraction">Extract web data</a> in 3 steps</h2>
+    <h4>Point, click and extract. No coding needed at all!</h4>
+    <ul class='wrap'>
+        <li>
+            <div data-id='1' class='sel'>
+                <span>Step 1</span>
+                <p>
+                    Enter website URL you'd like to extract data from
+                </p>
+            </div>
+            <div data-id='2'>
+                <span>Step 2</span>
+                <p>
+                    Click on the target data to extract
+                </p>
+            </div>
+            <div data-id='3'>
+                <span>Step 3</span>
+                <p>
+                    Run the extraction and get data
+                </p>
+            </div>
+        </li>
+        <li>
+        </li>
+        <li>
+            <img class='macbook' src="/images/home/Macbook.png" alt="">
+            <img class='example' src="/images/home/gif-1.gif" alt="">
+        </li>
+    </ul>
+</div>
+<section id="section-2" class="flex flex-column">
+    <h2>Advanced <a href="/DataCrawler">Web Scraping</a> Features</h2>
+    <p>Everything you need to automate your <a href="/DataCrawler">web scraping</a></p>
+    <div class="flex flex-one" style="width: 100%;">
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_01.jpg" alt="icon_home_01.jpg">
+            <h2>Easy to Use</h2>
+            <p>Scrape all data with simple point and click.<br>No coding needed.</p>
+        </div>
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_02.jpg" alt="icon_home_02.jpg">
+            <h2>Deal With All Websites</h2>
+            <p>Scrape websites with infinite scrolling,<br>login, drop-down, AJAX...</p>
+        </div>
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_03.jpg" alt="icon_home_03.jpg">
+            <h2>Download Results</h2>
+            <p>Download scraped data as CSV, Excel, API<br>or save to databases.</p>
+        </div>
+    </div>
+    <div class="flex" style="width: 100%;">
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_04.jpg" alt="icon_home_04.jpg">
+            <h2>Cloud Services</h2>
+            <p>Scrape and access data on Octoparse cloud platform 24/7.</p>
+        </div>
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_05.jpg" alt="icon_home_05.jpg">
+            <h2>Schedule Scraping</h2>
+            <p>Schedule tasks to scrape at any specific time,<br>hourly, daily, weekly...</p>
+        </div>
+        <div class="block flex-one">
+            <img width="122" height="124" src="/images/home/icon_home_06.jpg" alt="icon_home_06.jpg">
+            <h2>IP Rotation</h2>
+            <p>Automatic IP rotation to prevent IP<br>from being blocked.</p>
+        </div>
+    </div>
+</section>
+
+<div>test</div>
+<!--<img class="margin-left" src="/images/home/img_home_1.png" alt="img_home_1.png" width="640" height="410">-->
+<div class="infor" style='height:620px'>
+    <h1>What we can do</h1>
+    <ul class='wrap'>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_1.png" alt=""></li>
+        <li class='word'>
+            <h3>Easily Build <a href="/DataCrawler">Web Crawlers</a></h3>
+            <p>Point and click interface - Anyone who knows how to browse can scrape. No coding needed.</p>
+            <p>Scrape data from any dynamic website - Infinite scrolling, dropdowns, log-in authentication, AJAX...</p>
+            <p>Scrape unlimited pages - <a href="/DataCrawler">Crawl and scrape</a> from unlimited webpages for free.</p>
+            <a href="/signup" target="_blank">Sign Up</a>
+        </li>
+    </ul>
+</div>
+<div class="infor special">
+    <ul class='wrap'>
+        <li class='word'>
+            <h3>Octoparse Cloud Service</h3>
+            <p>Cloud platform - Execute multiple concurrent extractions 24/7 with faster scraping speed.</p>
+            <p>Schedule scraping - Schedule to extract data in the cloud any time at any frequency.</p>
+            <p>Automatic IP Rotation - Anonymous scraping minimizes the chances of being traced and blocked.</p>
+            <a href="/pricing" target="_blank">Buy Now</a>
+        </li>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_2.jpg" alt=""></li>
+    </ul>
+</div>
+<div class="infor">
+    <ul class='wrap'>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_3.png" alt=""></li>
+        <li class='word'>
+            <h3>Professional Data Services</h3>
+            <span>We provide professional data scraping services for you. Tell us what you need.</span>
+            <span>Our data team will meet with you to discuss your web crawling and data processing requirements.</span>
+            <span>Save money and time hiring the web scraping experts.</span>
+            <a href="/data-scraping-service" target="_blank">Data scraping service</a>
+        </li>
+    </ul>
+</div>
+
+<div class="trustedBy">
+    <h1>Trusted by</h1>
+    <ul>
+        <li>
+            It is very easy to use even though you don't have any experience on website scraping before.
+            <br>It can do a lot for you. Octoparse has enabled me to ingest a large number of data point and focus my time on statistical analysis versus data extraction.
+        </li>
+        <li>
+            Octoparse is an extremely powerful data extraction tool that has optimized and pushed our data scraping efforts to the next level.
+            <br>I would recommend this service to anyone. The price for the value provides a large return on the investment.
+            <br>For the free version, which works great, you can run at least 10 scraping tasks at a time.
+        </li>
+    </ul>
+    <div class="img"><img src="/images/home/client.png" alt=""></div>
+</div>
+<div class="logo">
+    <ul>
+        <li><img src="/images/home/logo-1.jpg" alt=""></li>
+        <li><img src="/images/home/logo-2.jpg" alt=""></li>
+        <li><img src="/images/home/logo-3.jpg" alt=""></li>
+        <li><img src="/images/home/logo-4.jpg" alt=""></li>
+        <li><img src="/images/home/logo-5.jpg" alt=""></li>
+        <li><img src="/images/home/logo-6.jpg" alt=""></li>
+        <li><img src="/images/home/logo-7.jpg" alt=""></li>
+        <li><img src="/images/home/logo-8.jpg" alt=""></li>
+    </ul>
+</div>
+
+<div class="blog">
+    <h1>Latest from our blog</h1>
+    <h3><a target="_blank" href="/blog">View all >></a></h3>
+    <div class="container">
+        <img src="/images/home/icon-arrow-left.png" alt="" class="left">
+        <div class="warp">
+            <ul>
+                @foreach (var item in blogs)
+                {
+                    var title = string.IsNullOrWhiteSpace(item.Title) ? item.Name : item.Title;
+                    var dateTime = item.PublishDate == default(DateTime) ? item.CreateDate : item.PublishDate;
+                    var summary = string.IsNullOrWhiteSpace(item.Summary) ? item.Description : item.Summary;
+                    <a target="_blank" href="@item.Url">
+                        <li>
+                            <div class="head">@(title.Length > 64 ? title.Substring(0, 62) + "..." : title)</div>
+                            <div class="date">@dateTime.ToString("f")</div>
+                            <p>@(summary.Length > 160 ? summary.Substring(0, 160) + "..." : summary)</p>
+                            <a target="_blank" href="@item.Url" style='margin-right:20px'>Read full article >></a>
+                        </li>
+                    </a>
+                }
+            </ul>
+        </div>
+        <img src="/images/home/icon-arrow-right.png" alt="" class="right">
+    </div>
+</div>
+
+<!--<img class="margin-left" src="/images/home/img_home_1.png" alt="img_home_1.png" width="640" height="410">-->
+<div class="infor" style='height:620px'>
+    <h1>What we can do</h1>
+    <ul class='wrap'>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_1.png" alt=""></li>
+        <li class='word'>
+            <h3>Easily Build <a href="/DataCrawler">Web Crawlers</a></h3>
+            <p>Point and click interface - Anyone who knows how to browse can scrape. No coding needed.</p>
+            <p>Scrape data from any dynamic website - Infinite scrolling, dropdowns, log-in authentication, AJAX...</p>
+            <p>Scrape unlimited pages - <a href="/DataCrawler">Crawl and scrape</a> from unlimited webpages for free.</p>
+            <a href="/signup" target="_blank">Sign Up</a>
+        </li>
+    </ul>
+</div>
+<div class="infor special">
+    <ul class='wrap'>
+        <li class='word'>
+            <h3>Octoparse Cloud Service</h3>
+            <p>Cloud platform - Execute multiple concurrent extractions 24/7 with faster scraping speed.</p>
+            <p>Schedule scraping - Schedule to extract data in the cloud any time at any frequency.</p>
+            <p>Automatic IP Rotation - Anonymous scraping minimizes the chances of being traced and blocked.</p>
+            <a href="/pricing" target="_blank">Buy Now</a>
+        </li>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_2.jpg" alt=""></li>
+    </ul>
+</div>
+<div class="infor">
+    <ul class='wrap'>
+        <li class='img'><img src="https://www.octoparse.com/images/home/img_home_3.png" alt=""></li>
+        <li class='word'>
+            <h3>Professional Data Services 333</h3>
+            <span>We provide professional data scraping services for you. Tell us what you need.</span>
+            <span>Our data team will meet with you to discuss your web crawling and data processing requirements.</span>
+            <span>Save money and time hiring the web scraping experts.</span>
+            <a href="/data-scraping-service" target="_blank">Data scraping service</a>
+        </li>
+    </ul>
+</div>
+
+<div class="trustedBy">
+    <h1>Trusted by</h1>
+    <ul>
+        <li>
+            It is very easy to use even though you don't have any experience on website scraping before.
+            <br>It can do a lot for you. Octoparse has enabled me to ingest a large number of data point and focus my time on statistical analysis versus data extraction.
+        </li>
+        <li>
+            Octoparse is an extremely powerful data extraction tool that has optimized and pushed our data scraping efforts to the next level.
+            <br>I would recommend this service to anyone. The price for the value provides a large return on the investment.
+            <br>For the free version, which works great, you can run at least 10 scraping tasks at a time.
+        </li>
+    </ul>
+    <div class="img"><img src="/images/home/client.png" alt=""></div>
+</div>
+<div class="logo">
+    <ul>
+        <li><img src="/images/home/logo-1.jpg" alt=""></li>
+        <li><img src="/images/home/logo-2.jpg" alt=""></li>
+        <li><img src="/images/home/logo-3.jpg" alt=""></li>
+        <li><img src="/images/home/logo-4.jpg" alt=""></li>
+        <li><img src="/images/home/logo-5.jpg" alt=""></li>
+        <li><img src="/images/home/logo-6.jpg" alt=""></li>
+        <li><img src="/images/home/logo-7.jpg" alt=""></li>
+        <li><img src="/images/home/logo-8.jpg" alt=""></li>
+    </ul>
+</div>
+
+<div class="blog">
+    <h1>Latest from our blog</h1>
+    <h3><a target="_blank" href="/blog">View all >></a></h3>
+    <div class="container">
+        <img src="/images/home/icon-arrow-left.png" alt="" class="left">
+        <div class="warp">
+            <ul>
+                @foreach (var item in blogs)
+                {
+                    var title = string.IsNullOrWhiteSpace(item.Title) ? item.Name : item.Title;
+                    var dateTime = item.PublishDate == default(DateTime) ? item.CreateDate : item.PublishDate;
+                    var summary = string.IsNullOrWhiteSpace(item.Summary) ? item.Description : item.Summary;
+                    <a target="_blank" href="@item.Url">
+                        <li>
+                            <div class="head">@(title.Length > 64 ? title.Substring(0, 62) + "..." : title)</div>
+                            <div class="date">@dateTime.ToString("f")</div>
+                            <p>@(summary.Length > 160 ? summary.Substring(0, 160) + "..." : summary)</p>
+                            <a target="_blank" href="@item.Url" style='margin-right:20px'>Read full article >></a>
+                        </li>
+                    </a>
+                }
+            </ul>
+        </div>
+        <img src="/images/home/icon-arrow-right.png" alt="" class="right">
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('.leftul li span').popover();
+
+            $('#video-btn').click(function () {
+                $('#Video').modal('show');
+                $('#Video iframe').attr('src', 'https://www.youtube.com/embed/xBBAD407zzU');
+            });
+
+            $('#Video button').click(function () {
+                $('#Video iframe').removeAttr('src');
+            });
+        });
+
+        $('.steps .wrap > li:first-child div').mouseenter(function () {
+            var id = this.getAttribute('data-id');
+            $('.steps .wrap > li:first-child div').attr('class', '')
+            $('.steps .wrap > li:first-child div').eq(id - 1).attr('class', 'sel')
+            $('.steps .wrap > li:nth-child(3) .example').attr('src', '/images/home/gif-' + id + '.gif')
+        })
+
+        function _blogInit() {
+            const length = 6;   //总共展示的article的数量，修改此变量即可
+            let showIndex = 0;
+            let wrap = document.querySelector('.blog .container .warp ul');
+            let btnLeft = document.querySelector('.blog .container img.left');
+            let btnRight = document.querySelector('.blog .container img.right');
+
+            wrap.style.width = length * 340 + 'px';
+            btnLeft.onclick = function () {
+                if (showIndex > 0) {
+                    showIndex--;
+                }
+                wrap.style.left = '-' + showIndex * 340 + 'px';
+            }
+            btnRight.onclick = function () {
+                if (showIndex < length - 3) {
+                    showIndex++;
+                }
+                wrap.style.left = '-' + showIndex * 340 + 'px';
+            }
+        }
+
+        _blogInit()
+
+    </script>
+}

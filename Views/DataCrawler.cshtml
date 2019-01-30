@@ -1,0 +1,148 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "octLayout.cshtml";
+  ViewBag.PageTitle += "Data Crawler - ";
+}
+
+@section styles {
+  <style>
+    .banner {height: 300px;background-image: url(/images/data-crawler/banner.png);background-position: center;background-size: cover;background-repeat: no-repeat;}
+    .banner h1 {color: #fff;font-size: 56px;font-weight: bold;margin: 0;}
+
+    .box-wrap {background: #f1f1f1;color: #222;}
+    .box-wrap .box {align-items: center;width: 1000px;margin: 0 auto;padding: 115px 0 5px;}
+    .box-wrap .box h2 {margin: 24px 0 80px;font-size: 32px;font-weight: bold;}
+    .box-wrap .box p {font-size: 20px;}
+
+    .box-wrap .box-4 {margin-bottom: 150px;}
+    .box-wrap .box-4 .img-group {width: 1200px;justify-content: space-between;}
+    .box-wrap .box-4 .img-wrap {width: 284px;align-items: center;}
+    .box-wrap .box-4 .img-wrap img {margin: 28px;}
+    .box-wrap .box-4 .img-wrap span {font-size: 24px;}
+
+    .other-content {}
+    .other-content .box {width: 1000px;margin: 0 auto;}
+    .other-content .box-title {font-size: 32px;font-weight: bold;margin: 50px auto 0;text-align: center;}
+    .other-content .box-sub-title {margin: 24px auto 80px;font-size: 24px;text-align: center;}
+    .other-content hr {margin: 50px auto; width: 1200px;}
+
+    .other-content .box-1 .box-body {margin: 0 auto;}
+    .other-content .box-1 .content-wrap {margin-left: 70px;}
+    .other-content .box-1 .content-wrap ul {color: #222;margin: 0;padding: 0;flex-wrap: wrap;line-height: 50px;}
+    .other-content .box-1 .content-wrap li {font-size: 20px;width: 60%;}
+    .other-content .box-1 .content-wrap li.shorter {font-size: 20px;width: 40%;}
+    .other-content .box-1 .btn-sign-up {color: #fff;background-color: #1762cc;width: 160px;height: 48px;margin-top: 20px;font-size: 20px;transition: all 300ms;}
+    .other-content .box-1 .btn-sign-up:hover {text-decoration: none;background-color: #124ec1;}
+
+    .other-content .box-2 p {font-size: 22px;color: #222222;line-height: 40px;margin: 0 auto;}
+    .other-content .box-2 a {color: #1762cc;font-weight: bold;}
+    .other-content .box-2 .video {margin: 50px auto 80px;display: block;}
+
+    .other-content .box-3 ul {padding: 0;margin: 0 auto;list-style: none;font-size: 20px;line-height: 48px;}
+    .other-content .box-3 li {}
+    .other-content .box-3 a {color: #1762cc;font-weight: bold;}
+    .other-content .box-3 .box-title {text-align: left;margin-bottom: 20px}
+
+    .footer-p {background-image: url(/images/data-crawler/img-footer.jpg);background-position: center;background-size: cover; height: 240px;margin-top: 200px;}
+    .footer-p p {font-size: 32px;color: #fff;margin: 0;}
+    .footer-p hr {margin: 16px 0 20px;border: 0;border-top: solid 3px #fff;width: 60px;}
+
+    .home-anchor {color: #1762cc;font-weight: bold;}
+  </style>
+}
+
+<div class="banner flex flex-middle">
+  <h1>Data Crawler</h1>
+</div>
+<div class="box-wrap flex flex-column">
+  <div class="box box-1 flex flex-column">
+    <img class="box-icon" height="50" width="50" src="/images/data-crawler/icon-1.jpg" alt="icon-1.jpg">
+    <h2>What Is a Data Crawler?</h2>
+    <p>A <a href="/" class="home-anchor">data crawler</a>, sometimes called a spider, is an Internet bot that systematically browses the World Wide Web, typically for the purpose of creating entries for a search engine index. Companies like Google or Facebook use web crawling to collect the data.</p>
+  </div>
+  <div class="box box-2 flex flex-column">
+    <img class="box-icon" height="50" width="50" src="/images/data-crawler/icon-2.jpg" alt="icon-2.jpg">
+    <h2>How Does a Data Crawler work?</h2>
+    <p>A crawler starts with a list of URLs to visit, and it will follow every hyperlink it can find on each page and add them to the list of URLs to visit. Web <a href="/" class="home-anchor">Data Crawlers</a> are mainly used to create a copy of all the visited pages for later processing by a search engine, which will index the downloaded pages to provide fast searches.</p>
+    <br>
+    <p>So there are basically three steps that are involved in the web crawling procedure. Firstly, the spider starts by crawling certain pages of a site. Next it keeps indexing the words and content of the site, and lastly it visits all the hyperlinks that are found in the site.</p>
+  </div>
+  <div class="box box-3 flex flex-column">
+    <img class="box-icon" height="50" width="50" src="/images/data-crawler/icon-3.jpg" alt="icon-3.jpg">
+    <h2>Date Crawler or Data Scraper?</h2>
+    <p>We can say a crawler collects data thoroughly as everything on the web will eventually be found and spidered if it keeps visiting pages; however, it is also really time-consuming as it needs to go through all the links and it will drive you crazy when you have to recrawl every page to get new information.</p>
+    <br>
+    <p>When it comes to crawling, what springs to mind is getting all kinds of data from web. But true crawling actually refers to a very specific method of getting URLs, especially useful for indexing or SEO. It collects all the URLs, even those that contain data you do not need. </p>
+    <br>
+    <p>That is why we need another tool, data scraper, which is highly targeted and super fast. You can build a web scraper to a specific website and then scrape certain kind of data on that page. It is like a crawler guided by certain logic to just scrape data (not just URLs but any kind of data such as title) from pages you want, making the whole extraction process much more efficient.</p>
+  </div>
+  <div class="box box-4 flex flex-column">
+    <img class="box-icon" height="50" width="50" src="/images/data-crawler/icon-4.jpg" alt="icon-4.jpg">
+    <h2>What Can a Data Scraper Do?</h2>
+    <div class="img-group flex">
+      <div class="img-wrap flex flex-column">
+        <img width="104" height="104" src="/images/data-crawler/img-1.png" alt="img-1.png">
+        <span>Scrape a single page</span>
+      </div>
+      <div class="img-wrap flex flex-column">
+        <img width="104" height="104" src="/images/data-crawler/img-2.png" alt="img-2.png">
+        <span>Scrape multiple pages</span>
+      </div>
+      <div class="img-wrap flex flex-column">
+        <img width="104" height="104" src="/images/data-crawler/img-3.png" alt="img-3.png">
+        <span>Scrape detail pages</span>
+      </div>
+      <div class="img-wrap flex flex-column">
+        <img width="104" height="104" src="/images/data-crawler/img-4.png" alt="img-4.png">
+        <span>Any other pages</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="other-content">
+  <div class="box box-1">
+    <div class="box-title">Just set up your rules to scrape data right away!</div>
+    <p class="box-sub-title">Free and powerful tool for anyone！</p>
+    <div class="box-body flex">
+      <img src="/images/data-crawler/img.png" alt="img.png" width="320" height="220">
+      <div class="content-wrap flex flex-column">
+        <ul class="flex">
+          <li class="shorter">No coding needed</li>
+          <li>Export extracted data in  any format</li>
+          <li class="shorter">Deal with all websites</li>
+          <li>Cloud-based platform</li>
+          <li class="shorter">IP Rotation</li>
+          <li>Schedule extraction</li>
+        </ul>
+        <a href="/signup" class="btn-sign-up flex flex-middle">Sign up today</a>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="box box-2">
+    <div class="box-title">Build a Data Crawler</div>
+    <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/Cw32LNpzxFk" frameborder="0" gesture="media" allowfullscreen></iframe>
+    <p>Till now, Octoparse has helped users to build their own <a href="/" class="home-anchor">data crawlers</a> in an amount of 3,000,000. Anyone, no matter you know coding or not, can create crawlers with points and clicks. Just watch the video above to experience the amazing world of <a href="/" class="home-anchor">data crawler</a> starting with Octoparse!</p>
+    <br>
+    <br>
+    <p>If you’re interested in more cases of crawling data with Octoparse, come to our <a href="/tutorial">case tutorial</a> site or <a href="/contact">contact us</a> to see how we can help you making your own crawler!</p>
+  </div>
+  <hr>
+  <div class="box box-3">
+    <div class="box-title">Further Reading：</div>
+    <ul>
+      <li><a href="http://scraping.pro/octoparse-scraping-tool-designed-non-programmers">Octoparse – a scraping tool designed for non-programmers</a></li>
+      <li><a href="/blog/top-30-free-web-scraping-software">Top 30 Free Web Scraping Software</a></li>
+      <li><a href="http://www.ijarcce.com/upload/2016/january-16/IJARCCE%2052.pdf">Review of Web Crawlers with Specification and Working</a></li>
+      <li><a href="http://link.springer.com/content/pdf/10.1007/3-540-46004-7.pdf#page=235">The Boru Data Crawler for Object Detection Tasks in Machine Vision</a></li>
+      <li><a href="https://link.springer.com/chapter/10.1007/978-3-642-36385-6_9">Applied Methods and Techniques for Modeling and Control on Micro-Blog Data Crawler</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-p flex flex-column flex-middle">
+  <p>Octoparse</p>
+  <hr>
+  <p>Free and Easy Scraping for Anyone</p>
+</div>
+
+@section scripts {}

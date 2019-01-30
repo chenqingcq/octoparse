@@ -1,0 +1,146 @@
+﻿@{
+    var umbracoHelper = new Umbraco.Web.UmbracoHelper(Umbraco.Web.UmbracoContext.Current);
+    var homePage = umbracoHelper.ContentAtRoot().First();
+
+    var newsBlogOverview = homePage.octBlogOverviews.First();
+    var newsTutorialOverview = homePage.octTutorialOverviews.First();
+
+    var recentPosts = newsBlogOverview.octBlogItems.OrderBy("publishDate desc, createDate desc").Take(4);
+    var recentTutorials = newsTutorialOverview.octTutorialItems.OrderBy("publishDate desc, createDate desc").Take(4);
+}
+<style type="text/css" >
+	*{margin:0;padding:0;}
+	._newfooter{
+		width: 100%;
+		height: 120rem;
+        background:#ececec;
+		box-sizing: border-box;
+		padding-top:47px;
+		padding-bottom: 2rem;
+	}
+	._newfooter ul{
+		list-style: none;
+		padding: 0;
+		height: 70rem
+	}
+	._newfooter ul li{
+		padding-left: 2rem;
+		line-height: 3.5rem;
+	}
+	.hidden{
+		display: none;
+	}
+	._newfooter ul li p {
+		font-weight: 900;
+		padding: 2rem 0;
+		font-size: 4rem;
+	}
+	._newfooter ul li a{
+		/* color: #2095F2; */
+		margin: 1rem 0;
+	}
+	.part{
+		color: #337AB7;
+		font-size: 4rem;
+		text-align: center;
+		margin: 2rem 0 4rem 0 ;
+		font-family: ArialMT;
+		line-height: 4rem;
+	}
+	._signUp{
+		width: 28rem;
+		height: 6rem;
+		background: #2095F2;
+		text-align: center;
+		color: #fff;
+		text-decoration: none;
+		line-height: 6rem;
+		border-radius: 10px;
+	}
+	.signIn{
+		display: flex;
+		justify-content: center;
+		height: 7rem;
+	}
+	.toLogin{
+		margin-top: 3rem;
+		text-align: center;
+		color:  #337AB7;
+	}
+	.loginNow{
+		color: #2095F2;
+	}
+	.media-link-warp {
+		margin-top: 4rem ;
+		display: flex;
+		justify-content: center;
+	}
+	.media-link-warp  img{
+		display: inline-block;
+		margin-left: 3rem;
+		width: 4rem;
+		height: 4rem;
+	}
+	#lancher {
+		width: 2rem; 
+		height: 2rem;
+	}
+</style>
+
+ <div class="_newfooter">
+		<ul >
+  			<li style="font-size:3rem">
+  				<p >Company Test</p>
+  				<div class="a"><a target="_blank" href="/about" target="_blank">About us</a></div>
+  				<div class="a"><a target="_blank" href="/terms-and-conditions" target="_blank">Terms & conditions</a></div>
+  				<div class="a"><a target="_blank" href="/data-scraping-service" target="_blank">Data scraping service</a></div>
+  				<div class="a"><a target="_blank" href="/JoinAffiliateProgram" target="_blank">Affiliate program</a> | <a target="_blank" href="http://agent.octoparse.com/login">Log in</a></div>
+  				<div class="a"><a target="_blank" href="http://jp.octoparse.com" target="_blank">Octoparse Japan</a></div>
+  			</li>
+  			<li style="font-size:3rem">
+  				<p>Product Demo</p>
+  				<div class="a"><a target="_blank" href="/product" target="_blank">Product</a></div>
+  				<div class="a"><a target="_blank" href="/pricing" target="_blank">Pricing</a></div>
+  				<div class="a"><a target="_blank" href="/product/FeaturesComparison" target="_blank">Features</a></div>
+  				<div class="a"><a target="_blank" href="/download" target="_blank">Download</a></div>
+  				<div class="a"><a target="_blank" href="/blog" target="_blank">Web scraping blog</a></div>
+  			</li>
+  			<!-- <li>
+  				<p>Resources</p>
+  				<div class="a"><a target="_blank" href="/tutorial" target="_blank">Tutorials: V 6.X</a> | <a target="_blank" href="/tutorial-7">V 7.X</a></div>
+  				<div class="a"><a target="_blank" href="/troubleshooting" target="_blank">Web scraping FAQs</a></div>
+  				<div class="a"><a target="_blank" href="http://dataapi.octoparse.com/help" target="_blank">Data export API</a></div>
+  				<div class="a"><a target="_blank" href="http://advancedapi.octoparse.com/help" target="_blank">Advanced API</a></div>
+				<div class="a"><a target="_blank" href="/contact" target="_blank">Contact support</a></div>
+  				<div class="a"><a target="_blank" href="https://www.octoparse.com/contact" target="_blank">Contact support</a></div>
+  			</li> -->
+			<li style="font-size:3rem">
+  				<p>Resources</p>
+  				<div class="a"><a target="_blank" href="/tutorial">Tutorials: V 6.X</a> | <a target="_blank" href="/tutorial-7">V 7.X</a></div>
+  				<div class="a"><a target="_blank" href="/troubleshooting">Web scraping FAQs</a></div>
+  				<div class="a"><a target="_blank" href="http://dataapi.octoparse.com/help">Data export API</a></div>
+  				<div class="a"><a target="_blank" href="http://advancedapi.octoparse.com/help">Advanced API</a></div>
+				<div class="a"><a target="_blank" href="https://helpcenter.octoparse.com">Help Center</a></div>
+  				<div class="a"><a target="_blank" href="/contact">Contact support</a></div>
+  			</li>
+  			<div style="font-size:3rem;" >
+  				<div class="part" style="text-align:center;padding:0 2rem;">
+  					Getting started with web scraping today by creating an account?
+  				</div>
+				<div class="signIn">
+  					<a class="_signUp" target="_blank" href="/signup" class="sign" target="_blank">Sign Up</a>
+				</div>
+  				<div class="toLogin">Already have an account?<a target="_blank" href="/login" target="_blank" class="loginNow"> Login now</a></div>
+  			</div>
+			<div style="font-size:3rem">
+				<div class="media-link-warp ">
+					<a target="_blank" href="https://www.facebook.com/Octoparse/"><img src="/images/h/home-new/icon_link_1.png" alt="icon_link_1.png"></a>
+					<a target="_blank" href="https://twitter.com/Octoparse"><img src="/images/h/home-new/icon_link_2.png" alt="icon_link_2.png"></a>
+					<a target="_blank" href="https://www.linkedin.com/company-beta/10694752/"><img src="/images/h/home-new/icon_link_3.png" alt="icon_link_3.png"></a>
+					<a target="_blank" href="https://plus.google.com/u/0/106959685400674392220"><img src="/images/h/home-new/icon_link_4.png" alt="icon_link_4.png"></a>
+					<a target="_blank" href="https://www.youtube.com/channel/UCweDWm1QY2G67SDAKX7nreg"><img src="/images/h/home-new/icon_link_5.png" alt="icon_link_5.png"></a>
+  				</div>
+			</div>
+  		</ul>
+  	</div>
+</div>

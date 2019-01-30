@@ -1,0 +1,67 @@
+﻿@using Umbraco.Web;
+@using Octoparse.Web;
+@model Octoparse.Web.Models.ProfileModel
+@{
+    Layout = null;
+}
+@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+    
+        <div class="bacs-data">
+            <div class="head-img">
+                <span class="img">
+                  <img class="img-circle" src="/images/user-center_face.png">
+                </span> 
+            </div>
+            <span class="name">@Model.UserName</span>
+            <a class="btn btn-default cpwd" href="/changepassword"><i class="glyphicon glyphicon-lock"></i> Change Password</a>  
+            <span class="basc-email">@Html.DisplayFor(m=>m.Email)</span>        
+        </div>
+	    
+        
+  
+	       @if (Model.IsApproved)
+           {
+            <div class="basc-type">
+                <span>Current Plan: <span>@(Model.IsExpired ? "Free":Model.UserTypeDisplayName)</span></span>
+                @if (Model.UserType != (int)AccountType.Free && (!Model.IsAutoRenewal || Model.IsAutoRenewal && Model.NextBillingDate!=null && Model.NextBillingDate.Value<DateTime.Now))
+                {
+                    <span>Your plan will expire on <span style="color:#10a2d3">@Model.ExpireDate.Value.ToEnDate()</span></span>
+                    <a class="basc-btn" href="@(Model.UserType==(int)AccountType.Basic?"/Subscribe/Pay?plan=bsc-mo":( Model.UserType==(int)AccountType.Standard?"/Subscribe/Pay?plan=std-yr":"/Subscribe/Pay?plan=pro-yr"))">Renew Now</a>
+                }
+                @if (Model.UserType == (int)AccountType.Free || Model.UserType == (int)AccountType.Basic)
+                {
+                    <a class="basc-btn" href="/Subscribe">Upgrade</a>
+                }
+                else if (Model.UserType == (int)AccountType.Standard)
+                {
+                    <a class="basc-btn" href="/Subscribe/Pay?plan=pro-yr">Upgrade</a>
+                }
+            </div>
+               if (!Model.IsExpired)
+               {
+                   if (Model.PlanEffetiveDate.HasValue && Model.PlanEffetiveDate.Value > DateTime.Now && (int)Model.PlanType.GetAccountType() != Model.UserType && Model.IsAutoRenewal)
+                   {
+
+                    <div style="text-align: center;">Your plan will switch to <span style="color:#10a2d3">@Model.PlanType.GetAccountName()</span> plan on <span style="color:#10a2d3">@Model.PlanEffetiveDate.Value.ToEnDate()</span>. Payment Amount: <span style="color:#10a2d3">$@Convert.ToInt32(Model.NextBillingAmount.Value)</span></div>
+                   }
+                   else if (Model.IsAutoRenewal)
+                   {
+                <div style="text-align: center;">Your plan will automatically renew on: <span style="color:#10a2d3">@Model.NextBillingDate.Value.ToEnDate()</span>. Payment Amount: <span style="color:#10a2d3">$@Convert.ToInt32(Model.NextBillingAmount.Value)</span>.</div>
+                <div style="padding-top: 5px; text-align: center;font-size: 12px;color: #999;">If your payment method has been declined, please change your payment method on the <a href="/subscribe/PaymentMethod" title="Update payment info">Payment Method</a> page.</div>
+                   }
+               }
+           }
+           else
+           {
+
+                <span class="basc-tips">
+                    <span  id="unactivateMessage">
+                        Please activate your account, or
+                    </span>
+                    <a id="btnResendEmail" href="javascript:;">Resend activation email</a>
+                    <div id="resendEmailMessage" style="display:none">An activation email has been sent to your inbox, valid for 48hours. Please check your email.</div>
+                </span>
+            }                	
+
+

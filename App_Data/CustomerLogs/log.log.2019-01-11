@@ -1,0 +1,92 @@
+2019-01-11 03:46:18,163 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 03:46:18,179 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 03:46:18,179 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 03:46:18,179 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 06:59:37,126 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 06:59:37,141 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 06:59:37,141 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 06:59:37,141 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 10:23:22,197 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 10:23:22,197 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 10:23:22,197 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 10:23:22,197 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 11:30:48,832 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 11:30:48,832 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 11:30:48,832 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 11:30:48,832 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 12:00:48,837 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 12:00:48,837 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 12:00:48,837 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 12:20:10,152 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 12:20:10,168 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 12:20:10,168 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 12:20:10,168 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 14:27:46,188 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 14:27:46,188 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 14:27:46,188 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 14:27:46,188 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 15:49:42,480 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 15:49:42,512 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 15:49:42,512 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 15:49:42,512 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 16:19:42,517 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 16:19:42,517 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 16:19:42,517 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 17:23:41,762 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 17:23:41,762 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 17:23:41,762 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 17:23:41,762 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 17:53:41,766 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 17:53:41,766 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 17:53:41,766 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 18:13:41,393 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 18:13:41,409 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 18:13:41,409 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 18:13:41,409 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 18:35:16,350 [32] INFO  SkieerWeb - [Braintree Webhook Received 2019/1/11 10:35:04] | Kind: subscription_charged_successfully
+2019-01-11 18:35:37,522 [32] ERROR SkieerWeb - GetAvailableCoupon Error. UserId:548b8bac-9eaa-4d7d-97e3-e09382c9fac0
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 101.200.193.134:9002
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 Octoparse.Web.HttpHelper.RESTFullRequest(RequestType method, String url, Object bodyContent, String authorization, String contentType)
+   在 Octoparse.Web.HttpHelper.Get[T](String url)
+   在 Octoparse.Web.Controllers.SubscribeController.GetAvailableCoupon(String userId, PlanType newPlanType, Decimal newPrice, Decimal nowBillingAmount)
+2019-01-11 18:43:41,421 [12] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 18:43:41,421 [12] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 18:43:41,421 [12] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 19:14:00,758 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 19:14:00,758 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 19:14:00,758 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 19:14:00,758 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 19:44:00,762 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 19:44:00,762 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 19:44:00,762 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 20:14:00,764 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 20:14:00,764 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 20:14:00,764 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 20:44:00,768 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 20:44:00,768 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 20:44:00,768 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 21:14:00,774 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 21:14:00,774 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 21:14:00,774 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 21:44:00,778 [13] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 21:44:00,778 [13] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 21:44:00,778 [13] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 21:52:11,653 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 21:52:11,653 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 21:52:11,653 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 21:52:11,653 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 22:22:11,658 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 22:22:11,658 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 22:22:11,658 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 23:16:44,292 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 23:16:44,307 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 23:16:44,307 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 23:16:44,307 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.
+2019-01-11 23:50:04,139 [1] INFO  SkieerWeb - RefundJob starting.
+2019-01-11 23:50:04,170 [10] INFO  SkieerWeb - RefundJob checking.
+2019-01-11 23:50:04,170 [10] INFO  SkieerWeb - IsEnabledRefund = False
+2019-01-11 23:50:04,170 [10] INFO  SkieerWeb - RefundJob waiting 30 minutes.

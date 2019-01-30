@@ -1,0 +1,153 @@
+﻿@using System.Xml.XPath;
+@using umbraco.MacroEngines;
+@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+    
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+	var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+	var newsOverview = homePage.octTutorialOverviews.First();
+	var items=newsOverview.octTutorialItems.OrderBy("publishDate desc, createDate desc").Take(5);
+	var category=Request.QueryString["category"];
+	var currentPageCategory = CurrentPage.category;
+}
+@section styles{
+<style type="text/css">
+	.tutos-body {padding-left:150px;padding-right:20px;margin:0 auto;}
+	/*breadcrumb*/.breadcrumb {background-color:transparent;padding:20px 0;border-bottom:solid 1px #ddd;}
+	.wrap-body {background:#fff;}
+	/*content*/.row-con {padding-top:30px;}
+	.video-title {padding-bottom:40px;}
+	.video-title>p {padding-bottom:10px;overflow:hidden;font-size:30px;font-weight: bold;}
+	.video-title>span {display:inline-block;height:40px;line-height:40px;font-size:20px;vertical-align:middle;}
+	/*share*/.sharebox {font-size:0;vertical-align:middle;}
+	.sharebox .stButton .facebook {background-image:url(/images/facebook.png);}
+	.sharebox .stButton .twitter {background-image:url(/images/twitter.png);}
+	.sharebox .stButton .googleplus {background-image:url(/images/google.png);}
+	.sharebox .stButton .linkedin {background-image:url(/images/linkedin.png);}
+	.sharebox .stButton .pinterest {background-image:url(/images/pinterest.png);}
+	.sharebox .stButton .sharethis {background-image:url(/images/sharethis.png);}
+	.sharebox .stButton .chicklets {margin-left:3px;background-repeat:no-repeat;background-size:contain;white-space:nowrap;display:inline-block;height:39px;width:39px;}
+	.rightBar {margin-top:160px;padding-left:40px;}
+	.rightBar .relate-title {font-size:20px;}
+	.rightBar ul {margin:0;padding:0;position:relative;font:normal normal normal 16px/24px;color:#2F2E2E;}
+	.rightBar li {list-style:none;}
+	.vertical-line:before {background:url(/images/fadelinevertical.png) -99px 0 no-repeat;position:absolute;left:0;width:29px;height:100px;content:'';top:-100px;}
+	.vertical-line {display:block;background:url(/images/fadelinevertical.png) -70px 0 no-repeat;position:absolute;left:0;width:29px;height:100px;top:50px;}
+	.vertical-line:after {display:block;background:url(/images/fadelinevertical.png) -99px 100% no-repeat;position:absolute;left:0;width:29px;height:100px;content:'';top:100px;}
+
+	.video-tab-nav {margin: 0;padding: 0;list-style: none;}
+	.video-tab-nav li {font-size: 20px;}
+	.video-tab-nav li.right {margin-left: 20px;border-left: solid 1px #ddd;padding-left: 20px;}
+	.video-tab-nav a {color: #777;}
+	.video-tab-nav li.active a {color: #2095f2;font-weight: bold}
+	</style>
+}
+
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="/tutorial">Tutorial</a></li>
+		@{
+			if(CurrentPage.learnCategory=="Features"){
+				<li><a href="/features-tutorial">Features Tutorial</a></li>
+				<li><a href="/features-tutorial?category=@currentPageCategory">@currentPageCategory.ToLower()</a></li>
+			}
+			else if(CurrentPage.learnCategory=="Basic")
+			{
+				<li><a href="/basic-tutorial">Basic Tutorial</a></li>
+				<li><a href="/basic-tutorial?category=@currentPageCategory">@currentPageCategory.ToLower()</a></li>
+			}
+			else if(CurrentPage.learnCategory=="Cases")
+			{
+				<li><a href="/cases-tutorial">Cases Tutorial</a></li>
+				<li><a href="/cases-tutorial?category=@currentPageCategory">@currentPageCategory.ToLower()</a></li>
+			}
+		}
+		<li class="active">@CurrentPage.Name</li>
+	</ol>
+	<div class="row-con">
+		<div class="video-title">
+			<p>@CurrentPage.tutorialName</p>
+			<span>@((CurrentPage.PublishDate == default(DateTime) ? CurrentPage.CreateDate:CurrentPage.PublishDate).ToString("f"))</span>
+			<span class="sharebox">
+				<span class='st_facebook' displayText=''></span>
+				<span class='st_twitter' displayText=''></span>
+				<span class='st_googleplus' displayText=''></span>
+				<span class='st_linkedin' displayText=''></span>
+				<span class='st_pinterest' displayText=''></span>
+				<span class='st_sharethis' displayText=''></span>
+			</span>
+			<script type="text/javascript">var switchTo5x=true;</script>
+			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "beff5847-b8e9-4ee4-82f8-a075354f3974", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+		</div>
+		<div class="video-tab">
+			<ul id="video-tab" class="video-tab-nav flex" role="tablist">
+				@if(CurrentPage.graphicTutorial!=null &&  CurrentPage.graphicTutorial.ToString()!="")
+				{
+					<li role="presentation" class="@(string.IsNullOrWhiteSpace(CurrentPage.videoTutorial)?"active":"")">
+						<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Graphic tutorial</a>
+					</li>
+				}
+				@if(!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
+				{
+					<li role="presentation" class="right @(string.IsNullOrWhiteSpace(CurrentPage.videoTutorial)?"":"active")">
+						<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Video tutorial</a>
+					</li>
+				}
+			</ul>
+			<div class="tab-content" style="padding:20px;padding-left:0;">
+				@CurrentPage.test
+				@if(CurrentPage.graphicTutorial!=null &&  CurrentPage.graphicTutorial.ToString()!="")
+				{
+					<div role="tabpanel" class="tab-pane @(string.IsNullOrWhiteSpace(CurrentPage.videoTutorial)?"active":"")" id="profile">@CurrentPage.graphicTutorial</div>
+				}
+				@if(!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
+				{
+					<div role="tabpanel" class="tab-pane @(string.IsNullOrWhiteSpace(CurrentPage.videoTutorial)?"":"active")" id="home" >
+						<iframe width="560" height="315" src="@CurrentPage.videoTutorial" frameborder="0" allowfullscreen></iframe>
+						<p>If this video tutorial is not available for you, you can&nbsp;<a id="video-view" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">click here</a>to see the corresponding graphic tutorial.</p>
+						<br clas="divider">
+						<div>
+							<h3>Recent Posts</h3>
+							<div class="list-group" >
+								@foreach(var item in items)
+								{
+									<h4><a class="list-group-item" style="border-width:0px;color:#0303ff;" href="@item.videoTutorial">@item.tutorialName<br><span style="font-size: 10px;color:#555555"> @(item.PublishDate==default(DateTime)?item.CreateDate.ToString("f"):item.PublishDate.ToString("f"))</span></a></h4>
+								}
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts{
+  <script>
+    $(function() {
+      var m = window.location.hash;
+      if(m == '#0'){
+        $('#pbtn').parent('li').addClass('active');
+        $('#vbtn').parent('li').removeClass('active');
+        $('#profile').addClass('active');
+        $('#home').removeClass('active');
+      }else if(m == '#1'){
+        $('#pbtn').parent('li').removeClass('active');
+        $('#vbtn').parent('li').addClass('active');
+        $('#profile').removeClass('active');
+        $('#home').addClass('active');
+      }else{
+        $('.nav-tabs>li').removeClass('active');
+        $('.nav-tabs>li').eq(0).addClass('active');
+        $('.tab-content>div').removeClass('active');
+        $('.tab-content>div').eq(0).addClass('active');
+      }
+    })
+  </script>
+}

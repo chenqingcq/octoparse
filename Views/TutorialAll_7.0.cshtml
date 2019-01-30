@@ -1,0 +1,218 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "octLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    //var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+    //    ? CurrentPage.Name
+    //    : CurrentPage.Title;
+    if(!string.IsNullOrWhiteSpace(Request.QueryString["category"]))
+    {
+        ViewBag.PageTitle=Request.QueryString["category"];
+    }
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.octTutorialOverviews.First();
+
+    int pageIndex = 0,pageSize=6,total=0;
+    int.TryParse(Request.QueryString["pageIndex"], out pageIndex);
+    if (pageIndex == 0){
+        pageIndex = 1;
+    }
+    var baseUrl = "/learn";
+    var category=Request.QueryString["category"];
+    var newsItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Basic").Where("allShow=@0",true);
+	var featuresItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Features").Where("allShow=@0",true);
+	var casesItems=newsOverview.octTutorialItems.Where("learnCategory=@0","Cases").Where("allShow=@0",true);
+
+ 
+    total=newsItems!=null?newsItems.Count():0;
+    if(total>0){
+        newsItems=newsItems.OrderBy("publishDate desc, createDate desc");
+    }
+
+}
+
+@section styles{
+	<link rel="stylesheet" href="/css/tutorial-search-bar.css">
+  <style>
+    .wrap-body{
+          padding-top: 0px
+    }
+    .main-container {align-items:center;padding-bottom:100px;}
+    .main-banner{
+      background: #2A96EF;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      height: 150px;
+    }
+    .main-banner a{
+      color: #fff;
+    }
+    .list-card.block{
+      width: 100%;
+    }
+    .tutorial-class-title {font-size:36px;font-weight:bold;text-align:center;width:800px;border-bottom:solid 1px #ccc;margin-top:50px;margin-bottom:30px;padding-bottom:20px;}
+    .list-wrap {
+      width:800px;
+    justify-content:space-between;
+    margin-bottom:30px;
+        flex-wrap: wrap;
+    }
+    .list-card {width:380px; margin-bottom: 30px;}
+    .list-card h3 {font-size:26px;margin:0;}
+    .list-card ul {font-size:20px;margin:10px 0 0 0;}
+    .more-class{
+      width: 100%;
+      display: block;
+      text-align: right;
+      padding-right: 200px;
+    }
+  </style>
+}
+<div class="wrap-body">
+  <div class="main-banner">
+    <h2>Octoparse Tutorials</h2>
+    <p>Step-by-step tutorials for you to get started with Octoparse new UI</p>
+    <a href="/tutorial">(Back to 6.X tutorials >>)</a>
+  </div>
+  <div class="container flex flex-column main-container">
+    <h2 class="tutorial-class-title"><a href="/basic-tutorial">Getting Started</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card block">
+        <h3>Octoparse Introductory Lessons</h3>
+        <ul>
+          <li><a target="_Blank" href="">Lesson 1: Downloading and getting started</a></li>
+          <li><a target="_Blank" href="">Lesson 2: Getting to know Octoparse</a></li>
+          <li><a target="_Blank" href="">Lesson 3: Getting data - Capture text from a page</a></li>
+          <li><a target="_Blank" href="">Lesson 4: Getting data - Capture a list of items</a></li>
+          <li><a target="_Blank" href="">Lesson 5: Getting data - Click on a list and capture data from each item page</a></li>
+          <li><a target="_Blank" href="">Lesson 6: Pagination - Capture data from multiple pages</a></li>
+          <li><a target="_Blank" href="">Lesson 7: Execute tasks</a></li>    
+          <li><a target="_Blank" href="">Lesson 8: Export data extracted</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Modes to Scrape</h3>
+        <ul>
+          <li><a target="_Blank" href="">Wizard Mode</a></li>
+          <li><a target="_Blank" href="">Advanced Mode</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>Basic Concepts</h3>
+        <ul>
+          <li><a href="">What is a task? </a></li>
+          <li><a href="">What is concurrent run?</a></li>
+        </ul>
+      </div>
+            <div class="list-card">
+        <h3>Ways to Getting Data</h3>
+        <ul>
+          <li><a href="">Run tasks on local machine</a></li>
+          <li><a href="">Run/Schedule tasks in the cloud</a></li>
+            <li><a href="">Connect to Octoparse API</a></li>
+        </ul>
+      </div>
+            <div class="list-card">
+        <h3>Download Data</h3>
+        <ul>
+          <li><a href="">CSV, Excel, JSON, HTML </a></li>
+          <li><a href="">Export to database​</a></li>
+        </ul>
+      </div>
+    </div>
+    <h2 class="tutorial-class-title"><a href="/features-tutorial">Building Tasks </a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Select Data</h3>
+        <ul>
+ <li><a target="_Blank" href="/features-tutorial?category=XPATH">Select and extract data/URL/image/HTML</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=AUTOMATIC-IP-ROTATION">Use lists to extract</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Extract multiple pages through pagination </a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>Interact with Webpage</h3>
+        <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=XPATH">Extract behind a login</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=AUTOMATIC-IP-ROTATION">Text/keyword input</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Load with infinite scrolling/Load more</a></li>
+            <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Select items in a drop-down menu</a></li>
+              <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Deal with AJAX</a></li>
+                <li><a target="_Blank" href="/features-tutorial?category=REGULAREXPRESSION">Load with infinite scrolling/Load more</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <h3>Customize Action</h3>
+        <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=CSV-EXCEL">Locate elements with XPath</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DATABASE">Associate data with nearby text</a></li>
+          <li><a target="_Blank" href="http://dataapi.octoparse.com/help">Extract from source code</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=CSV-EXCEL">Extract page-level data</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DATABASE">Re-format data extracted</a></li>
+          <li><a target="_Blank" href="http://dataapi.octoparse.com/help">Conglomerate data extracted</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>More Techniques</h3>
+         <ul>
+          <li><a target="_Blank" href="/features-tutorial?category=CSV-EXCEL">Condition-based scraping (Branch Judgement)</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DATABASE">Extract from a list of URLs</a></li>
+          <li><a target="_Blank" href="http://dataapi.octoparse.com/help">Set up wait time</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=CSV-EXCEL">Set up proxies</a></li>
+          <li><a target="_Blank" href="/features-tutorial?category=DATABASE">Retry actions​​</a></li>
+        </ul>
+      </div>
+    </div>
+    <h2 class="tutorial-class-title"><a href="/cases-tutorial">Case Tutorials</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card block">
+        <ul>
+          <li><a target="_Blank" href="/cases-tutorial?category=PRODUCT-DETAILS">Example: Scrape product information from Amazon</a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=JOBSITES">Example: Scrape pricing from eBay</a></li>
+          <li><a target="_Blank" href="/cases-tutorial?category=PORTAL-SITES">Example: Scrape business information from Yelp</a></li>
+           <li><a target="_Blank" href="/cases-tutorial?category=PORTAL-SITES">Example: Scrape leads from Yellowpage</a></li>
+            <li><a target="_Blank" href="/cases-tutorial?category=PORTAL-SITES">Example: Scrape tweets from Twitter</a></li>
+             <li><a target="_Blank" href="/cases-tutorial?category=PORTAL-SITES">Example: Scrape from Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+              <a target="_Blank"  class="more-class" href="http://advancedapi.octoparse.com/help">View more cases >></a></li>
+    <h2 class="tutorial-class-title"><a href="/faq">More Resources</a></h2>
+    <div class="list-wrap flex-one flex">
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/faq?&faqCategory=Troubleshootings">Data API/Advanced API</a></li>
+          <li><a target="_Blank" href="http://dataapi.octoparse.com/help">Billing and payments</a>
+          <li><a target="_Blank" href="/basic-tutorial?category=TIPS-FOR-NEWBIES">User Guide Doc</a></li>
+            <li><a target="_Blank" href="/basic-tutorial?category=TIPS-FOR-NEWBIES">Troubleshooting</a></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <ul>
+          <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=Billing%20and%20Payments">Billing and payments</a></li>
+          <li><a target="_Blank" href="/doc-wf/preface">User Guide Documentation</a></li>
+          <li><a target="_Blank" href="/faq?pageIndex=1&faqCategory=System%20Requirements">Installation</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
