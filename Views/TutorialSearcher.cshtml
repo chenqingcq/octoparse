@@ -47,7 +47,7 @@ BaseUrl = "/search?query=" + query + "&type=" + type + "&isseven=" + isseven
 <link rel="stylesheet" href="/css/tutorial-search-bar.css">
 <style>
     .summary {
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: 600;
         margin: 3rem 2rem;
     }
@@ -186,3 +186,13 @@ BaseUrl = "/search?query=" + query + "&type=" + type + "&isseven=" + isseven
     <p class="no-data-tips"><span class="fa fa-frown-o"></span>&nbsp;no data found.</p>
     }
 </div>
+<script>
+    var containers = document.querySelectorAll('.container');
+    var titles = document.querySelectorAll('.article-list article a ');
+    containers.forEach(function(item){
+        item.style.width = '100%';
+    })
+    titles.forEach(function(item){
+        item.style.color = '#2095f2'
+    })
+</script>

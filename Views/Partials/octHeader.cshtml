@@ -14,6 +14,8 @@
 </div> -->
 <style type="text/css">
     .firstPageContainer{
+      width: 100% !important;
+      height: 100% !important;
     }
     header{
       width: 100%;
@@ -93,11 +95,15 @@
     }
     .nav-list{
       width: 100vw;
+      height: 100%;
       font-size:3rem;
-      background: #2095f2;
       color: #fff; 
       position: absolute;
       z-index: 999;
+    }
+    .nav-list > ul {
+      padding: 2rem 0;
+      background: #2095f2;
     }
     ul{
       list-style: none;
@@ -156,6 +162,7 @@
     .resource{
       height: 3rem;
     }
+    .mock-nav-home{width: 100%;height: 100%;background: rgba(0, 0, 0, .5);margin-top: -2rem;}
 </style>
 <div class="firstPageContainer">
   <header style="font-size:2rem">
@@ -166,8 +173,8 @@
       <a href="/">
         <span  style="color:#2095f2;font-size:3rem;margin-left:2rem;">Octoparse</span>
       </a>
-      <span class="login theme-color">Log in</span>
-      <span class="signUp theme-color">Sign up</span>
+      <span class="login theme-color" onclick="navigate('/Login')">Log in</span>
+      <span class="signUp theme-color" onclick="navigate('/SignUp')">Sign up</span>
       <span class="watchmore"> 
         <span class="left-dots">
           <em></em>
@@ -197,9 +204,10 @@
             <li onclick="navigate('https://helpcenter.octoparse.com/hc/en-us/requests/new')">Contact Support</li>
           </ul>
         </div>
-        <li style="margin-top:2rem 0 ;">Download</li>
-        <li>Blog</li>
+        <li onclick="navigate('/Download')" style="margin-top:2rem 0 ;">Download</li>
+        <li onclick="navigate('/Blog')">Blog</li>
       </ul>
+      <div class="mock-nav-home"></div>
   </div>
 </div>
 
@@ -209,7 +217,8 @@
      var arrow = document.querySelector('.arrow-default');
      var resource = document.querySelector('.resource');
      var subItems = document.querySelector('.sub-items');
-     watchmore.onclick = function(){
+     var mock= document.querySelector('.mock-nav-home');
+     function showOrHiden (){
        if(navItem.classList.contains('hidden')){
          navItem.classList.remove('hidden');
          navItem.classList.add('show')
@@ -217,9 +226,14 @@
           navItem.classList.add('hidden');
           navItem.classList.remove('show')
        }
-     };
+     }
+     mock.onclick  = function(){
+      //  showOrHiden();
+     }
+     watchmore.onclick = function(){
+       showOrHiden();
+     }
      resource.onclick = function(){
-       console.log(arrow.classList)
        if(arrow.classList.contains('arrow-not-active')){
           arrow.classList.remove('arrow-not-active');
           arrow.classList.add('arrow-active');

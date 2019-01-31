@@ -99,7 +99,7 @@ BaseUrl = currentCategoryUrl
     }
 
     .tut-bread {
-        width: 1200px;
+        width: 100%;
         margin: 10px auto -12px;
         font-size: 16px;
         color: #666666;
@@ -112,7 +112,7 @@ BaseUrl = currentCategoryUrl
         color:#333
     }
     .tut-bread li{
-        font-size: 16px;
+        font-size: 3rem;
         color: #666666;
         text-align: left;
         color: #333;
@@ -121,7 +121,7 @@ BaseUrl = currentCategoryUrl
         cursor: default;
     }
     .tut-bread li a{
-        font-size: 16px;
+        font-size: 3rem;
         color: #666666;
         text-align: left;
     }
@@ -136,8 +136,8 @@ BaseUrl = currentCategoryUrl
     }
 
     .tut-content {
-        width: 1170px;
-        margin: 0 auto 45px;
+        width: 100%;
+        /* margin: 0 auto 45px; */
     }
 
     .tut-content:after {
@@ -157,7 +157,7 @@ BaseUrl = currentCategoryUrl
     }
 
     .tut-content .right .lesson li {
-        background: #ffffff;
+        /* background: #ffffff; */
         width: 850px;
         height: 72px;
         margin-bottom: 10px;
@@ -165,12 +165,14 @@ BaseUrl = currentCategoryUrl
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        margin-top: 2rem;
     }
 
     .tut-content .right .lesson li a {
-        font-size: 20px;
-        color: #333333;
-        line-height: 72px;
+        font-size: 3rem;
+        color: #2095F2;
+        font-family: ArialMT , Arial, Helvetica, sans-serif;
+        /* line-height: 72px; */
         text-decoration: none;
     }
 
@@ -248,25 +250,22 @@ BaseUrl = currentCategoryUrl
 
     .popular {
         width: 100%;
-        height: 236px;
+        /* height: 40rem; */
         background-image: url("@Url.Content("~/images/bg.jpg")");
         background-image: url(/images/bg.jpg);
         background-position: center top;
     }
 
     .popular .wrap {
-        width: 972px;
-        margin: 0 auto;
+        width: 100%;
+        /* margin: 0 auto; */
         box-sizing: border-box;
     }
 
     .popular .wrap ul {
-        width: 280px;
-        height: 100%;
-        margin-right: 120px;
-        margin-left:86px;
         list-style: none;
-        float: left;
+        padding:1rem 2rem;
+        /* float: left; */
     }
 
     .popular .wrap ul:last-child {
@@ -274,20 +273,17 @@ BaseUrl = currentCategoryUrl
     }
 
     .popular .wrap ul li {
-        width: 280px;
-        height: 37px;
-        line-height: 40px;
-        font-size: 16px;
         color: #333333;
         text-align: left;
         font-weight: bold;
+        font-size: 4rem;
         white-space: nowrap;
     }
 
     .popular .wrap ul li a {
-        color: #337ab7;
+        color: #2095f2;
+        font-size: 3rem;
         font-weight: normal;
-        width: 400px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -296,34 +292,37 @@ BaseUrl = currentCategoryUrl
 
     .download {
         /*background: url("@Url.Content("~/images/morequestions.jpg")");*/
-        background: url("/images/morequestions.jpg");
-        background-position: center top;
+        /* background: url("/images/morequestions.jpg");
+        background-position: center no-repeat ;
+        background-size: cover; */
         width: 100%;
-        height: 160px;
+        height: 30rem;;
         padding-top: 18px;
         box-sizing: border-box;
         text-align: center;
+        background: #fbad29;
     }
 
     .download p {
-        font-size: 20px;
+        font-size: 4rem;
         color: #2e2e2f;
         text-align: center;
         font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
         font-weight: bold;
+        color: #fff;
     }
 
     .download a {
         border: 2px solid #ffffff;
-        border-radius: 3px;
-        line-height: 36px;
-        margin-top: 22px;
+        border-radius: 10px;
+        margin-top: 2rem;
+        line-height: 6rem;
         text-decoration: none;
         background: #ffffff;
-        width: 136px;
-        height: 40px;
+        width: 25rem;
+        height: 6rem;
         display: inline-block;
-        font-size: 20px;
+        font-size: 3rem;
         color: #fbad29;
         text-align: center;
         font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
@@ -336,10 +335,35 @@ BaseUrl = currentCategoryUrl
         background: #fcba52;
         margin-left: 40px;
     }
+    .breadcrumb{
+        text-align: center;
+    }
+    .breadcrumb li a {
+        font-size: 3rem;
+        font-weight: 400;
+        color: #2095F2;
+        font-family: ArialMT;
+    }
+    .breadcrumb li ::before {
+        color: #8F9DA7 !important;
+    }
+    .tut-content{display: flex;padding: 0 2rem;};
+    div.tut-header{height: 20rem;display: flex;justify-content: center;align-items: center};
+    .btn-download{
+        width: 100%;
+        height: 6rem;
+    }
+    .tut-content .right ul li a{font-size: 2rem;};
+    .popular .wrap ul li.title{
+        margin-bottom: 4rem
+    }
 </style>
 }
-
-<div class="tut-header">
+<style>
+    .tut-header h1{font-size: 4rem;font-family: BoldMT;font-weight: 400;line-height: normal};
+    /* .contentt .tut-header > a.startdownload {font-size: 2rem;display: inline-block;} */
+</style>
+<div class="tut-header" style="height:26rem;justify-content: center;align-items: center">
     @if (category == null)
     {
     <h1 class="page-title flex flex-middle">Web Scraping Tutorials - @learnCategory</h1>
@@ -348,7 +372,9 @@ BaseUrl = currentCategoryUrl
     {
     <h1 class="page-title flex flex-middle">Web Scraping Tutorials - @category</h1>
     }
-    <a target="_blank" href="/download">Download Octoparse</a>
+    <div class="btn-download" style="width:100%;height:6rem;">
+        <a class="startdownload" style="padding:2rem 4rem;font-family:ArialMT;color:#fff;font-size:3rem;background:#fbad29;height:100%;width:40rem;border-radius:6rem;" target="_blank" href="/download">Download Octoparse</a>
+    </div>
 </div>
 <div class="tut-bread">
     @if (category == null)
@@ -370,7 +396,6 @@ BaseUrl = currentCategoryUrl
     <span class="part2">octoparse-introductory-lessons</span>*@
 </div>
 <div class="tut-content">
-    @{ Html.RenderPartial("octTutorial7Left");}
     <div class="right">
         <ul class="lesson">
             @foreach (var article in newsItems)
@@ -381,23 +406,23 @@ BaseUrl = currentCategoryUrl
 
             }
         </ul>
-        @if (total > pageSize)
+        <!-- @if (total > pageSize)
         {
         @Html.Partial("_PagePartial", pageInfo)
-        }
+        } -->
     </div>
 </div>
 <div class="popular">
     <div class="wrap">
         <ul>
-            <li>Related tutorials</li>
+            <li class="title" style="margin-bottom:2rem">Related tutorials</li>
             @foreach (var item in newsOverview.tutorialItemV7s.OrderBy("updateDate desc").Take(5))
             {
             <li><a target="_blank" href="@item.Url" title="@item.tutorialName">@(item.tutorialName)</a></li>
             }
         </ul>
         <ul>
-            <li>Recently view tutorials</li>
+            <li class="title" style="margin-bottom:2rem">Recently view tutorials</li>
             @foreach (var item in newsOverview.tutorialItemV7s.Where("learnCategory == @0", "Case Tutorials").OrderBy("updateDate desc").Take(5))
             {
             <li><a target="_blank" href="@item.Url" title="@item.tutorialName">@(item.tutorialName)</a></li>

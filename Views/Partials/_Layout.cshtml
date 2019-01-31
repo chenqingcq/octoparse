@@ -61,6 +61,17 @@
       ga('create', 'UA-69472089-3', 'auto');
       ga('send', 'pageview');
     </script>
-    
+    <script>
+        (function(){
+            var timer = null ;
+            timer = setInterval(function(){
+                var iframe = document.querySelector('#launcher');
+                if(iframe){
+                    clearInterval(timer);
+                    iframe.style.display = 'none'
+                }
+            },60)
+        })()
+    </script>
 </body>
 </html>

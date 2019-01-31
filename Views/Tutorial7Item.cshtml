@@ -36,62 +36,68 @@ var currentPageCategory = CurrentPage.category;
     .tut-header {
         background: #2095f2;
         width: 100%;
-        height: 160px;
+        height: 26rem;
         padding-top: 20px;
         box-sizing: border-box;
     }
 
     .tut-header p {
-        font-size: 32px;
-        color: #ffffff;
+        font-size: 4rem;
+        font-family: BoldMT;
+        font-weight: 400;
+        line-height: normal;
+        color: #fff;
         text-align: center;
-        line-height: 40px;
-        font-family:Futura-LT-W01-Light
-
+        margin-top: 3rem;
     }
 
     .tut-header a {
-        display: block;
-        margin: 0 auto;
-        border: 1px solid #ffffff;
-        border-radius: 3px;
-        width: 220px;
-        height: 46px;
-        line-height: 46px;
-        font-size: 20px;
-        color: #ffffff;
-        text-align: center;
-        margin-top: 32px;
-        text-decoration: none;
-        font-family:Futura-LT-W01-Light
+        padding: 2rem 4rem;
+        font-family: ArialMT;
+        color: #fff;
+        font-size: 3rem;
+        background: #fbad29;
+        height: 100%;
+        width: 40rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6rem;
     }
 
     .tut-bread {
-        width: 1200px;
-        margin: 18px auto -4px;
-        font-size: 16px;
-        color: #666666;
+        width: 100%;
+        font-size: 3rem;
+        color: #2095f2;
         text-align: left;
     }
     .tut-bread .breadcrumb{
         border:0;
-        background:unset
+        width: 100%;
+        height: auto;
+        padding:3rem 2rem
     }
     .tut-bread .breadcrumb>.active{
-        color:#333
+        /* color:#333 */
     }
     .tut-bread li{
-        font-size: 16px;
-        text-align: left;
-        color: #333;
+        display: inline-block;
+        font-size: 2.5rem;
+        color: #2095f2;
+        font-family: ArialMT;
+        float: left;
+        height: 4rem;
+        display: flex;
+        align-items: center;
     }
     .tut-bread li .active{
         cursor: default;
     }
     .tut-bread li a{
-        font-size: 16px;
-        color: #666666;
-        text-align: left;
+        color: #2a96ef;
+        font-size: 2.5rem;
+        display: inline-block;
+        font-family: ArialMT;
     }
 
     .tut-bread span {
@@ -103,11 +109,6 @@ var currentPageCategory = CurrentPage.category;
         cursor: default;
     }
 
-    .tut-content {
-        width: 1170px;
-        margin: 0 auto 45px;
-    }
-
     .tut-content:after {
         content: '';
         display: block;
@@ -117,30 +118,37 @@ var currentPageCategory = CurrentPage.category;
     }
 
     .tut-content .right {
-        width: 850px;
-        float: right;
+        /* width: 850px; */
+        /* float: right; */
         background: #ffffff;
         padding: 24px 20px;
         box-sizing: border-box;
+        color: #193F65;
     }
 
     .tut-content .right .article {
     }
 
     .tut-content .right .article .title{
-        font-size: 30px;
+        font-size: 3rem;
         line-height:1.4;
         font-weight:bold;
         margin:0;
         margin-bottom: 10px;
+        color: #193F65;
+        font-family: ArialMT;
     }
-
+    .breadcrumb>li:before{
+        font-size: 3rem !important;
+        color: #2a96ef !important;
+    }
     .tut-content .right .article .date {
-        font-size: 16px;
-        color: #333333;
+        font-size: 2rem;
+        color: #193F65;
         margin-bottom: 24px;
         font-weight: normal;
         display: block;
+        font-family: ArialMT;
     }
 
     .tut-content .right .article p.line {
@@ -148,12 +156,15 @@ var currentPageCategory = CurrentPage.category;
         width: 810px;
         height: 1px;
         margin-bottom: 27px;
+        font-size: 2rem;
+        font-family: ArialMT;        
     }
 
     .tut-content .right .article .content {
-        font-size: 16px;
-        color: #333333;
-        line-height: 24px;
+        font-size: 2.5rem;
+        font-family: ArialMT;
+        color: #193F65;
+        /* line-height: 24px; */
         text-align: left;
         overflow: hidden;
         margin: 18px 0 30px;
@@ -179,6 +190,7 @@ var currentPageCategory = CurrentPage.category;
     .page {
         width: 100%;
         margin-top: 40px;
+        height: auto;
     }
 
     .page .pre a:hover,.next a:hover
@@ -187,17 +199,18 @@ var currentPageCategory = CurrentPage.category;
     }
     .page .pre {
         background: #ffffff;
-        width: 220px;
         min-height: 38px;
         float: left;
         text-align: left;
         cursor: pointer;
         user-select: none;
+        color: #2a96ef;
+        padding-bottom: 3rem;
     }
 
     .page .next {
         background: #ffffff;
-        width: 220px;
+        /* width: 220px; */
         float: right;
         min-height: 38px;
         text-align: right;
@@ -206,11 +219,13 @@ var currentPageCategory = CurrentPage.category;
     }
     .page .pre .wrap{
         float:right;
-        width: 200px;
+        width: 25rem;
     }
     .page .pre .wrap .nextpost{
-        color:gray;
-        font-size:12px;
+        color:#2095f2;
+        font-size:2.5rem;
+        display: inline-block;
+        width:auto;
     }
     .page .pre .img{
         float:left;
@@ -220,11 +235,14 @@ var currentPageCategory = CurrentPage.category;
     }
     .page .next .wrap{
         float:left;
-        width: 200px;
+        /* width: 200px; */
+        width: 25rem;
     }
     .page .next .wrap .nextpost{
-        color:gray;
-        font-size:12px;
+        color:#2095f2;
+        font-size:2.5rem;
+        display: inline-block;
+        width: auto;
     }
     .page .next .img{
         float:right;
@@ -243,24 +261,20 @@ var currentPageCategory = CurrentPage.category;
 
     .popular {
         width: 100%;
-        height: 236px;
+        /* height: 30rem; */
+        padding-top: 1rem;
         background-image: url("@Url.Content("~/images/bg.jpg")");
         background-position: center top;
     }
 
     .popular .wrap {
-        width: 972px;
         margin: 0 auto;
         box-sizing: border-box;
     }
 
     .popular .wrap ul {
-        width: 280px;
-        height: 100%;
-        margin-right: 120px;
-        margin-left:86px;
+        padding: 1rem 2rem;
         list-style: none;
-        float: left;
     }
 
     .popular .wrap ul:last-child {
@@ -268,39 +282,35 @@ var currentPageCategory = CurrentPage.category;
     }
 
     .popular .wrap ul li {
-        width: 280px;
-        height: 37px;
-        line-height: 40px;
-        font-size: 16px;
-        color: #333333;
+        color: #193F65;
         text-align: left;
         font-weight: bold;
+        font-size: 4rem;
         white-space: nowrap;
     }
 
     .popular .wrap ul li a {
-        color: #337ab7;
+        color: #2095f2;
+        font-size: 3rem;
         font-weight: normal;
-        width: 400px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        display: inline-block;
+        display: inline-block
     }
 
     .download {
-        background: url("@Url.Content("~/images/morequestions.jpg")");
-        background-position: center top;
         width: 100%;
-        height: 160px;
+        height: 30rem;
         padding-top: 18px;
         box-sizing: border-box;
         text-align: center;
+        background: #fbad29;
     }
 
     .download p {
-        font-size: 20px;
-        color: #2e2e2f;
+        font-size: 4rem;
+        color: #fff;
         text-align: center;
         font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
         font-weight: bold;
@@ -308,19 +318,19 @@ var currentPageCategory = CurrentPage.category;
 
     .download a {
         border: 2px solid #ffffff;
-        border-radius: 3px;
-        line-height: 36px;
-        margin-top: 22px;
+        border-radius: 10px;
+        margin-top: 2rem;
+        line-height: 6rem;
         text-decoration: none;
         background: #ffffff;
-        width: 136px;
-        height: 40px;
+        width: 25rem;
+        height: 6rem;
         display: inline-block;
-        font-size: 20px;
+        font-size: 3rem;
         color: #fbad29;
         text-align: center;
         font-family: Avenir-LT-W01_35-Light, Avenir-LT-W01_85-Heavy;
-        font-weight: bold;
+        font-weight: bold
     }
 
     .download a:last-child {
@@ -331,8 +341,8 @@ var currentPageCategory = CurrentPage.category;
     }
     .changeView{
         height: 42px;
-        font-size: 18px;
-        color: black;
+        font-size: 2rem;
+        color: #193F65;
         font-weight: bold;
     }
     .changeView span{
@@ -350,11 +360,18 @@ var currentPageCategory = CurrentPage.category;
     img{
         max-width: 100%;
     }
+    .btn-download{display: flex;justify-content: center;margin-top: 3rem};
+    #profile{display: flex;justify-content: center};
+    #profile  strong{font-size: 3rem};
+    .video{display: flex;justify-content: center};
+    #profile table p span strong {text-indent: 2rem !important}
 </style>
 }
 <div class="tut-header">
     <p>Step-by-step tutorials for you to get started with web scraping</p>
-    <a target="_blank" href="/download">Download Octoparse</a>
+    <div class="btn-download" style="width: 100%;height: 6rem">
+        <a target="_blank" href="/download">Download Octoparse</a>
+    </div>
 </div>
 <div class="tut-bread">
     <ol class="breadcrumb">
@@ -388,18 +405,16 @@ var currentPageCategory = CurrentPage.category;
     <span class="part2">octoparse-introductory-lessons</span> >
     <span class="part3">Article</span>*@
 </div>
+<style>
+    .tut-content{margin-top: 3rem;margin: 0 auto ;padding-top: 6rem;background: #fff}
+</style>
 <div class="tut-content">
-    @{ Html.RenderPartial("octTutorial7Left");}
     <div class="right">
         <div class="article">
             <h1 class="title">@CurrentPage.tutorialName</h1>
             <span class="date">@((CurrentPage.UpdateDate == default(DateTime) ? CurrentPage.CreateDate : CurrentPage.UpdateDate).ToString("D"))</span>
             @if (!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
-            {
-            <div class="changeView">
-                <p>Graphic tutorial</p><span>|</span>
-                <p>Video tutorial</p>
-            </div>
+            {   
             }
             <p class="line"></p>
             <div class="content contentarticle">
@@ -409,9 +424,8 @@ var currentPageCategory = CurrentPage.category;
             }
             @if (!string.IsNullOrWhiteSpace(CurrentPage.videoTutorial))
             {
-            <div style="display: none" class="video">
-                <iframe  width="800" height="450" id="video" src="@CurrentPage.videoTutorial" frameborder="0" allowfullscreen></iframe>
-                <p>If this video tutorial is not available for you, you can&nbsp;<a target="_blank" id="video-view" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">click here</a>to see the corresponding graphic tutorial.</p>
+            <div  class="video" style="display:flex;justify-content:center">
+                <iframe  width="100%" height="800" id="video" src="@CurrentPage.videoTutorial" frameborder="0" allowfullscreen></iframe>
                 <br class="divider">
             </div>
             }
@@ -435,9 +449,7 @@ var currentPageCategory = CurrentPage.category;
             <a target="_blank" href="@pre.Url" title="@preTitle">
                 <span class="wrap">
                 <span class="nextpost">PREVIOUS POST</span><br>
-                <span class="title">@(preTitle)</span>
             </span>
-                <span class="img"><</span>
             </a>
         </div>
         }
@@ -448,9 +460,7 @@ var currentPageCategory = CurrentPage.category;
         <div class="next"><a target="_blank" href="@next.Url" title="@nextTitle">
             <span class="wrap">
                 <span class="nextpost">NEXT POST</span><br>
-                <span class="title">@(nextTitle)</span>
             </span>
-            <span class="img">></span>
         </a></div>
         }
         }
@@ -497,5 +507,15 @@ var currentPageCategory = CurrentPage.category;
             document.querySelector('.changeView p:first-child').style.color = '#2095f2'
             document.querySelector('.tab-pane').style.display = 'none'
             document.querySelector('.video').style.display = 'block'
-        }
+    }
+    var textDesc = document.querySelectorAll('#profile span');
+    var tables = document.querySelectorAll('#profile table');
+    var titles = document.querySelectorAll('#profile  strong');
+    textDesc.forEach(function(item){
+        item.style.fontSize = '2.5rem';
+    });
+    tables.forEach(function(item){
+        item.style.width = '100%';
+        item.style['margin'] = '2rem auto';
+    })
 </script>
